@@ -256,9 +256,21 @@ if (!defined('INIT_NO_SMARTY') && gzip_enabled()) {
 } else {
     ob_start();
 }
-// bigrocs_region 这是全局地区变量
-$_SESSION['region_id']    = 299; //bigrocs//地区编号
-$GLOBALS['_region_id'] = array(
-    'region_id' => $_SESSION['region_id'],
-    'province_id' => getParentRegionsId($_SESSION['region_id'])
-);
+
+setRegionId();
+/**
+ * [setRegionId 设置RegionId]
+ */
+function setRegionId()
+{
+    // $ip = real_ip();
+    $ip = '58.59.125.50';
+    print_R(mb_convert_encoding(ecs_geoip($ip), "UTF-8", "GBK"));
+
+    // bigrocs_region 这是全局地区变量
+    $_SESSION['region_id']    = 299; //bigrocs//地区编号
+    $GLOBALS['_region_id'] = array(
+        'region_id' => $_SESSION['region_id'],
+        'province_id' => getParentRegionsId($_SESSION['region_id'])
+    );
+}
