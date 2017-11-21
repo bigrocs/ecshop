@@ -1,0 +1,19 @@
+
+<!-- {foreach from=$pinfo item=value key=key} 循环配送方式 -->
+<p>
+  <input name="pinfo"
+  	type="radio"
+  	class="radio"
+  	id="pinfo_{$value.id}"
+  	value="{$value.id}"
+	{if $selectid == $value.id}checked="true"{/if}
+	pinfo_name = "{$value.shop_name}"
+	onclick="selectShipping_pinfo(this)"
+	style="vertical-align:middle"
+ />
+ <label for="pinfo_{$value.id}">
+ 	<span style='color:#67C23A'>{$value.shop_name}</span> <span style='color:#FA5555'>电话:{$value.phone}</span><br>
+	<span style='color:#878D99'>地址:{$value.address}</span>
+ </label>
+</p>
+<!-- {/foreach} 循环配送方式 -->
