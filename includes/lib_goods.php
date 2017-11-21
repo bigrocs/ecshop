@@ -1033,15 +1033,31 @@ function assign_cat_goods($cat_id, $num = 0, $from = 'web', $order_rule = '')
     $cat['sort_order'] = $sort_order;
 
     $children = get_children($cat_id);
+    //bigrocs_region 根据地区查询
+    $region = $GLOBALS['_region_id']['region_id'];//获取缓存地区
+    $province = $GLOBALS['_region_id']['province_id'];//省级id
+    if ($region) {
+        $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
+                   "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
+                  'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img ' .
+               "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
+               'LEFT JOIN ' . $GLOBALS['ecs']->table('goods_region') . ' AS gr ON gr.goods_id = g.goods_id ' .
+               "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
+                       "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
+               'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
+                   'g.is_delete = 0 AND (' . $children . 'OR ' . get_extension_goods($children) . ') '.
+                   " AND (gr.region_id = '$region' OR gr.region_id = '$province')";
+    } else {
+        $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
+                    "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
+                   'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img ' .
+                "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
+                "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
+                        "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
+                'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
+                    'g.is_delete = 0 AND (' . $children . 'OR ' . get_extension_goods($children) . ') ';
+    }
 
-    $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
-                "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
-               'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img ' .
-            "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
-            "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
-                    "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
-            'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
-                'g.is_delete = 0 AND (' . $children . 'OR ' . get_extension_goods($children) . ') ';
 
     $order_rule = empty($order_rule) ? 'ORDER BY g.sort_order, g.goods_id DESC' : $order_rule;
     $sql .= $order_rule;

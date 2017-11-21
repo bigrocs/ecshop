@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:9:{i:0;s:37:"/var/www/ecshop/themes/lizi/index.dwt";i:1;s:51:"/var/www/ecshop/themes/lizi/library/page_header.lbi";i:2;s:48:"/var/www/ecshop/themes/lizi/library/index_ad.lbi";i:3;s:59:"/var/www/ecshop/themes/lizi/library/recommend_promotion.lbi";i:4;s:53:"/var/www/ecshop/themes/lizi/library/recommend_new.lbi";i:5;s:54:"/var/www/ecshop/themes/lizi/library/recommend_best.lbi";i:6;s:51:"/var/www/ecshop/themes/lizi/library/ad_position.lbi";i:7;s:49:"/var/www/ecshop/themes/lizi/library/cat_goods.lbi";i:8;s:51:"/var/www/ecshop/themes/lizi/library/page_footer.lbi";}s:7:"expires";i:1511233254;s:8:"maketime";i:1511229654;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php exit;?>a:3:{s:8:"template";a:9:{i:0;s:37:"/var/www/ecshop/themes/lizi/index.dwt";i:1;s:51:"/var/www/ecshop/themes/lizi/library/page_header.lbi";i:2;s:48:"/var/www/ecshop/themes/lizi/library/index_ad.lbi";i:3;s:59:"/var/www/ecshop/themes/lizi/library/recommend_promotion.lbi";i:4;s:53:"/var/www/ecshop/themes/lizi/library/recommend_new.lbi";i:5;s:54:"/var/www/ecshop/themes/lizi/library/recommend_best.lbi";i:6;s:51:"/var/www/ecshop/themes/lizi/library/ad_position.lbi";i:7;s:49:"/var/www/ecshop/themes/lizi/library/cat_goods.lbi";i:8;s:51:"/var/www/ecshop/themes/lizi/library/page_footer.lbi";}s:7:"expires";i:1511234774;s:8:"maketime";i:1511231174;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -844,70 +844,28 @@
         <h2>生鲜食品</h2>
       </div>
       <ul class="brand">
-         
-					<li> <a href="category.php?id=2&amp;brand=1" title="艾尔Aier" target="_blank"><img src="data/brandlogo/1447704649936189900.jpg"  alt="艾尔Aier" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=2&amp;brand=2" title="发育宝Haipet" target="_blank"><img src="data/brandlogo/1447704682791039878.jpg"  alt="发育宝Haipet" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=2&amp;brand=3" title="雷米高" target="_blank"><img src="data/brandlogo/1447704720666038803.jpg"  alt="雷米高" style="display: inline;" /></a> </li>
-		           
-      </ul>
+        					<li> <a href="category.php?id=2&amp;brand=1" title="艾尔Aier" target="_blank"><img src="data/brandlogo/1447704649936189900.jpg"  alt="艾尔Aier" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=2&amp;brand=2" title="发育宝Haipet" target="_blank"><img src="data/brandlogo/1447704682791039878.jpg"  alt="发育宝Haipet" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=2&amp;brand=3" title="雷米高" target="_blank"><img src="data/brandlogo/1447704720666038803.jpg"  alt="雷米高" style="display: inline;" /></a> </li>
+		              </ul>
       <div class="brand_cata">
-      	 
-		<a href="category.php?id=15" title="精品肉类" target="_blank">精品肉类</a>
-	      	 
-		<a href="category.php?id=16" title="海鲜水产" target="_blank">海鲜水产</a>
-	      	 
-		<a href="category.php?id=17" title="蛋制品" target="_blank">蛋制品</a>
-	      	 
-		<a href="category.php?id=18" title="叶菜类" target="_blank">叶菜类</a>
-	      	 
-		<a href="category.php?id=19" title="根茎类" target="_blank">根茎类</a>
-	      	 
-		<a href="category.php?id=20" title="茄果类" target="_blank">茄果类</a>
+      			<a href="category.php?id=15" title="精品肉类" target="_blank">精品肉类</a>
+	      			<a href="category.php?id=16" title="海鲜水产" target="_blank">海鲜水产</a>
+	      			<a href="category.php?id=17" title="蛋制品" target="_blank">蛋制品</a>
+	      			<a href="category.php?id=18" title="叶菜类" target="_blank">叶菜类</a>
+	      			<a href="category.php?id=19" title="根茎类" target="_blank">根茎类</a>
+	      			<a href="category.php?id=20" title="茄果类" target="_blank">茄果类</a>
 	      	      	            </div>
-      
     </div>
-    <div class="series_pic"> 
-		  
-	   <a href='affiche.php?ad_id=4&uri='><img src='data/afficheimg/1449010433801562396.jpg' width='340' height='400' /></a>	    </div>
+    <div class="series_pic">
+			   <a href='affiche.php?ad_id=4&uri='><img src='data/afficheimg/1449010433801562396.jpg' width='340' height='400' /></a>	    </div>
     <div class="pro_list">
       <ul class="cle">
-		        <li> <a href="goods.php?id=48" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/48_thumb_G_1448943988607.jpg" style="display: inline;"></p>
-          <h3>新疆巴尔鲁克生鲜牛排眼肉牛扒1200g</h3>
-          <p class="price">  
-                    ￥88元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=47" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/47_thumb_G_1448946213633.jpg" style="display: inline;"></p>
-          <h3>日本蒜蓉粉丝扇贝270克6只装</h3>
-          <p class="price">  
-                    ￥108元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=11" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/11_thumb_G_1448944388914.jpg" style="display: inline;"></p>
-          <h3>澳洲进口120天谷饲牛仔骨4份原味生鲜</h3>
-          <p class="price">  
-                    ￥26元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=10" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/10_thumb_G_1448944572962.jpg" style="display: inline;"></p>
-          <h3>内蒙新鲜牛肉1斤清真生鲜牛肉火锅食材</h3>
-          <p class="price">  
-                    ￥88元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=9" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/9_thumb_G_1448944791708.jpg" style="display: inline;"></p>
-          <h3>爱食派内蒙古呼伦贝尔冷冻生鲜牛腱子肉1000g</h3>
-          <p class="price">  
-                    ￥168元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=8" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/8_thumb_G_1448945032585.jpg" style="display: inline;"></p>
-          <h3>五星眼肉牛排套餐8片装原味原切生鲜牛肉</h3>
-          <p class="price">  
-                    ￥125元          </p>
+		        <li> <a href="goods.php?id=1" target="_blank">
+          <p class="pic"> <img src="images/201512/thumb_img/1_thumb_G_1449024889033.jpg" style="display: inline;"></p>
+          <h3>新鲜水果甜蜜香脆单果约800克</h3>
+          <p class="price">
+                    ￥156元          </p>
           </a> </li>
 		      </ul>
     </div>
@@ -917,216 +875,89 @@
         <h2>蔬菜水果</h2>
       </div>
       <ul class="brand">
-         
-					<li> <a href="category.php?id=11&amp;brand=2" title="发育宝Haipet" target="_blank"><img src="data/brandlogo/1447704682791039878.jpg"  alt="发育宝Haipet" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=11&amp;brand=3" title="雷米高" target="_blank"><img src="data/brandlogo/1447704720666038803.jpg"  alt="雷米高" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=11&amp;brand=4" title="百利" target="_blank"><img src="data/brandlogo/1447705943471297107.jpg"  alt="百利" style="display: inline;" /></a> </li>
-		           
-      </ul>
+        					<li> <a href="category.php?id=11&amp;brand=2" title="发育宝Haipet" target="_blank"><img src="data/brandlogo/1447704682791039878.jpg"  alt="发育宝Haipet" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=11&amp;brand=3" title="雷米高" target="_blank"><img src="data/brandlogo/1447704720666038803.jpg"  alt="雷米高" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=11&amp;brand=4" title="百利" target="_blank"><img src="data/brandlogo/1447705943471297107.jpg"  alt="百利" style="display: inline;" /></a> </li>
+		              </ul>
       <div class="brand_cata">
-      	 
-		<a href="category.php?id=41" title="有机蔬菜" target="_blank">有机蔬菜</a>
-	      	 
-		<a href="category.php?id=42" title="精选蔬菜" target="_blank">精选蔬菜</a>
-	      	 
-		<a href="category.php?id=43" title="进口水果" target="_blank">进口水果</a>
-	      	 
-		<a href="category.php?id=44" title="国产水果" target="_blank">国产水果</a>
+      			<a href="category.php?id=41" title="有机蔬菜" target="_blank">有机蔬菜</a>
+	      			<a href="category.php?id=42" title="精选蔬菜" target="_blank">精选蔬菜</a>
+	      			<a href="category.php?id=43" title="进口水果" target="_blank">进口水果</a>
+	      			<a href="category.php?id=44" title="国产水果" target="_blank">国产水果</a>
 	            </div>
-      
     </div>
-    <div class="series_pic"> 
-		  
-	   <a href='affiche.php?ad_id=2&uri='><img src='data/afficheimg/1449010763793377576.jpg' width='340' height='400' /></a>	    </div>
+    <div class="series_pic">
+			   <a href='affiche.php?ad_id=2&uri='><img src='data/afficheimg/1449010763793377576.jpg' width='340' height='400' /></a>	    </div>
     <div class="pro_list">
       <ul class="cle">
-		        <li> <a href="goods.php?id=36" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/36_thumb_G_1448948234706.jpg" style="display: inline;"></p>
-          <h3>仿真蔬菜水果果蔬菜模型</h3>
-          <p class="price">  
-                    ￥5元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=35" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/35_thumb_G_1448948333567.jpg" style="display: inline;"></p>
-          <h3>新鲜头茬非洲冰草冰菜</h3>
-          <p class="price">  
-                    ￥56元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=34" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/34_thumb_G_1448948399017.jpg" style="display: inline;"></p>
-          <h3>潍坊萝卜5斤/箱 礼盒</h3>
-          <p class="price">  
-                    ￥38元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=33" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/33_thumb_G_1448948479944.jpg" style="display: inline;"></p>
-          <h3>现摘芭乐 番石榴台湾珍珠芭乐</h3>
-          <p class="price">  
-                    ￥23元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=32" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/32_thumb_G_1448948525255.jpg" style="display: inline;"></p>
-          <h3>赣南脐橙 特级果 10斤装</h3>
-          <p class="price">  
-                    ￥36元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=31" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/31_thumb_G_1448948598408.jpg" style="display: inline;"></p>
-          <h3>四川双流草莓新鲜水果礼盒2盒</h3>
-          <p class="price">  
-                    ￥18元          </p>
-          </a> </li>
 		      </ul>
     </div>
-</div><div class="series_box cle">
+</div>
+<div class="series_box cle">
     <div class="series_info">
       <div class="series_name name_hufu">
         <h2>粮油副食</h2>
       </div>
       <ul class="brand">
-         
-					<li> <a href="category.php?id=5&amp;brand=1" title="艾尔Aier" target="_blank"><img src="data/brandlogo/1447704649936189900.jpg"  alt="艾尔Aier" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=5&amp;brand=2" title="发育宝Haipet" target="_blank"><img src="data/brandlogo/1447704682791039878.jpg"  alt="发育宝Haipet" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=5&amp;brand=3" title="雷米高" target="_blank"><img src="data/brandlogo/1447704720666038803.jpg"  alt="雷米高" style="display: inline;" /></a> </li>
-		           
-      </ul>
+        					<li> <a href="category.php?id=5&amp;brand=1" title="艾尔Aier" target="_blank"><img src="data/brandlogo/1447704649936189900.jpg"  alt="艾尔Aier" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=5&amp;brand=2" title="发育宝Haipet" target="_blank"><img src="data/brandlogo/1447704682791039878.jpg"  alt="发育宝Haipet" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=5&amp;brand=3" title="雷米高" target="_blank"><img src="data/brandlogo/1447704720666038803.jpg"  alt="雷米高" style="display: inline;" /></a> </li>
+		              </ul>
       <div class="brand_cata">
-      	 
-		<a href="category.php?id=30" title="食用油" target="_blank">食用油</a>
-	      	 
-		<a href="category.php?id=31" title="米面杂粮" target="_blank">米面杂粮</a>
-	      	 
-		<a href="category.php?id=32" title="厨房调料" target="_blank">厨房调料</a>
-	      	 
-		<a href="category.php?id=33" title="南北干货" target="_blank">南北干货</a>
-	      	 
-		<a href="category.php?id=34" title="方便速食" target="_blank">方便速食</a>
-	      	 
-		<a href="category.php?id=35" title="调味品" target="_blank">调味品</a>
+      			<a href="category.php?id=30" title="食用油" target="_blank">食用油</a>
+	      			<a href="category.php?id=31" title="米面杂粮" target="_blank">米面杂粮</a>
+	      			<a href="category.php?id=32" title="厨房调料" target="_blank">厨房调料</a>
+	      			<a href="category.php?id=33" title="南北干货" target="_blank">南北干货</a>
+	      			<a href="category.php?id=34" title="方便速食" target="_blank">方便速食</a>
+	      			<a href="category.php?id=35" title="调味品" target="_blank">调味品</a>
 	            </div>
-      
     </div>
-    <div class="series_pic"> 
-		  
-	   <a href='affiche.php?ad_id=1&uri='><img src='data/afficheimg/1449011954874068927.jpg' width='340' height='400' /></a>	    </div>
+    <div class="series_pic">
+			   <a href='affiche.php?ad_id=1&uri='><img src='data/afficheimg/1449011954874068927.jpg' width='340' height='400' /></a>	    </div>
     <div class="pro_list">
       <ul class="cle">
-		        <li> <a href="goods.php?id=29" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/29_thumb_G_1448947631664.jpg" style="display: inline;"></p>
-          <h3>融氏纯玉米胚芽油5l桶</h3>
-          <p class="price">  
-                    ￥12元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=28" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/28_thumb_G_1448947699187.jpg" style="display: inline;"></p>
-          <h3>橄榄玉米油5L*2桶</h3>
-          <p class="price">  
-                    ￥26元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=27" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/27_thumb_G_1448947771206.jpg" style="display: inline;"></p>
-          <h3>维纳斯橄榄菜籽油5L/桶</h3>
-          <p class="price">  
-                    ￥156元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=26" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/26_thumb_G_1448947825794.jpg" style="display: inline;"></p>
-          <h3>精炼一级大豆油5L色拉油粮油食用油</h3>
-          <p class="price">  
-                    ￥45元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=25" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/25_thumb_G_1448947875633.jpg" style="display: inline;"></p>
-          <h3>稻园牌稻米油粮油米糠油绿色植物油</h3>
-          <p class="price">  
-                    ￥12元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=24" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/24_thumb_G_1448948023508.jpg" style="display: inline;"></p>
-          <h3>山西黑米 农家黑米4斤</h3>
-          <p class="price">  
-                    ￥9元          </p>
-          </a> </li>
 		      </ul>
     </div>
-</div><div class="series_box cle">
+</div>
+<div class="series_box cle">
     <div class="series_info">
       <div class="series_name name_hufu">
         <h2>酒水饮料</h2>
       </div>
       <ul class="brand">
-         
-					<li> <a href="category.php?id=1&amp;brand=1" title="艾尔Aier" target="_blank"><img src="data/brandlogo/1447704649936189900.jpg"  alt="艾尔Aier" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=1&amp;brand=5" title="森美" target="_blank"><img src="data/brandlogo/1447706000795527048.jpg"  alt="森美" style="display: inline;" /></a> </li>
-		         
-					<li> <a href="category.php?id=1&amp;brand=6" title="哈根纽翠斯" target="_blank"><img src="data/brandlogo/1447706048999741376.jpg"  alt="哈根纽翠斯" style="display: inline;" /></a> </li>
-		           
-      </ul>
+        					<li> <a href="category.php?id=1&amp;brand=1" title="艾尔Aier" target="_blank"><img src="data/brandlogo/1447704649936189900.jpg"  alt="艾尔Aier" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=1&amp;brand=5" title="森美" target="_blank"><img src="data/brandlogo/1447706000795527048.jpg"  alt="森美" style="display: inline;" /></a> </li>
+		        					<li> <a href="category.php?id=1&amp;brand=6" title="哈根纽翠斯" target="_blank"><img src="data/brandlogo/1447706048999741376.jpg"  alt="哈根纽翠斯" style="display: inline;" /></a> </li>
+		              </ul>
       <div class="brand_cata">
-      	 
-		<a href="category.php?id=23" title="白酒" target="_blank">白酒</a>
-	      	 
-		<a href="category.php?id=24" title="葡萄酒" target="_blank">葡萄酒</a>
-	      	 
-		<a href="category.php?id=25" title="洋酒" target="_blank">洋酒</a>
-	      	 
-		<a href="category.php?id=26" title="啤酒" target="_blank">啤酒</a>
-	      	 
-		<a href="category.php?id=27" title="其他酒品" target="_blank">其他酒品</a>
-	      	 
-		<a href="category.php?id=28" title="饮料/水" target="_blank">饮料/水</a>
+      			<a href="category.php?id=23" title="白酒" target="_blank">白酒</a>
+	      			<a href="category.php?id=24" title="葡萄酒" target="_blank">葡萄酒</a>
+	      			<a href="category.php?id=25" title="洋酒" target="_blank">洋酒</a>
+	      			<a href="category.php?id=26" title="啤酒" target="_blank">啤酒</a>
+	      			<a href="category.php?id=27" title="其他酒品" target="_blank">其他酒品</a>
+	      			<a href="category.php?id=28" title="饮料/水" target="_blank">饮料/水</a>
 	      	            </div>
-      
     </div>
-    <div class="series_pic"> 
-		  
-	   <a href='affiche.php?ad_id=3&uri='><img src='data/afficheimg/1449012797850565666.jpg' width='340' height='400' /></a>	    </div>
+    <div class="series_pic">
+			   <a href='affiche.php?ad_id=3&uri='><img src='data/afficheimg/1449012797850565666.jpg' width='340' height='400' /></a>	    </div>
     <div class="pro_list">
       <ul class="cle">
 		        <li> <a href="goods.php?id=51" target="_blank">
           <p class="pic"> <img src="images/201512/thumb_img/51_thumb_G_1448946466261.jpg" style="display: inline;"></p>
           <h3>人头马CLUB特优香槟干邑350ml</h3>
-          <p class="price">  
+          <p class="price">
                     ￥10元          </p>
           </a> </li>
 		        <li> <a href="goods.php?id=50" target="_blank">
           <p class="pic"> <img src="images/201512/thumb_img/50_thumb_G_1448946542088.jpg" style="display: inline;"></p>
           <h3>Johnnie Walker尊尼获加黑牌威士忌</h3>
-          <p class="price">  
+          <p class="price">
                     ￥20元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=46" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/46_thumb_G_1448946598227.jpg" style="display: inline;"></p>
-          <h3>双响炮洋酒JimBeam whiskey美国白占边</h3>
-          <p class="price">  
-                    ￥28元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=45" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/45_thumb_G_1448946661697.jpg" style="display: inline;"></p>
-          <h3>深蓝伏特加巴维兰利口酒送预调酒</h3>
-          <p class="price">  
-                    ￥18元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=22" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/22_thumb_G_1448946729918.jpg" style="display: inline;"></p>
-          <h3>芝华士12年 苏格兰威士忌700ml</h3>
-          <p class="price">  
-                    ￥59元          </p>
-          </a> </li>
-		        <li> <a href="goods.php?id=21" target="_blank">
-          <p class="pic"> <img src="images/201512/thumb_img/21_thumb_G_1448946793103.jpg" style="display: inline;"></p>
-          <h3>西夫拉姆进口洋酒小酒版</h3>
-          <p class="price">  
-                    ￥46元          </p>
           </a> </li>
 		      </ul>
     </div>
-</div> </div>
+</div>
+ </div>
  <div id="footer">
   <div class="ft-bg">
     <div class="w-ensure mb20">
