@@ -13,8 +13,7 @@
  * $Id: inc_menu.php 17217 2011-01-19 06:29:08Z liubo $
 */
 
-if (!defined('IN_ECS'))
-{
+if (!defined('IN_ECS')) {
     die('Hacking attempt');
 }
 
@@ -148,4 +147,3 @@ $modules['16_email_manage']['attention_list']       = 'attention_list.php?act=li
 $modules['16_email_manage']['view_sendlist']        = 'view_sendlist.php?act=list';
 
 $modules['11_system']['website']  = 'website.php?act=list';
-?>
