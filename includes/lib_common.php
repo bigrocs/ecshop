@@ -240,7 +240,18 @@ function get_regions($type = 0, $parent = 0)
 
     return $GLOBALS['db']->GetAll($sql);
 }
+/**
+ * [get_region_name 根据id获取名称]
+ * @param  [type] $regionId [description]
+ * @return [type]           [description]
+ */
+function get_region_name($regionId)
+{
+    $sql = 'SELECT region_name FROM ' . $GLOBALS['ecs']->table('region') .
+            " WHERE region_id = '$regionId'";
 
+    return $GLOBALS['db']->getOne($sql);
+}
 /**
  * 获得配送区域中指定的配送方式的配送费用的计算参数
  *
