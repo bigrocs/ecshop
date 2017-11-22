@@ -263,14 +263,47 @@ setRegionId();
  */
 function setRegionId()
 {
+    if (!$_SESSION['region_id']) {//选择过地区则不重复定义
+        $CityId = getIpCityId();
+        // bigrocs_region 这是全局地区变量
+        $_SESSION['region_id']    = $CityId; //bigrocs//地区编号
+        $GLOBALS['_region_id'] = array(
+            'region_id' => $_SESSION['region_id'],
+            'province_id' => getParentRegionsId($_SESSION['region_id'])
+        );
+    }
+}
+/**
+ * [getIpCityId 根据ip获取当前城市id]
+ * @return [type] [description]
+ */
+function getIpCityId()
+{
+    $CityNmae = getCityNmae();
+    return getRegionsId($CityNmae);
+}
+/**
+ * [getCityNmae 获取当前城市名字]
+ * @return [type] [description]
+ */
+function getCityNmae()
+{
     // $ip = real_ip();
-    $ip = '58.59.125.50';
-    print_R(mb_convert_encoding(ecs_geoip($ip), "UTF-8", "GBK"));
-
-    // bigrocs_region 这是全局地区变量
-    $_SESSION['region_id']    = 299; //bigrocs//地区编号
-    $GLOBALS['_region_id'] = array(
-        'region_id' => $_SESSION['region_id'],
-        'province_id' => getParentRegionsId($_SESSION['region_id'])
-    );
+    $ip = '124.134.111.255';
+    $regionName = mb_convert_encoding(ecs_geoip($ip), "UTF-8", "GBK");
+    $CityNmae = str_replace("中国", "", $regionName);
+    $strlen = strlen($CityNmae);
+    if ($strlen>6) {
+        if (strpos('-_-!' . $CityNmae, '内蒙古')||strpos('-_-!' . $CityNmae, '黑龙江')) {
+            $CityNmae = substr($CityNmae, 9);//删掉前面的名字
+        } else {
+            $CityNmae = substr($CityNmae, 6);//删掉前面的名字
+        }
+    }
+    return $CityNmae;
+}
+function getRegionsId($CityNmae)
+{
+    $sql = "SELECT region_id FROM " .$GLOBALS['ecs']->table('region'). " WHERE region_name='$CityNmae'";
+    return $GLOBALS['db']->getOne($sql);
 }
