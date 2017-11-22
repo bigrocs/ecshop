@@ -56,13 +56,92 @@
           {elseif $var.type eq "manual"}
 
             {if $var.code eq "shop_country"}
-              <select name="value[{$var.id}]" id="selCountries" onchange="region.changed(this, 1, 'selProvinces')">
-                <option value=''>{$lang.select_please}</option>
-                {foreach from=$countries item=region}
-                  <option value="{$region.region_id}" {if $region.region_id eq $cfg.shop_country}selected{/if}>{$region.region_name}</option>
-                {/foreach}
-              </select>
-                  {elseif $var.code eq "shop_province"}
+                <table style="width:600px">
+                <tr>
+                  <td id="regionCell">
+                    {foreach from=$cfg.shop_countrys item=region key=id}
+                    <input type="checkbox" name="value[{$var.id}][]" value="{$id}" checked="true" /> {$region}&nbsp;&nbsp;
+                    {/foreach}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                      <select name="country" id="selCountries" onchange="region.changed(this, 1, 'selProvinces')" size="10" style="width:80px">
+                        {foreach from=$countries item=country}
+                        <option value="{$country.region_id}">{$country.region_name|escape:html}</option>
+                        {/foreach}
+                      </select>
+                      <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')" size="10" style="width:80px">
+                        <option value=''>{$lang.select_please}</option>
+                      </select>
+                      <select name="city" id="selCities" size="10" style="width:80px">
+                        <option value=''>{$lang.select_please}</option>
+                      </select>
+                      <!-- <select name="district" id="selDistricts" size="10" style="width:130px">
+                        <option value=''>{$lang.select_please}</option>
+                      </select> -->
+                      <span  style="vertical-align: top"><input type="button" value="+" class="button" onclick="addRegion()" /></span>
+                  </td>
+                </tr>
+                </table >
+                <script  language="JavaScript">
+                /**
+                 * 添加一个区域
+                 */
+                function addRegion()
+                {
+
+                    var selCountry  = document.forms['theForm'].elements['country'];
+                    var selProvince = document.forms['theForm'].elements['province'];
+                    var selCity     = document.forms['theForm'].elements['city'];
+                    var regionCell  = document.getElementById("regionCell");
+
+                        if (selCity.selectedIndex > 0)
+                        {
+                            regionId = selCity.options[selCity.selectedIndex].value;
+                            regionName = selCity.options[selCity.selectedIndex].text;
+                        }
+                        else
+                        {
+                            if (selProvince.selectedIndex > 0)
+                            {
+                                regionId = selProvince.options[selProvince.selectedIndex].value;
+                                regionName = selProvince.options[selProvince.selectedIndex].text;
+                            }
+                            else
+                            {
+
+                                if (selCountry.selectedIndex >= 0)
+                                {
+                                    regionId = selCountry.options[selCountry.selectedIndex].value;
+                                    regionName = selCountry.options[selCountry.selectedIndex].text;
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                        }
+                    // 检查该地区是否已经存在
+                    exists = false;
+                    for (i = 0; i < document.forms['theForm'].elements.length; i++)
+                    {
+                      if (document.forms['theForm'].elements[i].type=="checkbox")
+                      {
+                        if (document.forms['theForm'].elements[i].value == regionId)
+                        {
+                          exists = true;
+                        }
+                      }
+                    }
+                    // 创建checkbox
+                    if (!exists)
+                    {
+                      regionCell.innerHTML += "<input type='checkbox' name='value[{$var.id}][]' value='" + regionId + "' checked='true' /> " + regionName + "&nbsp;&nbsp;";
+                    }
+                }
+                </script>
+            {elseif $var.code eq "shop_province"}
               <select name="value[{$var.id}]" id="selProvinces" onchange="region.changed(this, 2, 'selCities')">
                 <option value=''>{$lang.select_please}</option>
                 {foreach from=$provinces item=region}
