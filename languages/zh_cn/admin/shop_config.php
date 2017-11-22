@@ -55,7 +55,7 @@ $_LANG['cfg_name']['shop_title'] = '商店标题';
 $_LANG['cfg_name']['shop_website'] = '商店网址';
 $_LANG['cfg_name']['shop_desc'] = '商店描述';
 $_LANG['cfg_name']['shop_keywords'] = '商店关键字';
-$_LANG['cfg_name']['shop_country'] = '所在国家';
+$_LANG['cfg_name']['shop_country'] = '首页城市';
 $_LANG['cfg_name']['shop_province'] = '所在省份';
 $_LANG['cfg_name']['shop_city'] = '所在城市';
 $_LANG['cfg_name']['shop_address'] = '详细地址';
@@ -573,7 +573,6 @@ $_LANG['cfg_range']['ecsdxt_order_picking']['0'] = '关闭';
 $_LANG['cfg_range']['ecsdxt_order_shipped']['1'] = '开启';
 $_LANG['cfg_range']['ecsdxt_order_shipped']['0'] = '关闭';
 
-$_LANG['cfg_name']['show_sales_type'] = '商品累计销量默认显示方式';  
-$_LANG['cfg_range']['show_sales_type'][1] = '真实显示';  
-$_LANG['cfg_range']['show_sales_type'][0] = '虚拟显示+真实显示'; 
-?>
+$_LANG['cfg_name']['show_sales_type'] = '商品累计销量默认显示方式';
+$_LANG['cfg_range']['show_sales_type'][1] = '真实显示';
+$_LANG['cfg_range']['show_sales_type'][0] = '虚拟显示+真实显示';
