@@ -1196,10 +1196,10 @@ var NALA = NALA || {};
             });
 
             function j(o) {
-			
+
                 var m = a(o),
                     n = m.index();
-					
+
                 if (n > 4) {
                     m.addClass("current").siblings("li").removeClass("current");
                     e.find(".J_subView").hide();

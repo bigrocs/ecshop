@@ -170,7 +170,7 @@ float:right;}
 
               <li><span>{$lang.goods_give_integral}可获<em class="red">{$goods.give_integral}</em>{$points_name}</span></li>
               <!-- {/if} -->
-
+             <li><span>可使用储值卡<em class="red">{$goods.integral}</em>元</span></li>        
               <!-- {if $cfg.use_integral} 购买此商品可使用积分-->
               <li><span>{$lang.goods_integral}<em class="red">{$goods.integral}</em>{$points_name}</span></li>
               <!-- {/if} -->

@@ -837,7 +837,7 @@ Template Type: type_0
 	position:fixed;
 	left:0;
 	right:0;
-	bottom:0;
+	bottom:58px;
 	background-color:#fff
 }
 #s-action button,#s-action .countdown {
@@ -1986,4 +1986,61 @@ box-shadow: 0 0 0.6rem rgba(250,0,0,0.1);
 }
 .global-nav--current .global-nav__operate-wrap:after{
 	display: none;
+}
+.regionCitys{
+	display:inline!important;
+	color:#fff;
+	font-size:1.2rem;
+	line-height:3rem;
+	font-weight:normal;
+	padding:0 0.5rem!important;
+}
+.popGeneralRegion {
+	background-color: #EDF2FC;
+	position: fixed;z-index:100010;
+	left:0px;
+	top:50px;
+	height:auto;width:90%;
+	display: none;
+	margin:5%;
+}
+.popGeneralRegion .tit {background-color:#0072e3;line-height: 2rem;height:2rem;	text-align:center;}
+.popGeneralRegion .tit  h4 {font-size: 0.8rem; color:#FFF}
+.popGeneralRegion .tit .ico_08 {cursor: pointer;display: inline-block;position: absolute;right: 0.8rem;top:0.5rem;}
+.popGeneralRegion .main{
+	padding: 10px 20px 10px 20px;
+}
+.popGeneralRegion .main li{
+	float:left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+
+}
+.popGeneralRegion .main li a{
+	color: #878D99;
+	font-size:1.0rem;
+}
+
+.marketPrice{
+	position:relative;
+	top:-59px;
+	left:59px;
+	margin:0;
+}
+.srp.album .proSales{
+	top:-56px!important;
+}
+.srp.album .pro-inner{
+	padding-bottom:90px!important;
+}
+.srp.album .proIcons{
+	top:-36px!important;
+}
+.srp.album .proPrice{
+	top:-40px!important;
+}
+.proChuZhiKa{
+	position:relative;
+	top:-59px;
+	margin:0;
 }

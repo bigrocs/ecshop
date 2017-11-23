@@ -74,7 +74,7 @@ setcookie('ECS[display]', $display, gmtime() + 86400 * 7);
 
 /* 页面的缓存ID */
 $cache_id = sprintf('%X', crc32($cat_id . '-' . $display . '-' . $sort  .'-' . $order  .'-' . $page . '-' . $size . '-' . $_SESSION['user_rank'] . '-' .
-    $_CFG['lang'] .'-'. $brand. '-' . $price_max . '-' .$price_min . '-' . $filter_attr_str));
+    $_CFG['lang'] .'-'. $brand. '-' . $price_max . '-' .$price_min . '-' . $filter_attr_str.'-'.$_SESSION['region_id']));
 
 if (!$smarty->is_cached('category.dwt', $cache_id)) {
     /* 如果页面没有被缓存则重新获取页面的内容 */

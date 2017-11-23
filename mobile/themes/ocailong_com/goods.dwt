@@ -199,17 +199,20 @@ function showPic(){
   <ul>
     <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
     <li>{$lang.promote_price}<b class="price">{$goods.promote_price}</b>　<!-- {if $cfg.show_marketprice} 市场价格-->
-    <del>{$goods.market_price}</del>
+    <del>原价：{$goods.market_price}</del>
     <!-- {/if} --></li>
     <!--{else}-->
     <li>{$lang.shop_price}<b class="price">{$goods.shop_price_formated}</b>　<!-- {if $cfg.show_marketprice} 市场价格-->
-    <del>{$goods.market_price}</del>
+    <del>原价：{$goods.market_price}</del>
     <!-- {/if} --></li>
     <!--{/if}-->
 	{if  $user_prices }
     <li>
 	{$user_prices.rank_name}：<b class="price" >{$user_prices.price}</b></li>
 {/if}
+  </ul>
+  <ul>
+      <li>可用储值卡:<b class="price">￥100元</b></li>
   </ul>
   <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
   {insert_scripts files='lefttime.js'}

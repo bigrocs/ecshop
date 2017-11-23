@@ -70,12 +70,12 @@
   _COMMON_UNIX_TIME();
 </script>
 
-<!--O菜龙工作室（www.ocailong.com）新增---> 
+<!--O菜龙工作室（www.ocailong.com）新增--->
 <style>
 *{outline:0;-webkit-tap-highlight-color:transparent;-webkit-box-sizing:border-box;box-sizing:border-box}
 .user_top_goods {
 height: 5rem;
-overflow: hidden; 
+overflow: hidden;
 background:#ffbf6b;
 position:relative
 
@@ -148,7 +148,7 @@ font-size: 0.9rem;
     width: 100%;
 }
 </style>
-<!--O菜龙工作室（www.ocailong.com）新增  ---> 
+<!--O菜龙工作室（www.ocailong.com）新增  --->
 </head>
 <body>
 <!--头部s-->
@@ -156,10 +156,10 @@ font-size: 0.9rem;
   <header id="header" >
     <div class="header_l"> <a class="ico_02" href="#menu"> 菜单栏 </a> </div>
     <h1> {if $name}{$name}{else}{$shop_name}{/if} </h1>
-    <div class="header_r"> <a class="ico_01" href="flow.php"> 购物车 </a> </div>
+    <div class="header_r"> <a class="regionCitys" onclick="showDiv()"> {$regionCitys} </a> </div>
   </header>
 </div>
-<!--头部e--> 
+<!--头部e-->
 <!--播放器广告s-->
 <div id="focus" class="focus region">
   <div class="hd">
@@ -176,11 +176,11 @@ font-size: 0.9rem;
   </div>
 </div>
 <script type="text/javascript">
-TouchSlide({ 
+TouchSlide({
 	slideCell:"#focus",
 	titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-	mainCell:".bd ul", 
-	effect:"leftLoop", 
+	mainCell:".bd ul",
+	effect:"leftLoop",
 	autoPlay:true,//自动播放
 	autoPage:true //自动分页
 });
@@ -214,7 +214,7 @@ TouchSlide({
     </ul>
   </div>
   <!--快速连接e-->
-  
+
 <div class="blank2"></div>
 <div class="mainCon">
   <dl class="wholeTime">
@@ -239,7 +239,7 @@ TouchSlide({
  <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable -->
        </div>
-     </div>        
+     </div>
      </dd>
   </dl>
 </div>
@@ -285,10 +285,10 @@ TouchSlide({
                 <img src="{$site_url}{$goods.thumb}" alt="{$goods.name|escape:html}" />
             </a>
             <div style="text-align:center">
-            <!-- {if $goods.promote_price neq ""} --> 
-            <span class="price_s"> {$goods.promote_price} </span> 
-            <!-- {else}--> 
-            <span class="price_s"> {$goods.shop_price} </span> 
+            <!-- {if $goods.promote_price neq ""} -->
+            <span class="price_s"> {$goods.promote_price} </span>
+            <!-- {else}-->
+            <span class="price_s"> {$goods.shop_price} </span>
             <!--{/if}-->
             <br>{$goods.name|escape:html|truncate:12}
             </div>
@@ -317,10 +317,10 @@ TouchSlide({
                 <img src="{$site_url}{$goods.thumb}" alt="{$goods.name|escape:html}" />
             </a>
             <div style="text-align:center">
-            <!-- {if $goods.promote_price neq ""} --> 
-            <span class="price_s"> {$goods.promote_price} </span> 
-            <!-- {else}--> 
-            <span class="price_s"> {$goods.shop_price} </span> 
+            <!-- {if $goods.promote_price neq ""} -->
+            <span class="price_s"> {$goods.promote_price} </span>
+            <!-- {else}-->
+            <span class="price_s"> {$goods.shop_price} </span>
             <!--{/if}-->
             <br>{$goods.name|escape:html|truncate:12}
             </div>
@@ -357,10 +357,10 @@ TouchSlide({
                 <img src="{$site_url}{$goods.thumb}" alt="{$goods.name|escape:html}" />
             </a>
             <div style="text-align:center">
-            <!-- {if $goods.promote_price neq ""} --> 
-            <span class="price_s"> {$goods.promote_price} </span> 
-            <!-- {else}--> 
-            <span class="price_s"> {$goods.shop_price} </span> 
+            <!-- {if $goods.promote_price neq ""} -->
+            <span class="price_s"> {$goods.promote_price} </span>
+            <!-- {else}-->
+            <span class="price_s"> {$goods.shop_price} </span>
             <!--{/if}-->
             <br>{$goods.name|escape:html|truncate:12}
             </div>
@@ -397,10 +397,10 @@ TouchSlide({
                 <img src="{$site_url}{$goods.thumb}" alt="{$goods.name|escape:html}" />
             </a>
             <div style="text-align:center">
-            <!-- {if $goods.promote_price neq ""} --> 
-            <span class="price_s"> {$goods.promote_price} </span> 
-            <!-- {else}--> 
-            <span class="price_s"> {$goods.shop_price} </span> 
+            <!-- {if $goods.promote_price neq ""} -->
+            <span class="price_s"> {$goods.promote_price} </span>
+            <!-- {else}-->
+            <span class="price_s"> {$goods.shop_price} </span>
             <!--{/if}-->
             <br>{$goods.name|escape:html|truncate:12}
             </div>
@@ -422,8 +422,8 @@ TouchSlide({
  <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable -->
 </div>
-<!--content e--> 
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+<!--content e-->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 <nav id="menu" style="display:None">
   <ul>
     <!--{foreach from=$categories item=cat}-->
@@ -443,6 +443,20 @@ TouchSlide({
     <!--{/foreach}-->
   </ul>
 </nav>
+<div id="regionCity" class="popGeneralRegion">
+  <div class="tit">
+      <h4>选择城市</h4>
+      <span class="ico_08" onclick="closeDiv()"><a href="javascript:"></a></span>
+  </div>
+  <div class="main">
+      <ul>
+          <li><a href="index.php?regionCity=1">全国</a></li>
+        <!--{foreach from=$regionCityList item=item key=key}-->
+          <li><a href="index.php?regionCity={$key}">{$item}</a></li>
+        <!--{/foreach}-->
+      </ul>
+  </div>
+</div>
 <!--搜索弹出框-->
 <div id="main-search" class="main-search">
 <div class="hd"> <span class="ico_08 close"> 关闭 </span> </div>
@@ -487,7 +501,7 @@ $(function() {
     signature: '{$signPackage.signature}',
     jsApiList: [
         'onMenuShareTimeline',
-        'onMenuShareAppMessage' 
+        'onMenuShareAppMessage'
     ]
   });
  wx.ready(function () {
@@ -498,17 +512,17 @@ $(function() {
       link: '{$url}',
       imgUrl: '',
       trigger: function (res) {
-		
+
 		{if $url}
         alert('恭喜！分享可以获取提成哦！');
 		{else}
 		alert('糟糕，需要分销商登录才能获得提成哦！');
 		{/if}
-		
+
       },
       success: function (res) {
 		{if $dourl }
-        window.location.href="{$dourl}&type=1"; 
+        window.location.href="{$dourl}&type=1";
 		{/if}
       },
       cancel: function (res) {
@@ -525,7 +539,7 @@ $(function() {
       link: '{$url}',
       imgUrl: '',
       trigger: function (res) {
-			
+
         {if $url}
 			alert('恭喜！分享可以获取提成哦！');
 		{else}
@@ -534,7 +548,7 @@ $(function() {
       },
       success: function (res) {
        	{if $dourl }
-        window.location.href="{$dourl}&type=2"; 
+        window.location.href="{$dourl}&type=2";
 		{/if}
       },
       cancel: function (res) {
@@ -548,6 +562,13 @@ $(function() {
 
 });
 <!-- {literal} -->
+    function showDiv(){
+        document.getElementById('regionCity').style.display = 'block';
+
+    }
+    function closeDiv(){
+        document.getElementById('regionCity').style.display = 'none';
+    }
 </script>
 
 </body>

@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:1:{i:0;s:61:"/var/www/ecshop/mobile/themes/ocailong_com/library/pickup.lbi";}s:7:"expires";i:1510903317;s:8:"maketime";i:1510899717;}
+<?php exit;?>a:3:{s:8:"template";a:1:{i:0;s:61:"/var/www/ecshop/mobile/themes/ocailong_com/library/pickup.lbi";}s:7:"expires";i:1511411718;s:8:"maketime";i:1511408118;}
 <p>
   <input name="pinfo"
   	type="radio"

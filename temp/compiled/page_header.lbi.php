@@ -19,14 +19,24 @@
 if ($this->_foreach['ad']['total'] > 0):
     foreach ($_from AS $this->_var['ad']):
         $this->_foreach['ad']['iteration']++;
-?>  
+?>
 	   <?php echo $this->_var['ad']['content']; ?>
 	<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
 </div>
 <div id="header" class="new_header">
   <div class="hd_bar">
     <div class="bd_bar_bd cle">
-      <ul class="welcome">
+      <ul class="welcome" id="userinfo-bar-city">
+	  	<li class="more-menu">城市: <a href="#"><?php echo $this->_var['regionCitys']; ?></a><i class="iconfont arrow">&#8193;</i>
+		<div class="more-bd">
+		  <div class="list">
+		  		<a href="index.php?regionCity=1">全国</a>
+			<?php $_from = $this->_var['regionCityList']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['item']):
+?>
+			   <a href="index.php?regionCity=<?php echo $this->_var['key']; ?>"><?php echo $this->_var['item']; ?></a>
+			<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
+		</div>
         <li><a id="favorite_wb" href="javascript:;" rel="nofollow">收藏<?php echo $this->_var['shop_name']; ?></a></li>
 		<li id="ECS_MEMBERZONE"><?php 
 $k = array (
@@ -64,7 +74,7 @@ echo $this->_echash . $k['name'] . '|' . serialize($k) . $this->_echash;
     
     </script>
   <div class="hd_main cle">
-    <div class="logo"> <a href="./" class="lizi_logo"><img src="themes/lizi/images/logo.gif" alt="<?php echo $this->_var['shop_name']; ?>"/></a> 
+    <div class="logo"> <a href="./" class="lizi_logo"><img src="themes/lizi/images/logo.gif" alt="<?php echo $this->_var['shop_name']; ?>"/></a>
     </div>
     <div class="search_box">
       <form action="search.php" method="get" id="searchForm" name="searchForm" onSubmit="return checkSearchForm()">
@@ -112,8 +122,8 @@ if ($this->_foreach['foo']['total'] > 0):
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
           </ul>
         </div>
-       
-     
+
+
         <div class="J_subCata" id="J_subCata" style="opacity: 0; left: 213px; top: 35px;">
           <?php $_from = $this->_var['categories']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'cat');if (count($_from)):
     foreach ($_from AS $this->_var['cat']):
@@ -122,25 +132,25 @@ if ($this->_foreach['foo']['total'] > 0):
           <div class="J_subView" style="display: none;">
           <?php $_from = $this->_var['cat']['cat_id']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'child');if (count($_from)):
     foreach ($_from AS $this->_var['child']):
-?> 
+?>
             <dl>
               <dt><a href="<?php echo $this->_var['child']['url']; ?>"><?php echo htmlspecialchars($this->_var['child']['name']); ?></a> </dt>
-              <dd> 
+              <dd>
               	 <?php $_from = $this->_var['child']['cat_id']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'childer');if (count($_from)):
     foreach ($_from AS $this->_var['childer']):
-?> 
-			<a href="<?php echo $this->_var['childer']['url']; ?>"><?php echo htmlspecialchars($this->_var['childer']['name']); ?></a> 
-		<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?> 
+?>
+			<a href="<?php echo $this->_var['childer']['url']; ?>"><?php echo htmlspecialchars($this->_var['childer']['name']); ?></a>
+		<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
               </dd>
             </dl>
 	    <div class="clear"></div>
-              <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?> 
+              <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
           </div>
           <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
         </div>
-      
-        
-                
+
+
+
 
       </div>
       <ul class="sub_nav cle" id="sub_nav">
@@ -150,12 +160,12 @@ if ($this->_foreach['foo']['total'] > 0):
 if ($this->_foreach['nav_middle_list']['total'] > 0):
     foreach ($_from AS $this->_var['nav']):
         $this->_foreach['nav_middle_list']['iteration']++;
-?> 
+?>
         <li<?php if ($this->_var['nav']['active'] == 1): ?> class="current"<?php endif; ?>><a href="<?php echo $this->_var['nav']['url']; ?>" <?php if ($this->_var['nav']['opennew'] == 1): ?>target="_blank" <?php endif; ?> rel="nofollow"><?php echo $this->_var['nav']['name']; ?></a>
         </li>
         <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
       </ul>
-      <div class="hd_cart" id="ECS_CARTINFO"> 
+      <div class="hd_cart" id="ECS_CARTINFO">
          <?php 
 $k = array (
   'name' => 'cart_info_mb5',

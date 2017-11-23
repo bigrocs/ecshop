@@ -36,12 +36,8 @@ require(dirname(__FILE__) . '/include/init.php');
 
 require(ROOT_PATH . 'include/lib_weixintong.php');
 
-if ((DEBUG_MODE & 2) != 2)
-
-{
-
+if ((DEBUG_MODE & 2) != 2) {
     $smarty->caching = true;
-
 }
 
 
@@ -50,10 +46,7 @@ if ((DEBUG_MODE & 2) != 2)
 
 $act = !empty($_GET['act']) ? $_GET['act'] : '';
 
-if ($act == 'cat_rec')
-
-{
-
+if ($act == 'cat_rec') {
     $rec_array = array(1 => 'best', 2 => 'new', 3 => 'hot');
 
     $rec_type = !empty($_REQUEST['rec_type']) ? intval($_REQUEST['rec_type']) : '1';
@@ -70,14 +63,13 @@ if ($act == 'cat_rec')
 
     $children = get_children($cat_id);
 
-    $smarty->assign($rec_array[$rec_type] . '_goods',      get_category_recommend_goods($rec_array[$rec_type], $children));    // 推荐商品
+    $smarty->assign($rec_array[$rec_type] . '_goods', get_category_recommend_goods($rec_array[$rec_type], $children));    // 推荐商品
 
     $smarty->assign('cat_rec_sign', 1);
 
     $result['content'] = $smarty->fetch('library/recommend_' . $rec_array[$rec_type] . '.lbi');
 
     die($json->encode($result));
-
 }
 
 
@@ -90,88 +82,81 @@ if ($act == 'cat_rec')
 
 /* 缓存编号 */
 
-$cache_id = sprintf('%X', crc32($_SESSION['user_rank'] . '-' . $_CFG['lang']));
+$cache_id = sprintf('%X', crc32($_SESSION['user_rank'] . '-' . $_CFG['lang'].'-'.$_SESSION['region_id']));
 
 
 
-if (!$smarty->is_cached('index.dwt', $cache_id))
-
-{
-
+if (!$smarty->is_cached('index.dwt', $cache_id)) {
     assign_template();
 
 
 
     $position = assign_ur_here();
 
-    $smarty->assign('page_title',      $position['title']);    // 页面标题
+    $smarty->assign('page_title', $position['title']);    // 页面标题
 
-    $smarty->assign('ur_here',         $position['ur_here']);  // 当前位置
+    $smarty->assign('ur_here', $position['ur_here']);  // 当前位置
 
 
 
     /* meta information */
 
-    $smarty->assign('keywords',        htmlspecialchars($_CFG['shop_keywords']));
+    $smarty->assign('keywords', htmlspecialchars($_CFG['shop_keywords']));
 
-    $smarty->assign('description',     htmlspecialchars($_CFG['shop_desc']));
+    $smarty->assign('description', htmlspecialchars($_CFG['shop_desc']));
 
-    $smarty->assign('flash_theme',     $_CFG['flash_theme']);  // Flash轮播图片模板
-
-
-
-    $smarty->assign('feed_url',        ($_CFG['rewrite'] == 1) ? 'feed.xml' : 'feed.php'); // RSS URL
+    $smarty->assign('flash_theme', $_CFG['flash_theme']);  // Flash轮播图片模板
 
 
 
-    $smarty->assign('categories',      get_categories_tree()); // 分类树
-
-    $smarty->assign('helps',           get_shop_help());       // 网店帮助
-
-    $smarty->assign('top_goods',       get_top10());           // 销售排行
+    $smarty->assign('feed_url', ($_CFG['rewrite'] == 1) ? 'feed.xml' : 'feed.php'); // RSS URL
 
 
 
-    $smarty->assign('best_goods',      get_recommend_goods('best'));    // 推荐商品
+    $smarty->assign('categories', get_categories_tree()); // 分类树
 
-    $smarty->assign('new_goods',       get_recommend_goods('new'));     // 最新商品
+    $smarty->assign('helps', get_shop_help());       // 网店帮助
 
-    $smarty->assign('hot_goods',       get_recommend_goods('hot'));     // 热点文章
+    $smarty->assign('top_goods', get_top10());           // 销售排行
+
+
+
+    $smarty->assign('best_goods', get_recommend_goods('best'));    // 推荐商品
+
+    $smarty->assign('new_goods', get_recommend_goods('new'));     // 最新商品
+
+    $smarty->assign('hot_goods', get_recommend_goods('hot'));     // 热点文章
 
     $smarty->assign('promotion_goods', get_promote_goods()); // 特价商品
 
-    $smarty->assign('brand_list',      get_brands());
+    $smarty->assign('brand_list', get_brands());
 
-    $smarty->assign('promotion_info',  get_promotion_info()); // 增加一个动态显示所有促销信息的标签栏
+    $smarty->assign('promotion_info', get_promotion_info()); // 增加一个动态显示所有促销信息的标签栏
 
 
 
-    $smarty->assign('invoice_list',    index_get_invoice_query());  // 发货查询
+    $smarty->assign('invoice_list', index_get_invoice_query());  // 发货查询
 
-    $smarty->assign('new_articles',    index_get_new_articles());   // 最新文章
+    $smarty->assign('new_articles', index_get_new_articles());   // 最新文章
 
     $smarty->assign('group_buy_goods', index_get_group_buy());      // 团购商品
 
-    $smarty->assign('auction_list',    index_get_auction());        // 拍卖活动
+    $smarty->assign('auction_list', index_get_auction());        // 拍卖活动
 
-    $smarty->assign('shop_notice',     $_CFG['shop_notice']);       // 商店公告
+    $smarty->assign('shop_notice', $_CFG['shop_notice']);       // 商店公告
 
 
 
     /* 首页主广告设置 */
 
-    $smarty->assign('index_ad',     $_CFG['index_ad']);
+    $smarty->assign('index_ad', $_CFG['index_ad']);
 
-    if ($_CFG['index_ad'] == 'cus')
-
-    {
-
+    if ($_CFG['index_ad'] == 'cus') {
         $sql = 'SELECT ad_type, content, url FROM ' . $ecs->table("ad_custom") . ' WHERE ad_status = 1';
 
         $ad = $db->getRow($sql, true);
 
         $smarty->assign('ad', $ad);
-
     }
 
 
@@ -180,11 +165,11 @@ if (!$smarty->is_cached('index.dwt', $cache_id))
 
     $links = index_get_links();
 
-    $smarty->assign('img_links',       $links['img']);
+    $smarty->assign('img_links', $links['img']);
 
-    $smarty->assign('txt_links',       $links['txt']);
+    $smarty->assign('txt_links', $links['txt']);
 
-    $smarty->assign('data_dir',        DATA_DIR);       // 数据目录
+    $smarty->assign('data_dir', DATA_DIR);       // 数据目录
 
 
 
@@ -192,22 +177,14 @@ if (!$smarty->is_cached('index.dwt', $cache_id))
 
     $cat_recommend_res = $db->getAll("SELECT c.cat_id, c.cat_name, cr.recommend_type FROM " . $ecs->table("cat_recommend") . " AS cr INNER JOIN " . $ecs->table("category") . " AS c ON cr.cat_id=c.cat_id");
 
-    if (!empty($cat_recommend_res))
-
-    {
-
+    if (!empty($cat_recommend_res)) {
         $cat_rec_array = array();
 
-        foreach($cat_recommend_res as $cat_recommend_data)
-
-        {
-
+        foreach ($cat_recommend_res as $cat_recommend_data) {
             $cat_rec[$cat_recommend_data['recommend_type']][] = array('cat_id' => $cat_recommend_data['cat_id'], 'cat_name' => $cat_recommend_data['cat_name']);
-
         }
 
         $smarty->assign('cat_rec', $cat_rec);
-
     }
 
 
@@ -215,82 +192,73 @@ if (!$smarty->is_cached('index.dwt', $cache_id))
     /* 页面中的动态内容 */
 
     assign_dynamic('index');
-
 }
 
 
 
-		/*模板之家修改*/
+        /*模板之家修改*/
 
-		$userid=$_SESSION['user_id'];
+        $userid=$_SESSION['user_id'];
 
-		if(!empty($userid)){	
-			$url="http://".$_SERVER['HTTP_HOST']."/mobile/index.php?u=".$userid;
-			//20141204新增分享返积分
-			$dourl="http://".$_SERVER['HTTP_HOST']."/mobile/re_url.php?user_id=".$userid;
-		}else{
+        if (!empty($userid)) {
+            $url="http://".$_SERVER['HTTP_HOST']."/mobile/index.php?u=".$userid;
+            //20141204新增分享返积分
+            $dourl="http://".$_SERVER['HTTP_HOST']."/mobile/re_url.php?user_id=".$userid;
+        } else {
+            $url="";
 
-			$url="";
+            //20141204新增分享返积分
 
-			//20141204新增分享返积分
+            $dourl="";
+        }
 
-			$dourl="";
+        require_once "wxjs/jssdk.php";
 
-		}
+        $ret = $db->getRow("SELECT  *  FROM ". $GLOBALS['ecs']->table('weixin_config'));
 
-		require_once "wxjs/jssdk.php";
+        $jssdk = new JSSDK($appid=$ret['appid'], $ret['appsecret']);
 
-		$ret = $db->getRow("SELECT  *  FROM ". $GLOBALS['ecs']->table('weixin_config'));
+        $signPackage = $jssdk->GetSignPackage();
 
-		$jssdk = new JSSDK($appid=$ret['appid'], $ret['appsecret']);
+        $smarty->assign('signPackage', $signPackage);
 
-		$signPackage = $jssdk->GetSignPackage();
+        $smarty->assign('userid', $userid);
 
-		$smarty->assign('signPackage',  $signPackage);
+        $smarty->assign('share_info', $share_info);
 
-		$smarty->assign('userid',  $userid);
+        $smarty->assign('dourl', $dourl);
 
-		$smarty->assign('share_info',  $share_info);
+        $smarty->assign('url', $url);
 
-		$smarty->assign('dourl',  $dourl);		
+        /*模板之家修改*/
 
-		$smarty->assign('url',  $url);
+    /*模板之家开发显示店铺名称*/
 
-		/*模板之家修改*/
+    $u=$_GET['u'];
 
-	/*模板之家开发显示店铺名称*/
+    if (!empty($u)) {
+        $sql = 'SELECT nicheng FROM ' . $ecs->table("users") . ' where user_id='.$u.'';
 
-	$u=$_GET['u'];
-
-	if(!empty($u)){
-
-		$sql = 'SELECT nicheng FROM ' . $ecs->table("users") . ' where user_id='.$u.'';
-
-		$name = $db->getOne($sql);
-
-		
-
-		}
+        $name = $db->getOne($sql);
+    }
 
 
 
-	if(!empty($user_id)){
+    if (!empty($user_id)) {
+        $sql = 'SELECT nicheng FROM ' . $ecs->table("users") . ' where user_id='.$user_id.'';
 
-		$sql = 'SELECT nicheng FROM ' . $ecs->table("users") . ' where user_id='.$user_id.'';
+        $name = $db->getOne($sql);
+    }
 
-		$name = $db->getOne($sql);
+        /*O菜龙工作室（www.ocailong.com）修复开发*/
 
-		}	
 
-		/*O菜龙工作室（www.ocailong.com）修复开发*/
 
-		
+        $xkfla_url = $db->getOne("SELECT cfg_value  FROM ". $GLOBALS['ecs']->table('weixin_cfg') ." WHERE `cfg_name` = 'xkfla_url'");
 
-		$xkfla_url = $db->getOne("SELECT cfg_value  FROM ". $GLOBALS['ecs']->table('weixin_cfg') ." WHERE `cfg_name` = 'xkfla_url'");
+        $smarty->assign('xkfla_url', $xkfla_url);
 
-		$smarty->assign('xkfla_url',  $xkfla_url); 		
 
-		
 
 $smarty->assign('name', $name);
 
@@ -319,9 +287,7 @@ $smarty->display('index.dwt', $cache_id);
  */
 
 function index_get_invoice_query()
-
 {
-
     $sql = 'SELECT o.order_sn, o.invoice_no, s.shipping_code FROM ' . $GLOBALS['ecs']->table('order_info') . ' AS o' .
 
             ' LEFT JOIN ' . $GLOBALS['ecs']->table('shipping') . ' AS s ON s.shipping_id = o.shipping_id' .
@@ -334,18 +300,12 @@ function index_get_invoice_query()
 
 
 
-    foreach ($all AS $key => $row)
-
-    {
-
+    foreach ($all as $key => $row) {
         $plugin = ROOT_PATH . 'include/modules/shipping/' . $row['shipping_code'] . '.php';
 
 
 
-        if (file_exists($plugin))
-
-        {
-
+        if (file_exists($plugin)) {
             include_once($plugin);
 
 
@@ -353,9 +313,7 @@ function index_get_invoice_query()
             $shipping = new $row['shipping_code'];
 
             $all[$key]['invoice_no'] = $shipping->query((string)$row['invoice_no']);
-
         }
-
     }
 
 
@@ -365,7 +323,6 @@ function index_get_invoice_query()
 
 
     return $all;
-
 }
 
 
@@ -383,9 +340,7 @@ function index_get_invoice_query()
  */
 
 function index_get_new_articles()
-
 {
-
     $sql = 'SELECT a.article_id, a.title, ac.cat_name, a.add_time, a.file_url, a.open_type, ac.cat_id, ac.cat_name ' .
 
             ' FROM ' . $GLOBALS['ecs']->table('article') . ' AS a, ' .
@@ -402,10 +357,7 @@ function index_get_new_articles()
 
     $arr = array();
 
-    foreach ($res AS $idx => $row)
-
-    {
-
+    foreach ($res as $idx => $row) {
         $arr[$idx]['id']          = $row['article_id'];
 
         $arr[$idx]['title']       = $row['title'];
@@ -423,13 +375,11 @@ function index_get_new_articles()
                                         build_uri('article', array('aid' => $row['article_id']), $row['title']) : trim($row['file_url']);
 
         $arr[$idx]['cat_url']     = build_uri('article_cat', array('acid' => $row['cat_id']), $row['cat_name']);
-
     }
 
 
 
     return $arr;
-
 }
 
 
@@ -447,9 +397,7 @@ function index_get_new_articles()
  */
 
 function index_get_group_buy()
-
 {
-
     $time = gmtime();
 
     $limit = get_library_number('group_buy', 'index');
@@ -458,10 +406,7 @@ function index_get_group_buy()
 
     $group_buy_list = array();
 
-    if ($limit > 0)
-
-    {
-
+    if ($limit > 0) {
         $sql = 'SELECT gb.act_id AS group_buy_id, gb.goods_id, gb.ext_info, gb.goods_name, g.goods_thumb, g.goods_img, g.market_price ' .
 
                 'FROM ' . $GLOBALS['ecs']->table('goods_activity') . ' AS gb, ' .
@@ -486,9 +431,7 @@ function index_get_group_buy()
 
 
 
-        while ($row = $GLOBALS['db']->fetchRow($res))
-
-        {
+        while ($row = $GLOBALS['db']->fetchRow($res)) {
 
             /* 如果缩略图为空，使用默认图片 */
 
@@ -504,50 +447,33 @@ function index_get_group_buy()
 
             $price_ladder = $ext_info['price_ladder'];
 
-            if (!is_array($price_ladder) || empty($price_ladder))
-
-            {
-
+            if (!is_array($price_ladder) || empty($price_ladder)) {
                 $row['last_price'] = price_format(0);
-
-            }
-
-            else
-
-            {
-
-                foreach ($price_ladder AS $amount_price)
-
-                {
-
+            } else {
+                foreach ($price_ladder as $amount_price) {
                     $price_ladder[$amount_price['amount']] = $amount_price['price'];
-
                 }
-
             }
 
             ksort($price_ladder);
 
             $row['last_price'] = price_format(end($price_ladder));
-			$row['zhekou'] = round(10 / ($row['market_price'] / end($price_ladder)), 1);
+            $row['zhekou'] = round(10 / ($row['market_price'] / end($price_ladder)), 1);
             $row['url'] = build_uri('group_buy', array('gbid' => $row['group_buy_id']));
 
             $row['short_name']   = $GLOBALS['_CFG']['goods_name_length'] > 0 ?
 
                                            sub_str($row['goods_name'], $GLOBALS['_CFG']['goods_name_length']) : $row['goods_name'];
 
-            $row['short_style_name']   = add_style($row['short_name'],'');
+            $row['short_style_name']   = add_style($row['short_name'], '');
 
             $group_buy_list[] = $row;
-
         }
-
     }
 
 
 
     return $group_buy_list;
-
 }
 
 
@@ -561,9 +487,7 @@ function index_get_group_buy()
  */
 
 function index_get_auction()
-
 {
-
     $now = gmtime();
 
     $limit = get_library_number('auction', 'index');
@@ -596,10 +520,7 @@ function index_get_auction()
 
     $list = array();
 
-    while ($row = $GLOBALS['db']->fetchRow($res))
-
-    {
-
+    while ($row = $GLOBALS['db']->fetchRow($res)) {
         $ext_info = unserialize($row['ext_info']);
 
         $arr = array_merge($row, $ext_info);
@@ -616,16 +537,14 @@ function index_get_auction()
 
                                            sub_str($arr['goods_name'], $GLOBALS['_CFG']['goods_name_length']) : $arr['goods_name'];
 
-        $arr['short_style_name']   = add_style($arr['short_name'],'');
+        $arr['short_style_name']   = add_style($arr['short_name'], '');
 
         $list[] = $arr;
-
     }
 
 
 
     return $list;
-
 }
 
 
@@ -643,9 +562,7 @@ function index_get_auction()
  */
 
 function index_get_links()
-
 {
-
     $sql = 'SELECT link_logo, link_name, link_url FROM ' . $GLOBALS['ecs']->table('friend_link') . ' ORDER BY show_order';
 
     $res = $GLOBALS['db']->getAll($sql);
@@ -656,40 +573,21 @@ function index_get_links()
 
 
 
-    foreach ($res AS $row)
-
-    {
-
-        if (!empty($row['link_logo']))
-
-        {
-
+    foreach ($res as $row) {
+        if (!empty($row['link_logo'])) {
             $links['img'][] = array('name' => $row['link_name'],
 
                                     'url'  => $row['link_url'],
 
                                     'logo' => $row['link_logo']);
-
-        }
-
-        else
-
-        {
-
+        } else {
             $links['txt'][] = array('name' => $row['link_name'],
 
                                     'url'  => $row['link_url']);
-
         }
-
     }
 
 
 
     return $links;
-
 }
-
-
-
-?>

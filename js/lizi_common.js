@@ -13,29 +13,29 @@ $(function(){
 			}
      	}
 	})
-	
+
 	/*回到顶部效果 start*/
-	$("a.back2top").click(function(){	
+	$("a.back2top").click(function(){
 		$("body,html").animate({
                     scrollTop: 0
 		}, 500);
 	})
 	/*回到顶部效果 end*/
-	
+
 	/*头部下拉菜单 start*/
 	$("#userinfo-bar li.more-menu").mouseenter(function(){
 		$(this).animate(300,function(){
 			$(this).addClass("hover");
 		})
 	})
-	
+
 	$("#userinfo-bar li.more-menu").mouseleave(function(){
 		$(this).animate(300,function(){
 			$(this).removeClass("hover");
 		})
 	})
 	/*头部下拉菜单 end*/
-	
+
 	/*购物车鼠标移入效果 start*/
 	$("#ECS_CARTINFO").on("mouseenter", function() {
 		$("#ECS_CARTINFO").animate(200,function(){
@@ -49,8 +49,8 @@ $(function(){
 		})
 	});
 	/*购物车鼠标移入效果 end*/
-	
-	/*分类导航鼠标移入效果 start*/	
+
+	/*分类导航鼠标移入效果 start*/
 	h = this;
 	b = $("#J_mainCata");
 	e = $("#J_subCata");
@@ -60,7 +60,7 @@ $(function(){
 	d = false;
 	g = false;
 	f = false;
-			
+
 	i.on("mouseenter", function() {
 		var m = $(this);
 		if (l !== null) {
@@ -74,7 +74,7 @@ $(function(){
 			b.stop().show().animate({
 					opacity: 1
 			}, 300);
-		}, 200);		
+		}, 200);
 	}).on("mouseleave", function() {
 		if (l !== null) {
 			clearTimeout(l);
@@ -98,12 +98,12 @@ $(function(){
 			}
         }, 200);
 	});
-			
-			
+
+
 	$("#J_mainCata li").mouseenter(function(){
 		m = $(this);
 		n = $("#J_mainCata li").index($(this));
-				
+
 		/*
 		if (n > 4) {
 			m.addClass("current").siblings("li").removeClass("current");
@@ -116,42 +116,42 @@ $(function(){
 			b_h = b.height();
 			m_h = m.height();
 			m_p = m.position();
-			
+
 
 			x = b_h-subView_h;
 			x = (x/2);
-			
+
 			v = parseInt(m_p.top)+m_h;
-			
-			
+
+
 			if(parseInt(subView_h+x) > v)
 			{
 				x+=35;
 				e.css({
 					top: x
-				});	
+				});
 			}
 			else
 			{
-				
+
 				s = v - x - subView_h;
 				x += s;
 				x += 35;
-				
+
 				e.css({
 					top: x
-				});	
-				
+				});
+
 			}
 
-			
+
 		} else {
 			e.css({
 			top: "35px"
 			});
-		} 
-		
-		if (g) {					
+		}
+
+		if (g) {
 			m.addClass("current").siblings("li").removeClass("current");
 			e.find(".J_subView").hide().eq(n).show();
 		} else {
@@ -172,7 +172,7 @@ $(function(){
 			}, 200);
 		}
 	})
-			
+
 	function c(m) {
 		e.css({
 			opacity: 1,
@@ -180,11 +180,11 @@ $(function(){
 		}).find(".J_subView").eq(m).show();
 			d = true;
 	}
-	/*分类导航鼠标移入效果 end*/	
-	
+	/*分类导航鼠标移入效果 end*/
+
 	$("#h_box h3").click(function(){
 		var i = $("#h_box h3").index($(this));
-		
+
 		if($("#h_box ul").eq(i).is(":hidden"))
 		{
 			$(this).addClass("h3_all");
@@ -197,4 +197,3 @@ $(function(){
 		}
 	})
 })
-

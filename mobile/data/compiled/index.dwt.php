@@ -71,12 +71,12 @@
   _COMMON_UNIX_TIME();
 </script>
 
- 
+
 <style>
 *{outline:0;-webkit-tap-highlight-color:transparent;-webkit-box-sizing:border-box;box-sizing:border-box}
 .user_top_goods {
 height: 5rem;
-overflow: hidden; 
+overflow: hidden;
 background:#ffbf6b;
 position:relative
 
@@ -149,7 +149,7 @@ font-size: 0.9rem;
     width: 100%;
 }
 </style>
- 
+
 </head>
 <body>
 
@@ -157,10 +157,10 @@ font-size: 0.9rem;
   <header id="header" >
     <div class="header_l"> <a class="ico_02" href="#menu"> 菜单栏 </a> </div>
     <h1> <?php if ($this->_var['name']): ?><?php echo $this->_var['name']; ?><?php else: ?><?php echo $this->_var['shop_name']; ?><?php endif; ?> </h1>
-    <div class="header_r"> <a class="ico_01" href="flow.php"> 购物车 </a> </div>
+    <div class="header_r"> <a class="regionCitys" onclick="showDiv()"> <?php echo $this->_var['regionCitys']; ?> </a> </div>
   </header>
 </div>
- 
+
 
 <div id="focus" class="focus region">
   <div class="hd">
@@ -174,11 +174,11 @@ font-size: 0.9rem;
   </div>
 </div>
 <script type="text/javascript">
-TouchSlide({ 
+TouchSlide({
 	slideCell:"#focus",
 	titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-	mainCell:".bd ul", 
-	effect:"leftLoop", 
+	mainCell:".bd ul",
+	effect:"leftLoop",
 	autoPlay:true,//自动播放
 	autoPage:true //自动分页
 });
@@ -216,7 +216,7 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
     </ul>
   </div>
   
-  
+
 <div class="blank2"></div>
 <div class="mainCon">
   <dl class="wholeTime">
@@ -235,7 +235,7 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
 <?php $this->assign('ads_id','3'); ?><?php $this->assign('ads_num','1'); ?><?php echo $this->fetch('library/ad_position.lbi'); ?>
 
        </div>
-     </div>        
+     </div>
      </dd>
   </dl>
 </div>
@@ -266,8 +266,8 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
 <?php $this->assign('cat_goods',$this->_var['cat_goods_5']); ?><?php $this->assign('goods_cat',$this->_var['goods_cat_5']); ?><?php echo $this->fetch('library/cat_goods.lbi'); ?>
 
 </div>
- 
-<?php echo $this->fetch('library/page_footer.lbi'); ?> 
+
+<?php echo $this->fetch('library/page_footer.lbi'); ?>
 <nav id="menu" style="display:None">
   <ul>
     <?php $_from = $this->_var['categories']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'cat');if (count($_from)):
@@ -293,6 +293,22 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
     <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
   </ul>
 </nav>
+<div id="regionCity" class="popGeneralRegion">
+  <div class="tit">
+      <h4>选择城市</h4>
+      <span class="ico_08" onclick="closeDiv()"><a href="javascript:"></a></span>
+  </div>
+  <div class="main">
+      <ul>
+          <li><a href="index.php?regionCity=1">全国</a></li>
+        <?php $_from = $this->_var['regionCityList']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['item']):
+?>
+          <li><a href="index.php?regionCity=<?php echo $this->_var['key']; ?>"><?php echo $this->_var['item']; ?></a></li>
+        <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
+      </ul>
+  </div>
+</div>
 
 <div id="main-search" class="main-search">
 <div class="hd"> <span class="ico_08 close"> 关闭 </span> </div>
@@ -337,7 +353,7 @@ $(function() {
     signature: '<?php echo $this->_var['signPackage']['signature']; ?>',
     jsApiList: [
         'onMenuShareTimeline',
-        'onMenuShareAppMessage' 
+        'onMenuShareAppMessage'
     ]
   });
  wx.ready(function () {
@@ -348,17 +364,17 @@ $(function() {
       link: '<?php echo $this->_var['url']; ?>',
       imgUrl: '',
       trigger: function (res) {
-		
+
 		<?php if ($this->_var['url']): ?>
         alert('恭喜！分享可以获取提成哦！');
 		<?php else: ?>
 		alert('糟糕，需要分销商登录才能获得提成哦！');
 		<?php endif; ?>
-		
+
       },
       success: function (res) {
 		<?php if ($this->_var['dourl']): ?>
-        window.location.href="<?php echo $this->_var['dourl']; ?>&type=1"; 
+        window.location.href="<?php echo $this->_var['dourl']; ?>&type=1";
 		<?php endif; ?>
       },
       cancel: function (res) {
@@ -375,7 +391,7 @@ $(function() {
       link: '<?php echo $this->_var['url']; ?>',
       imgUrl: '',
       trigger: function (res) {
-			
+
         <?php if ($this->_var['url']): ?>
 			alert('恭喜！分享可以获取提成哦！');
 		<?php else: ?>
@@ -384,7 +400,7 @@ $(function() {
       },
       success: function (res) {
        	<?php if ($this->_var['dourl']): ?>
-        window.location.href="<?php echo $this->_var['dourl']; ?>&type=2"; 
+        window.location.href="<?php echo $this->_var['dourl']; ?>&type=2";
 		<?php endif; ?>
       },
       cancel: function (res) {
@@ -398,6 +414,13 @@ $(function() {
 
 });
 
+    function showDiv(){
+        document.getElementById('regionCity').style.display = 'block';
+
+    }
+    function closeDiv(){
+        document.getElementById('regionCity').style.display = 'none';
+    }
 </script>
 
 </body>

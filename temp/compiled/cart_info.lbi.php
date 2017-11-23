@@ -2,15 +2,15 @@
        <div class="list">
 <?php if ($this->_var['cart_list']): ?>
 <div class="data">
- <?php $_from = $this->_var['cart_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_28207200_1511231175');if (count($_from)):
-    foreach ($_from AS $this->_var['goods_0_28207200_1511231175']):
+ <?php $_from = $this->_var['cart_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_30480200_1511415487');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_30480200_1511415487']):
 ?>
   <dl>
-    <dt><a target="_blank" href="<?php echo $this->_var['goods_0_28207200_1511231175']['url']; ?>"><img src="<?php echo $this->_var['goods_0_28207200_1511231175']['thumb']; ?>"></a></dt>
+    <dt><a target="_blank" href="<?php echo $this->_var['goods_0_30480200_1511415487']['url']; ?>"><img src="<?php echo $this->_var['goods_0_30480200_1511415487']['thumb']; ?>"></a></dt>
     <dd>
-      <h4><a target="_blank" href="<?php echo $this->_var['goods_0_28207200_1511231175']['url']; ?>"><?php echo $this->_var['goods_0_28207200_1511231175']['short_name']; ?></a></h4>
-      <p><span class="red"><?php echo $this->_var['goods_0_28207200_1511231175']['shop_price']; ?></span>&nbsp;<i>X</i>&nbsp;<?php echo $this->_var['goods_0_28207200_1511231175']['goods_number']; ?></p>
-      <a class="iconfont del" title="删除" href="javascript:deleteCartGoods(<?php echo $this->_var['goods_0_28207200_1511231175']['rec_id']; ?>);">Ť</a></dd>
+      <h4><a target="_blank" href="<?php echo $this->_var['goods_0_30480200_1511415487']['url']; ?>"><?php echo $this->_var['goods_0_30480200_1511415487']['short_name']; ?></a></h4>
+      <p><span class="red"><?php echo $this->_var['goods_0_30480200_1511415487']['shop_price']; ?></span>&nbsp;<i>X</i>&nbsp;<?php echo $this->_var['goods_0_30480200_1511415487']['goods_number']; ?></p>
+      <a class="iconfont del" title="删除" href="javascript:deleteCartGoods(<?php echo $this->_var['goods_0_30480200_1511415487']['rec_id']; ?>);">Ť</a></dd>
   </dl>
   <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
 </div>

@@ -23,8 +23,15 @@
 <div id="header" class="new_header">
   <div class="hd_bar">
     <div class="bd_bar_bd cle">
-      <ul class="welcome">
-	  	<li class="more-menu">城市: <a href="user.php">会员中心</a><i class="iconfont arrow">&#8193;</i>
+      <ul class="welcome" id="userinfo-bar-city">
+	  	<li class="more-menu">城市: <a href="#">{$regionCitys}</a><i class="iconfont arrow">&#8193;</i>
+		<div class="more-bd">
+		  <div class="list">
+		  		<a href="index.php?regionCity=1">全国</a>
+			<!--{foreach from=$regionCityList item=item key=key}-->
+			   <a href="index.php?regionCity={$key}">{$item}</a>
+			<!--{/foreach}-->
+		</div>
         <li><a id="favorite_wb" href="javascript:;" rel="nofollow">收藏{$shop_name}</a></li>
 		<li id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}</li>
       </ul>

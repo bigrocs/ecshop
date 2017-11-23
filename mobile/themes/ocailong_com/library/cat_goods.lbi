@@ -14,11 +14,13 @@
                 <img src="{$site_url}{$goods.thumb}" alt="{$goods.name|escape:html}" />
             </a>
             <div style="text-align:center">
-            <!-- {if $goods.promote_price neq ""} --> 
-            <span class="price_s"> {$goods.promote_price} </span> 
-            <!-- {else}--> 
-            <span class="price_s"> {$goods.shop_price} </span> 
+            <!-- {if $goods.promote_price neq ""} -->
+            <span class="price_s"> {$goods.promote_price} </span>
+            <!-- {else}-->
+            <span class="price_s"> {$goods.shop_price} </span>
             <!--{/if}-->
+            <del style="color:#878D99">{$goods.market_price}</del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
             <br>{$goods.name|escape:html|truncate:12}
             </div>
         </div>

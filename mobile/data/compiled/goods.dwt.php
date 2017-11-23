@@ -144,11 +144,9 @@ spec_arr = getSelectedAttributes(frm);
       <!--<div><a href="javascript:showPic()"><img src="<?php echo $this->_var['goods']['goods_thumb']; ?>"  alt="<?php echo $this->_var['goods']['goods_name']; ?>" /></a></div>-->
       <ul>
         <?php if ($this->_var['pictures']): ?>
-        <?php $_from = $this->_var['pictures']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('', 'picture');$this->_foreach['no'] = array('total' => count($_from), 'iteration' => 0);
+        <?php $_from = $this->_var['pictures']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'picture');$this->_foreach['no'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['no']['total'] > 0):
-    foreach ($_from as $this->_var['picture']):
+    foreach ($_from AS $this->_var['picture']):
         $this->_foreach['no']['iteration']++;
 ?>
               <li><a href="javascript:showPic()"><img style="width:auto;height:20rem;" src="<?php echo $this->_var['site_url']; ?><?php echo $this->_var['picture']['imgurl']; ?>"/></a></li>
@@ -162,11 +160,9 @@ if ($this->_foreach['no']['total'] > 0):
       <ul>
         <i class="current"></i>
         <?php if ($this->_var['pictures']): ?>
-        <?php $_from = $this->_var['pictures']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('', 'picture');$this->_foreach['no'] = array('total' => count($_from), 'iteration' => 0);
+        <?php $_from = $this->_var['pictures']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'picture');$this->_foreach['no'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['no']['total'] > 0):
-    foreach ($_from as $this->_var['picture']):
+    foreach ($_from AS $this->_var['picture']):
         $this->_foreach['no']['iteration']++;
 ?>
         <i class="current"></i>
@@ -233,10 +229,8 @@ function showPic(){
   <?php if ($this->_var['promotion']): ?>
   <ul>
     <li>
-    <?php $_from = $this->_var['promotion']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('key', 'item'); if (count($_from)):
-    foreach ($_from as $this->_var['key'] => $this->_var['item']):
+    <?php $_from = $this->_var['promotion']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['item']):
 ?>
     <?php echo $this->_var['lang']['activity']; ?>
     <?php if ($this->_var['item']['type'] == "snatch"): ?>
@@ -264,11 +258,9 @@ function showPic(){
   <section class="goodsBuy radius5">
     <input id="goodsBuy-open" type="checkbox">
     <label class="info" for="goodsBuy-open">
-    <div>请选择<span><?php $_from = $this->_var['specification']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('spec_key', 'spec');$this->_foreach['spec'] = array('total' => count($_from), 'iteration' => 0);
+    <div>请选择<span><?php $_from = $this->_var['specification']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('spec_key', 'spec');$this->_foreach['spec'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['spec']['total'] > 0):
-    foreach ($_from as $this->_var['spec_key'] => $this->_var['spec']):
+    foreach ($_from AS $this->_var['spec_key'] => $this->_var['spec']):
         $this->_foreach['spec']['iteration']++;
 ?><?php if ($this->_foreach['spec']['iteration'] > 1): ?>/<?php endif; ?><?php echo $this->_var['spec']['name']; ?><?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?></span><i></i></div>
     <div class="selected"> </div>
@@ -280,26 +272,22 @@ if ($this->_foreach['spec']['total'] > 0):
           <li></li>
         </ul>
         <ul class="ul2">
-
-              <?php $_from = $this->_var['specification']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('spec_key', 'spec'); if (count($_from)):
-    foreach ($_from as $this->_var['spec_key'] => $this->_var['spec']):
+              
+              <?php $_from = $this->_var['specification']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('spec_key', 'spec');if (count($_from)):
+    foreach ($_from AS $this->_var['spec_key'] => $this->_var['spec']):
 ?>
 		<li>
 		<h2><?php echo $this->_var['spec']['name']; ?>：</h2>
                 <div class="items">
-
+                  
                   <?php if ($this->_var['spec']['attr_type'] == 1): ?>
                   <?php if ($this->_var['cfg']['goodsattr_style'] == 1): ?>
-
+                  
                   <input type="hidden" name="spec_attr_type" value="<?php echo $this->_var['spec_key']; ?>">
                   <ul class="ys_xuan" id="xuan_<?php echo $this->_var['spec_key']; ?>">
                     <div class="catt" id="catt_<?php echo $this->_var['spec_key']; ?>">
-                      <?php $_from = $this->_var['spec']['values']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('key', 'value'); if (count($_from)):
-    foreach ($_from as $this->_var['key'] => $this->_var['value']):
+                      <?php $_from = $this->_var['spec']['values']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'value');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['value']):
 ?>
                       <a href="javascript:" <?php if ($this->_var['value']['disabled']): ?>class="wuxiao"<?php else: ?><?php if ($this->_var['value']['selected_key_mb5'] == '1'): ?>class="cattsel"<?php endif; ?><?php endif; ?> onclick="<?php if ($this->_var['value']['disabled']): ?><?php else: ?>show_attr_status(this,<?php echo $this->_var['goods']['goods_id']; ?><?php if ($this->_var['attr_id']): ?>,<?php echo $this->_var['attr_id']; ?><?php endif; ?>);<?php if ($this->_var['spec_key'] == $this->_var['attr_id']): ?>get_gallery_attr(<?php echo $this->_var['id']; ?>, <?php echo $this->_var['value']['id']; ?>);<?php endif; ?><?php endif; ?>" name="<?php echo $this->_var['value']['id']; ?>" id="xuan_a_<?php echo $this->_var['value']['id']; ?>">
 		      <p <?php if ($this->_var['value']['thumb_url']): ?>class="padd"<?php elseif ($this->_var['value']['hex_color'] != ''): ?>style="background:#<?php echo $this->_var['value']['hex_color']; ?>; height:40px; width:40px"<?php else: ?>style="padding:6px 10px;"<?php endif; ?> title="<?php echo $this->_var['value']['label']; ?>">
@@ -317,13 +305,11 @@ if ($this->_foreach['spec']['total'] > 0):
                     </div>
                   </ul>
                   <input type="hidden" name="spec_list" value="<?php echo $this->_var['key']; ?>" />
-
+                  
                   <?php else: ?>
                   <select name="spec_<?php echo $this->_var['spec_key']; ?>">
-                    <?php $_from = $this->_var['spec']['values']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('key', 'value'); if (count($_from)):
-    foreach ($_from as $this->_var['key'] => $this->_var['value']):
+                    <?php $_from = $this->_var['spec']['values']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'value');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['value']):
 ?>
                     <option label="<?php echo $this->_var['value']['label']; ?>" value="<?php echo $this->_var['value']['id']; ?>"><?php echo $this->_var['value']['label']; ?> <?php if ($this->_var['value']['price'] > 0): ?><?php echo $this->_var['lang']['plus']; ?><?php elseif ($this->_var['value']['price'] < 0): ?><?php echo $this->_var['lang']['minus']; ?><?php endif; ?><?php if ($this->_var['value']['price'] != 0): ?><?php echo $this->_var['value']['format_price']; ?><?php endif; ?></option>
                     <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
@@ -331,10 +317,8 @@ if ($this->_foreach['spec']['total'] > 0):
                   <input type="hidden" name="spec_list" value="<?php echo $this->_var['key']; ?>" />
                   <?php endif; ?>
                   <?php else: ?>
-                  <?php $_from = $this->_var['spec']['values']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('key', 'value'); if (count($_from)):
-    foreach ($_from as $this->_var['key'] => $this->_var['value']):
+                  <?php $_from = $this->_var['spec']['values']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'value');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['value']):
 ?>
                   <label for="spec_value_<?php echo $this->_var['value']['id']; ?>">
                     <input type="checkbox" name="spec_<?php echo $this->_var['spec_key']; ?>" value="<?php echo $this->_var['value']['id']; ?>" id="spec_value_<?php echo $this->_var['value']['id']; ?>" onclick="changePrice()" />
@@ -345,21 +329,19 @@ if ($this->_foreach['spec']['total'] > 0):
                   <?php endif; ?>
                 </div>
               <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
-
+              
               <script type="text/javascript">
 var myString=new Array();
 
-<?php $_from = $this->_var['prod_exist_arr']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('pkey', 'prod'); if (count($_from)):
-    foreach ($_from as $this->_var['pkey'] => $this->_var['prod']):
+<?php $_from = $this->_var['prod_exist_arr']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('pkey', 'prod');if (count($_from)):
+    foreach ($_from AS $this->_var['pkey'] => $this->_var['prod']):
 ?>
 myString[<?php echo $this->_var['pkey']; ?>]="<?php echo $this->_var['prod']; ?>";
 <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
 
 </script>
-
-
+              
+              
         </ul>
         <ul class="quantity">
           <h2>数量：</h2>
@@ -405,7 +387,7 @@ myString[<?php echo $this->_var['pkey']; ?>]="<?php echo $this->_var['prod']; ?>
         <button type="button" class="btn cart radius5" onclick="addToCart(<?php echo $this->_var['goods']['goods_id']; ?>);">
         <div class="ico_01"></div>
         加入购物车</button>-->
-
+        
         <div class="tipMask" id="hidDiv" style="display:none" ></div>
         <div class="sellerPopGeneral" id="sellerDiv" >
           <div class="tit">
@@ -428,7 +410,7 @@ myString[<?php echo $this->_var['pkey']; ?>]="<?php echo $this->_var['prod']; ?>
           </div>
           <div class="popbtn"> <a class="bnt1 flex_in radius5" onclick="closeDiv()" href="javascript:void(0);">继续购物</a> <a class="bnt2 flex_in radius5" href="flow.php">去结算</a> </div>
         </div>
-
+        
       </div>
     </form>
   </section>
@@ -513,15 +495,11 @@ function tab(id){
         </td>
       </tr>
       <?php endif; ?>
-      <?php $_from = $this->_var['properties']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('key', 'property_group'); if (count($_from)):
-    foreach ($_from as $this->_var['key'] => $this->_var['property_group']):
+      <?php $_from = $this->_var['properties']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'property_group');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['property_group']):
 ?>
-      <?php $_from = $this->_var['property_group']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('', 'property'); if (count($_from)):
-    foreach ($_from as $this->_var['property']):
+      <?php $_from = $this->_var['property_group']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'property');if (count($_from)):
+    foreach ($_from AS $this->_var['property']):
 ?>
       <tr>
         <td width="64" class="th">
@@ -555,11 +533,9 @@ function tab(id){
     <div class="wrap">
       <ul class="m-recommend ">
         <div class="blank2"></div>
-        <?php $_from = $this->_var['related_goods']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('', 'releated_goods_data');$this->_foreach['related_goods'] = array('total' => count($_from), 'iteration' => 0);
+        <?php $_from = $this->_var['related_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'releated_goods_data');$this->_foreach['related_goods'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['related_goods']['total'] > 0):
-    foreach ($_from as $this->_var['releated_goods_data']):
+    foreach ($_from AS $this->_var['releated_goods_data']):
         $this->_foreach['related_goods']['iteration']++;
 ?>
         <li class="flex_in  "   <?php if (($this->_foreach['related_goods']['iteration'] - 1) % 2 == 1): ?> style="float:right" <?php endif; ?> > <a href="<?php echo $this->_var['releated_goods_data']['url']; ?>">
@@ -576,11 +552,9 @@ if ($this->_foreach['related_goods']['total'] > 0):
         </div>
         <?php if ($this->_var['goods']['goods_comment']): ?>
         <div class="reviews">
-          <?php $_from = $this->_var['goods']['goods_comment']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('', 'comment');$this->_foreach['comment'] = array('total' => count($_from), 'iteration' => 0);
+          <?php $_from = $this->_var['goods']['goods_comment']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'comment');$this->_foreach['comment'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['comment']['total'] > 0):
-    foreach ($_from as $this->_var['comment']):
+    foreach ($_from AS $this->_var['comment']):
         $this->_foreach['comment']['iteration']++;
 ?>
           <?php if ($this->_foreach['comment']['iteration'] < 4): ?>
@@ -604,10 +578,8 @@ if ($this->_foreach['comment']['total'] > 0):
 var goods_id = <?php echo $this->_var['goods_id']; ?>;
 var goodsattr_style = <?php echo empty($this->_var['cfg']['goodsattr_style']) ? '1' : $this->_var['cfg']['goodsattr_style']; ?>;
 var gmt_end_time = <?php echo empty($this->_var['promote_end_time']) ? '0' : $this->_var['promote_end_time']; ?>;
-<?php $_from = $this->_var['lang']['goods_js']; if (!is_array($_from) && !is_object($_from)) {
-    settype($_from, 'array');
-}; $this->push_vars('key', 'item'); if (count($_from)):
-    foreach ($_from as $this->_var['key'] => $this->_var['item']):
+<?php $_from = $this->_var['lang']['goods_js']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['item']):
 ?>
 var <?php echo $this->_var['key']; ?> = "<?php echo $this->_var['item']; ?>";
 <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>

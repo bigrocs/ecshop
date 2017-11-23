@@ -257,21 +257,73 @@ if (!defined('INIT_NO_SMARTY') && gzip_enabled()) {
     ob_start();
 }
 
-setRegionId();
+setCityId();
+setRegionId();//设置城市id
+if ($smarty) {
+    setHeaderCity($smarty);//设置城市渲染数据
+}
+
+/**
+ * [setCityId 手动设置城市]
+ */
+function setCityId()
+{
+    if (!empty($_GET['regionCity'])) {
+        $_SESSION['region_id']    = $_GET['regionCity'];
+    }
+}
 /**
  * [setRegionId 设置RegionId]
  */
 function setRegionId()
 {
-    if (!$_SESSION['region_id']) {//选择过地区则不重复定义
+    if (empty($_SESSION['region_id'])) {//选择过地区则不重复定义
         $CityId = getIpCityId();
+        if ($CityId) {
+            $_SESSION['region_id']    = $CityId; //bigrocs//地区编号
+            $GLOBALS['_region_id'] = array(
+                    'region_id' => $_SESSION['region_id'],
+                    'province_id' => getParentRegionsId($_SESSION['region_id']),
+                    'name' => getRegionName($_SESSION['region_id'])
+                );
+        } else {
+            $_SESSION['region_id']    = 0; //bigrocs//地区编号
+            $GLOBALS['_region_id'] = array(
+                    'region_id' => 0,
+                    'province_id' => 0,
+                    'name' => '全国'
+                );
+        }
         // bigrocs_region 这是全局地区变量
-        $_SESSION['region_id']    = $CityId; //bigrocs//地区编号
-        $GLOBALS['_region_id'] = array(
-            'region_id' => $_SESSION['region_id'],
-            'province_id' => getParentRegionsId($_SESSION['region_id'])
-        );
+    } else {
+        if ($_SESSION['region_id']==1) {
+            $GLOBALS['_region_id'] = array(
+                    'region_id' => 0,
+                    'province_id' => 0,
+                    'name' => '全国'
+                );
+        } else {
+            $GLOBALS['_region_id'] = array(
+                    'region_id' => $_SESSION['region_id'],
+                    'province_id' => getParentRegionsId($_SESSION['region_id']),
+                    'name' => getRegionName($_SESSION['region_id'])
+                );
+        }
     }
+}
+/**
+ * [setHeaderCity 头部城市显示]
+ * @param [type] $smarty [description]
+ */
+function setHeaderCity($smarty)
+{
+    $citys = array();
+    $sql = "SELECT value FROM " .$GLOBALS['ecs']->table('shop_config'). " WHERE code='shop_country'";
+    foreach (unserialize($GLOBALS['db']->getOne($sql)) as $key) {
+        $citys[$key] = getRegionName($key);
+    }
+    $smarty->assign('regionCityList', $citys);//允许切换城市列表
+    $smarty->assign('regionCitys', $GLOBALS['_region_id']['name']);//当前城市名称
 }
 /**
  * [getIpCityId 根据ip获取当前城市id]
@@ -288,8 +340,8 @@ function getIpCityId()
  */
 function getCityNmae()
 {
-    // $ip = real_ip();
-    $ip = '124.134.111.255';
+    $ip = real_ip();
+    // $ip = '124.134.111.255';
     $regionName = mb_convert_encoding(ecs_geoip($ip), "UTF-8", "GBK");
     $CityNmae = str_replace("中国", "", $regionName);
     $strlen = strlen($CityNmae);
@@ -305,5 +357,10 @@ function getCityNmae()
 function getRegionsId($CityNmae)
 {
     $sql = "SELECT region_id FROM " .$GLOBALS['ecs']->table('region'). " WHERE region_name='$CityNmae'";
+    return $GLOBALS['db']->getOne($sql);
+}
+function getRegionName($region_id)
+{
+    $sql = "SELECT region_name FROM " .$GLOBALS['ecs']->table('region'). " WHERE region_id='$region_id'";
     return $GLOBALS['db']->getOne($sql);
 }

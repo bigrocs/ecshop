@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:9:{i:0;s:37:"/var/www/ecshop/themes/lizi/index.dwt";i:1;s:51:"/var/www/ecshop/themes/lizi/library/page_header.lbi";i:2;s:48:"/var/www/ecshop/themes/lizi/library/index_ad.lbi";i:3;s:59:"/var/www/ecshop/themes/lizi/library/recommend_promotion.lbi";i:4;s:53:"/var/www/ecshop/themes/lizi/library/recommend_new.lbi";i:5;s:54:"/var/www/ecshop/themes/lizi/library/recommend_best.lbi";i:6;s:51:"/var/www/ecshop/themes/lizi/library/ad_position.lbi";i:7;s:49:"/var/www/ecshop/themes/lizi/library/cat_goods.lbi";i:8;s:51:"/var/www/ecshop/themes/lizi/library/page_footer.lbi";}s:7:"expires";i:1511234774;s:8:"maketime";i:1511231174;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php exit;?>a:3:{s:8:"template";a:9:{i:0;s:37:"/var/www/ecshop/themes/lizi/index.dwt";i:1;s:51:"/var/www/ecshop/themes/lizi/library/page_header.lbi";i:2;s:48:"/var/www/ecshop/themes/lizi/library/index_ad.lbi";i:3;s:59:"/var/www/ecshop/themes/lizi/library/recommend_promotion.lbi";i:4;s:53:"/var/www/ecshop/themes/lizi/library/recommend_new.lbi";i:5;s:54:"/var/www/ecshop/themes/lizi/library/recommend_best.lbi";i:6;s:51:"/var/www/ecshop/themes/lizi/library/ad_position.lbi";i:7;s:49:"/var/www/ecshop/themes/lizi/library/cat_goods.lbi";i:8;s:51:"/var/www/ecshop/themes/lizi/library/page_footer.lbi";}s:7:"expires";i:1511419089;s:8:"maketime";i:1511415489;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -26,12 +26,21 @@
 .topimg a img{width:100%; height:50px; margin:0 auto; border:0px}
 </style>
 <div class="topimg">
-		  
-	   <a href='affiche.php?ad_id=10&uri='><img src='data/afficheimg/1460440720430642585.jpg' width='1024' height='50' /></a>	</div>
+			   <a href='affiche.php?ad_id=10&uri='><img src='data/afficheimg/1460440720430642585.jpg' width='1024' height='50' /></a>	</div>
 <div id="header" class="new_header">
   <div class="hd_bar">
     <div class="bd_bar_bd cle">
-      <ul class="welcome">
+      <ul class="welcome" id="userinfo-bar-city">
+	  	<li class="more-menu">城市: <a href="#">淄博</a><i class="iconfont arrow">&#8193;</i>
+		<div class="more-bd">
+		  <div class="list">
+		  		<a href="index.php?regionCity=1">全国</a>
+						   <a href="index.php?regionCity=299">淄博</a>
+						   <a href="index.php?regionCity=298">枣庄</a>
+						   <a href="index.php?regionCity=285">滨州</a>
+						   <a href="index.php?regionCity=284">青岛</a>
+						   <a href="index.php?regionCity=283">济南</a>
+					</div>
         <li><a id="favorite_wb" href="javascript:;" rel="nofollow">收藏O菜龙工作室</a></li>
 		<li id="ECS_MEMBERZONE">554fcae493e564ee0dc75bdf2ebf94camember_info|a:1:{s:4:"name";s:11:"member_info";}554fcae493e564ee0dc75bdf2ebf94ca</li>
       </ul>
@@ -64,7 +73,7 @@
     
     </script>
   <div class="hd_main cle">
-    <div class="logo"> <a href="./" class="lizi_logo"><img src="themes/lizi/images/logo.gif" alt="O菜龙工作室"/></a> 
+    <div class="logo"> <a href="./" class="lizi_logo"><img src="themes/lizi/images/logo.gif" alt="O菜龙工作室"/></a>
     </div>
     <div class="search_box">
       <form action="search.php" method="get" id="searchForm" name="searchForm" onSubmit="return checkSearchForm()">
@@ -123,568 +132,394 @@
             </li>
                       </ul>
         </div>
-       
-     
         <div class="J_subCata" id="J_subCata" style="opacity: 0; left: 213px; top: 35px;">
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=15">精品肉类</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=64">羊肉</a> 
-		 
-			<a href="category.php?id=65">禽类</a> 
-		 
-			<a href="category.php?id=66">猪肉</a> 
-		 
-			<a href="category.php?id=67">牛肉</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=64">羊肉</a>
+					<a href="category.php?id=65">禽类</a>
+					<a href="category.php?id=66">猪肉</a>
+					<a href="category.php?id=67">牛肉</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=16">海鲜水产</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=68">参鲍</a> 
-		 
-			<a href="category.php?id=69">鱼</a> 
-		 
-			<a href="category.php?id=70">虾</a> 
-		 
-			<a href="category.php?id=71">蟹/贝</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=68">参鲍</a>
+					<a href="category.php?id=69">鱼</a>
+					<a href="category.php?id=70">虾</a>
+					<a href="category.php?id=71">蟹/贝</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=17">蛋制品</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=72">松花蛋/咸鸭蛋</a> 
-		 
-			<a href="category.php?id=73">鸡蛋</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=72">松花蛋/咸鸭蛋</a>
+					<a href="category.php?id=73">鸡蛋</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=18">叶菜类</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=74">生菜</a> 
-		 
-			<a href="category.php?id=75">菠菜</a> 
-		 
-			<a href="category.php?id=76">圆椒</a> 
-		 
-			<a href="category.php?id=77">西兰花</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=74">生菜</a>
+					<a href="category.php?id=75">菠菜</a>
+					<a href="category.php?id=76">圆椒</a>
+					<a href="category.php?id=77">西兰花</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=19">根茎类</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=20">茄果类</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=21">菌菇类</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=22">进口生鲜</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=23">白酒</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=83">五粮液</a> 
-		 
-			<a href="category.php?id=84">泸州老窖</a> 
-		 
-			<a href="category.php?id=85">茅台</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=83">五粮液</a>
+					<a href="category.php?id=84">泸州老窖</a>
+					<a href="category.php?id=85">茅台</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=24">葡萄酒</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=25">洋酒</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=26">啤酒</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=27">其他酒品</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=78">其他品牌</a> 
-		 
-			<a href="category.php?id=79">黄酒</a> 
-		 
-			<a href="category.php?id=80">养生酒</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=78">其他品牌</a>
+					<a href="category.php?id=79">黄酒</a>
+					<a href="category.php?id=80">养生酒</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=28">饮料/水</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=29">红酒</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=81">白兰地</a> 
-		 
-			<a href="category.php?id=82">威士忌</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=81">白兰地</a>
+					<a href="category.php?id=82">威士忌</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=30">食用油</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=86">其他食用油</a> 
-		 
-			<a href="category.php?id=87">菜仔油</a> 
-		 
-			<a href="category.php?id=88">花生油</a> 
-		 
-			<a href="category.php?id=89">橄榄油</a> 
-		 
-			<a href="category.php?id=90">礼盒</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=86">其他食用油</a>
+					<a href="category.php?id=87">菜仔油</a>
+					<a href="category.php?id=88">花生油</a>
+					<a href="category.php?id=89">橄榄油</a>
+					<a href="category.php?id=90">礼盒</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=31">米面杂粮</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=91">面粉/面条</a> 
-		 
-			<a href="category.php?id=92">大米</a> 
-		 
-			<a href="category.php?id=93">意大利面</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=91">面粉/面条</a>
+					<a href="category.php?id=92">大米</a>
+					<a href="category.php?id=93">意大利面</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=32">厨房调料</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=94">调味油/汁</a> 
-		 
-			<a href="category.php?id=95">酱油/醋</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=94">调味油/汁</a>
+					<a href="category.php?id=95">酱油/醋</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=33">南北干货</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=34">方便速食</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=35">调味品</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=41">有机蔬菜</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=96">西红柿</a> 
-		 
-			<a href="category.php?id=97">韭菜</a> 
-		 
-			<a href="category.php?id=98">青菜</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=96">西红柿</a>
+					<a href="category.php?id=97">韭菜</a>
+					<a href="category.php?id=98">青菜</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=42">精选蔬菜</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=99">甘蓝</a> 
-		 
-			<a href="category.php?id=100">胡萝卜</a> 
-		 
-			<a href="category.php?id=101">黄瓜</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=99">甘蓝</a>
+					<a href="category.php?id=100">胡萝卜</a>
+					<a href="category.php?id=101">黄瓜</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=43">进口水果</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=102">火龙果</a> 
-		 
-			<a href="category.php?id=103">菠萝蜜</a> 
-		 
-			<a href="category.php?id=104">奇异果</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=102">火龙果</a>
+					<a href="category.php?id=103">菠萝蜜</a>
+					<a href="category.php?id=104">奇异果</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=44">国产水果</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=105">水果礼盒</a> 
-		 
-			<a href="category.php?id=106">苹果</a> 
-		 
-			<a href="category.php?id=107">雪梨</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=105">水果礼盒</a>
+					<a href="category.php?id=106">苹果</a>
+					<a href="category.php?id=107">雪梨</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=36">休闲零食</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=108">果冻</a> 
-		 
-			<a href="category.php?id=109">枣类</a> 
-		 
-			<a href="category.php?id=110">蜜饯</a> 
-		 
-			<a href="category.php?id=111">肉类零食</a> 
-		 
-			<a href="category.php?id=112">坚果炒货</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=108">果冻</a>
+					<a href="category.php?id=109">枣类</a>
+					<a href="category.php?id=110">蜜饯</a>
+					<a href="category.php?id=111">肉类零食</a>
+					<a href="category.php?id=112">坚果炒货</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=37">糖果</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=113">创意喜糖</a> 
-		 
-			<a href="category.php?id=114">口香糖</a> 
-		 
-			<a href="category.php?id=115">软糖</a> 
-		 
-			<a href="category.php?id=116">棒棒糖</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=113">创意喜糖</a>
+					<a href="category.php?id=114">口香糖</a>
+					<a href="category.php?id=115">软糖</a>
+					<a href="category.php?id=116">棒棒糖</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=38">巧克力</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=117">夹心巧克力</a> 
-		 
-			<a href="category.php?id=118">白巧克力</a> 
-		 
-			<a href="category.php?id=119">松露巧克力</a> 
-		 
-			<a href="category.php?id=120">黑巧克力</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=117">夹心巧克力</a>
+					<a href="category.php?id=118">白巧克力</a>
+					<a href="category.php?id=119">松露巧克力</a>
+					<a href="category.php?id=120">黑巧克力</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=39">肉干肉脯/豆干</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=121">牛肉干</a> 
-		 
-			<a href="category.php?id=122">猪肉脯</a> 
-		 
-			<a href="category.php?id=123">牛肉粒</a> 
-		 
-			<a href="category.php?id=124">猪肉干</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=121">牛肉干</a>
+					<a href="category.php?id=122">猪肉脯</a>
+					<a href="category.php?id=123">牛肉粒</a>
+					<a href="category.php?id=124">猪肉干</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=40">鱿鱼丝/鱼干</a> </dt>
-              <dd> 
-              	  
-			<a href="category.php?id=125">鱿鱼足</a> 
-		 
-			<a href="category.php?id=126">鱿鱼丝</a> 
-		 
-			<a href="category.php?id=127">墨鱼/乌贼</a> 
-		 
-			<a href="category.php?id=128">鱿鱼仔</a> 
-		 
-			<a href="category.php?id=129">鱿鱼片</a> 
-		 
-              </dd>
+              <dd>
+              	 			<a href="category.php?id=125">鱿鱼足</a>
+					<a href="category.php?id=126">鱿鱼丝</a>
+					<a href="category.php?id=127">墨鱼/乌贼</a>
+					<a href="category.php?id=128">鱿鱼仔</a>
+					<a href="category.php?id=129">鱿鱼片</a>
+		              </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=45">进口奶品</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=46">国产奶品</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=47">奶粉</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=48">有机奶</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=49">原料奶</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=53">菌菇类</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=54">腌干海产</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=55">汤料</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=56">豆类</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=57">干菜/菜干</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=58">干果/果干</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=59">豆制品</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=60">腊味</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
           
           <div class="J_subView" style="display: none;">
-           
-            <dl>
+                      <dl>
               <dt><a href="category.php?id=61">白茶</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=62">红茶</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-            <dl>
+                          <dl>
               <dt><a href="category.php?id=63">绿茶</a> </dt>
-              <dd> 
-              	  
-              </dd>
+              <dd>
+              	               </dd>
             </dl>
 	    <div class="clear"></div>
-               
-          </div>
+                        </div>
                   </div>
-      
-        
-                
       </div>
       <ul class="sub_nav cle" id="sub_nav">
         <li class="current"><a href="./" rel="nofollow">首页</a>
         </li>
-         
-        <li><a href="category.php?id=2"  rel="nofollow">生鲜食品</a>
+                <li><a href="category.php?id=2"  rel="nofollow">生鲜食品</a>
         </li>
-         
-        <li><a href="category.php?id=1"  rel="nofollow">酒水饮料</a>
+                <li><a href="category.php?id=1"  rel="nofollow">酒水饮料</a>
         </li>
-         
-        <li><a href="group_buy.php"  rel="nofollow">团购商品</a>
+                <li><a href="group_buy.php"  rel="nofollow">团购商品</a>
         </li>
-         
-        <li><a href="exchange.php"  rel="nofollow">积分兑换</a>
+                <li><a href="exchange.php"  rel="nofollow">积分兑换</a>
         </li>
               </ul>
-      <div class="hd_cart" id="ECS_CARTINFO"> 
+      <div class="hd_cart" id="ECS_CARTINFO">
          554fcae493e564ee0dc75bdf2ebf94cacart_info_mb5|a:1:{s:4:"name";s:13:"cart_info_mb5";}554fcae493e564ee0dc75bdf2ebf94ca      </div>
     </div>
   </div>
   <div class="search_result"></div>
-</div><script type="text/javascript" src="themes/lizi/js/lizi_index.js"></script>
+</div>
+<script type="text/javascript" src="themes/lizi/js/lizi_index.js"></script>
 <div class="index-banner">
   <div class="index-slide" id="index-slide">
     <ul>
@@ -831,6 +666,7 @@
    </li>
   </ul>
 </div>
+ 
 <!-- <div class="brand_temai">
   <ul id="brand_temai" class="cle">
     
@@ -869,7 +705,8 @@
           </a> </li>
 		      </ul>
     </div>
-</div><div class="series_box cle">
+</div>
+<div class="series_box cle">
     <div class="series_info">
       <div class="series_name name_hufu">
         <h2>蔬菜水果</h2>
@@ -1023,5 +860,6 @@
         <a href="http://amos1.taobao.com/msg.ww?v=2&uid=o%E8%8F%9C%E9%BE%99&s=2" target="_blank" class="kefuww"></a>
     <a href="javascript:;" class="qr weixin"><i></i></a>
   <a href="javascript:;" class="gotop" style="display:none;"></a>
-</ul></body>
+</ul>
+</body>
 </html>

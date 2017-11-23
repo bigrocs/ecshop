@@ -36,12 +36,8 @@ require(dirname(__FILE__) . '/include/init.php');
 
 require(ROOT_PATH . 'include/lib_weixintong.php');
 
-if ((DEBUG_MODE & 2) != 2)
-
-{
-
+if ((DEBUG_MODE & 2) != 2) {
     $smarty->caching = true;
-
 }
 
 
@@ -72,10 +68,7 @@ $goods_id = isset($_REQUEST['id'])  ? intval($_REQUEST['id']) : 0;
 
 
 
-if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price')
-
-{
-
+if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price') {
     include('include/cls_json.php');
 
 
@@ -92,67 +85,45 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price')
 
 
 
-    if ($goods_id == 0)
-
-    {
-
+    if ($goods_id == 0) {
         $res['err_msg'] = $_LANG['err_change_attr'];
 
         $res['err_no']  = 1;
-
-    }
-
-    else
-
-    {
-
-        if ($number == 0)
-
-        {
-
+    } else {
+        if ($number == 0) {
             $res['qty'] = $number = 1;
-
-        }
-
-        else
-
-        {
-
+        } else {
             $res['qty'] = $number;
-
         }
 
 
 
         $shop_price  = get_final_price($goods_id, $number, true, $attr_id);
 
-		//模板之家修复。
+        //模板之家修复。
 
-		$xkfla2015=$shop_price * $number;
+        $xkfla2015=$shop_price * $number;
 
         $res['result'] = "￥".$xkfla2015;
-
     }
 
 
 
     die($json->encode($res));
-
 }
 
 /*------------------------------------------------------ */
 //-- O菜龙工作室（www.ocailong.com）添加的商品属性关联库------开始
 /*------------------------------------------------------ */
-if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'get_products_info')
-{
-include('include/cls_json.php');
-$json = new JSON;
-// $res = array('err_msg' => '', 'result' => '', 'qty' => 1);
-$spce_id = $_GET['id'];
-$goods_id = $_GET['goods_id'];
-$row = get_products_info($goods_id,explode(",",$spce_id));
-//$res = array('err_msg'=>$goods_id,'id'=>$spce_id);
-die($json->encode($row));
+if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'get_products_info') {
+    include('include/cls_json.php');
+    $json = new JSON;
+    // $res = array('err_msg' => '', 'result' => '', 'qty' => 1);
+    $spce_id = $_GET['id'];
+    $goods_id = $_GET['goods_id'];
+    $row = get_products_info($goods_id, explode(",", $spce_id));
+    //$res = array('err_msg'=>$goods_id,'id'=>$spce_id);
+    die($json->encode($row));
 }
 /*------------------------------------------------------ */
 //-- O菜龙工作室（www.ocailong.com）添加的商品属性关联库存------结束
@@ -166,10 +137,7 @@ die($json->encode($row));
 
 
 
-if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
-
-{
-
+if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage') {
     include('include/cls_json.php');
 
 
@@ -186,10 +154,7 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
 
 
 
-    if (!empty($goods_id))
-
-    {
-
+    if (!empty($goods_id)) {
         $need_cache = $GLOBALS['smarty']->caching;
 
         $need_compile = $GLOBALS['smarty']->force_compile;
@@ -214,12 +179,8 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
 
 
 
-        foreach ($bought_notes as $key => $val)
-
-        {
-
+        foreach ($bought_notes as $key => $val) {
             $bought_notes[$key]['add_time'] = local_date("Y-m-d G:i:s", $val['add_time']);
-
         }
 
 
@@ -246,7 +207,8 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
 
         $pager['record_count'] = $count;
 
-        $pager['page_count']   = $page_count = ($count > 0) ? intval(ceil($count / $size)) : 1;;
+        $pager['page_count']   = $page_count = ($count > 0) ? intval(ceil($count / $size)) : 1;
+        ;
 
         $pager['page_first']   = "javascript:gotoBuyPage(1,$goods_id)";
 
@@ -273,13 +235,11 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
         $GLOBALS['smarty']->caching = $need_cache;
 
         $GLOBALS['smarty']->force_compile = $need_compile;
-
     }
 
 
 
     die($json->encode($res));
-
 }
 
 
@@ -296,25 +256,22 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
 
 $cache_id = $goods_id . '-' . $_SESSION['user_rank'].'-'.$_CFG['lang'];
 
-$cache_id = sprintf('%X', crc32($cache_id));
+$cache_id = sprintf('%X', crc32($cache_id.'-'.$_SESSION['region_id']));
 
-if (!$smarty->is_cached('goods.dwt', $cache_id))
-
-{
-
-    $smarty->assign('image_width',  $_CFG['image_width']);
+if (!$smarty->is_cached('goods.dwt', $cache_id)) {
+    $smarty->assign('image_width', $_CFG['image_width']);
 
     $smarty->assign('image_height', $_CFG['image_height']);
 
-    $smarty->assign('helps',        get_shop_help()); // 网店帮助
+    $smarty->assign('helps', get_shop_help()); // 网店帮助
 
-    $smarty->assign('id',           $goods_id);
+    $smarty->assign('id', $goods_id);
 
-    $smarty->assign('type',         0);
+    $smarty->assign('type', 0);
 
-    $smarty->assign('cfg',          $_CFG);
+    $smarty->assign('cfg', $_CFG);
 
-    $smarty->assign('promotion',       get_promotion_info($goods_id));//促销信息
+    $smarty->assign('promotion', get_promotion_info($goods_id));//促销信息
 
     $smarty->assign('promotion_info', get_promotion_info());
 
@@ -330,28 +287,16 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
 
 
-    if ($goods === false)
-
-    {
+    if ($goods === false) {
 
         /* 如果没有找到任何记录则跳回到首页 */
 
         ecs_header("Location: ./\n");
 
         exit;
-
-    }
-
-    else
-
-    {
-
-        if ($goods['brand_id'] > 0)
-
-        {
-
+    } else {
+        if ($goods['brand_id'] > 0) {
             $goods['goods_brand_url'] = build_uri('brand', array('bid'=>$goods['brand_id']), $goods['goods_brand']);
-
         }
 
 
@@ -370,10 +315,7 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
         /* 购买该商品可以得到多少钱的红包 */
 
-        if ($goods['bonus_type_id'] > 0)
-
-        {
-
+        if ($goods['bonus_type_id'] > 0) {
             $time = gmtime();
 
             $sql = "SELECT type_money FROM " . $ecs->table('bonus_type') .
@@ -388,36 +330,31 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
             $goods['bonus_money'] = floatval($db->getOne($sql));
 
-            if ($goods['bonus_money'] > 0)
-
-            {
-
+            if ($goods['bonus_money'] > 0) {
                 $goods['bonus_money'] = price_format($goods['bonus_money']);
-
             }
-
         }
 
-		$goods['goods_desc'] = str_replace('src="/images/', 'src="'.$config['site_url'].'images/', $goods['goods_desc']); //修复产品详情的图片 by wang
+        $goods['goods_desc'] = str_replace('src="/images/', 'src="'.$config['site_url'].'images/', $goods['goods_desc']); //修复产品详情的图片 by wang
 
-        $smarty->assign('goods',              $goods);
+        $smarty->assign('goods', $goods);
 
-        $smarty->assign('goods_id',           $goods['goods_id']);
+        $smarty->assign('goods_id', $goods['goods_id']);
 
-        $smarty->assign('promote_end_time',   $goods['gmt_end_time']);
+        $smarty->assign('promote_end_time', $goods['gmt_end_time']);
 
-        $smarty->assign('sales_count',        get_goods_sales_count($goods['goods_id'])); // by wang
+        $smarty->assign('sales_count', get_goods_sales_count($goods['goods_id'])); // by wang
 
-        $smarty->assign('categories',         get_categories_tree($goods['cat_id']));  // 分类树
-		$smarty->assign('sales_count',        get_sales_counts($goods_id));
+        $smarty->assign('categories', get_categories_tree($goods['cat_id']));  // 分类树
+        $smarty->assign('sales_count', get_sales_counts($goods_id));
 
 
 
         /* meta */
 
-        $smarty->assign('keywords',           htmlspecialchars($goods['keywords']));
+        $smarty->assign('keywords', htmlspecialchars($goods['keywords']));
 
-        $smarty->assign('description',        htmlspecialchars($goods['goods_brief']));
+        $smarty->assign('description', htmlspecialchars($goods['goods_brief']));
 
 
 
@@ -425,12 +362,8 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
         $catlist = array();
 
-        foreach(get_parent_cats($goods['cat_id']) as $k=>$v)
-
-        {
-
+        foreach (get_parent_cats($goods['cat_id']) as $k=>$v) {
             $catlist[] = $v['cat_id'];
-
         }
 
 
@@ -439,32 +372,24 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
 
 
-         /* 上一个商品下一个商品 */
+        /* 上一个商品下一个商品 */
 
         $prev_gid = $db->getOne("SELECT goods_id FROM " .$ecs->table('goods'). " WHERE cat_id=" . $goods['cat_id'] . " AND goods_id > " . $goods['goods_id'] . " AND is_on_sale = 1 AND is_alone_sale = 1 AND is_delete = 0 LIMIT 1");
 
-        if (!empty($prev_gid))
-
-        {
-
+        if (!empty($prev_gid)) {
             $prev_good['url'] = build_uri('goods', array('gid' => $prev_gid), $goods['goods_name']);
 
             $smarty->assign('prev_good', $prev_good);//上一个商品
-
         }
 
 
 
         $next_gid = $db->getOne("SELECT max(goods_id) FROM " . $ecs->table('goods') . " WHERE cat_id=".$goods['cat_id']." AND goods_id < ".$goods['goods_id'] . " AND is_on_sale = 1 AND is_alone_sale = 1 AND is_delete = 0");
 
-        if (!empty($next_gid))
-
-        {
-
+        if (!empty($next_gid)) {
             $next_good['url'] = build_uri('goods', array('gid' => $next_gid), $goods['goods_name']);
 
             $smarty->assign('next_good', $next_good);//下一个商品
-
         }
 
 
@@ -475,130 +400,110 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
         /* current position */
 
-        $smarty->assign('page_title',          $position['title']);                    // 页面标题
+        $smarty->assign('page_title', $position['title']);                    // 页面标题
 
-        $smarty->assign('ur_here',             $position['ur_here']);                  // 当前位置
+        $smarty->assign('ur_here', $position['ur_here']);                  // 当前位置
 
         $properties = get_goods_properties($goods_id);  // 获得商品的规格和属性
-        $smarty->assign('properties',          $properties['pro']);                              // 商品属性
+        $smarty->assign('properties', $properties['pro']);                              // 商品属性
 
-		/* 代码增加_start  By  www.ocailong.com */	
-		$sql = "SELECT goods_attr_id, attr_value FROM " . $GLOBALS['ecs']->table('goods_attr') . " WHERE goods_id = '$goods_id'";
-		$results_goods_pro = $GLOBALS['db']->getAll($sql);
-		$return_arr = array();
-		foreach ($results_goods_pro as $value_mb5)
-		{
-			$return_arr[$value_mb5['goods_attr_id']] = $value_mb5['attr_value'];
-		}
-		$prod_options_arr=array();
-		
-		$prod_exist_arr = array();
-		$sql_prod  = "select goods_attr from ". $GLOBALS['ecs']->table('products') ." where product_number>0 and goods_id='$goods_id' order by goods_attr";
-		$res_prod = $db->query($sql_prod);
-		while ($row_prod = $GLOBALS['db']->fetchRow($res_prod))
-		{
-			$prod_exist_arr[] = "|". $row_prod['goods_attr'] ."|";			
-		}
-		$GLOBALS['smarty']->assign('prod_exist_arr', $prod_exist_arr);
+        /* 代码增加_start  By  www.ocailong.com */
+        $sql = "SELECT goods_attr_id, attr_value FROM " . $GLOBALS['ecs']->table('goods_attr') . " WHERE goods_id = '$goods_id'";
+        $results_goods_pro = $GLOBALS['db']->getAll($sql);
+        $return_arr = array();
+        foreach ($results_goods_pro as $value_mb5) {
+            $return_arr[$value_mb5['goods_attr_id']] = $value_mb5['attr_value'];
+        }
+        $prod_options_arr=array();
 
-		$selected_first = array();
+        $prod_exist_arr = array();
+        $sql_prod  = "select goods_attr from ". $GLOBALS['ecs']->table('products') ." where product_number>0 and goods_id='$goods_id' order by goods_attr";
+        $res_prod = $db->query($sql_prod);
+        while ($row_prod = $GLOBALS['db']->fetchRow($res_prod)) {
+            $prod_exist_arr[] = "|". $row_prod['goods_attr'] ."|";
+        }
+        $GLOBALS['smarty']->assign('prod_exist_arr', $prod_exist_arr);
 
-		foreach ($properties['spe'] AS $skey_mb5=>$sval_mb5)
-		{
-			$hahaha_zhyh = 0;
-			$sskey_goods_pro = '-1';
-			foreach ($sval_mb5['values'] AS $sskey_mb5=>$ssval_mb5)
-			{				
-				if ( is_exist_prod($selected_first, $ssval_mb5['id'], $prod_exist_arr))
-				{ 
-					$hahaha_zhyh = $hahaha_zhyh ? $hahaha_zhyh : $ssval_mb5['id'];
-					$sskey_goods_pro = ($sskey_goods_pro != '-1') ? $sskey_goods_pro : $sskey_mb5;
-				}
-				else
-				{
-					$properties['spe'][$skey_mb5]['values'][$sskey_mb5]['disabled'] = "disabled";
-				}
+        $selected_first = array();
 
-			}
-			if ($hahaha_zhyh)
-			{
-				$selected_first[$skey_mb5] =  $hahaha_zhyh;
-			}
-			if ($sskey_goods_pro!='-1')
-			{
-				$properties['spe'][$skey_mb5]['values'][$sskey_goods_pro]['selected_key_mb5'] = "1";
-			}
-		}
-		$smarty->assign('is_goods_page', 1);
-		//echo '<pre>';
-		//print_r($properties['spe']);
-		//echo '</pre>';
-		/* 代码增加_end  By  www.ocailong.com */
+        foreach ($properties['spe'] as $skey_mb5=>$sval_mb5) {
+            $hahaha_zhyh = 0;
+            $sskey_goods_pro = '-1';
+            foreach ($sval_mb5['values'] as $sskey_mb5=>$ssval_mb5) {
+                if (is_exist_prod($selected_first, $ssval_mb5['id'], $prod_exist_arr)) {
+                    $hahaha_zhyh = $hahaha_zhyh ? $hahaha_zhyh : $ssval_mb5['id'];
+                    $sskey_goods_pro = ($sskey_goods_pro != '-1') ? $sskey_goods_pro : $sskey_mb5;
+                } else {
+                    $properties['spe'][$skey_mb5]['values'][$sskey_mb5]['disabled'] = "disabled";
+                }
+            }
+            if ($hahaha_zhyh) {
+                $selected_first[$skey_mb5] =  $hahaha_zhyh;
+            }
+            if ($sskey_goods_pro!='-1') {
+                $properties['spe'][$skey_mb5]['values'][$sskey_goods_pro]['selected_key_mb5'] = "1";
+            }
+        }
+        $smarty->assign('is_goods_page', 1);
+        //echo '<pre>';
+        //print_r($properties['spe']);
+        //echo '</pre>';
+        /* 代码增加_end  By  www.ocailong.com */
 
-        $smarty->assign('specification',       $properties['spe']);                              // 商品规格
-        $smarty->assign('attribute_linked',    get_same_attribute_goods($properties));           // 相同属性的关联商品
-        $smarty->assign('related_goods',       $linked_goods);                                   // 关联商品
-        $smarty->assign('goods_article_list',  get_linked_articles($goods_id));                  // 关联文章
-        $smarty->assign('fittings',            get_goods_fittings(array($goods_id)));                   // 配件
-        $smarty->assign('rank_prices',         get_user_rank_prices($goods_id, $shop_price)); 
+        $smarty->assign('specification', $properties['spe']);                              // 商品规格
+        $smarty->assign('attribute_linked', get_same_attribute_goods($properties));           // 相同属性的关联商品
+        $smarty->assign('related_goods', $linked_goods);                                   // 关联商品
+        $smarty->assign('goods_article_list', get_linked_articles($goods_id));                  // 关联文章
+        $smarty->assign('fittings', get_goods_fittings(array($goods_id)));                   // 配件
+        $smarty->assign('rank_prices', get_user_rank_prices($goods_id, $shop_price));
 
-		/*O菜龙工作室（www.ocailong.com）添加*/
+        /*O菜龙工作室（www.ocailong.com）添加*/
 
-		$rank_prices=get_user_rank_prices($goods_id, $shop_price);
+        $rank_prices=get_user_rank_prices($goods_id, $shop_price);
 
-		$user_prices="";
+        $user_prices="";
 
-		foreach($rank_prices as $k=>$v){
-
-			
-
-			if($_SESSION['user_rank']==$k){
-
-				$user_prices=$v;
-
-			}
-
-		}
+        foreach ($rank_prices as $k=>$v) {
+            if ($_SESSION['user_rank']==$k) {
+                $user_prices=$v;
+            }
+        }
 
 
 
-		$smarty->assign('user_prices',            $user_prices); 
+        $smarty->assign('user_prices', $user_prices);
 
-		/*O菜龙工作室（www.ocailong.com）添加*/
+        /*O菜龙工作室（www.ocailong.com）添加*/
 
-		
 
-		//O菜龙工作室（www.ocailong.com）添加判断该商品是否被收藏过
 
-			$is_collect=0;
+        //O菜龙工作室（www.ocailong.com）添加判断该商品是否被收藏过
 
-			$user_id=$_SESSION['user_id'];
+        $is_collect=0;
 
-			$sql = "SELECT * FROM " .$GLOBALS['ecs']->table('collect_goods'). " WHERE user_id = '$user_id' and goods_id='$goods_id'";
+        $user_id=$_SESSION['user_id'];
 
-			$is_collect = $GLOBALS['db']->getRow($sql);
+        $sql = "SELECT * FROM " .$GLOBALS['ecs']->table('collect_goods'). " WHERE user_id = '$user_id' and goods_id='$goods_id'";
 
-			
+        $is_collect = $GLOBALS['db']->getRow($sql);
 
-		if(!empty($is_collect))	{
 
-			$smarty->assign('is_collect', 1 );
 
-		}else{
+        if (!empty($is_collect)) {
+            $smarty->assign('is_collect', 1);
+        } else {
+            $smarty->assign('is_collect', 0);
+        }
 
-			$smarty->assign('is_collect', 0 );
+        //O菜龙工作室（www.ocailong.com）添加判断该商品是否被收藏过
 
-		}		
+        // 会员等级价格
 
-		//O菜龙工作室（www.ocailong.com）添加判断该商品是否被收藏过
+        $smarty->assign('pictures', get_goods_gallery($goods_id));                    // 商品相册
 
-		// 会员等级价格
+        $smarty->assign('bought_goods', get_also_bought($goods_id));                      // 购买了该商品的用户还购买了哪些商品
 
-        $smarty->assign('pictures',            get_goods_gallery($goods_id));                    // 商品相册
-
-        $smarty->assign('bought_goods',        get_also_bought($goods_id));                      // 购买了该商品的用户还购买了哪些商品
-
-        $smarty->assign('goods_rank',          get_goods_rank($goods_id));                       // 商品的销售排名
+        $smarty->assign('goods_rank', get_goods_rank($goods_id));                       // 商品的销售排名
 
 
 
@@ -606,7 +511,7 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
         $tag_array = get_tags($goods_id);
 
-        $smarty->assign('tags',                $tag_array);                                       // 商品的标记
+        $smarty->assign('tags', $tag_array);                                       // 商品的标记
 
 
 
@@ -614,7 +519,7 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
         $package_goods_list = get_package_goods_list($goods['goods_id']);
 
-        $smarty->assign('package_goods_list',$package_goods_list);    // 获取关联礼包
+        $smarty->assign('package_goods_list', $package_goods_list);    // 获取关联礼包
 
 
 
@@ -622,20 +527,15 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
         $volume_price_list = get_volume_price_list($goods['goods_id'], '1');
 
-        $smarty->assign('volume_price_list',$volume_price_list);    // 商品优惠价格区间
-
+        $smarty->assign('volume_price_list', $volume_price_list);    // 商品优惠价格区间
     }
-
 }
 
 
 
 /* 记录浏览历史 */
 
-if (!empty($_COOKIE['ECS']['history']))
-
-{
-
+if (!empty($_COOKIE['ECS']['history'])) {
     $history = explode(',', $_COOKIE['ECS']['history']);
 
 
@@ -646,26 +546,15 @@ if (!empty($_COOKIE['ECS']['history']))
 
 
 
-    while (count($history) > $_CFG['history_number'])
-
-    {
-
+    while (count($history) > $_CFG['history_number']) {
         array_pop($history);
-
     }
 
 
 
     setcookie('ECS[history]', implode(',', $history), gmtime() + 3600 * 24 * 30);
-
-}
-
-else
-
-{
-
+} else {
     setcookie('ECS[history]', $goods_id, gmtime() + 3600 * 24 * 30);
-
 }
 
 
@@ -680,84 +569,82 @@ $db->query('UPDATE ' . $ecs->table('goods') . " SET click_count = click_count + 
 
 
 
-		/*模板之家修改*/
+        /*模板之家修改*/
 
-		
 
-		
 
-		$userid=$_SESSION['user_id'];
 
-		if(!empty($userid)){	
-			$url="http://".$_SERVER['HTTP_HOST']."/mobile/index.php?u=".$userid;
-			//20141204新增分享返积分
-			$dourl="http://".$_SERVER['HTTP_HOST']."/mobile/re_url.php?user_id=".$userid;
-		}else{
 
-			$url="";
+        $userid=$_SESSION['user_id'];
 
-			//20141204新增分享返积分
+        if (!empty($userid)) {
+            $url="http://".$_SERVER['HTTP_HOST']."/mobile/index.php?u=".$userid;
+            //20141204新增分享返积分
+            $dourl="http://".$_SERVER['HTTP_HOST']."/mobile/re_url.php?user_id=".$userid;
+        } else {
+            $url="";
 
-			$dourl="";
+            //20141204新增分享返积分
 
-		}
+            $dourl="";
+        }
 
-		require_once "wxjs/jssdk.php";
+        require_once "wxjs/jssdk.php";
 
-		$ret = $db->getRow("SELECT  *  FROM ". $GLOBALS['ecs']->table('weixin_config'));
+        $ret = $db->getRow("SELECT  *  FROM ". $GLOBALS['ecs']->table('weixin_config'));
 
-		$jssdk = new JSSDK($appid=$ret['appid'], $ret['appsecret']);
+        $jssdk = new JSSDK($appid=$ret['appid'], $ret['appsecret']);
 
-		$signPackage = $jssdk->GetSignPackage();
+        $signPackage = $jssdk->GetSignPackage();
 
-		$smarty->assign('signPackage',  $signPackage);
+        $smarty->assign('signPackage', $signPackage);
 
-		$smarty->assign('userid',  $userid);
+        $smarty->assign('userid', $userid);
 
-		$smarty->assign('share_info',  $share_info);	
+        $smarty->assign('share_info', $share_info);
 
-		$smarty->assign('dourl',  $dourl);		
+        $smarty->assign('dourl', $dourl);
 
-		$smarty->assign('url',  $url);
+        $smarty->assign('url', $url);
 
-		/*O菜龙工作室（www.ocailong.com）修改*/
+        /*O菜龙工作室（www.ocailong.com）修改*/
 
-		/*O菜龙工作室（www.ocailong.com）修复开发*/
+        /*O菜龙工作室（www.ocailong.com）修复开发*/
 
-		$is_wechat=is_wechat_browser();
+        $is_wechat=is_wechat_browser();
         $useryes = $db->getOne("SELECT user_id FROM ".$ecs->table('users')." WHERE user_id=".$_SESSION['user_id']." AND wxid is not null and wxch_bd ='ok'");
-		$weixin_url = $db->getOne("SELECT cfg_value  FROM ". $GLOBALS['ecs']->table('weixin_cfg') ." WHERE `cfg_name` = 'weixin_url'");
-		$scene_id = $_GET['u'];
-		if(empty($useryes) && $is_wechat!==false){//判断如果没有关注并且是微信场景
+        $weixin_url = $db->getOne("SELECT cfg_value  FROM ". $GLOBALS['ecs']->table('weixin_cfg') ." WHERE `cfg_name` = 'weixin_url'");
+        $scene_id = $_GET['u'];
+        if (empty($useryes) && $is_wechat!==false) {//判断如果没有关注并且是微信场景
 
 
-			if(!empty($scene_id)){
-				$qr_path = $db->getOne("SELECT `qr_path` FROM ". $GLOBALS['ecs']->table('weixin_qr') ." WHERE `scene_id`='$scene_id'");
-				$local_file=fopen($qr_path,'r');
-				if(false !==$local_file){
-					$qrcodeurl="http://".$_SERVER['HTTP_HOST']."/wechat/egg/index1.php?scene_id=".$scene_id;
-					$smarty->assign('qrcodeurl',  $qrcodeurl); 
-					fclose($local_file);
-				}else{
-					$smarty->assign('qrcodeurl',  $weixin_url);
-				}
-			}else{
-					$smarty->assign('qrcodeurl',  $weixin_url); 
-			}
+            if (!empty($scene_id)) {
+                $qr_path = $db->getOne("SELECT `qr_path` FROM ". $GLOBALS['ecs']->table('weixin_qr') ." WHERE `scene_id`='$scene_id'");
+                $local_file=fopen($qr_path, 'r');
+                if (false !==$local_file) {
+                    $qrcodeurl="http://".$_SERVER['HTTP_HOST']."/wechat/egg/index1.php?scene_id=".$scene_id;
+                    $smarty->assign('qrcodeurl', $qrcodeurl);
+                    fclose($local_file);
+                } else {
+                    $smarty->assign('qrcodeurl', $weixin_url);
+                }
+            } else {
+                $smarty->assign('qrcodeurl', $weixin_url);
+            }
 
 
-			//$smarty->assign('qrcodeurl',  $weixin_url);
-		}elseif(empty($useryes) && $is_wechat==false){//判断如果没有关注并且不是微信场景
-			$smarty->assign('qrcodeurl',  '');
-		}
+            //$smarty->assign('qrcodeurl',  $weixin_url);
+        } elseif (empty($useryes) && $is_wechat==false) {//判断如果没有关注并且不是微信场景
+            $smarty->assign('qrcodeurl', '');
+        }
 
-		
 
-		/*O菜龙工作室（www.ocailong.com）修复开发*/
 
-$smarty->assign('now_time',  gmtime());           // 当前系统时间
+        /*O菜龙工作室（www.ocailong.com）修复开发*/
 
-$smarty->display('goods.dwt',      $cache_id);
+$smarty->assign('now_time', gmtime());           // 当前系统时间
+
+$smarty->display('goods.dwt', $cache_id);
 
 
 
@@ -784,9 +671,7 @@ $smarty->display('goods.dwt',      $cache_id);
  */
 
 function get_linked_goods($goods_id)
-
 {
-
     $sql = 'SELECT g.goods_id, g.goods_name, g.goods_thumb, g.goods_img, g.shop_price AS org_price, ' .
 
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
@@ -811,10 +696,7 @@ function get_linked_goods($goods_id)
 
     $arr = array();
 
-    while ($row = $GLOBALS['db']->fetchRow($res))
-
-    {
-
+    while ($row = $GLOBALS['db']->fetchRow($res)) {
         $arr[$row['goods_id']]['goods_id']     = $row['goods_id'];
 
         $arr[$row['goods_id']]['goods_name']   = $row['goods_name'];
@@ -837,30 +719,18 @@ function get_linked_goods($goods_id)
 
 
 
-        if ($row['promote_price'] > 0)
-
-        {
-
+        if ($row['promote_price'] > 0) {
             $arr[$row['goods_id']]['promote_price'] = bargain_price($row['promote_price'], $row['promote_start_date'], $row['promote_end_date']);
 
             $arr[$row['goods_id']]['formated_promote_price'] = price_format($arr[$row['goods_id']]['promote_price']);
-
-        }
-
-        else
-
-        {
-
+        } else {
             $arr[$row['goods_id']]['promote_price'] = 0;
-
         }
-
     }
 
 
 
     return $arr;
-
 }
 
 
@@ -880,9 +750,7 @@ function get_linked_goods($goods_id)
  */
 
 function get_linked_articles($goods_id)
-
 {
-
     $sql = 'SELECT a.article_id, a.title, a.file_url, a.open_type, a.add_time ' .
 
             'FROM ' . $GLOBALS['ecs']->table('goods_article') . ' AS g, ' .
@@ -899,10 +767,7 @@ function get_linked_articles($goods_id)
 
     $arr = array();
 
-    while ($row = $GLOBALS['db']->fetchRow($res))
-
-    {
-
+    while ($row = $GLOBALS['db']->fetchRow($res)) {
         $row['url']         = $row['open_type'] != 1 ?
 
             build_uri('article', array('aid'=>$row['article_id']), $row['title']) : trim($row['file_url']);
@@ -916,13 +781,11 @@ function get_linked_articles($goods_id)
 
 
         $arr[] = $row;
-
     }
 
 
 
     return $arr;
-
 }
 
 
@@ -942,9 +805,7 @@ function get_linked_articles($goods_id)
  */
 
 function get_user_rank_prices($goods_id, $shop_price)
-
 {
-
     $sql = "SELECT rank_id, IFNULL(mp.user_price, r.discount * $shop_price / 100) AS price, r.rank_name, r.discount " .
 
             'FROM ' . $GLOBALS['ecs']->table('user_rank') . ' AS r ' .
@@ -961,24 +822,17 @@ function get_user_rank_prices($goods_id, $shop_price)
 
     $arr = array();
 
-    while ($row = $GLOBALS['db']->fetchRow($res))
-
-    {
-
-
-
+    while ($row = $GLOBALS['db']->fetchRow($res)) {
         $arr[$row['rank_id']] = array(
 
                         'rank_name' => htmlspecialchars($row['rank_name']),
 
                         'price'     => price_format($row['price']));
-
     }
 
 
 
     return $arr;
-
 }
 
 
@@ -998,9 +852,7 @@ function get_user_rank_prices($goods_id, $shop_price)
  */
 
 function get_also_bought($goods_id)
-
 {
-
     $sql = 'SELECT COUNT(b.goods_id ) AS num, g.goods_id, g.goods_name, g.goods_thumb, g.goods_img, g.shop_price, g.promote_price, g.promote_start_date, g.promote_end_date ' .
 
             'FROM ' . $GLOBALS['ecs']->table('order_goods') . ' AS a ' .
@@ -1025,10 +877,7 @@ function get_also_bought($goods_id)
 
     $arr = array();
 
-    while ($row = $GLOBALS['db']->fetchRow($res))
-
-    {
-
+    while ($row = $GLOBALS['db']->fetchRow($res)) {
         $arr[$key]['goods_id']    = $row['goods_id'];
 
         $arr[$key]['goods_name']  = $row['goods_name'];
@@ -1047,34 +896,22 @@ function get_also_bought($goods_id)
 
 
 
-        if ($row['promote_price'] > 0)
-
-        {
-
+        if ($row['promote_price'] > 0) {
             $arr[$key]['promote_price'] = bargain_price($row['promote_price'], $row['promote_start_date'], $row['promote_end_date']);
 
             $arr[$key]['formated_promote_price'] = price_format($arr[$key]['promote_price']);
-
-        }
-
-        else
-
-        {
-
+        } else {
             $arr[$key]['promote_price'] = 0;
-
         }
 
 
 
         $key++;
-
     }
 
 
 
     return $arr;
-
 }
 
 
@@ -1094,51 +931,22 @@ function get_also_bought($goods_id)
  */
 
 function get_goods_rank($goods_id)
-
 {
 
     /* 统计时间段 */
 
     $period = intval($GLOBALS['_CFG']['top10_time']);
 
-    if ($period == 1) // 一年
-
-    {
-
+    if ($period == 1) { // 一年
         $ext = " AND o.add_time > '" . local_strtotime('-1 years') . "'";
-
-    }
-
-    elseif ($period == 2) // 半年
-
-    {
-
+    } elseif ($period == 2) { // 半年
         $ext = " AND o.add_time > '" . local_strtotime('-6 months') . "'";
-
-    }
-
-    elseif ($period == 3) // 三个月
-
-    {
-
+    } elseif ($period == 3) { // 三个月
         $ext = " AND o.add_time > '" . local_strtotime('-3 months') . "'";
-
-    }
-
-    elseif ($period == 4) // 一个月
-
-    {
-
+    } elseif ($period == 4) { // 一个月
         $ext = " AND o.add_time > '" . local_strtotime('-1 months') . "'";
-
-    }
-
-    else
-
-    {
-
+    } else {
         $ext = '';
-
     }
 
 
@@ -1165,9 +973,7 @@ function get_goods_rank($goods_id)
 
 
 
-    if ($sales_count > 0)
-
-    {
+    if ($sales_count > 0) {
 
         /* 只有在商品销售量大于0时才去计算该商品的排行 */
 
@@ -1195,28 +1001,16 @@ function get_goods_rank($goods_id)
 
 
 
-        if ($rank > 10)
-
-        {
-
+        if ($rank > 10) {
             $rank = 0;
-
         }
-
-    }
-
-    else
-
-    {
-
+    } else {
         $rank = 0;
-
     }
 
 
 
     return $rank;
-
 }
 
 
@@ -1238,9 +1032,7 @@ function get_goods_rank($goods_id)
  */
 
 function get_attr_amount($goods_id, $attr)
-
 {
-
     $sql = "SELECT SUM(attr_price) FROM " . $GLOBALS['ecs']->table('goods_attr') .
 
         " WHERE goods_id='$goods_id' AND " . db_create_in($attr, 'goods_attr_id');
@@ -1248,7 +1040,6 @@ function get_attr_amount($goods_id, $attr)
 
 
     return $GLOBALS['db']->getOne($sql);
-
 }
 
 
@@ -1268,9 +1059,7 @@ function get_attr_amount($goods_id, $attr)
  */
 
 function get_package_goods_list($goods_id)
-
 {
-
     $now = gmtime();
 
     $sql = "SELECT pg.goods_id, ga.act_id, ga.act_name, ga.act_desc, ga.goods_name, ga.start_time,
@@ -1295,28 +1084,17 @@ function get_package_goods_list($goods_id)
 
 
 
-    foreach ($res as $tempkey => $value)
-
-    {
-
+    foreach ($res as $tempkey => $value) {
         $subtotal = 0;
 
         $row = unserialize($value['ext_info']);
 
         unset($value['ext_info']);
 
-        if ($row)
-
-        {
-
-            foreach ($row as $key=>$val)
-
-            {
-
+        if ($row) {
+            foreach ($row as $key=>$val) {
                 $res[$tempkey][$key] = $val;
-
             }
-
         }
 
 
@@ -1347,10 +1125,7 @@ function get_package_goods_list($goods_id)
 
 
 
-        foreach($goods_res as $key => $val)
-
-        {
-
+        foreach ($goods_res as $key => $val) {
             $goods_id_array[] = $val['goods_id'];
 
             $goods_res[$key]['goods_thumb']  = get_image_path($val['goods_id'], $val['goods_thumb'], true);
@@ -1360,7 +1135,6 @@ function get_package_goods_list($goods_id)
             $goods_res[$key]['rank_price']   = price_format($val['rank_price']);
 
             $subtotal += $val['rank_price'] * $val['goods_number'];
-
         }
 
 
@@ -1383,12 +1157,8 @@ function get_package_goods_list($goods_id)
 
         $_goods_attr = array();
 
-        foreach ($result_goods_attr as $value)
-
-        {
-
+        foreach ($result_goods_attr as $value) {
             $_goods_attr[$value['goods_attr_id']] = $value['attr_value'];
-
         }
 
 
@@ -1397,34 +1167,22 @@ function get_package_goods_list($goods_id)
 
         $format = '[%s]';
 
-        foreach($goods_res as $key => $val)
-
-        {
-
-            if ($val['goods_attr'] != '')
-
-            {
-
+        foreach ($goods_res as $key => $val) {
+            if ($val['goods_attr'] != '') {
                 $goods_attr_array = explode('|', $val['goods_attr']);
 
 
 
                 $goods_attr = array();
 
-                foreach ($goods_attr_array as $_attr)
-
-                {
-
+                foreach ($goods_attr_array as $_attr) {
                     $goods_attr[] = $_goods_attr[$_attr];
-
                 }
 
 
 
                 $goods_res[$key]['goods_attr_str'] = sprintf($format, implode('，', $goods_attr));
-
             }
-
         }
 
 
@@ -1436,13 +1194,11 @@ function get_package_goods_list($goods_id)
         $res[$tempkey]['saving']        = price_format(($subtotal - $res[$tempkey]['package_price']));
 
         $res[$tempkey]['package_price'] = price_format($res[$tempkey]['package_price']);
-
     }
 
 
 
     return $res;
-
 }
 
 
@@ -1450,7 +1206,6 @@ function get_package_goods_list($goods_id)
 // 获取商品的销量 by wang
 
 function get_goods_sales_count($goods_id)
-
 {
 
     /* 统计时间段 */
@@ -1462,23 +1217,17 @@ function get_goods_sales_count($goods_id)
     if ($period == 1) { // 一年
 
         $ext = " AND o.add_time > '" . local_strtotime('-1 years') . "'";
-
     } elseif ($period == 2) { // 半年
 
         $ext = " AND o.add_time > '" . local_strtotime('-6 months') . "'";
-
     } elseif ($period == 3) { // 三个月
 
         $ext = " AND o.add_time > '" . local_strtotime('-3 months') . "'";
-
     } elseif ($period == 4) { // 一个月
 
         $ext = " AND o.add_time > '" . local_strtotime('-1 months') . "'";
-
     } else {
-
         $ext = '';
-
     }
 
 
@@ -1506,21 +1255,17 @@ function get_goods_sales_count($goods_id)
 
 
     return intval($sales_count);
-
 }
 
 
 
 // 统计商品的评论数
 
-function get_comment_count($goods_id){
-
+function get_comment_count($goods_id)
+{
     $sql = 'SELECT count(*) FROM '.$GLOBALS['ecs']->table('comment').' where status=1 and id_value='.$goods_id;
 
     $res = $GLOBALS['db']->getOne($sql);
 
     return intval($res);
-
 }
-
-?>
