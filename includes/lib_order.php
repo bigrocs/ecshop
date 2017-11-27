@@ -521,6 +521,7 @@ function order_fee($order, $goods, $consignee)
                     'shipping_fee'     => 0,
                     'shipping_insure'  => 0,
                     'integral_money'   => 0,
+                    'jiubi_money'      => 0,
                     'bonus'            => 0,
                     'surplus'          => 0,
                     'cod_fee'          => 0,
@@ -711,6 +712,24 @@ function order_fee($order, $goods, $consignee)
     $total['integral'] = $order['integral'];
     $total['integral_formated'] = price_format($total['integral_money'], false);
 
+    /* 储值卡金额 */
+    $order['jiubi'] = $order['jiubi'] > 0 ? $order['jiubi'] : 0;
+    if ($total['amount'] > 0 && $max_amount > 0 && $order['jiubi'] > 0) {
+        $jiubi_money = value_of_jiubi($order['jiubi']);
+
+        // 使用储值卡金额支付
+        $use_jiubi           = min($total['amount'], $max_amount, $jiubi_money); // 实际使用储值卡金额支付的金额
+
+        $total['amount']        -= $use_jiubi;
+        $total['jiubi_money'] = $use_jiubi;
+        $order['jiubi']       = jiubi_of_value($use_jiubi);
+    } else {
+        $total['jiubi_money'] = 0;
+        $order['jiubi']       = 0;
+    }
+    $total['jiubi'] = $order['jiubi'];
+    $total['jiubi_formated'] = price_format($total['jiubi_money'], false);
+
     /* 保存订单信息 */
     $_SESSION['flow_order'] = $order;
 
@@ -790,7 +809,7 @@ function cart_goods($type = CART_GENERAL_GOODS)
 {
     $sql = "SELECT rec_id, user_id, goods_id, goods_name, goods_sn, goods_number, " .
             "market_price, goods_price, fencheng, goods_attr, is_real, extension_code, parent_id, is_gift, is_shipping, " .
-            "goods_price * goods_number AS subtotal " .
+            "goods_price * goods_number AS subtotal, jiubi " .
             "FROM " . $GLOBALS['ecs']->table('cart') .
             " WHERE session_id = '" . SESS_ID . "' " .
             "AND rec_type = '$type'";
@@ -940,7 +959,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
     $sql = "SELECT g.goods_name, g.goods_sn, g.is_on_sale, g.is_real, ".
                 "g.market_price, g.shop_price AS org_price, g.promote_price, g.promote_start_date, ".
                 "g.promote_end_date, g.goods_weight, g.integral, g.extension_code, g.fencheng, ".
-                "g.goods_number, g.is_alone_sale, g.is_shipping,".
+                "g.goods_number, g.is_alone_sale, g.is_shipping, g.jiubi,".
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price ".
             " FROM " .$GLOBALS['ecs']->table('goods'). " AS g ".
             " LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
@@ -1035,6 +1054,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
         'extension_code'=> $goods['extension_code'],
         'is_gift'       => 0,
         'is_shipping'   => $goods['is_shipping'],
+        'jiubi'         => $goods['jiubi'],
         'rec_type'      => CART_GENERAL_GOODS
     );
 
@@ -1726,7 +1746,29 @@ function integral_of_value($value)
 
     return $scale > 0 ? round($value / $scale * 100) : 0;
 }
+/**
+ * 计算储值卡金额的价值（能抵多少钱）
+ * @param   int     $integral   积分
+ * @return  float   积分价值
+ */
+function value_of_jiubi($jiubi)
+{
+    $scale = floatval($GLOBALS['_CFG']['jiubi']);
+    return $scale > 0 ? round($jiubi/$scale, 2) : 0;
+}
+/**
+ * 计算指定的金额需要多少储值卡金额
+ *
+ * @access  public
+ * @param   integer $value  金额
+ * @return  void
+ */
+function jiubi_of_value($value)
+{
+    $scale = floatval($GLOBALS['_CFG']['jiubi']);
 
+    return $scale > 0 ? round($value*$scale) : 0;
+}
 /**
  * 订单退款
  * @param   array   $order          订单

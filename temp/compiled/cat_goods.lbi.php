@@ -35,29 +35,29 @@ if ($this->_foreach['child_tree']['total'] > 0):
 	<?php
 	   $GLOBALS['smarty']->assign('adlist',get_advlist('首页_'.$catname.'_分类商品广告',1));
 	?>
-	<?php $_from = $this->_var['adlist']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'ad_0_72688700_1511601895');$this->_foreach['ad'] = array('total' => count($_from), 'iteration' => 0);
+	<?php $_from = $this->_var['adlist']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'ad_0_88254500_1511772944');$this->_foreach['ad'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['ad']['total'] > 0):
-    foreach ($_from AS $this->_var['ad_0_72688700_1511601895']):
+    foreach ($_from AS $this->_var['ad_0_88254500_1511772944']):
         $this->_foreach['ad']['iteration']++;
 ?>
-	   <?php echo $this->_var['ad_0_72688700_1511601895']['content']; ?>
+	   <?php echo $this->_var['ad_0_88254500_1511772944']['content']; ?>
 	<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
     </div>
     <div class="pro_list">
       <ul class="cle">
-		<?php $_from = $this->_var['cat_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_72698700_1511601895');if (count($_from)):
-    foreach ($_from AS $this->_var['goods_0_72698700_1511601895']):
+		<?php $_from = $this->_var['cat_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_88258200_1511772944');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_88258200_1511772944']):
 ?>
-        <li> <a href="<?php echo $this->_var['goods_0_72698700_1511601895']['url']; ?>" target="_blank">
-          <p class="pic"> <img src="<?php echo $this->_var['goods_0_72698700_1511601895']['thumb']; ?>" style="display: inline;"></p>
-          <h3><?php echo htmlspecialchars($this->_var['goods_0_72698700_1511601895']['short_name']); ?></h3>
+        <li> <a href="<?php echo $this->_var['goods_0_88258200_1511772944']['url']; ?>" target="_blank">
+          <p class="pic"> <img src="<?php echo $this->_var['goods_0_88258200_1511772944']['thumb']; ?>" style="display: inline;"></p>
+          <h3><?php echo htmlspecialchars($this->_var['goods_0_88258200_1511772944']['short_name']); ?></h3>
           <p class="price">
-          <?php if ($this->_var['goods_0_72698700_1511601895']['promote_price'] != ""): ?>
-          <?php echo $this->_var['goods_0_72698700_1511601895']['promote_price']; ?>
+          <?php if ($this->_var['goods_0_88258200_1511772944']['promote_price'] != ""): ?>
+          <?php echo $this->_var['goods_0_88258200_1511772944']['promote_price']; ?>
           <?php else: ?>
-          <?php echo $this->_var['goods_0_72698700_1511601895']['shop_price']; ?>
+          <?php echo $this->_var['goods_0_88258200_1511772944']['shop_price']; ?>
           <?php endif; ?>
-          <del style="color:#878D99"><?php echo $this->_var['goods_0_72698700_1511601895']['market_price']; ?></del>
+          <del style="color:#878D99"><?php echo $this->_var['goods_0_88258200_1511772944']['market_price']; ?></del>
           </p>
           <p>可用储值卡:<span style="color:#EB9E05"> 100 </span></p>
           </a> </li>

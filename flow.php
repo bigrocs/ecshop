@@ -649,7 +649,21 @@ if ($_REQUEST['step'] == 'add_to_cart') {
         $favour_name = empty($discount['name']) ? '' : join(',', $discount['name']);
         $smarty->assign('your_discount', sprintf($_LANG['your_discount'], $favour_name, price_format($discount['discount'])));
     }
+    /**
+     * 储值卡金额begin
+     */
+    $jiubi= flow_max_jiubi($cart_goods);
+    $order['jiubi'] = $jiubi['consume_jiubi'];
 
+    $user_info = user_info($_SESSION['user_id']);
+    $smarty->assign('user_jiubi', $user_info['jiubi']);  // 可用储值卡金额
+    $smarty->assign('consume_jiubi', $jiubi['consume_jiubi']);  // 可用储值卡金额
+    $smarty->assign('max_deductible_jine', price_format($jiubi['max_deductible_jine']));  // 最大储值卡金额抵扣金额
+    $deductible_jine = $jiubi['consume_jiubi']/$GLOBALS['_CFG']['jiubi'];
+    $smarty->assign('deductible_jine', price_format($deductible_jine));  // 使用储值卡金额后的抵扣金额
+    /**
+     * 储值卡金额end
+     */
     /*
      * 计算订单的费用
      */
@@ -888,7 +902,7 @@ if ($_REQUEST['step'] == 'add_to_cart') {
         $result['need_insure'] = ($shipping_info['insure'] > 0 && !empty($order['need_insure'])) ? 1 : 0;
         $result['content']     = $smarty->fetch('library/order_total.lbi');
         /**
-         * [print_r 自提]
+         * [ 自提]
          * @var [type]
          */
         $recid = $_REQUEST['shipping'];
@@ -1193,6 +1207,67 @@ if ($_REQUEST['step'] == 'add_to_cart') {
 
     $json = new JSON();
     die($json->encode($result));
+} elseif ($_REQUEST['step'] == 'change_jiubi') {
+    /*------------------------------------------------------ */
+    //-- 改变积分
+    /*------------------------------------------------------ */
+    include_once('includes/cls_json.php');
+
+    $points    = floatval($_GET['points']);
+    $user_info = user_info($_SESSION['user_id']);
+
+    /* 取得订单信息 */
+    $order = flow_order_info();
+    $order['jiubi'] = 0;
+    $order['integral'] = 0;
+
+    /* 取得购物类型 */
+    $flow_type = isset($_SESSION['flow_type']) ? intval($_SESSION['flow_type']) : CART_GENERAL_GOODS;
+    /* 获得收货人信息 */
+    $consignee = get_consignee($_SESSION['user_id']);
+    /* 对商品信息赋值 */
+    $cart_goods = cart_goods($flow_type); // 取得商品列表，计算合计
+    /**
+     * 储值卡金额begin
+     */
+    $jiubi= flow_max_jiubi($cart_goods);
+    $consume_jiubi     = $jiubi['consume_jiubi'];
+
+    /**
+     * 储值卡金额end
+     */
+
+
+
+    // $flow_points = flow_available_points();  // 该订单允许使用的积分
+    $user_points = $user_info['pay_points']; // 用户的积分总数
+
+    if ($points > $user_info['jiubi']) {
+        $result['error'] = '您使用的储值卡金额不能超过您现有的储值卡金额。';
+    } elseif ($points > $consume_jiubi) {
+        $result['error'] = sprintf('您使用的储值卡金额不能超过%d 个', $consume_jiubi);
+    } else {
+        if (empty($cart_goods) || !check_consignee_info($consignee, $flow_type)) {
+            $result['error'] = $_LANG['no_goods_in_cart'];
+        } else {
+            $order['jiubi'] = $points;
+
+            /* 计算订单的费用 */
+            $total = order_fee($order, $cart_goods, $consignee);
+            $smarty->assign('total', $total);
+            $smarty->assign('config', $_CFG);
+
+            /* 团购标志 */
+            if ($flow_type == CART_GROUP_BUY_GOODS) {
+                $smarty->assign('is_group_buy', 1);
+            }
+
+            $result['content'] = $smarty->fetch('library/order_total.lbi');
+            $result['error'] = '';
+        }
+    }
+    $json = new JSON();
+    die($json->encode($result));
 } elseif ($_REQUEST['step'] == 'change_integral') {
     /*------------------------------------------------------ */
     //-- 改变积分
@@ -1453,6 +1528,7 @@ elseif ($_REQUEST['step'] == 'done') {
         'card_message'    => trim($_POST['card_message']),
         'surplus'         => isset($_POST['surplus']) ? floatval($_POST['surplus']) : 0.00,
         'integral'        => isset($_POST['integral']) ? intval($_POST['integral']) : 0,
+        'jiubi'           => isset($_POST['jiubi']) ? intval($_POST['jiubi']) : 0,
         'bonus_id'        => isset($_POST['bonus']) ? intval($_POST['bonus']) : 0,
         'need_inv'        => empty($_POST['need_inv']) ? 0 : 1,
         'inv_type'        => $_POST['inv_type'],
@@ -1499,6 +1575,23 @@ elseif ($_REQUEST['step'] == 'done') {
     } else {
         $order['surplus']  = 0;
         $order['integral'] = 0;
+    }
+    /* 检查储值卡金额余额是否合法 */
+    if ($user_id > 0) {
+        $user_info = user_info($user_id);
+        /* 对商品信息赋值 */
+        $cart_goods = cart_goods($flow_type); // 取得商品列表，计算合计
+        /**
+         * 储值卡金额begin
+         */
+        $jiubi = flow_max_jiubi($cart_goods);
+        $user_points = $user_info['jiubi']; // 用户的积分总数
+        $order['jiubi'] = min($order['jiubi'], $user_points, $jiubi);
+        if ($order['jiubi'] < 0) {
+            $order['jiubi'] = 0;
+        }
+    } else {
+        $order['jiubi'] = 0;
     }
 
     /* 检查红包是否存在 */
@@ -1629,6 +1722,9 @@ elseif ($_REQUEST['step'] == 'done') {
 
     $order['integral_money']   = $total['integral_money'];
     $order['integral']         = $total['integral'];
+    //储值卡金额加入订单
+    $order['jiubi_money']   = $total['jiubi_money'];
+    $order['jiubi']         = $total['jiubi'];
 
     if ($order['extension_code'] == 'exchange_goods') {
         $order['integral_money']   = 0;
@@ -1672,7 +1768,7 @@ elseif ($_REQUEST['step'] == 'done') {
     }
     $order['pickup_point'] = $pickup_point;
     //end自提点
-    
+
     /* 插入订单表 */
     $error_no = 0;
     do {
@@ -1711,7 +1807,9 @@ elseif ($_REQUEST['step'] == 'done') {
     if ($order['user_id'] > 0 && $order['integral'] > 0) {
         log_account_change($order['user_id'], 0, 0, 0, $order['integral'] * (-1), sprintf($_LANG['pay_order'], $order['order_sn']));
     }
-
+    if ($order['user_id'] > 0 && $order['jiubi'] > 0) {
+        log_account_change($order['user_id'], 0, 0, 0, 0, sprintf($_LANG['pay_order'], $order['order_sn']), ACT_OTHER, $order['jiubi'] * (-1));
+    }
 
     if ($order['bonus_id'] > 0 && $temp_amout > 0) {
         use_bonus($order['bonus_id'], $new_order_id);
@@ -2377,13 +2475,37 @@ function flow_available_points()
 }
 
 /**
- * 更新购物车中的商品数量
+ * 获得当前订单最大抵扣金额
  *
- * @access  public
- * @param   array   $arr
- * @return  void
-
+ * @access  private
+ * @return  integral
  */
+function flow_max_jiubi($goods)
+{
+    /* 商品总价 */
+    $max_deductible_jine = 0;//最大储值卡金额抵扣金额
+    foreach ($goods as $val) {
+        $goods_price  += $val['goods_price'] * $val['goods_number'];
+        $max_deductible_jine += $val['jiubi'] * $val['goods_number'];
+    }
+    $user_info = user_info($_SESSION['user_id']);
+
+    //当储值卡金额归零时自动充值为初始化储值卡金额
+    if ($user_info['jiubi']==0&&$user_info['init_jiubi']!=0) {
+        $sqlUpdate ="UPDATE ". $GLOBALS['ecs']->table('users'). "SET `jiubi`='$user_info[init_jiubi]' WHERE user_name= '$user_info[user_name]'";
+        $GLOBALS['db']->query($sqlUpdate);
+        $user_info['jiubi'] =  $user_info['init_jiubi'];
+    }
+
+    if ($user_info['jiubi']<$max_deductible_jine) {
+        $consume_jiubi = $user_info['jiubi'];
+    } else {
+        $consume_jiubi = $max_deductible_jine;
+    }
+    $jiubi['max_deductible_jine'] = $max_deductible_jine;
+    $jiubi['consume_jiubi'] = $consume_jiubi;
+    return $jiubi;
+}
 /**
  * 更新购物车中的商品数量
  *

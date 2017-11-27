@@ -571,6 +571,7 @@ function load_config()
         $arr['market_price_rate']    = floatval($arr['market_price_rate']);
         $arr['integral_scale']       = floatval($arr['integral_scale']);
         //$arr['integral_percent']     = floatval($arr['integral_percent']);
+
         $arr['cache_time']           = intval($arr['cache_time']);
         $arr['thumb_width']          = intval($arr['thumb_width']);
         $arr['thumb_height']         = intval($arr['thumb_height']);
@@ -1663,7 +1664,7 @@ function formated_weight($weight)
  * @param   int     $change_type    变动类型：参见常量文件
  * @return  void
  */
-function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER)
+function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER, $jiubi = 0)
 {
     /* 插入帐户变动记录 */
     $account_log = array(
@@ -1671,6 +1672,7 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
         'user_money'    => $user_money,
         'frozen_money'  => $frozen_money,
         'rank_points'   => $rank_points,
+        'jiubi'         => $jiubi,
         'pay_points'    => $pay_points,
         'change_time'   => gmtime(),
         'change_desc'   => $change_desc,
@@ -1683,6 +1685,7 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
             " SET user_money = user_money + ('$user_money')," .
             " frozen_money = frozen_money + ('$frozen_money')," .
             " rank_points = rank_points + ('$rank_points')," .
+            " jiubi = jiubi + ('$jiubi')," .
             " pay_points = pay_points + ('$pay_points')" .
             " WHERE user_id = '$user_id' LIMIT 1";
     $GLOBALS['db']->query($sql);

@@ -5,7 +5,7 @@
   <!-- {if $smarty.session.user_id > 0 and ($config.use_integral or $config.use_bonus)} -->
   <tr>
     <td align="right" bgcolor="#f5f5f5">
-    {$lang.complete_acquisition} 
+    {$lang.complete_acquisition}
       <!-- {if $config.use_integral} 是否使用积分-->
       <font class="f4_b">{$total.will_get_integral}</font> {$points_name}
       <!-- {/if} -->
@@ -40,7 +40,7 @@
       + {$lang.card_fee}: <font class="f4_b">{$total.card_fee_formated}</font>
       <!-- {/if} -->    </td>
   </tr>
-  <!-- {if $total.surplus > 0 or $total.integral > 0 or $total.bonus > 0} 使用余额或积分或红包 -->
+  <!-- {if $total.surplus > 0 or $total.integral > 0 or $total.bonus > 0 or $total.jiubi > 0} 使用余额或积分或红包 -->
   <tr>
     <td align="right" bgcolor="#f5f5f5">
       <!-- {if $total.surplus > 0} 使用余额 -->
@@ -48,6 +48,9 @@
       <!-- {/if} -->
       <!-- {if $total.integral > 0} 使用积分 -->
       - {$lang.use_integral}: <font class="f4_b">{$total.integral_formated}</font>
+      <!-- {/if} -->
+      <!-- {if $total.jiubi > 0} 使用储值卡金额 -->
+      - 使用储值卡金额: <font class="f4_b">{$total.jiubi_formated}</font>
       <!-- {/if} -->
       <!-- {if $total.bonus > 0} 使用红包 -->
       - {$lang.use_bonus}: <font class="f4_b">{$total.bonus_formated}</font>

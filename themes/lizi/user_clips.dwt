@@ -16,13 +16,13 @@
 {insert_scripts files='common.js,user.js'}
 </head>
 <body class="user_center">
-<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem --> 
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
 <div id="wrapper" class="cle">
-	<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem --> 
+	<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
 
     <div class="my_nala_main">
-        <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem --> 
-			
+        <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem -->
+
     <div class="my_nala_centre ilizi_centre">
     <div class="ilizi cle">
       	<div class="box">
@@ -50,6 +50,7 @@
           <!-- {if $info.credit_line gt 0} 如果有信用额度 -->
           {$lang.credit_line}:{$info.formated_credit_line}<br />
           <!-- {/if} -->
+          储值卡金额:<a href="#" style="color:#f70;">{$info.jiubi} 元</a><br />
           {$lang.your_bonus}:<a href="user.php?act=bonus" style="color:#f70;">{$info.bonus}</a><br />
           {$lang.your_integral}:{$info.integral}<br />
           </div>
@@ -584,7 +585,7 @@ copyToClipboard = function(txt)
      </div>
     </div>
     </div>
-    
+
     </div>
     </div>
     </div>

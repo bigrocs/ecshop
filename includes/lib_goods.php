@@ -842,6 +842,9 @@ function get_goods_info($goods_id)
         if ($watermark_img != '') {
             $row['watermark_img'] =  $watermark_img;
         }
+        //储值卡金额抵扣金额
+        $row['consume_jiubi']     = $row['jiubi'];
+        $row['deductible_jiubi']   = price_format($row['jiubi']);
 
         $row['promote_price_org'] =  $promote_price;
         $row['promote_price'] =  price_format($promote_price);

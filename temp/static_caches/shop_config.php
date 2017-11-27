@@ -1,7 +1,7 @@
 <?php
 $data = array (
-  'shop_name' => '汇丰石化测试网站',
-  'shop_title' => '汇丰石化测试网站',
+  'shop_name' => '测试网站',
+  'shop_title' => '测试网站',
   'shop_desc' => '汇丰石化测试网站',
   'shop_keywords' => '汇丰石化测试网站',
   'shop_country' => 'a:5:{i:0;s:3:"299";i:1;s:3:"298";i:2;s:3:"285";i:3;s:3:"284";i:4;s:3:"283";}',

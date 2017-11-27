@@ -2,15 +2,15 @@
        <div class="list">
 <?php if ($this->_var['cart_list']): ?>
 <div class="data">
- <?php $_from = $this->_var['cart_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods');if (count($_from)):
-    foreach ($_from AS $this->_var['goods']):
+ <?php $_from = $this->_var['cart_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_04396600_1511772945');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_04396600_1511772945']):
 ?>
   <dl>
-    <dt><a target="_blank" href="<?php echo $this->_var['goods']['url']; ?>"><img src="<?php echo $this->_var['goods']['thumb']; ?>"></a></dt>
+    <dt><a target="_blank" href="<?php echo $this->_var['goods_0_04396600_1511772945']['url']; ?>"><img src="<?php echo $this->_var['goods_0_04396600_1511772945']['thumb']; ?>"></a></dt>
     <dd>
-      <h4><a target="_blank" href="<?php echo $this->_var['goods']['url']; ?>"><?php echo $this->_var['goods']['short_name']; ?></a></h4>
-      <p><span class="red"><?php echo $this->_var['goods']['shop_price']; ?></span>&nbsp;<i>X</i>&nbsp;<?php echo $this->_var['goods']['goods_number']; ?></p>
-      <a class="iconfont del" title="删除" href="javascript:deleteCartGoods(<?php echo $this->_var['goods']['rec_id']; ?>);">Ť</a></dd>
+      <h4><a target="_blank" href="<?php echo $this->_var['goods_0_04396600_1511772945']['url']; ?>"><?php echo $this->_var['goods_0_04396600_1511772945']['short_name']; ?></a></h4>
+      <p><span class="red"><?php echo $this->_var['goods_0_04396600_1511772945']['shop_price']; ?></span>&nbsp;<i>X</i>&nbsp;<?php echo $this->_var['goods_0_04396600_1511772945']['goods_number']; ?></p>
+      <a class="iconfont del" title="删除" href="javascript:deleteCartGoods(<?php echo $this->_var['goods_0_04396600_1511772945']['rec_id']; ?>);">Ť</a></dd>
   </dl>
   <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
 </div>

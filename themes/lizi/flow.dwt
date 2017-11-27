@@ -559,6 +559,11 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="加�
                 {$lang.can_use_integral}:{$your_integral|default:0} {$points_name}，{$lang.noworder_can_integral}{$order_max_integral}  {$points_name}. <span id="ECS_INTEGRAL_NOTICE" class="notice"></span></td>
             </tr>
             <!-- {/if} 是否使用积分 -->
+            <tr>
+              <td bgcolor="#ffffff"><strong>使用储值卡金额</strong></td>
+              <td bgcolor="#ffffff"><input name="jiubi" type="text" class="input" id="ECS_JIUBI" onblur="changeJiubi(this.value)" value="{$consume_jiubi|default:0}" size="10" />
+                您当前可用储值卡金额:{$user_jiubi|default:0} 元，{$lang.noworder_can_integral}{$consume_jiubi}  元 <span id="ECS_JIUBI_NOTICE" class="notice"></span></td>
+            </tr>
             <!-- {if $allow_use_bonus} 是否使用红包 -->
             <tr>
               <td bgcolor="#ffffff"><strong>{$lang.use_bonus}:</strong></td>

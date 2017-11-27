@@ -32,6 +32,7 @@
       <th>{$lang.frozen_money}</th>
       <th>{$lang.rank_points}</th>
       <th>{$lang.pay_points}</th>
+      <th>储值卡账号</th>
     </tr>
     {foreach from=$account_list item=account}
     <tr>
@@ -71,6 +72,15 @@
           <span style="color:#FF0000">{$account.pay_points}</span>
         {else}
           {$account.pay_points}
+        {/if}
+      </td>
+      <td align="right">
+        {if $account.jiubi gt 0}
+          <span style="color:#0000FF">+{$account.jiubi}</span>
+        {elseif $account.jiubi lt 0}
+          <span style="color:#FF0000">{$account.jiubi}</span>
+        {else}
+          {$account.jiubi}
         {/if}
       </td>
     </tr>
