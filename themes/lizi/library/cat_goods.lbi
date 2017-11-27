@@ -43,7 +43,10 @@
           {$goods.promote_price}
           <!-- {else}-->
           {$goods.shop_price}
-          <!--{/if}--></p>
+          <!--{/if}-->
+          <del style="color:#878D99">{$goods.market_price}</del>
+          </p>
+          <p>可用储值卡:<span style="color:#EB9E05"> 100 </span></p>
           </a> </li>
 		<!--{/foreach}-->
       </ul>

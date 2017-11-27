@@ -1,9 +1,9 @@
-<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1511418919;s:8:"maketime";i:1511415319;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:65:"D:/wwwroot/zhongyan2/wwwroot/mobile/themes/ocailong_com/index.dwt";i:1;s:79:"D:/wwwroot/zhongyan2/wwwroot/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:82:"D:/wwwroot/zhongyan2/wwwroot/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:77:"D:/wwwroot/zhongyan2/wwwroot/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:79:"D:/wwwroot/zhongyan2/wwwroot/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1511747263;s:8:"maketime";i:1511743663;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
 <meta charset="utf-8" />
-<title>O菜龙工作室微商店</title>
+<title>汇丰石化测试网站</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -146,7 +146,7 @@ font-size: 0.9rem;
 <div id="page">
   <header id="header" >
     <div class="header_l"> <a class="ico_02" href="#menu"> 菜单栏 </a> </div>
-    <h1> O菜龙工作室微商店 </h1>
+    <h1> 汇丰石化测试网站 </h1>
     <div class="header_r"> <a class="regionCitys" onclick="showDiv()"> 全国 </a> </div>
   </header>
 </div>
@@ -260,31 +260,31 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=42">
-                <img src="http://ecshop.dev/images/201512/thumb_img/42_thumb_G_1448948895152.jpg" alt="伊利官方直营全脂营养舒化奶250ml*12盒*2提" />
+            <a href="goods.php?id=215">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/215_thumb_G_1511572906870.jpg" alt="茶语仙-天池梨山" />
             </a>
             <div style="text-align:center">
              
-            <span class="price_s"> ￥<span>36</span> </span> 
-                        <br>伊利官方直营全脂营养舒化...            </div>
+            <span class="price_s"> ￥<span>980</span> </span> 
+                        <br>茶语仙-天池梨山            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=51">
-                <img src="http://ecshop.dev/images/201512/thumb_img/51_thumb_G_1448946466261.jpg" alt="人头马CLUB特优香槟干邑350ml" />
+            <a href="goods.php?id=192">
+                <img src="http://zy.jianzhanzhuanjia.net/data/static/images/no_picture.gif" alt="西王鲜胚玉米胚芽油5L" />
             </a>
             <div style="text-align:center">
              
-            <span class="price_s"> ￥<span>10</span> </span> 
-                        <br>人头马CLUB特优香槟干...            </div>
+            <span class="price_s"> ￥<span>118</span> </span> 
+                        <br>西王鲜胚玉米胚芽油5L            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=49">
-                <img src="http://ecshop.dev/images/201511/thumb_img/49_thumb_G_1448162819357.jpg" alt="1分钱支付测试商品" />
+            <a href="goods.php?id=201">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/201_thumb_G_1511572024910.jpg" alt="怀庄53-喜酱" />
             </a>
             <div style="text-align:center">
              
-            <span class="price_s"> ￥<span>1</span> </span> 
-                        <br>1分钱支付测试商品            </div>
+            <span class="price_s"> ￥<span>268</span> </span> 
+                        <br>怀庄53-喜酱            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
 </section>
@@ -298,57 +298,63 @@ TouchSlide({
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
             <a href="goods.php?id=48">
-                <img src="http://ecshop.dev/images/201512/thumb_img/48_thumb_G_1448943988607.jpg" alt="新疆巴尔鲁克生鲜牛排眼肉牛扒1200g" />
+                <img src="http://zy.jianzhanzhuanjia.net/images/201512/thumb_img/48_thumb_G_1448943988607.jpg" alt="新疆巴尔鲁克生鲜牛排眼肉牛扒1200g" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>88</span> </span> 
-                        <br>新疆巴尔鲁克生鲜牛排眼肉...            </div>
+                        <span class="price_s"> ￥<span>88</span> </span>
+                        <del style="color:#878D99">￥<span>126</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>新疆巴尔鲁克生鲜牛排眼肉...            </div>
         </div>
                          <div class="goodsItem flex_in">
             <a href="goods.php?id=47">
-                <img src="http://ecshop.dev/images/201512/thumb_img/47_thumb_G_1448946213633.jpg" alt="日本蒜蓉粉丝扇贝270克6只装" />
+                <img src="http://zy.jianzhanzhuanjia.net/images/201512/thumb_img/47_thumb_G_1448946213633.jpg" alt="日本蒜蓉粉丝扇贝270克6只装" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>108</span> </span> 
-                        <br>日本蒜蓉粉丝扇贝270克...            </div>
+                        <span class="price_s"> ￥<span>108</span> </span>
+                        <del style="color:#878D99">￥<span>130</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>日本蒜蓉粉丝扇贝270克...            </div>
         </div>
                          <div class="goodsItem flex_in">
             <a href="goods.php?id=11">
-                <img src="http://ecshop.dev/images/201512/thumb_img/11_thumb_G_1448944388914.jpg" alt="澳洲进口120天谷饲牛仔骨4份原味生鲜" />
+                <img src="http://zy.jianzhanzhuanjia.net/images/201512/thumb_img/11_thumb_G_1448944388914.jpg" alt="澳洲进口120天谷饲牛仔骨4份原味生鲜" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>26</span> </span> 
-                        <br>澳洲进口120天谷饲牛仔...            </div>
+                        <span class="price_s"> ￥<span>26</span> </span>
+                        <del style="color:#878D99">￥<span>31</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>澳洲进口120天谷饲牛仔...            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
             <a href="goods.php?id=10">
-                <img src="http://ecshop.dev/images/201512/thumb_img/10_thumb_G_1448944572962.jpg" alt="内蒙新鲜牛肉1斤清真生鲜牛肉火锅食材" />
+                <img src="http://zy.jianzhanzhuanjia.net/images/201512/thumb_img/10_thumb_G_1448944572962.jpg" alt="内蒙新鲜牛肉1斤清真生鲜牛肉火锅食材" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>88</span> </span> 
-                        <br>内蒙新鲜牛肉1斤清真生鲜...            </div>
+                        <span class="price_s"> ￥<span>88</span> </span>
+                        <del style="color:#878D99">￥<span>106</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>内蒙新鲜牛肉1斤清真生鲜...            </div>
         </div>
                          <div class="goodsItem flex_in">
             <a href="goods.php?id=9">
-                <img src="http://ecshop.dev/images/201512/thumb_img/9_thumb_G_1448944791708.jpg" alt="爱食派内蒙古呼伦贝尔冷冻生鲜牛腱子肉1000g" />
+                <img src="http://zy.jianzhanzhuanjia.net/images/201512/thumb_img/9_thumb_G_1448944791708.jpg" alt="爱食派内蒙古呼伦贝尔冷冻生鲜牛腱子肉1000g" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>168</span> </span> 
-                        <br>爱食派内蒙古呼伦贝尔冷冻...            </div>
+                        <span class="price_s"> ￥<span>168</span> </span>
+                        <del style="color:#878D99">￥<span>202</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>爱食派内蒙古呼伦贝尔冷冻...            </div>
         </div>
                          <div class="goodsItem flex_in">
             <a href="goods.php?id=8">
-                <img src="http://ecshop.dev/images/201512/thumb_img/8_thumb_G_1448945032585.jpg" alt="五星眼肉牛排套餐8片装原味原切生鲜牛肉" />
+                <img src="http://zy.jianzhanzhuanjia.net/images/201512/thumb_img/8_thumb_G_1448945032585.jpg" alt="五星眼肉牛排套餐8片装原味原切生鲜牛肉" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>125</span> </span> 
-                        <br>五星眼肉牛排套餐8片装原...            </div>
+                        <span class="price_s"> ￥<span>125</span> </span>
+                        <del style="color:#878D99">￥<span>150</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>五星眼肉牛排套餐8片装原...            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
     <div class="item_tags clearfix">
@@ -379,58 +385,64 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=51">
-                <img src="http://ecshop.dev/images/201512/thumb_img/51_thumb_G_1448946466261.jpg" alt="人头马CLUB特优香槟干邑350ml" />
+            <a href="goods.php?id=202">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/202_thumb_G_1511572087353.jpg" alt="怀庄53-神秘茅台" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>10</span> </span> 
-                        <br>人头马CLUB特优香槟干...            </div>
+                        <span class="price_s"> ￥<span>98</span> </span>
+                        <del style="color:#878D99">￥<span>298</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>怀庄53-神秘茅台            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=50">
-                <img src="http://ecshop.dev/images/201512/thumb_img/50_thumb_G_1448946542088.jpg" alt="Johnnie Walker尊尼获加黑牌威士忌" />
+            <a href="goods.php?id=201">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/201_thumb_G_1511572024910.jpg" alt="怀庄53-喜酱" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>20</span> </span> 
-                        <br>Johnnie Walk...            </div>
+                        <span class="price_s"> ￥<span>268</span> </span>
+                        <del style="color:#878D99">￥<span>268</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>怀庄53-喜酱            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=46">
-                <img src="http://ecshop.dev/images/201512/thumb_img/46_thumb_G_1448946598227.jpg" alt="双响炮洋酒JimBeam whiskey美国白占边" />
+            <a href="goods.php?id=200">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/200_thumb_G_1511571984596.jpg" alt="怀庄53-六合文化" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>28</span> </span> 
-                        <br>双响炮洋酒JimBeam...            </div>
+                        <span class="price_s"> ￥<span>598</span> </span>
+                        <del style="color:#878D99">￥<span>598</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>怀庄53-六合文化            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=45">
-                <img src="http://ecshop.dev/images/201512/thumb_img/45_thumb_G_1448946661697.jpg" alt="深蓝伏特加巴维兰利口酒送预调酒" />
+            <a href="goods.php?id=199">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/199_thumb_G_1511571931323.jpg" alt="怀庄53-和贵福" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>18</span> </span> 
-                        <br>深蓝伏特加巴维兰利口酒送...            </div>
+                        <span class="price_s"> ￥<span>380</span> </span>
+                        <del style="color:#878D99">￥<span>380</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>怀庄53-和贵福            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=22">
-                <img src="http://ecshop.dev/images/201512/thumb_img/22_thumb_G_1448946729918.jpg" alt="芝华士12年 苏格兰威士忌700ml" />
+            <a href="goods.php?id=198">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/198_thumb_G_1511571890681.jpg" alt="怀庄53-人赐福" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>59</span> </span> 
-                        <br>芝华士12年 苏格兰威士...            </div>
+                        <span class="price_s"> ￥<span>580</span> </span>
+                        <del style="color:#878D99">￥<span>580</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>怀庄53-人赐福            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=21">
-                <img src="http://ecshop.dev/images/201512/thumb_img/21_thumb_G_1448946793103.jpg" alt="西夫拉姆进口洋酒小酒版" />
+            <a href="goods.php?id=197">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/197_thumb_G_1511571848286.jpg" alt="怀庄53-地赐福" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>46</span> </span> 
-                        <br>西夫拉姆进口洋酒小酒版            </div>
+                        <span class="price_s"> ￥<span>780</span> </span>
+                        <del style="color:#878D99">￥<span>780</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>怀庄53-地赐福            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
     <div class="item_tags clearfix">
@@ -459,58 +471,64 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=29">
-                <img src="http://ecshop.dev/images/201512/thumb_img/29_thumb_G_1448947631664.jpg" alt="融氏纯玉米胚芽油5l桶" />
+            <a href="goods.php?id=195">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/195_thumb_G_1511571690703.jpg" alt="西王花生油5L" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>12</span> </span> 
-                        <br>融氏纯玉米胚芽油5l桶            </div>
+                        <span class="price_s"> ￥<span>139</span> </span>
+                        <del style="color:#878D99">￥<span>139</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>西王花生油5L            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=28">
-                <img src="http://ecshop.dev/images/201512/thumb_img/28_thumb_G_1448947699187.jpg" alt="橄榄玉米油5L*2桶" />
+            <a href="goods.php?id=194">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/194_thumb_G_1511571615761.jpg" alt="西王玉米胚芽油6.18L" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>26</span> </span> 
-                        <br>橄榄玉米油5L*2桶            </div>
+                        <span class="price_s"> ￥<span>99</span> </span>
+                        <del style="color:#878D99">￥<span>99</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>西王玉米胚芽油6.18L            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=27">
-                <img src="http://ecshop.dev/images/201512/thumb_img/27_thumb_G_1448947771206.jpg" alt="维纳斯橄榄菜籽油5L/桶" />
+            <a href="goods.php?id=193">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/193_thumb_G_1511571561618.jpg" alt="西王鲜胚玉米胚芽油1.8L*2" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>156</span> </span> 
-                        <br>维纳斯橄榄菜籽油5L/桶            </div>
+                        <span class="price_s"> ￥<span>83</span> </span>
+                        <del style="color:#878D99">￥<span>83</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>西王鲜胚玉米胚芽油1.8...            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=26">
-                <img src="http://ecshop.dev/images/201512/thumb_img/26_thumb_G_1448947825794.jpg" alt="精炼一级大豆油5L色拉油粮油食用油" />
+            <a href="goods.php?id=192">
+                <img src="http://zy.jianzhanzhuanjia.net/data/static/images/no_picture.gif" alt="西王鲜胚玉米胚芽油5L" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>45</span> </span> 
-                        <br>精炼一级大豆油5L色拉油...            </div>
+                        <span class="price_s"> ￥<span>118</span> </span>
+                        <del style="color:#878D99">￥<span>118</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>西王鲜胚玉米胚芽油5L            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=25">
-                <img src="http://ecshop.dev/images/201512/thumb_img/25_thumb_G_1448947875633.jpg" alt="稻园牌稻米油粮油米糠油绿色植物油" />
+            <a href="goods.php?id=191">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/191_thumb_G_1511571452132.jpg" alt="西王鲜胚玉米胚芽油3L*2" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>12</span> </span> 
-                        <br>稻园牌稻米油粮油米糠油绿...            </div>
+                        <span class="price_s"> ￥<span>140</span> </span>
+                        <del style="color:#878D99">￥<span>140</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>西王鲜胚玉米胚芽油3L*...            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=24">
-                <img src="http://ecshop.dev/images/201512/thumb_img/24_thumb_G_1448948023508.jpg" alt="山西黑米 农家黑米4斤" />
+            <a href="goods.php?id=190">
+                <img src="http://zy.jianzhanzhuanjia.net/images/201711/thumb_img/190_thumb_G_1511571400481.jpg" alt="西王鲜胚玉米胚芽油3L" />
             </a>
             <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>9</span> </span> 
-                        <br>山西黑米 农家黑米4斤            </div>
+                        <span class="price_s"> ￥<span>60</span> </span>
+                        <del style="color:#878D99">￥<span>60</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br>西王鲜胚玉米胚芽油3L            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
     <div class="item_tags clearfix">
@@ -542,8 +560,8 @@ TouchSlide({
   </div>
   <p class="link region"> <a href="./"> 返回首页 </a> <a href="flow.php"> 购物车 </a> <a href="user.php"> 会员中心 </a> <a href="ectouch.php?act=contact"> 联系我们 </a> </p>
   <p class="region">
-        &copy; 2005-2017 O菜龙工作室微商店 版权所有，并保留所有权利。 </p>
-  <div class="favLink region"> <a href="http://www.ocailong.com"> powered by O菜龙工作室 </a> </div>
+        &copy; 2005-2017 汇丰石化测试网站 版权所有，并保留所有权利。 </p>
+  <div class="favLink region"> <a href="">  </a> </div>
 </div>
 <div class="global-nav global-nav--current">
     <div class="global-nav__nav-wrap">
@@ -926,6 +944,10 @@ function get_search_box(){
         </li>
               </ul>
     </li>
+        <li> <a href="category.php?id=130"> 台湾茗茶 </a>
+      <ul>
+              </ul>
+    </li>
       </ul>
 </nav>
 <div id="regionCity" class="popGeneralRegion">
@@ -979,9 +1001,9 @@ $(function() {
   wx.config({
     debug: false,
     appId: '',
-    timestamp: 1511415319,
-    nonceStr: 'XcGBF0l5HRqmzfEB',
-    signature: 'e60c4634d8ae68ea5c9e704dba4f5e3d670b732d',
+    timestamp: 1511743665,
+    nonceStr: 'EL19KUEp7iImd9yp',
+    signature: '8512fdd1a5d3b2565e1b52ccd30df449ca0e2383',
     jsApiList: [
         'onMenuShareTimeline',
         'onMenuShareAppMessage'
@@ -990,8 +1012,8 @@ $(function() {
  wx.ready(function () {
 	//模板之家监听“分享给朋友”
     wx.onMenuShareAppMessage({
-      title: '',
-      desc: '',
+      title: '汇丰石化测试网站',
+      desc: '汇丰石化测试网站',
       link: '',
       imgUrl: '',
       trigger: function (res) {
@@ -1009,7 +1031,7 @@ $(function() {
     });
 	//分享到朋友圈模板之家
     wx.onMenuShareTimeline({
-      title: '',
+      title: '汇丰石化测试网站',
       link: '',
       imgUrl: '',
       trigger: function (res) {

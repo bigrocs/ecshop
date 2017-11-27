@@ -12,10 +12,10 @@
   <p class="link region"> <a href="./"> 返回首页 </a> <a href="flow.php"> 购物车 </a> <a href="user.php"> 会员中心 </a> <a href="ectouch.php?act=contact"> 联系我们 </a> </p>
   <p class="region">
     <?php if ($this->_var['icp_number']): ?>
-    <?php echo $this->_var['lang']['icp_number']; ?>: <a href="http://www.miibeian.gov.cn/" target="_blank"> <?php echo $this->_var['icp_number']; ?> </a>
+    <?php echo $this->_var['lang']['icp_number']; ?>: <a href="" target="_blank"> <?php echo $this->_var['icp_number']; ?> </a>
     <?php endif; ?>
     <?php echo $this->_var['copyright']; ?> </p>
-  <div class="favLink region"> <a href="http://www.ocailong.com"> powered by O菜龙工作室 </a> </div>
+  <div class="favLink region"> <a href="">  </a> </div>
 </div>
 
 

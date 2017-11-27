@@ -10,12 +10,12 @@
    <?php
 	   $GLOBALS['smarty']->assign('adlist',get_advlist('天天惊喜左侧广告',1));
 	?>
-	<?php $_from = $this->_var['adlist']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'ad_0_20107800_1511415487');$this->_foreach['ad'] = array('total' => count($_from), 'iteration' => 0);
+	<?php $_from = $this->_var['adlist']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'ad_0_67208400_1511743666');$this->_foreach['ad'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['ad']['total'] > 0):
-    foreach ($_from AS $this->_var['ad_0_20107800_1511415487']):
+    foreach ($_from AS $this->_var['ad_0_67208400_1511743666']):
         $this->_foreach['ad']['iteration']++;
 ?>  
-	   <?php echo $this->_var['ad_0_20107800_1511415487']['content']; ?>
+	   <?php echo $this->_var['ad_0_67208400_1511743666']['content']; ?>
 	<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
         </div>
         <div class="fr surprise-list ovh">

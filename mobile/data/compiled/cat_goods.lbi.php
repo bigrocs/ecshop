@@ -7,22 +7,24 @@
       </a>
     </h3>
     <div class="flex flex-f-row">
-        <?php $_from = $this->_var['cat_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_93074600_1510821217');$this->_foreach['goods'] = array('total' => count($_from), 'iteration' => 0);
+        <?php $_from = $this->_var['cat_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_64180700_1511681321');$this->_foreach['goods'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['goods']['total'] > 0):
-    foreach ($_from AS $this->_var['goods_0_93074600_1510821217']):
+    foreach ($_from AS $this->_var['goods_0_64180700_1511681321']):
         $this->_foreach['goods']['iteration']++;
 ?>
         <div class="goodsItem flex_in">
-            <a href="<?php echo $this->_var['goods_0_93074600_1510821217']['url']; ?>">
-                <img src="<?php echo $this->_var['site_url']; ?><?php echo $this->_var['goods_0_93074600_1510821217']['thumb']; ?>" alt="<?php echo htmlspecialchars($this->_var['goods_0_93074600_1510821217']['name']); ?>" />
+            <a href="<?php echo $this->_var['goods_0_64180700_1511681321']['url']; ?>">
+                <img src="<?php echo $this->_var['site_url']; ?><?php echo $this->_var['goods_0_64180700_1511681321']['thumb']; ?>" alt="<?php echo htmlspecialchars($this->_var['goods_0_64180700_1511681321']['name']); ?>" />
             </a>
             <div style="text-align:center">
-            <?php if ($this->_var['goods_0_93074600_1510821217']['promote_price'] != ""): ?> 
-            <span class="price_s"> <?php echo $this->_var['goods_0_93074600_1510821217']['promote_price']; ?> </span> 
-            <?php else: ?> 
-            <span class="price_s"> <?php echo $this->_var['goods_0_93074600_1510821217']['shop_price']; ?> </span> 
+            <?php if ($this->_var['goods_0_64180700_1511681321']['promote_price'] != ""): ?>
+            <span class="price_s"> <?php echo $this->_var['goods_0_64180700_1511681321']['promote_price']; ?> </span>
+            <?php else: ?>
+            <span class="price_s"> <?php echo $this->_var['goods_0_64180700_1511681321']['shop_price']; ?> </span>
             <?php endif; ?>
-            <br><?php echo sub_str(htmlspecialchars($this->_var['goods_0_93074600_1510821217']['name']),12); ?>
+            <del style="color:#878D99"><?php echo $this->_var['goods_0_64180700_1511681321']['market_price']; ?></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br><?php echo sub_str(htmlspecialchars($this->_var['goods_0_64180700_1511681321']['name']),12); ?>
             </div>
         </div>
          <?php if ($this->_foreach['goods']['iteration'] % 3 == 0): ?></div><div class="flex flex-f-row"><?php endif; ?>
@@ -42,3 +44,4 @@ if ($this->_foreach['f']['total'] > 0):
         <?php endif; ?>
     </div>
 </section>
+
