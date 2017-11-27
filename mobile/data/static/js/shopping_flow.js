@@ -7,6 +7,7 @@ var selectedCard     = null;
 var selectedSurplus  = '';
 var selectedBonus    = 0;
 var selectedIntegral = 0;
+var selectedJiubi = 0;
 var selectedOOS      = null;
 var alertedSurplus   = false;
 
@@ -368,7 +369,47 @@ function changeIntegralResponse(obj)
     orderSelectedResponse(obj.content);
   }
 }
+/* *
+ * 改变储值卡金额
+ */
+function changeJiubi(val)
+{
+  if (selectedJiubi == val)
+  {
+    return;
+  }
+  else
+  {
+    selectedJiubi= val;
+  }
 
+  Ajax.call('flow.php?step=change_jiubi', 'points=' + val, changeJiubiResponse, 'GET', 'JSON');
+}
+/* *
+ * 改变储值卡金额回调函数
+ */
+function changeJiubiResponse(obj)
+{
+  if (obj.error)
+  {
+    try
+    {
+      document.getElementById('ECS_JIUBI_NOTICE').innerHTML = obj.error;
+      document.getElementById('ECS_JIUBI').value = '0';
+      document.getElementById('ECS_JIUBI').focus();
+    }
+    catch (ex) { }
+  }
+  else
+  {
+    try
+    {
+      document.getElementById('ECS_JIUBI_NOTICE').innerHTML = '';
+    }
+    catch (ex) { }
+    orderSelectedResponse(obj.content);
+  }
+}
 /* *
  * 改变红包
  */

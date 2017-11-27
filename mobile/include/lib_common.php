@@ -28,12 +28,8 @@
 
 
 
-if (!defined('IN_ECTOUCH'))
-
-{
-
+if (!defined('IN_ECTOUCH')) {
     die('Hacking attempt');
-
 }
 
 
@@ -57,65 +53,30 @@ if (!defined('IN_ECTOUCH'))
  */
 
 function db_create_in($item_list, $field_name = '')
-
 {
-
-    if (empty($item_list))
-
-    {
-
+    if (empty($item_list)) {
         return $field_name . " IN ('') ";
-
-    }
-
-    else
-
-    {
-
-        if (!is_array($item_list))
-
-        {
-
+    } else {
+        if (!is_array($item_list)) {
             $item_list = explode(',', $item_list);
-
         }
 
         $item_list = array_unique($item_list);
 
         $item_list_tmp = '';
 
-        foreach ($item_list AS $item)
-
-        {
-
-            if ($item !== '')
-
-            {
-
+        foreach ($item_list as $item) {
+            if ($item !== '') {
                 $item_list_tmp .= $item_list_tmp ? ",'$item'" : "'$item'";
-
             }
-
         }
 
-        if (empty($item_list_tmp))
-
-        {
-
+        if (empty($item_list_tmp)) {
             return $field_name . " IN ('') ";
-
-        }
-
-        else
-
-        {
-
+        } else {
             return $field_name . ' IN (' . $item_list_tmp . ') ';
-
         }
-
     }
-
 }
 
 
@@ -137,41 +98,18 @@ function db_create_in($item_list, $field_name = '')
  */
 
 function is_email($user_email)
-
 {
-
     $chars = "/^([a-z0-9+_]|\\-|\\.)+@(([a-z0-9_]|\\-)+\\.)+[a-z]{2,6}\$/i";
 
-    if (strpos($user_email, '@') !== false && strpos($user_email, '.') !== false)
-
-    {
-
-        if (preg_match($chars, $user_email))
-
-        {
-
+    if (strpos($user_email, '@') !== false && strpos($user_email, '.') !== false) {
+        if (preg_match($chars, $user_email)) {
             return true;
-
-        }
-
-        else
-
-        {
-
+        } else {
             return false;
-
         }
-
-    }
-
-    else
-
-    {
-
+    } else {
         return false;
-
     }
-
 }
 
 
@@ -191,15 +129,12 @@ function is_email($user_email)
  */
 
 function is_time($time)
-
 {
-
     $pattern = '/[\d]{4}-[\d]{1,2}-[\d]{1,2}\s[\d]{1,2}:[\d]{1,2}:[\d]{1,2}/';
 
 
 
     return preg_match($pattern, $time);
-
 }
 
 
@@ -217,41 +152,19 @@ function is_time($time)
  */
 
 function assign_query_info()
-
 {
-
-    if ($GLOBALS['db']->queryTime == '')
-
-    {
-
+    if ($GLOBALS['db']->queryTime == '') {
         $query_time = 0;
-
-    }
-
-    else
-
-    {
-
-        if (PHP_VERSION >= '5.0.0')
-
-        {
-
+    } else {
+        if (PHP_VERSION >= '5.0.0') {
             $query_time = number_format(microtime(true) - $GLOBALS['db']->queryTime, 6);
-
-        }
-
-        else
-
-        {
-
+        } else {
             list($now_usec, $now_sec)     = explode(' ', microtime());
 
             list($start_usec, $start_sec) = explode(' ', $GLOBALS['db']->queryTime);
 
             $query_time = number_format(($now_sec - $start_sec) + ($now_usec - $start_usec), 6);
-
         }
-
     }
 
     $GLOBALS['smarty']->assign('query_info', sprintf($GLOBALS['_LANG']['query_info'], $GLOBALS['db']->queryCount, $query_time));
@@ -260,12 +173,8 @@ function assign_query_info()
 
     /* 内存占用情况 */
 
-    if ($GLOBALS['_LANG']['memory_info'] && function_exists('memory_get_usage'))
-
-    {
-
+    if ($GLOBALS['_LANG']['memory_info'] && function_exists('memory_get_usage')) {
         $GLOBALS['smarty']->assign('memory_info', sprintf($GLOBALS['_LANG']['memory_info'], memory_get_usage() / 1048576));
-
     }
 
 
@@ -275,7 +184,6 @@ function assign_query_info()
     $gzip_enabled = gzip_enabled() ? $GLOBALS['_LANG']['gzip_enabled'] : $GLOBALS['_LANG']['gzip_disabled'];
 
     $GLOBALS['smarty']->assign('gzip_enabled', $gzip_enabled);
-
 }
 
 
@@ -295,19 +203,14 @@ function assign_query_info()
  */
 
 function region_result($parent, $sel_name, $type)
-
 {
-
     global $cp;
 
 
 
     $arr = get_regions($type, $parent);
 
-    foreach ($arr AS $v)
-
-    {
-
+    foreach ($arr as $v) {
         $region      =& $cp->add_node('region');
 
         $region_id   =& $region->add_node('id');
@@ -319,13 +222,11 @@ function region_result($parent, $sel_name, $type)
         $region_id->set_data($v['region_id']);
 
         $region_name->set_data($v['region_name']);
-
     }
 
     $select_obj =& $cp->add_node('select');
 
     $select_obj->set_data($sel_name);
-
 }
 
 
@@ -345,9 +246,7 @@ function region_result($parent, $sel_name, $type)
  */
 
 function get_regions($type = 0, $parent = 0)
-
 {
-
     $sql = 'SELECT region_id, region_name FROM ' . $GLOBALS['ecs']->table('region') .
 
             " WHERE region_type = '$type' AND parent_id = '$parent'";
@@ -355,7 +254,6 @@ function get_regions($type = 0, $parent = 0)
 
 
     return $GLOBALS['db']->GetAll($sql);
-
 }
 
 
@@ -377,7 +275,6 @@ function get_regions($type = 0, $parent = 0)
  */
 
 function get_shipping_config($area_id)
-
 {
 
     /* 获得配置信息 */
@@ -388,28 +285,18 @@ function get_shipping_config($area_id)
 
 
 
-    if ($cfg)
-
-    {
+    if ($cfg) {
 
         /* 拆分成配置信息的数组 */
 
         $arr = unserialize($cfg);
-
-    }
-
-    else
-
-    {
-
+    } else {
         $arr = array();
-
     }
 
 
 
     return $arr;
-
 }
 
 
@@ -427,19 +314,13 @@ function get_shipping_config($area_id)
  */
 
 function &init_users()
-
 {
-
     $set_modules = false;
 
     static $cls = null;
 
-    if ($cls != null)
-
-    {
-
+    if ($cls != null) {
         return $cls;
-
     }
 
     include_once(ROOT_PATH . 'include/modules/integrates/' . $GLOBALS['_CFG']['integrate_code'] . '.php');
@@ -451,7 +332,6 @@ function &init_users()
 
 
     return $cls;
-
 }
 
 
@@ -479,23 +359,15 @@ function &init_users()
  */
 
 function cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 0, $is_show_all = true)
-
 {
-
-    static $res = NULL;
-
+    static $res = null;
 
 
-    if ($res === NULL)
 
-    {
-
+    if ($res === null) {
         $data = read_static_cache('cat_pid_releate');
 
-        if ($data === false)
-
-        {
-
+        if ($data === false) {
             $sql = "SELECT c.cat_id, c.cat_name, c.measure_unit, c.parent_id, c.is_show, c.show_in_nav, c.grade, c.sort_order, COUNT(s.cat_id) AS has_children ".
 
                 'FROM ' . $GLOBALS['ecs']->table('category') . " AS c ".
@@ -536,68 +408,36 @@ function cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 0, $is_s
 
             $newres = array();
 
-            foreach($res2 as $k=>$v)
-
-            {
-
+            foreach ($res2 as $k=>$v) {
                 $newres[$v['cat_id']] = $v['goods_num'];
 
-                foreach($res3 as $ks=>$vs)
-
-                {
-
-                    if($v['cat_id'] == $vs['cat_id'])
-
-                    {
-
-                    $newres[$v['cat_id']] = $v['goods_num'] + $vs['goods_num'];
-
+                foreach ($res3 as $ks=>$vs) {
+                    if ($v['cat_id'] == $vs['cat_id']) {
+                        $newres[$v['cat_id']] = $v['goods_num'] + $vs['goods_num'];
                     }
-
                 }
-
             }
 
 
 
-            foreach($res as $k=>$v)
-
-            {
-
+            foreach ($res as $k=>$v) {
                 $res[$k]['goods_num'] = !empty($newres[$v['cat_id']]) ? $newres[$v['cat_id']] : 0;
-
             }
 
             //如果数组过大，不采用静态缓存方式
 
-            if (count($res) <= 1000)
-
-            {
-
+            if (count($res) <= 1000) {
                 write_static_cache('cat_pid_releate', $res);
-
             }
-
-        }
-
-        else
-
-        {
-
+        } else {
             $res = $data;
-
         }
-
     }
 
 
 
-    if (empty($res) == true)
-
-    {
-
+    if (empty($res) == true) {
         return $re_type ? '' : array();
-
     }
 
 
@@ -608,156 +448,79 @@ function cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 0, $is_s
 
     $children_level = 99999; //大于这个分类的将被删除
 
-    if ($is_show_all == false)
-
-    {
-
-        foreach ($options as $key => $val)
-
-        {
-
-            if ($val['level'] > $children_level)
-
-            {
-
+    if ($is_show_all == false) {
+        foreach ($options as $key => $val) {
+            if ($val['level'] > $children_level) {
                 unset($options[$key]);
-
-            }
-
-            else
-
-            {
-
-                if ($val['is_show'] == 0)
-
-                {
-
+            } else {
+                if ($val['is_show'] == 0) {
                     unset($options[$key]);
 
-                    if ($children_level > $val['level'])
-
-                    {
-
+                    if ($children_level > $val['level']) {
                         $children_level = $val['level']; //标记一下，这样子分类也能删除
-
                     }
-
-                }
-
-                else
-
-                {
-
+                } else {
                     $children_level = 99999; //恢复初始值
-
                 }
-
             }
-
         }
-
     }
 
 
 
     /* 截取到指定的缩减级别 */
 
-    if ($level > 0)
-
-    {
-
-        if ($cat_id == 0)
-
-        {
-
+    if ($level > 0) {
+        if ($cat_id == 0) {
             $end_level = $level;
-
-        }
-
-        else
-
-        {
-
+        } else {
             $first_item = reset($options); // 获取第一个元素
 
             $end_level  = $first_item['level'] + $level;
-
         }
 
 
 
         /* 保留level小于end_level的部分 */
 
-        foreach ($options AS $key => $val)
-
-        {
-
-            if ($val['level'] >= $end_level)
-
-            {
-
+        foreach ($options as $key => $val) {
+            if ($val['level'] >= $end_level) {
                 unset($options[$key]);
-
             }
-
         }
-
     }
 
 
 
-    if ($re_type == true)
-
-    {
-
+    if ($re_type == true) {
         $select = '';
 
-        foreach ($options AS $var)
-
-        {
-
+        foreach ($options as $var) {
             $select .= '<option value="' . $var['cat_id'] . '" ';
 
             $select .= ($selected == $var['cat_id']) ? "selected='ture'" : '';
 
             $select .= '>';
 
-            if ($var['level'] > 0)
-
-            {
-
+            if ($var['level'] > 0) {
                 $select .= str_repeat('&nbsp;', $var['level'] * 4);
-
             }
 
             $select .= htmlspecialchars(addslashes($var['cat_name']), ENT_QUOTES) . '</option>';
-
         }
 
 
 
         return $select;
-
-    }
-
-    else
-
-    {
-
-        foreach ($options AS $key => $value)
-
-        {
-
+    } else {
+        foreach ($options as $key => $value) {
             $options[$key]['url'] = build_uri('category', array('cid' => $value['cat_id']), $value['cat_name']);
-
         }
 
 
 
         return $options;
-
     }
-
 }
 
 
@@ -781,57 +544,32 @@ function cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 0, $is_s
  */
 
 function cat_options($spec_cat_id, $arr)
-
 {
-
     static $cat_options = array();
 
 
 
-    if (isset($cat_options[$spec_cat_id]))
-
-    {
-
+    if (isset($cat_options[$spec_cat_id])) {
         return $cat_options[$spec_cat_id];
-
     }
 
 
 
-    if (!isset($cat_options[0]))
-
-    {
-
+    if (!isset($cat_options[0])) {
         $level = $last_cat_id = 0;
 
         $options = $cat_id_array = $level_array = array();
 
         $data = read_static_cache('cat_option_static');
 
-        if ($data === false)
-
-        {
-
-            while (!empty($arr))
-
-            {
-
-                foreach ($arr AS $key => $value)
-
-                {
-
+        if ($data === false) {
+            while (!empty($arr)) {
+                foreach ($arr as $key => $value) {
                     $cat_id = $value['cat_id'];
 
-                    if ($level == 0 && $last_cat_id == 0)
-
-                    {
-
-                        if ($value['parent_id'] > 0)
-
-                        {
-
+                    if ($level == 0 && $last_cat_id == 0) {
+                        if ($value['parent_id'] > 0) {
                             break;
-
                         }
 
 
@@ -848,12 +586,8 @@ function cat_options($spec_cat_id, $arr)
 
 
 
-                        if ($value['has_children'] == 0)
-
-                        {
-
+                        if ($value['has_children'] == 0) {
                             continue;
-
                         }
 
                         $last_cat_id  = $cat_id;
@@ -863,15 +597,11 @@ function cat_options($spec_cat_id, $arr)
                         $level_array[$last_cat_id] = ++$level;
 
                         continue;
-
                     }
 
 
 
-                    if ($value['parent_id'] == $last_cat_id)
-
-                    {
-
+                    if ($value['parent_id'] == $last_cat_id) {
                         $options[$cat_id]          = $value;
 
                         $options[$cat_id]['level'] = $level;
@@ -884,16 +614,9 @@ function cat_options($spec_cat_id, $arr)
 
 
 
-                        if ($value['has_children'] > 0)
-
-                        {
-
-                            if (end($cat_id_array) != $last_cat_id)
-
-                            {
-
+                        if ($value['has_children'] > 0) {
+                            if (end($cat_id_array) != $last_cat_id) {
                                 $cat_id_array[] = $last_cat_id;
-
                             }
 
                             $last_cat_id    = $cat_id;
@@ -901,49 +624,22 @@ function cat_options($spec_cat_id, $arr)
                             $cat_id_array[] = $cat_id;
 
                             $level_array[$last_cat_id] = ++$level;
-
                         }
-
-                    }
-
-                    elseif ($value['parent_id'] > $last_cat_id)
-
-                    {
-
+                    } elseif ($value['parent_id'] > $last_cat_id) {
                         break;
-
                     }
-
                 }
 
 
 
                 $count = count($cat_id_array);
 
-                if ($count > 1)
-
-                {
-
+                if ($count > 1) {
                     $last_cat_id = array_pop($cat_id_array);
-
-                }
-
-                elseif ($count == 1)
-
-                {
-
-                    if ($last_cat_id != end($cat_id_array))
-
-                    {
-
+                } elseif ($count == 1) {
+                    if ($last_cat_id != end($cat_id_array)) {
                         $last_cat_id = end($cat_id_array);
-
-                    }
-
-                    else
-
-                    {
-
+                    } else {
                         $level = 0;
 
                         $last_cat_id = 0;
@@ -951,83 +647,39 @@ function cat_options($spec_cat_id, $arr)
                         $cat_id_array = array();
 
                         continue;
-
                     }
-
                 }
 
 
 
-                if ($last_cat_id && isset($level_array[$last_cat_id]))
-
-                {
-
+                if ($last_cat_id && isset($level_array[$last_cat_id])) {
                     $level = $level_array[$last_cat_id];
-
-                }
-
-                else
-
-                {
-
+                } else {
                     $level = 0;
-
                 }
-
             }
 
             //如果数组过大，不采用静态缓存方式
 
-            if (count($options) <= 2000)
-
-            {
-
+            if (count($options) <= 2000) {
                 write_static_cache('cat_option_static', $options);
-
             }
-
-        }
-
-        else
-
-        {
-
+        } else {
             $options = $data;
-
         }
 
         $cat_options[0] = $options;
-
-    }
-
-    else
-
-    {
-
+    } else {
         $options = $cat_options[0];
-
     }
 
 
 
-    if (!$spec_cat_id)
-
-    {
-
+    if (!$spec_cat_id) {
         return $options;
-
-    }
-
-    else
-
-    {
-
-        if (empty($options[$spec_cat_id]))
-
-        {
-
+    } else {
+        if (empty($options[$spec_cat_id])) {
             return array();
-
         }
 
 
@@ -1036,54 +688,26 @@ function cat_options($spec_cat_id, $arr)
 
 
 
-        foreach ($options AS $key => $value)
-
-        {
-
-            if ($key != $spec_cat_id)
-
-            {
-
+        foreach ($options as $key => $value) {
+            if ($key != $spec_cat_id) {
                 unset($options[$key]);
-
-            }
-
-            else
-
-            {
-
+            } else {
                 break;
-
             }
-
         }
 
 
 
         $spec_cat_id_array = array();
 
-        foreach ($options AS $key => $value)
-
-        {
-
+        foreach ($options as $key => $value) {
             if (($spec_cat_id_level == $value['level'] && $value['cat_id'] != $spec_cat_id) ||
 
-                ($spec_cat_id_level > $value['level']))
-
-            {
-
+                ($spec_cat_id_level > $value['level'])) {
                 break;
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $spec_cat_id_array[$key] = $value;
-
             }
-
         }
 
         $cat_options[$spec_cat_id] = $spec_cat_id_array;
@@ -1091,9 +715,7 @@ function cat_options($spec_cat_id, $arr)
 
 
         return $spec_cat_id_array;
-
     }
-
 }
 
 
@@ -1111,31 +733,22 @@ function cat_options($spec_cat_id, $arr)
  */
 
 function load_config()
-
 {
-
     $arr = array();
 
 
 
     $data = read_static_cache('shop_config');
 
-    if ($data === false)
-
-    {
-
+    if ($data === false) {
         $sql = 'SELECT code, value FROM ' . $GLOBALS['ecs']->table('touch_shop_config') . ' WHERE parent_id > 0';
 
         $res = $GLOBALS['db']->getAll($sql);
 
 
 
-        foreach ($res AS $row)
-
-        {
-
+        foreach ($res as $row) {
             $arr[$row['code']] = $row['value'];
-
         }
 
 
@@ -1206,14 +819,11 @@ function load_config()
 
 
 
-        if (!isset($GLOBALS['_CFG']['ecs_version']))
-
-        {
+        if (!isset($GLOBALS['_CFG']['ecs_version'])) {
 
             /* 如果没有版本号则默认为2.0.5 */
 
             $GLOBALS['_CFG']['ecs_version'] = 'v2.7.3';
-
         }
 
 
@@ -1222,40 +832,24 @@ function load_config()
 
         $lang_array = array('zh_cn', 'zh_tw', 'en_us');
 
-        if (empty($arr['lang']) || !in_array($arr['lang'], $lang_array))
-
-        {
-
+        if (empty($arr['lang']) || !in_array($arr['lang'], $lang_array)) {
             $arr['lang'] = 'zh_cn'; // 默认语言为简体中文
-
         }
 
 
 
-        if (empty($arr['integrate_code']))
-
-        {
-
+        if (empty($arr['integrate_code'])) {
             $arr['integrate_code'] = 'ecshop'; // 默认的会员整合插件为 ecshop
-
         }
 
         write_static_cache('shop_config', $arr);
-
-    }
-
-    else
-
-    {
-
+    } else {
         $arr = $data;
-
     }
 
 
 
     return $arr;
-
 }
 
 
@@ -1269,9 +863,7 @@ function load_config()
  */
 
 function get_brand_list()
-
 {
-
     $sql = 'SELECT brand_id, brand_name FROM ' . $GLOBALS['ecs']->table('brand') . ' ORDER BY sort_order';
 
     $res = $GLOBALS['db']->getAll($sql);
@@ -1280,18 +872,13 @@ function get_brand_list()
 
     $brand_list = array();
 
-    foreach ($res AS $row)
-
-    {
-
+    foreach ($res as $row) {
         $brand_list[$row['brand_id']] = addslashes($row['brand_name']);
-
     }
 
 
 
     return $brand_list;
-
 }
 
 
@@ -1311,9 +898,7 @@ function get_brand_list()
  */
 
 function get_brands($cat = 0, $app = 'brand')
-
 {
-
     global $page_libs;
 
     $template = basename(PHP_SELF);
@@ -1324,12 +909,8 @@ function get_brands($cat = 0, $app = 'brand')
 
     static $static_page_libs = null;
 
-    if ($static_page_libs == null)
-
-    {
-
-            $static_page_libs = $page_libs;
-
+    if ($static_page_libs == null) {
+        $static_page_libs = $page_libs;
     }
 
 
@@ -1350,34 +931,25 @@ function get_brands($cat = 0, $app = 'brand')
 
             "GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY tag DESC, b.sort_order ASC";
 
-    if (isset($static_page_libs[$template]['/library/brands.lbi']))
-
-    {
-
+    if (isset($static_page_libs[$template]['/library/brands.lbi'])) {
         $num = get_library_number("brands");
 
         $sql .= " LIMIT $num ";
-
     }
 
     $row = $GLOBALS['db']->getAll($sql);
 
 
 
-    foreach ($row AS $key => $val)
-
-    {
-
+    foreach ($row as $key => $val) {
         $row[$key]['url'] = build_uri($app, array('cid' => $cat, 'bid' => $val['brand_id']), $val['brand_name']);
 
-        $row[$key]['brand_desc'] = htmlspecialchars($val['brand_desc'],ENT_QUOTES);
-
+        $row[$key]['brand_desc'] = htmlspecialchars($val['brand_desc'], ENT_QUOTES);
     }
 
 
 
     return $row;
-
 }
 
 
@@ -1395,9 +967,7 @@ function get_brands($cat = 0, $app = 'brand')
  */
 
 function get_promotion_info($goods_id = '')
-
 {
-
     $snatch = array();
 
     $group = array();
@@ -1414,23 +984,14 @@ function get_promotion_info($goods_id = '')
 
     $sql = 'SELECT act_id, act_name, act_type, start_time, end_time FROM ' . $GLOBALS['ecs']->table('goods_activity') . " WHERE is_finished=0 AND start_time <= '$gmtime' AND end_time >= '$gmtime'";
 
-    if(!empty($goods_id))
-
-    {
-
+    if (!empty($goods_id)) {
         $sql .= " AND goods_id = '$goods_id'";
-
     }
 
     $res = $GLOBALS['db']->getAll($sql);
 
-    foreach ($res as $data)
-
-    {
-
-        switch ($data['act_type'])
-
-        {
+    foreach ($res as $data) {
+        switch ($data['act_type']) {
 
             case GAT_SNATCH: //夺宝奇兵
 
@@ -1495,7 +1056,6 @@ function get_promotion_info($goods_id = '')
                 break;
 
         }
-
     }
 
 
@@ -1506,26 +1066,16 @@ function get_promotion_info($goods_id = '')
 
     $sql = 'SELECT act_id, act_range, act_range_ext, act_name, start_time, end_time FROM ' . $GLOBALS['ecs']->table('favourable_activity') . " WHERE start_time <= '$gmtime' AND end_time >= '$gmtime'";
 
-    if(!empty($goods_id))
-
-    {
-
+    if (!empty($goods_id)) {
         $sql .= " AND CONCAT(',', user_rank, ',') LIKE '%" . $user_rank . "%'";
-
     }
 
     $res = $GLOBALS['db']->getAll($sql);
 
 
 
-    if(empty($goods_id))
-
-    {
-
-        foreach ($res as $rows)
-
-        {
-
+    if (empty($goods_id)) {
+        foreach ($res as $rows) {
             $favourable[$rows['act_id']]['act_name'] = $rows['act_name'];
 
             $favourable[$rows['act_id']]['url'] = 'activity.php';
@@ -1535,15 +1085,8 @@ function get_promotion_info($goods_id = '')
             $favourable[$rows['act_id']]['sort'] = $rows['start_time'];
 
             $favourable[$rows['act_id']]['type'] = 'favourable';
-
         }
-
-    }
-
-    else
-
-    {
-
+    } else {
         $sql = "SELECT cat_id, brand_id FROM " . $GLOBALS['ecs']->table('goods') .
 
            "WHERE goods_id = '$goods_id'";
@@ -1556,14 +1099,8 @@ function get_promotion_info($goods_id = '')
 
 
 
-        foreach ($res as $rows)
-
-        {
-
-            if ($rows['act_range'] == FAR_ALL)
-
-            {
-
+        foreach ($res as $rows) {
+            if ($rows['act_range'] == FAR_ALL) {
                 $favourable[$rows['act_id']]['act_name'] = $rows['act_name'];
 
                 $favourable[$rows['act_id']]['url'] = 'activity.php';
@@ -1573,12 +1110,7 @@ function get_promotion_info($goods_id = '')
                 $favourable[$rows['act_id']]['sort'] = $rows['start_time'];
 
                 $favourable[$rows['act_id']]['type'] = 'favourable';
-
-            }
-
-            elseif ($rows['act_range'] == FAR_CATEGORY)
-
-            {
+            } elseif ($rows['act_range'] == FAR_CATEGORY) {
 
                 /* 找出分类id的子分类id */
 
@@ -1586,22 +1118,15 @@ function get_promotion_info($goods_id = '')
 
                 $raw_id_list = explode(',', $rows['act_range_ext']);
 
-                foreach ($raw_id_list as $id)
-
-                {
-
+                foreach ($raw_id_list as $id) {
                     $id_list = array_merge($id_list, array_keys(cat_list($id, 0, false)));
-
                 }
 
                 $ids = join(',', array_unique($id_list));
 
 
 
-                if (strpos(',' . $ids . ',', ',' . $category_id . ',') !== false)
-
-                {
-
+                if (strpos(',' . $ids . ',', ',' . $category_id . ',') !== false) {
                     $favourable[$rows['act_id']]['act_name'] = $rows['act_name'];
 
                     $favourable[$rows['act_id']]['url'] = 'activity.php';
@@ -1611,19 +1136,9 @@ function get_promotion_info($goods_id = '')
                     $favourable[$rows['act_id']]['sort'] = $rows['start_time'];
 
                     $favourable[$rows['act_id']]['type'] = 'favourable';
-
                 }
-
-            }
-
-            elseif ($rows['act_range'] == FAR_BRAND)
-
-            {
-
-                if (strpos(',' . $rows['act_range_ext'] . ',', ',' . $brand_id . ',') !== false)
-
-                {
-
+            } elseif ($rows['act_range'] == FAR_BRAND) {
+                if (strpos(',' . $rows['act_range_ext'] . ',', ',' . $brand_id . ',') !== false) {
                     $favourable[$rows['act_id']]['act_name'] = $rows['act_name'];
 
                     $favourable[$rows['act_id']]['url'] = 'activity.php';
@@ -1633,19 +1148,9 @@ function get_promotion_info($goods_id = '')
                     $favourable[$rows['act_id']]['sort'] = $rows['start_time'];
 
                     $favourable[$rows['act_id']]['type'] = 'favourable';
-
                 }
-
-            }
-
-            elseif ($rows['act_range'] == FAR_GOODS)
-
-            {
-
-                if (strpos(',' . $rows['act_range_ext'] . ',', ',' . $goods_id . ',') !== false)
-
-                {
-
+            } elseif ($rows['act_range'] == FAR_GOODS) {
+                if (strpos(',' . $rows['act_range_ext'] . ',', ',' . $goods_id . ',') !== false) {
                     $favourable[$rows['act_id']]['act_name'] = $rows['act_name'];
 
                     $favourable[$rows['act_id']]['url'] = 'activity.php';
@@ -1655,13 +1160,9 @@ function get_promotion_info($goods_id = '')
                     $favourable[$rows['act_id']]['sort'] = $rows['start_time'];
 
                     $favourable[$rows['act_id']]['type'] = 'favourable';
-
                 }
-
             }
-
         }
-
     }
 
 
@@ -1680,12 +1181,8 @@ function get_promotion_info($goods_id = '')
 
     $arr = array_merge($snatch, $group, $auction, $package, $favourable);
 
-    foreach($arr as $key => $value)
-
-    {
-
+    foreach ($arr as $key => $value) {
         $sort_time[] = $value['sort'];
-
     }
 
     array_multisort($sort_time, SORT_NUMERIC, SORT_DESC, $arr);
@@ -1693,7 +1190,6 @@ function get_promotion_info($goods_id = '')
 
 
     return $arr;
-
 }
 
 
@@ -1713,11 +1209,8 @@ function get_promotion_info($goods_id = '')
  */
 
 function get_children($cat = 0)
-
 {
-
     return 'g.cat_id ' . db_create_in(array_unique(array_merge(array($cat), array_keys(cat_list($cat, 0, false)))));
-
 }
 
 
@@ -1738,12 +1231,9 @@ function get_children($cat = 0)
 
  */
 
-function get_article_children ($cat = 0)
-
+function get_article_children($cat = 0)
 {
-
     return db_create_in(array_unique(array_merge(array($cat), array_keys(article_cat_list($cat, 0, false)))), 'cat_id');
-
 }
 
 
@@ -1765,17 +1255,12 @@ function get_article_children ($cat = 0)
  */
 
 function get_mail_template($tpl_name)
-
 {
-
     $sql = 'SELECT template_subject, is_html, template_content FROM ' . $GLOBALS['ecs']->table('mail_templates') . " WHERE template_code = '$tpl_name'";
 
 
 
     return $GLOBALS['db']->GetRow($sql);
-
-
-
 }
 
 
@@ -1805,15 +1290,9 @@ function get_mail_template($tpl_name)
  */
 
 function order_action($order_sn, $order_status, $shipping_status, $pay_status, $note = '', $username = null, $place = 0)
-
 {
-
-    if (is_null($username))
-
-    {
-
+    if (is_null($username)) {
         $username = $_SESSION['admin_name'];
-
     }
 
 
@@ -1829,7 +1308,6 @@ function order_action($order_sn, $order_status, $shipping_status, $pay_status, $
             'FROM ' . $GLOBALS['ecs']->table('order_info') . " WHERE order_sn = '$order_sn'";
 
     $GLOBALS['db']->query($sql);
-
 }
 
 
@@ -1849,24 +1327,13 @@ function order_action($order_sn, $order_status, $shipping_status, $pay_status, $
  */
 
 function price_format($price, $change_price = true)
-
 {
-
-    if($price==='')
-
-    {
-
-     $price=0;
-
+    if ($price==='') {
+        $price=0;
     }
 
-    if ($change_price && defined('ECS_ADMIN') === false)
-
-    {
-
-        switch ($GLOBALS['_CFG']['price_format'])
-
-        {
+    if ($change_price && defined('ECS_ADMIN') === false) {
+        switch ($GLOBALS['_CFG']['price_format']) {
 
             case 0:
 
@@ -1880,12 +1347,8 @@ function price_format($price, $change_price = true)
 
 
 
-                if (substr($price, -1) == '.')
-
-                {
-
+                if (substr($price, -1) == '.') {
                     $price = substr($price, 0, -1);
-
                 }
 
                 break;
@@ -1915,21 +1378,13 @@ function price_format($price, $change_price = true)
                 break;
 
         }
-
-    }
-
-    else
-
-    {
-
+    } else {
         $price = number_format($price, 2, '.', '');
-
     }
 
 
 
     return sprintf($GLOBALS['_CFG']['currency_format'], $price);
-
 }
 
 
@@ -1953,31 +1408,19 @@ function price_format($price, $change_price = true)
  */
 
 function get_virtual_goods($order_id, $shipping = false)
-
 {
-
-    if ($shipping)
-
-    {
-
+    if ($shipping) {
         $sql = 'SELECT goods_id, goods_name, send_number AS num, extension_code FROM '.
 
            $GLOBALS['ecs']->table('order_goods') .
 
            " WHERE order_id = '$order_id' AND extension_code > ''";
-
-    }
-
-    else
-
-    {
-
+    } else {
         $sql = 'SELECT goods_id, goods_name, (goods_number - send_number) AS num, extension_code FROM '.
 
            $GLOBALS['ecs']->table('order_goods') .
 
            " WHERE order_id = '$order_id' AND is_real = 0 AND (goods_number - send_number) > 0 AND extension_code > '' ";
-
     }
 
     $res = $GLOBALS['db']->getAll($sql);
@@ -1986,18 +1429,13 @@ function get_virtual_goods($order_id, $shipping = false)
 
     $virtual_goods = array();
 
-    foreach ($res AS $row)
-
-    {
-
+    foreach ($res as $row) {
         $virtual_goods[$row['extension_code']][] = array('goods_id' => $row['goods_id'], 'goods_name' => $row['goods_name'], 'num' => $row['num']);
-
     }
 
 
 
     return $virtual_goods;
-
 }
 
 
@@ -2025,59 +1463,31 @@ function get_virtual_goods($order_id, $shipping = false)
  */
 
 function virtual_goods_ship(&$virtual_goods, &$msg, $order_sn, $return_result = false, $process = 'other')
-
 {
-
     $virtual_card = array();
 
-    foreach ($virtual_goods AS $code => $goods_list)
-
-    {
+    foreach ($virtual_goods as $code => $goods_list) {
 
         /* 只处理虚拟卡 */
 
-        if ($code == 'virtual_card')
-
-        {
-
-            foreach ($goods_list as $goods)
-
-            {
-
-                if (virtual_card_shipping($goods, $order_sn, $msg, $process))
-
-                {
-
-                    if ($return_result)
-
-                    {
-
+        if ($code == 'virtual_card') {
+            foreach ($goods_list as $goods) {
+                if (virtual_card_shipping($goods, $order_sn, $msg, $process)) {
+                    if ($return_result) {
                         $virtual_card[] = array('goods_id'=>$goods['goods_id'], 'goods_name'=>$goods['goods_name'], 'info'=>virtual_card_result($order_sn, $goods));
-
                     }
-
-                }
-
-                else
-
-                {
-
+                } else {
                     return false;
-
                 }
-
             }
 
-            $GLOBALS['smarty']->assign('virtual_card',      $virtual_card);
-
+            $GLOBALS['smarty']->assign('virtual_card', $virtual_card);
         }
-
     }
 
 
 
     return true;
-
 }
 
 
@@ -2104,8 +1514,7 @@ function virtual_goods_ship(&$virtual_goods, &$msg, $order_sn, $return_result = 
 
  */
 
-function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
-
+function virtual_card_shipping($goods, $order_sn, &$msg, $process = 'other')
 {
 
     /* 包含加密解密函数所在文件 */
@@ -2122,74 +1531,51 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
 
 
 
-    if ($num < $goods['num'])
-
-    {
-
+    if ($num < $goods['num']) {
         $msg .= sprintf($GLOBALS['_LANG']['virtual_card_oos'], $goods['goods_name']);
 
 
 
         return false;
-
     }
 
 
 
-     /* 取出卡片信息 */
+    /* 取出卡片信息 */
 
-     $sql = "SELECT card_id, card_sn, card_password, end_date, crc32 FROM ".$GLOBALS['ecs']->table('virtual_card')." WHERE goods_id = '$goods[goods_id]' AND is_saled = 0  LIMIT " . $goods['num'];
+    $sql = "SELECT card_id, card_sn, card_password, end_date, crc32 FROM ".$GLOBALS['ecs']->table('virtual_card')." WHERE goods_id = '$goods[goods_id]' AND is_saled = 0  LIMIT " . $goods['num'];
 
-     $arr = $GLOBALS['db']->getAll($sql);
-
-
-
-     $card_ids = array();
-
-     $cards = array();
+    $arr = $GLOBALS['db']->getAll($sql);
 
 
 
-     foreach ($arr as $virtual_card)
+    $card_ids = array();
 
-     {
+    $cards = array();
 
+
+
+    foreach ($arr as $virtual_card) {
         $card_info = array();
 
 
 
         /* 卡号和密码解密 */
 
-        if ($virtual_card['crc32'] == 0 || $virtual_card['crc32'] == crc32(AUTH_KEY))
-
-        {
-
+        if ($virtual_card['crc32'] == 0 || $virtual_card['crc32'] == crc32(AUTH_KEY)) {
             $card_info['card_sn'] = decrypt($virtual_card['card_sn']);
 
             $card_info['card_password'] = decrypt($virtual_card['card_password']);
-
-        }
-
-        elseif ($virtual_card['crc32'] == crc32(OLD_AUTH_KEY))
-
-        {
-
+        } elseif ($virtual_card['crc32'] == crc32(OLD_AUTH_KEY)) {
             $card_info['card_sn'] = decrypt($virtual_card['card_sn'], OLD_AUTH_KEY);
 
             $card_info['card_password'] = decrypt($virtual_card['card_password'], OLD_AUTH_KEY);
-
-        }
-
-        else
-
-        {
-
+        } else {
             $msg .= 'error key';
 
 
 
             return false;
-
         }
 
         $card_info['end_date'] = date($GLOBALS['_CFG']['date_format'], $virtual_card['end_date']);
@@ -2197,12 +1583,11 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
         $card_ids[] = $virtual_card['card_id'];
 
         $cards[] = $card_info;
-
-     }
-
+    }
 
 
-     /* 标记已经取出的卡片 */
+
+    /* 标记已经取出的卡片 */
 
     $sql = "UPDATE ".$GLOBALS['ecs']->table('virtual_card')." SET ".
 
@@ -2212,16 +1597,12 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
 
            "WHERE " . db_create_in($card_ids, 'card_id');
 
-    if (!$GLOBALS['db']->query($sql, 'SILENT'))
-
-    {
-
+    if (!$GLOBALS['db']->query($sql, 'SILENT')) {
         $msg .= $GLOBALS['db']->error();
 
 
 
         return false;
-
     }
 
 
@@ -2234,9 +1615,7 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
 
 
 
-    if (true)
-
-    {
+    if (true) {
 
         /* 获取订单信息 */
 
@@ -2248,10 +1627,7 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
 
         /* 更新订单信息 */
 
-        if ($process == 'split')
-
-        {
-
+        if ($process == 'split') {
             $sql = "UPDATE ".$GLOBALS['ecs']->table('order_goods'). "
 
                     SET send_number = send_number + '" . $goods['num'] . "'
@@ -2259,13 +1635,7 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
                     WHERE order_id = '" . $order['order_id'] . "'
 
                     AND goods_id = '" . $goods['goods_id'] . "' ";
-
-        }
-
-        else
-
-        {
-
+        } else {
             $sql = "UPDATE ".$GLOBALS['ecs']->table('order_goods'). "
 
                     SET send_number = '" . $goods['num'] . "'
@@ -2273,34 +1643,28 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
                     WHERE order_id = '" . $order['order_id'] . "'
 
                     AND goods_id = '" . $goods['goods_id'] . "' ";
-
         }
 
 
 
-        if (!$GLOBALS['db']->query($sql, 'SILENT'))
-
-        {
-
+        if (!$GLOBALS['db']->query($sql, 'SILENT')) {
             $msg .= $GLOBALS['db']->error();
 
 
 
             return false;
-
         }
-
     }
 
 
 
     /* 发送邮件 */
 
-    $GLOBALS['smarty']->assign('virtual_card',                   $cards);
+    $GLOBALS['smarty']->assign('virtual_card', $cards);
 
-    $GLOBALS['smarty']->assign('order',                          $order);
+    $GLOBALS['smarty']->assign('order', $order);
 
-    $GLOBALS['smarty']->assign('goods',                          $goods);
+    $GLOBALS['smarty']->assign('goods', $goods);
 
 
 
@@ -2323,7 +1687,6 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
 
 
     return true;
-
 }
 
 
@@ -2345,7 +1708,6 @@ function virtual_card_shipping ($goods, $order_sn, &$msg, $process = 'other')
  */
 
 function virtual_card_result($order_sn, $goods)
-
 {
 
     /* 包含加密解密函数所在文件 */
@@ -2366,52 +1728,32 @@ function virtual_card_result($order_sn, $goods)
 
 
 
-    while ($row = $GLOBALS['db']->FetchRow($res))
-
-    {
+    while ($row = $GLOBALS['db']->FetchRow($res)) {
 
         /* 卡号和密码解密 */
 
-        if ($row['crc32'] == 0 || $row['crc32'] == crc32(AUTH_KEY))
-
-        {
-
+        if ($row['crc32'] == 0 || $row['crc32'] == crc32(AUTH_KEY)) {
             $row['card_sn'] = decrypt($row['card_sn']);
 
             $row['card_password'] = decrypt($row['card_password']);
-
-        }
-
-        elseif ($row['crc32'] == crc32(OLD_AUTH_KEY))
-
-        {
-
+        } elseif ($row['crc32'] == crc32(OLD_AUTH_KEY)) {
             $row['card_sn'] = decrypt($row['card_sn'], OLD_AUTH_KEY);
 
             $row['card_password'] = decrypt($row['card_password'], OLD_AUTH_KEY);
-
-        }
-
-        else
-
-        {
-
+        } else {
             $row['card_sn'] = '***';
 
             $row['card_password'] = '***';
-
         }
 
 
 
         $cards[] = array('card_sn'=>$row['card_sn'], 'card_password'=>$row['card_password'], 'end_date'=>date($GLOBALS['_CFG']['date_format'], $row['end_date']));
-
     }
 
 
 
     return $cards;
-
 }
 
 
@@ -2435,9 +1777,7 @@ function virtual_card_result($order_sn, $goods)
  */
 
 function get_snatch_result($id)
-
 {
-
     $sql = 'SELECT u.user_id, u.user_name, u.email, lg.bid_price, lg.bid_time, count(*) as num' .
 
             ' FROM ' . $GLOBALS['ecs']->table('snatch_log') . ' AS lg '.
@@ -2454,10 +1794,7 @@ function get_snatch_result($id)
 
 
 
-    if ($rec)
-
-    {
-
+    if ($rec) {
         $rec['bid_time']  = local_date($GLOBALS['_CFG']['time_format'], $rec['bid_time']);
 
         $rec['formated_bid_price'] = price_format($rec['bid_price'], false);
@@ -2480,20 +1817,10 @@ function get_snatch_result($id)
 
 
 
-        if (!empty($info['max_price']))
-
-        {
-
+        if (!empty($info['max_price'])) {
             $rec['buy_price'] = ($rec['bid_price'] > $info['max_price']) ? $info['max_price'] : $rec['bid_price'];
-
-        }
-
-        else
-
-        {
-
+        } else {
             $rec['buy_price'] = $rec['bid_price'];
-
         }
 
 
@@ -2517,13 +1844,11 @@ function get_snatch_result($id)
 
 
         $rec['order_count'] = $GLOBALS['db']->getOne($sql);
-
     }
 
 
 
     return $rec;
-
 }
 
 
@@ -2547,59 +1872,33 @@ function get_snatch_result($id)
  */
 
 function clear_tpl_files($is_cache = true, $ext = '')
-
 {
-
     $dirs = array();
 
 
 
-    if (isset($GLOBALS['shop_id']) && $GLOBALS['shop_id'] > 0)
-
-    {
-
+    if (isset($GLOBALS['shop_id']) && $GLOBALS['shop_id'] > 0) {
         $tmp_dir = DATA_DIR ;
-
-    }
-
-    else
-
-    {
-
+    } else {
         $tmp_dir = 'data';
-
     }
 
-    if ($is_cache)
-
-    {
-
+    if ($is_cache) {
         $cache_dir = ROOT_PATH . $tmp_dir . '/caches/';
 
         $dirs[] = ROOT_PATH . $tmp_dir . '/query_caches/';
 
         $dirs[] = ROOT_PATH . $tmp_dir . '/static_caches/';
 
-        for($i = 0; $i < 16; $i++)
-
-        {
-
+        for ($i = 0; $i < 16; $i++) {
             $hash_dir = $cache_dir . dechex($i);
 
             $dirs[] = $hash_dir . '/';
-
         }
-
-    }
-
-    else
-
-    {
-
+    } else {
         $dirs[] = ROOT_PATH . $tmp_dir . '/compiled/';
 
         $dirs[] = ROOT_PATH . $tmp_dir . '/compiled/admin/';
-
     }
 
 
@@ -2610,39 +1909,23 @@ function clear_tpl_files($is_cache = true, $ext = '')
 
 
 
-    foreach ($dirs AS $dir)
-
-    {
-
+    foreach ($dirs as $dir) {
         $folder = @opendir($dir);
 
 
 
-        if ($folder === false)
-
-        {
-
+        if ($folder === false) {
             continue;
-
         }
 
 
 
-        while ($file = readdir($folder))
-
-        {
-
-            if ($file == '.' || $file == '..' || $file == 'index.htm' || $file == 'index.html')
-
-            {
-
+        while ($file = readdir($folder)) {
+            if ($file == '.' || $file == '..' || $file == 'index.htm' || $file == 'index.html') {
                 continue;
-
             }
 
-            if (is_file($dir . $file))
-
-            {
+            if (is_file($dir . $file)) {
 
                 /* 如果有文件名则判断是否匹配 */
 
@@ -2650,56 +1933,30 @@ function clear_tpl_files($is_cache = true, $ext = '')
 
 
 
-                if ($str_len > 0 && $pos !== false)
-
-                {
-
+                if ($str_len > 0 && $pos !== false) {
                     $ext_str = substr($file, 0, $pos);
 
 
 
-                    if ($ext_str == $ext)
-
-                    {
-
-                        if (@unlink($dir . $file))
-
-                        {
-
+                    if ($ext_str == $ext) {
+                        if (@unlink($dir . $file)) {
                             $count++;
-
                         }
-
                     }
-
-                }
-
-                else
-
-                {
-
-                    if (@unlink($dir . $file))
-
-                    {
-
+                } else {
+                    if (@unlink($dir . $file)) {
                         $count++;
-
                     }
-
                 }
-
             }
-
         }
 
         closedir($folder);
-
     }
 
 
 
     return $count;
-
 }
 
 
@@ -2719,11 +1976,8 @@ function clear_tpl_files($is_cache = true, $ext = '')
  */
 
 function clear_compiled_files($ext = '')
-
 {
-
     return clear_tpl_files(false, $ext);
-
 }
 
 
@@ -2743,11 +1997,8 @@ function clear_compiled_files($ext = '')
  */
 
 function clear_cache_files($ext = '')
-
 {
-
     return clear_tpl_files(true, $ext);
-
 }
 
 
@@ -2767,11 +2018,8 @@ function clear_cache_files($ext = '')
  */
 
 function clear_all_files($ext = '')
-
 {
-
-    return clear_tpl_files(false, $ext) + clear_tpl_files(true,  $ext);
-
+    return clear_tpl_files(false, $ext) + clear_tpl_files(true, $ext);
 }
 
 
@@ -2791,53 +2039,32 @@ function clear_all_files($ext = '')
  */
 
 function smarty_insert_scripts($args)
-
 {
-
     static $scripts = array();
 
 
 
-    $arr = explode(',', str_replace(' ','',$args['files']));
+    $arr = explode(',', str_replace(' ', '', $args['files']));
 
 
 
     $str = '';
 
-    foreach ($arr AS $val)
-
-    {
-
-        if (in_array($val, $scripts) == false)
-
-        {
-
+    foreach ($arr as $val) {
+        if (in_array($val, $scripts) == false) {
             $scripts[] = $val;
 
-            if ($val{0} == '.')
-
-            {
-
+            if ($val{0} == '.') {
                 $str .= '<script type="text/javascript" src="' . $val . '"></script>';
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $str .= '<script type="text/javascript" src="data/static/js/' . $val . '"></script>';
-
             }
-
         }
-
     }
 
 
 
     return $str;
-
 }
 
 
@@ -2857,9 +2084,7 @@ function smarty_insert_scripts($args)
  */
 
 function smarty_create_pages($params)
-
 {
-
     extract($params);
 
 
@@ -2870,30 +2095,20 @@ function smarty_create_pages($params)
 
 
 
-    if (empty($page))
-
-    {
-
+    if (empty($page)) {
         $page = 1;
-
     }
 
 
 
-    if (!empty($count))
-
-    {
-
+    if (!empty($count)) {
         $step = 1;
 
         $str .= "<option value='1'>1</option>";
 
 
 
-        for ($i = 2; $i < $count; $i += $step)
-
-        {
-
+        for ($i = 2; $i < $count; $i += $step) {
             $step = ($i >= $page + $len - 1 || $i <= $page - $len + 1) ? $len : 1;
 
             $str .= "<option value='$i'";
@@ -2901,29 +2116,22 @@ function smarty_create_pages($params)
             $str .= $page == $i ? " selected='true'" : '';
 
             $str .= ">$i</option>";
-
         }
 
 
 
-        if ($count > 1)
-
-        {
-
+        if ($count > 1) {
             $str .= "<option value='$count'";
 
             $str .= $page == $count ? " selected='true'" : '';
 
             $str .= ">$count</option>";
-
         }
-
     }
 
 
 
     return $str;
-
 }
 
 
@@ -2951,19 +2159,13 @@ function smarty_create_pages($params)
  */
 
 function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size = 0)
-
 {
-
-    static $rewrite = NULL;
-
+    static $rewrite = null;
 
 
-    if ($rewrite === NULL)
 
-    {
-
+    if ($rewrite === null) {
         $rewrite = intval($GLOBALS['_CFG']['rewrite']);
-
     }
 
 
@@ -2998,154 +2200,76 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
     $uri = '';
 
-    switch ($app)
-
-    {
+    switch ($app) {
 
         case 'category':
 
-            if (empty($cid))
-
-            {
-
+            if (empty($cid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
-                if ($rewrite)
-
-                {
-
+            } else {
+                if ($rewrite) {
                     $uri = 'category-' . $cid;
 
-                    if (isset($bid))
-
-                    {
-
+                    if (isset($bid)) {
                         $uri .= '-b' . $bid;
-
                     }
 
-                    if (isset($price_min))
-
-                    {
-
+                    if (isset($price_min)) {
                         $uri .= '-min'.$price_min;
-
                     }
 
-                    if (isset($price_max))
-
-                    {
-
+                    if (isset($price_max)) {
                         $uri .= '-max'.$price_max;
-
                     }
 
-                    if (isset($filter_attr))
-
-                    {
-
+                    if (isset($filter_attr)) {
                         $uri .= '-attr' . $filter_attr;
-
                     }
 
-                    if (!empty($page))
-
-                    {
-
+                    if (!empty($page)) {
                         $uri .= '-' . $page;
-
                     }
 
-                    if (!empty($sort))
-
-                    {
-
+                    if (!empty($sort)) {
                         $uri .= '-' . $sort;
-
                     }
 
-                    if (!empty($order))
-
-                    {
-
+                    if (!empty($order)) {
                         $uri .= '-' . $order;
-
                     }
-
-                }
-
-                else
-
-                {
-
+                } else {
                     $uri = 'category.php?id=' . $cid;
 
-                    if (!empty($bid))
-
-                    {
-
+                    if (!empty($bid)) {
                         $uri .= '&amp;brand=' . $bid;
-
                     }
 
-                    if (isset($price_min))
-
-                    {
-
+                    if (isset($price_min)) {
                         $uri .= '&amp;price_min=' . $price_min;
-
                     }
 
-                    if (isset($price_max))
-
-                    {
-
+                    if (isset($price_max)) {
                         $uri .= '&amp;price_max=' . $price_max;
-
                     }
 
-                    if (!empty($filter_attr))
-
-                    {
-
+                    if (!empty($filter_attr)) {
                         $uri .='&amp;filter_attr=' . $filter_attr;
-
                     }
 
 
 
-                    if (!empty($page))
-
-                    {
-
+                    if (!empty($page)) {
                         $uri .= '&amp;page=' . $page;
-
                     }
 
-                    if (!empty($sort))
-
-                    {
-
+                    if (!empty($sort)) {
                         $uri .= '&amp;sort=' . $sort;
-
                     }
 
-                    if (!empty($order))
-
-                    {
-
+                    if (!empty($order)) {
                         $uri .= '&amp;order=' . $order;
-
                     }
-
                 }
-
             }
 
 
@@ -3154,54 +2278,33 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'goods':
 
-            if (empty($gid))
-
-            {
-
+            if (empty($gid)) {
                 return false;
+            } else {
 
-            }
+        /*O菜龙工作室-www.ocailong.com修改*/
 
-            else
+                $userid=$_SESSION['user_id'];
 
-            {
+                $affiliate = unserialize($GLOBALS['_CFG']['affiliate']);
 
-		/*O菜龙工作室-www.ocailong.com修改*/
+                $level_register_up = (float)$affiliate['config']['level_register_up'];
 
-		$userid=$_SESSION['user_id'];
+                $rank_points =  $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users')."where user_id=".$userid);
 
-		$affiliate = unserialize($GLOBALS['_CFG']['affiliate']);
 
-		$level_register_up = (float)$affiliate['config']['level_register_up'];
 
-		$rank_points =  $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users')."where user_id=".$userid);
+                if ($rank_points>$level_register_up||$rank_points==$level_register_up) {
+                    if (!empty($userid)) {
+                        $uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid."&u=".$userid;
+                    } else {
+                        $uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid;
+                    }
+                } else {
+                    $uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid;
+                }
 
-		
-
-		if($rank_points>$level_register_up||$rank_points==$level_register_up){
-
-			if(!empty($userid)){
-
-			$uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid."&u=".$userid;
-
-				}else{
-
-					
-
-					$uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid;
-
-				}
-
-			}else{
-
-				
-
-				$uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid;
-
-			}			
-
-			/*O菜龙工作室-www.ocailong.com修改*/
-
+                /*O菜龙工作室-www.ocailong.com修改*/
             }
 
 
@@ -3210,98 +2313,46 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'brand':
 
-            if (empty($bid))
-
-            {
-
+            if (empty($bid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
-                if ($rewrite)
-
-                {
-
+            } else {
+                if ($rewrite) {
                     $uri = 'brand-' . $bid;
 
-                    if (isset($cid))
-
-                    {
-
+                    if (isset($cid)) {
                         $uri .= '-c' . $cid;
-
                     }
 
-                    if (!empty($page))
-
-                    {
-
+                    if (!empty($page)) {
                         $uri .= '-' . $page;
-
                     }
 
-                    if (!empty($sort))
-
-                    {
-
+                    if (!empty($sort)) {
                         $uri .= '-' . $sort;
-
                     }
 
-                    if (!empty($order))
-
-                    {
-
+                    if (!empty($order)) {
                         $uri .= '-' . $order;
-
                     }
-
-                }
-
-                else
-
-                {
-
+                } else {
                     $uri = 'brand.php?id=' . $bid;
 
-                    if (!empty($cid))
-
-                    {
-
+                    if (!empty($cid)) {
                         $uri .= '&amp;cat=' . $cid;
-
                     }
 
-                    if (!empty($page))
-
-                    {
-
+                    if (!empty($page)) {
                         $uri .= '&amp;page=' . $page;
-
                     }
 
-                    if (!empty($sort))
-
-                    {
-
+                    if (!empty($sort)) {
                         $uri .= '&amp;sort=' . $sort;
-
                     }
 
-                    if (!empty($order))
-
-                    {
-
+                    if (!empty($order)) {
                         $uri .= '&amp;order=' . $order;
-
                     }
-
                 }
-
             }
 
 
@@ -3310,98 +2361,46 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'article_cat':
 
-            if (empty($acid))
-
-            {
-
+            if (empty($acid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
-                if ($rewrite)
-
-                {
-
+            } else {
+                if ($rewrite) {
                     $uri = 'article_cat-' . $acid;
 
-                    if (!empty($page))
-
-                    {
-
+                    if (!empty($page)) {
                         $uri .= '-' . $page;
-
                     }
 
-                    if (!empty($sort))
-
-                    {
-
+                    if (!empty($sort)) {
                         $uri .= '-' . $sort;
-
                     }
 
-                    if (!empty($order))
-
-                    {
-
+                    if (!empty($order)) {
                         $uri .= '-' . $order;
-
                     }
 
-                    if (!empty($keywords))
-
-                    {
-
+                    if (!empty($keywords)) {
                         $uri .= '-' . $keywords;
-
                     }
-
-                }
-
-                else
-
-                {
-
+                } else {
                     $uri = 'article_cat.php?id=' . $acid;
 
-                    if (!empty($page))
-
-                    {
-
+                    if (!empty($page)) {
                         $uri .= '&amp;page=' . $page;
-
                     }
 
-                    if (!empty($sort))
-
-                    {
-
+                    if (!empty($sort)) {
                         $uri .= '&amp;sort=' . $sort;
-
                     }
 
-                    if (!empty($order))
-
-                    {
-
+                    if (!empty($order)) {
                         $uri .= '&amp;order=' . $order;
-
                     }
 
-                    if (!empty($keywords))
-
-                    {
-
+                    if (!empty($keywords)) {
                         $uri .= '&amp;keywords=' . $keywords;
-
                     }
-
                 }
-
             }
 
 
@@ -3410,20 +2409,10 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'article':
 
-            if (empty($aid))
-
-            {
-
+            if (empty($aid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $uri = $rewrite ? 'article-' . $aid : 'article.php?id=' . $aid;
-
             }
 
 
@@ -3432,20 +2421,10 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'group_buy':
 
-            if (empty($gbid))
-
-            {
-
+            if (empty($gbid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $uri = $rewrite ? 'group_buy-' . $gbid : 'group_buy.php?act=view&amp;id=' . $gbid;
-
             }
 
 
@@ -3454,20 +2433,10 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'auction':
 
-            if (empty($auid))
-
-            {
-
+            if (empty($auid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $uri = $rewrite ? 'auction-' . $auid : 'auction.php?act=view&amp;id=' . $auid;
-
             }
 
 
@@ -3476,20 +2445,10 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'snatch':
 
-            if (empty($sid))
-
-            {
-
+            if (empty($sid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $uri = $rewrite ? 'snatch-' . $sid : 'snatch.php?id=' . $sid;
-
             }
 
 
@@ -3502,102 +2461,52 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'exchange':
 
-            if ($rewrite)
-
-            {
-
+            if ($rewrite) {
                 $uri = 'exchange-' . $cid;
 
-                if (isset($price_min))
-
-                {
-
+                if (isset($price_min)) {
                     $uri .= '-min'.$price_min;
-
                 }
 
-                if (isset($price_max))
-
-                {
-
+                if (isset($price_max)) {
                     $uri .= '-max'.$price_max;
-
                 }
 
-                if (!empty($page))
-
-                {
-
+                if (!empty($page)) {
                     $uri .= '-' . $page;
-
                 }
 
-                if (!empty($sort))
-
-                {
-
+                if (!empty($sort)) {
                     $uri .= '-' . $sort;
-
                 }
 
-                if (!empty($order))
-
-                {
-
+                if (!empty($order)) {
                     $uri .= '-' . $order;
-
                 }
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $uri = 'exchange.php?cat_id=' . $cid;
 
-                if (isset($price_min))
-
-                {
-
+                if (isset($price_min)) {
                     $uri .= '&amp;integral_min=' . $price_min;
-
                 }
 
-                if (isset($price_max))
-
-                {
-
+                if (isset($price_max)) {
                     $uri .= '&amp;integral_max=' . $price_max;
-
                 }
 
 
 
-                if (!empty($page))
-
-                {
-
+                if (!empty($page)) {
                     $uri .= '&amp;page=' . $page;
-
                 }
 
-                if (!empty($sort))
-
-                {
-
+                if (!empty($sort)) {
                     $uri .= '&amp;sort=' . $sort;
-
                 }
 
-                if (!empty($order))
-
-                {
-
+                if (!empty($order)) {
                     $uri .= '&amp;order=' . $order;
-
                 }
-
             }
 
 
@@ -3606,20 +2515,10 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
         case 'exchange_goods':
 
-            if (empty($gid))
-
-            {
-
+            if (empty($gid)) {
                 return false;
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $uri = $rewrite ? 'exchange-id' . $gid : 'exchange.php?id=' . $gid . '&amp;act=view';
-
             }
 
 
@@ -3636,34 +2535,21 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
 
 
-    if ($rewrite)
-
-    {
-
-        if ($rewrite == 2 && !empty($append))
-
-        {
-
+    if ($rewrite) {
+        if ($rewrite == 2 && !empty($append)) {
             $uri .= '-' . urlencode(preg_replace('/[\.|\/|\?|&|\+|\\\|\'|"|,]+/', '', $append));
-
         }
 
 
 
         $uri .= '.html';
-
     }
 
-    if (($rewrite == 2) && (strpos(strtolower(EC_CHARSET), 'utf') !== 0))
-
-    {
-
+    if (($rewrite == 2) && (strpos(strtolower(EC_CHARSET), 'utf') !== 0)) {
         $uri = urlencode($uri);
-
     }
 
     return $uri;
-
 }
 
 
@@ -3679,45 +2565,24 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
  */
 
 function formated_weight($weight)
-
 {
-
     $weight = round(floatval($weight), 3);
 
-    if ($weight > 0)
-
-    {
-
-        if ($weight < 1)
-
-        {
+    if ($weight > 0) {
+        if ($weight < 1) {
 
             /* 小于1千克，用克表示 */
 
             return intval($weight * 1000) . $GLOBALS['_LANG']['gram'];
-
-        }
-
-        else
-
-        {
+        } else {
 
             /* 大于1千克，用千克表示 */
 
             return $weight . $GLOBALS['_LANG']['kilogram'];
-
         }
-
-    }
-
-    else
-
-    {
-
+    } else {
         return 0;
-
     }
-
 }
 
 
@@ -3744,8 +2609,7 @@ function formated_weight($weight)
 
  */
 
-function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER)
-
+function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER, $jiubi = 0)
 {
 
     /* 插入帐户变动记录 */
@@ -3759,6 +2623,8 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
         'frozen_money'  => $frozen_money,
 
         'rank_points'   => $rank_points,
+
+        'jiubi'         => $jiubi,
 
         'pay_points'    => $pay_points,
 
@@ -3784,12 +2650,13 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
 
             " rank_points = rank_points + ('$rank_points')," .
 
+            " jiubi = jiubi + ('$jiubi')," .
+
             " pay_points = pay_points + ('$pay_points')" .
 
             " WHERE user_id = '$user_id' LIMIT 1";
 
     $GLOBALS['db']->query($sql);
-
 }
 
 
@@ -3817,23 +2684,15 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
  */
 
 function article_cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 0)
-
 {
-
-    static $res = NULL;
-
+    static $res = null;
 
 
-    if ($res === NULL)
 
-    {
-
+    if ($res === null) {
         $data = read_static_cache('art_cat_pid_releate');
 
-        if ($data === false)
-
-        {
-
+        if ($data === false) {
             $sql = "SELECT c.*, COUNT(s.cat_id) AS has_children, COUNT(a.article_id) AS aricle_num ".
 
                ' FROM ' . $GLOBALS['ecs']->table('article_cat') . " AS c".
@@ -3849,27 +2708,15 @@ function article_cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 
             $res = $GLOBALS['db']->getAll($sql);
 
             write_static_cache('art_cat_pid_releate', $res);
-
-        }
-
-        else
-
-        {
-
+        } else {
             $res = $data;
-
         }
-
     }
 
 
 
-    if (empty($res) == true)
-
-    {
-
+    if (empty($res) == true) {
         return $re_type ? '' : array();
-
     }
 
 
@@ -3880,88 +2727,48 @@ function article_cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 
 
     /* 截取到指定的缩减级别 */
 
-    if ($level > 0)
-
-    {
-
-        if ($cat_id == 0)
-
-        {
-
+    if ($level > 0) {
+        if ($cat_id == 0) {
             $end_level = $level;
-
-        }
-
-        else
-
-        {
-
+        } else {
             $first_item = reset($options); // 获取第一个元素
 
             $end_level  = $first_item['level'] + $level;
-
         }
 
 
 
         /* 保留level小于end_level的部分 */
 
-        foreach ($options AS $key => $val)
-
-        {
-
-            if ($val['level'] >= $end_level)
-
-            {
-
+        foreach ($options as $key => $val) {
+            if ($val['level'] >= $end_level) {
                 unset($options[$key]);
-
             }
-
         }
-
     }
 
 
 
     $pre_key = 0;
 
-    foreach ($options AS $key => $value)
-
-    {
-
+    foreach ($options as $key => $value) {
         $options[$key]['has_children'] = 1;
 
-        if ($pre_key > 0)
-
-        {
-
-            if ($options[$pre_key]['cat_id'] == $options[$key]['parent_id'])
-
-            {
-
+        if ($pre_key > 0) {
+            if ($options[$pre_key]['cat_id'] == $options[$key]['parent_id']) {
                 $options[$pre_key]['has_children'] = 1;
-
             }
-
         }
 
         $pre_key = $key;
-
     }
 
 
 
-    if ($re_type == true)
-
-    {
-
+    if ($re_type == true) {
         $select = '';
 
-        foreach ($options AS $var)
-
-        {
-
+        foreach ($options as $var) {
             $select .= '<option value="' . $var['cat_id'] . '" ';
 
             $select .= ' cat_type="' . $var['cat_type'] . '" ';
@@ -3970,40 +2777,23 @@ function article_cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 
 
             $select .= '>';
 
-            if ($var['level'] > 0)
-
-            {
-
+            if ($var['level'] > 0) {
                 $select .= str_repeat('&nbsp;', $var['level'] * 4);
-
             }
 
             $select .= htmlspecialchars(addslashes($var['cat_name'])) . '</option>';
-
         }
 
 
 
         return $select;
-
-    }
-
-    else
-
-    {
-
-        foreach ($options AS $key => $value)
-
-        {
-
+    } else {
+        foreach ($options as $key => $value) {
             $options[$key]['url'] = build_uri('article_cat', array('acid' => $value['cat_id']), $value['cat_name']);
-
         }
 
         return $options;
-
     }
-
 }
 
 
@@ -4027,51 +2817,29 @@ function article_cat_list($cat_id = 0, $selected = 0, $re_type = true, $level = 
  */
 
 function article_cat_options($spec_cat_id, $arr)
-
 {
-
     static $cat_options = array();
 
 
 
-    if (isset($cat_options[$spec_cat_id]))
-
-    {
-
+    if (isset($cat_options[$spec_cat_id])) {
         return $cat_options[$spec_cat_id];
-
     }
 
 
 
-    if (!isset($cat_options[0]))
-
-    {
-
+    if (!isset($cat_options[0])) {
         $level = $last_cat_id = 0;
 
         $options = $cat_id_array = $level_array = array();
 
-        while (!empty($arr))
-
-        {
-
-            foreach ($arr AS $key => $value)
-
-            {
-
+        while (!empty($arr)) {
+            foreach ($arr as $key => $value) {
                 $cat_id = $value['cat_id'];
 
-                if ($level == 0 && $last_cat_id == 0)
-
-                {
-
-                    if ($value['parent_id'] > 0)
-
-                    {
-
+                if ($level == 0 && $last_cat_id == 0) {
+                    if ($value['parent_id'] > 0) {
                         break;
-
                     }
 
 
@@ -4088,12 +2856,8 @@ function article_cat_options($spec_cat_id, $arr)
 
 
 
-                    if ($value['has_children'] == 0)
-
-                    {
-
+                    if ($value['has_children'] == 0) {
                         continue;
-
                     }
 
                     $last_cat_id  = $cat_id;
@@ -4103,15 +2867,11 @@ function article_cat_options($spec_cat_id, $arr)
                     $level_array[$last_cat_id] = ++$level;
 
                     continue;
-
                 }
 
 
 
-                if ($value['parent_id'] == $last_cat_id)
-
-                {
-
+                if ($value['parent_id'] == $last_cat_id) {
                     $options[$cat_id]          = $value;
 
                     $options[$cat_id]['level'] = $level;
@@ -4124,16 +2884,9 @@ function article_cat_options($spec_cat_id, $arr)
 
 
 
-                    if ($value['has_children'] > 0)
-
-                    {
-
-                        if (end($cat_id_array) != $last_cat_id)
-
-                        {
-
+                    if ($value['has_children'] > 0) {
+                        if (end($cat_id_array) != $last_cat_id) {
                             $cat_id_array[] = $last_cat_id;
-
                         }
 
                         $last_cat_id    = $cat_id;
@@ -4141,49 +2894,22 @@ function article_cat_options($spec_cat_id, $arr)
                         $cat_id_array[] = $cat_id;
 
                         $level_array[$last_cat_id] = ++$level;
-
                     }
-
-                }
-
-                elseif ($value['parent_id'] > $last_cat_id)
-
-                {
-
+                } elseif ($value['parent_id'] > $last_cat_id) {
                     break;
-
                 }
-
             }
 
 
 
             $count = count($cat_id_array);
 
-            if ($count > 1)
-
-            {
-
+            if ($count > 1) {
                 $last_cat_id = array_pop($cat_id_array);
-
-            }
-
-            elseif ($count == 1)
-
-            {
-
-                if ($last_cat_id != end($cat_id_array))
-
-                {
-
+            } elseif ($count == 1) {
+                if ($last_cat_id != end($cat_id_array)) {
                     $last_cat_id = end($cat_id_array);
-
-                }
-
-                else
-
-                {
-
+                } else {
                     $level = 0;
 
                     $last_cat_id = 0;
@@ -4191,63 +2917,30 @@ function article_cat_options($spec_cat_id, $arr)
                     $cat_id_array = array();
 
                     continue;
-
                 }
-
             }
 
 
 
-            if ($last_cat_id && isset($level_array[$last_cat_id]))
-
-            {
-
+            if ($last_cat_id && isset($level_array[$last_cat_id])) {
                 $level = $level_array[$last_cat_id];
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $level = 0;
-
             }
-
         }
 
         $cat_options[0] = $options;
-
-    }
-
-    else
-
-    {
-
+    } else {
         $options = $cat_options[0];
-
     }
 
 
 
-    if (!$spec_cat_id)
-
-    {
-
+    if (!$spec_cat_id) {
         return $options;
-
-    }
-
-    else
-
-    {
-
-        if (empty($options[$spec_cat_id]))
-
-        {
-
+    } else {
+        if (empty($options[$spec_cat_id])) {
             return array();
-
         }
 
 
@@ -4256,54 +2949,26 @@ function article_cat_options($spec_cat_id, $arr)
 
 
 
-        foreach ($options AS $key => $value)
-
-        {
-
-            if ($key != $spec_cat_id)
-
-            {
-
+        foreach ($options as $key => $value) {
+            if ($key != $spec_cat_id) {
                 unset($options[$key]);
-
-            }
-
-            else
-
-            {
-
+            } else {
                 break;
-
             }
-
         }
 
 
 
         $spec_cat_id_array = array();
 
-        foreach ($options AS $key => $value)
-
-        {
-
+        foreach ($options as $key => $value) {
             if (($spec_cat_id_level == $value['level'] && $value['cat_id'] != $spec_cat_id) ||
 
-                ($spec_cat_id_level > $value['level']))
-
-            {
-
+                ($spec_cat_id_level > $value['level'])) {
                 break;
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $spec_cat_id_array[$key] = $value;
-
             }
-
         }
 
         $cat_options[$spec_cat_id] = $spec_cat_id_array;
@@ -4311,9 +2976,7 @@ function article_cat_options($spec_cat_id, $arr)
 
 
         return $spec_cat_id_array;
-
     }
-
 }
 
 
@@ -4335,17 +2998,11 @@ function article_cat_options($spec_cat_id, $arr)
  */
 
 function uc_call($func, $params=null)
-
 {
-
     restore_error_handler();
 
-    if (!function_exists($func))
-
-    {
-
+    if (!function_exists($func)) {
         include_once(ROOT_PATH . 'uc_client/client.php');
-
     }
 
 
@@ -4359,7 +3016,6 @@ function uc_call($func, $params=null)
 
 
     return $res;
-
 }
 
 
@@ -4375,11 +3031,8 @@ function uc_call($func, $params=null)
  */
 
 function exception_handler($errno, $errstr, $errfile, $errline)
-
 {
-
     return;
-
 }
 
 
@@ -4407,13 +3060,10 @@ function exception_handler($errno, $errstr, $errfile, $errline)
  */
 
 function get_image_path($goods_id, $image='', $thumb=false, $call='goods', $del=false)
-
 {
-
     $url = empty($image) ? $GLOBALS['_CFG']['no_picture'] : $image;
 
     return $url;
-
 }
 
 
@@ -4435,21 +3085,12 @@ function get_image_path($goods_id, $image='', $thumb=false, $call='goods', $del=
  */
 
 function user_uc_call($func, $params = null)
-
 {
-
-    if (isset($GLOBALS['_CFG']['integrate_code']) && $GLOBALS['_CFG']['integrate_code'] == 'ucenter')
-
-    {
-
+    if (isset($GLOBALS['_CFG']['integrate_code']) && $GLOBALS['_CFG']['integrate_code'] == 'ucenter') {
         restore_error_handler();
 
-        if (!function_exists($func))
-
-        {
-
+        if (!function_exists($func)) {
             include_once(ROOT_PATH . 'include/lib_uc.php');
-
         }
 
 
@@ -4463,19 +3104,9 @@ function user_uc_call($func, $params = null)
 
 
         return $res;
-
-    }
-
-    else
-
-    {
-
+    } else {
         return;
-
     }
-
-
-
 }
 
 
@@ -4497,9 +3128,7 @@ function user_uc_call($func, $params = null)
  */
 
 function get_volume_price_list($goods_id, $price_type = '1')
-
 {
-
     $volume_price = array();
 
     $temp_index   = '0';
@@ -4520,10 +3149,7 @@ function get_volume_price_list($goods_id, $price_type = '1')
 
 
 
-    foreach ($res as $k => $v)
-
-    {
-
+    foreach ($res as $k => $v) {
         $volume_price[$temp_index]                 = array();
 
         $volume_price[$temp_index]['number']       = $v['volume_number'];
@@ -4533,11 +3159,9 @@ function get_volume_price_list($goods_id, $price_type = '1')
         $volume_price[$temp_index]['format_price'] = price_format($v['volume_price']);
 
         $temp_index ++;
-
     }
 
     return $volume_price;
-
 }
 
 
@@ -4563,9 +3187,7 @@ function get_volume_price_list($goods_id, $price_type = '1')
  */
 
 function get_final_price($goods_id, $goods_num = '1', $is_spec_price = false, $spec = array())
-
 {
-
     $final_price   = '0'; //商品最终购买价格
 
     $volume_price  = '0'; //商品优惠价格
@@ -4578,24 +3200,12 @@ function get_final_price($goods_id, $goods_num = '1', $is_spec_price = false, $s
 
     $price_list   = get_volume_price_list($goods_id, '1');
 
-    if (!empty($price_list))
-
-    {
-
-        foreach ($price_list as $value)
-
-        {
-
-            if ($goods_num >= $value['number'])
-
-            {
-
+    if (!empty($price_list)) {
+        foreach ($price_list as $value) {
+            if ($goods_num >= $value['number']) {
                 $volume_price = $value['price'];
-
             }
-
         }
-
     }
 
     //取得商品促销价格列表
@@ -4620,20 +3230,10 @@ function get_final_price($goods_id, $goods_num = '1', $is_spec_price = false, $s
 
     /* 计算商品的促销价格 */
 
-    if ($goods['promote_price'] > 0)
-
-    {
-
+    if ($goods['promote_price'] > 0) {
         $promote_price = bargain_price($goods['promote_price'], $goods['promote_start_date'], $goods['promote_end_date']);
-
-    }
-
-    else
-
-    {
-
+    } else {
         $promote_price = 0;
-
     }
 
     //取得商品会员价格列表
@@ -4642,78 +3242,46 @@ function get_final_price($goods_id, $goods_num = '1', $is_spec_price = false, $s
 
     //比较商品的促销价格，会员价格，优惠价格
 
-    if (empty($volume_price) && empty($promote_price))
-
-    {
+    if (empty($volume_price) && empty($promote_price)) {
 
         //如果优惠价格，促销价格都为空则取会员价格
 
         $final_price = $user_price;
-
-    }
-
-    elseif (!empty($volume_price) && empty($promote_price))
-
-    {
+    } elseif (!empty($volume_price) && empty($promote_price)) {
 
         //如果优惠价格为空时不参加这个比较。
 
         $final_price = min($volume_price, $user_price);
-
-    }
-
-    elseif (empty($volume_price) && !empty($promote_price))
-
-    {
+    } elseif (empty($volume_price) && !empty($promote_price)) {
 
         //如果促销价格为空时不参加这个比较。
 
         $final_price = min($promote_price, $user_price);
-
-    }
-
-    elseif (!empty($volume_price) && !empty($promote_price))
-
-    {
+    } elseif (!empty($volume_price) && !empty($promote_price)) {
 
         //取促销价格，会员价格，优惠价格最小值
 
         $final_price = min($volume_price, $promote_price, $user_price);
-
-    }
-
-    else
-
-    {
-
+    } else {
         $final_price = $user_price;
-
     }
 
 
 
     //如果需要加入规格价格
 
-    if ($is_spec_price)
-
-    {
-
-        if (!empty($spec))
-
-        {
-
+    if ($is_spec_price) {
+        if (!empty($spec)) {
             $spec_price   = spec_price($spec);
 
             $final_price += $spec_price;
 
 
 
-			//O菜龙工作室-www.ocailong.com修改调用属性价格
+            //O菜龙工作室-www.ocailong.com修改调用属性价格
 
-			//$final_price=get_pro_price($spec,$final_price);
-
-		}
-
+            //$final_price=get_pro_price($spec,$final_price);
+        }
     }
 
 
@@ -4721,7 +3289,6 @@ function get_final_price($goods_id, $goods_num = '1', $is_spec_price = false, $s
     //返回商品最终购买价格
 
     return $final_price;
-
 }
 
 /**O菜龙工作室-www.ocailong.com修改调用属性价格方法
@@ -4732,32 +3299,23 @@ function get_final_price($goods_id, $goods_num = '1', $is_spec_price = false, $s
 
 */
 
-function get_pro_price($spec,$org_price=0)
-
+function get_pro_price($spec, $org_price=0)
 {
+    $is_s=sort($spec);
+
+    if ($is_s) {
+        $goods_attr = implode("|", $spec);
+    }
 
 
 
-		$is_s=sort($spec);
+    $final_price = $GLOBALS['db']->getOne("SELECT pro_price FROM " .$GLOBALS['ecs']->table('products'). " WHERE goods_attr='".$goods_attr."'");
 
-		if ($is_s)
-
-			$goods_attr = implode("|", $spec);
-
-		
-
-		$final_price = $GLOBALS['db']->getOne("SELECT pro_price FROM " .$GLOBALS['ecs']->table('products'). " WHERE goods_attr='".$goods_attr."'");
-
-		if($final_price > 0)
-
-			return $final_price;
-
-		else
-
-			return $org_price;
-
-
-
+    if ($final_price > 0) {
+        return $final_price;
+    } else {
+        return $org_price;
+    }
 }
 
 
@@ -4785,15 +3343,9 @@ function get_pro_price($spec,$org_price=0)
  */
 
 function sort_goods_attr_id_array($goods_attr_id_array, $sort = 'asc')
-
 {
-
-    if (empty($goods_attr_id_array))
-
-    {
-
+    if (empty($goods_attr_id_array)) {
         return $goods_attr_id_array;
-
     }
 
 
@@ -4820,22 +3372,17 @@ function sort_goods_attr_id_array($goods_attr_id_array, $sort = 'asc')
 
     $return_arr = array();
 
-    foreach ($row as $value)
-
-    {
-
+    foreach ($row as $value) {
         $return_arr['sort'][]   = $value['goods_attr_id'];
 
 
 
         $return_arr['row'][$value['goods_attr_id']]    = $value;
-
     }
 
 
 
     return $return_arr;
-
 }
 
 
@@ -4859,15 +3406,9 @@ function sort_goods_attr_id_array($goods_attr_id_array, $sort = 'asc')
  */
 
 function is_spec($goods_attr_id_array, $sort = 'asc')
-
 {
-
-    if (empty($goods_attr_id_array))
-
-    {
-
+    if (empty($goods_attr_id_array)) {
         return $goods_attr_id_array;
-
     }
 
 
@@ -4894,36 +3435,21 @@ function is_spec($goods_attr_id_array, $sort = 'asc')
 
     $return_arr = array();
 
-    foreach ($row as $value)
-
-    {
-
+    foreach ($row as $value) {
         $return_arr['sort'][]   = $value['goods_attr_id'];
 
 
 
         $return_arr['row'][$value['goods_attr_id']]    = $value;
-
     }
 
 
 
-    if(!empty($return_arr))
-
-    {
-
+    if (!empty($return_arr)) {
         return true;
-
-    }
-
-    else
-
-    {
-
+    } else {
         return false;
-
     }
-
 }
 
 
@@ -4945,9 +3471,7 @@ function is_spec($goods_attr_id_array, $sort = 'asc')
  */
 
 function get_package_info($id)
-
 {
-
     global $ecs, $db,$_CFG;
 
     $id = is_numeric($id)?intval($id):0;
@@ -4970,20 +3494,10 @@ function get_package_info($id)
 
     /* 将时间转成可阅读格式 */
 
-    if ($package['start_time'] <= $now && $package['end_time'] >= $now)
-
-    {
-
+    if ($package['start_time'] <= $now && $package['end_time'] >= $now) {
         $package['is_on_sale'] = "1";
-
-    }
-
-    else
-
-    {
-
+    } else {
         $package['is_on_sale'] = "0";
-
     }
 
     $package['start_time'] = local_date('Y-m-d H:i', $package['start_time']);
@@ -4994,18 +3508,10 @@ function get_package_info($id)
 
     unset($package['ext_info']);
 
-    if ($row)
-
-    {
-
-        foreach ($row as $key=>$val)
-
-        {
-
+    if ($row) {
+        foreach ($row as $key=>$val) {
             $package[$key] = $val;
-
         }
-
     }
 
 
@@ -5044,10 +3550,7 @@ function get_package_info($id)
 
 
 
-    foreach($goods_res as $key => $val)
-
-    {
-
+    foreach ($goods_res as $key => $val) {
         $goods_res[$key]['goods_thumb']         = get_image_path($val['goods_id'], $val['goods_thumb'], true);
 
         $goods_res[$key]['market_price_format'] = price_format($val['market_price']);
@@ -5058,40 +3561,19 @@ function get_package_info($id)
 
         /* 统计实体商品和虚拟商品的个数 */
 
-        if ($val['is_real'])
-
-        {
-
+        if ($val['is_real']) {
             $real_goods_count++;
-
-        }
-
-        else
-
-        {
-
+        } else {
             $virtual_goods_count++;
-
         }
-
     }
 
 
 
-    if ($real_goods_count > 0)
-
-    {
-
+    if ($real_goods_count > 0) {
         $package['is_real']            = 1;
-
-    }
-
-    else
-
-    {
-
+    } else {
         $package['is_real']            = 0;
-
     }
 
 
@@ -5107,7 +3589,6 @@ function get_package_info($id)
 
 
     return $package;
-
 }
 
 
@@ -5127,9 +3608,7 @@ function get_package_info($id)
  */
 
 function get_package_goods($package_id)
-
 {
-
     $sql = "SELECT pg.goods_id, g.goods_name, pg.goods_number, p.goods_attr, p.product_number, p.product_id
 
             FROM " . $GLOBALS['ecs']->table('package_goods') . " AS pg
@@ -5140,22 +3619,14 @@ function get_package_goods($package_id)
 
             WHERE pg.package_id = '$package_id'";
 
-    if ($package_id == 0)
-
-    {
-
+    if ($package_id == 0) {
         $sql .= " AND pg.admin_id = '$_SESSION[admin_id]'";
-
     }
 
     $resource = $GLOBALS['db']->query($sql);
 
-    if (!$resource)
-
-    {
-
+    if (!$resource) {
         return array();
-
     }
 
 
@@ -5168,13 +3639,8 @@ function get_package_goods($package_id)
 
     $good_product_str = '';
 
-    while ($_row = $GLOBALS['db']->fetch_array($resource))
-
-    {
-
-        if ($_row['product_id'] > 0)
-
-        {
+    while ($_row = $GLOBALS['db']->fetch_array($resource)) {
+        if ($_row['product_id'] > 0) {
 
             /* 取存商品id */
 
@@ -5185,17 +3651,11 @@ function get_package_goods($package_id)
             /* 组合商品id与货品id */
 
             $_row['g_p'] = $_row['goods_id'] . '_' . $_row['product_id'];
-
-        }
-
-        else
-
-        {
+        } else {
 
             /* 组合商品id与货品id */
 
             $_row['g_p'] = $_row['goods_id'];
-
         }
 
 
@@ -5203,7 +3663,6 @@ function get_package_goods($package_id)
         //生成结果数组
 
         $row[] = $_row;
-
     }
 
     $good_product_str = trim($good_product_str, ',');
@@ -5218,10 +3677,7 @@ function get_package_goods($package_id)
 
     /* 取商品属性 */
 
-    if ($good_product_str != '')
-
-    {
-
+    if ($good_product_str != '') {
         $sql = "SELECT goods_attr_id, attr_value FROM " .$GLOBALS['ecs']->table('goods_attr'). " WHERE goods_id IN ($good_product_str)";
 
         $result_goods_attr = $GLOBALS['db']->getAll($sql);
@@ -5230,14 +3686,9 @@ function get_package_goods($package_id)
 
         $_goods_attr = array();
 
-        foreach ($result_goods_attr as $value)
-
-        {
-
+        foreach ($result_goods_attr as $value) {
             $_goods_attr[$value['goods_attr_id']] = $value['attr_value'];
-
         }
-
     }
 
 
@@ -5248,48 +3699,29 @@ function get_package_goods($package_id)
 
     $format[1] = '%s--[%d]';
 
-    foreach ($row as $key => $value)
-
-    {
-
-        if ($value['goods_attr'] != '')
-
-        {
-
+    foreach ($row as $key => $value) {
+        if ($value['goods_attr'] != '') {
             $goods_attr_array = explode('|', $value['goods_attr']);
 
 
 
             $goods_attr = array();
 
-            foreach ($goods_attr_array as $_attr)
-
-            {
-
+            foreach ($goods_attr_array as $_attr) {
                 $goods_attr[] = $_goods_attr[$_attr];
-
             }
 
 
 
             $row[$key]['goods_name'] = sprintf($format[0], $value['goods_name'], implode('，', $goods_attr), $value['goods_number']);
-
-        }
-
-        else
-
-        {
-
+        } else {
             $row[$key]['goods_name'] = sprintf($format[1], $value['goods_name'], $value['goods_number']);
-
         }
-
     }
 
 
 
     return $row;
-
 }
 
 
@@ -5311,22 +3743,14 @@ function get_package_goods($package_id)
  */
 
 function get_good_products($goods_id, $conditions = '')
-
 {
-
-    if (empty($goods_id))
-
-    {
-
+    if (empty($goods_id)) {
         return array();
-
     }
 
 
 
-    switch (gettype($goods_id))
-
-    {
+    switch (gettype($goods_id)) {
 
         case 'integer':
 
@@ -5374,54 +3798,37 @@ function get_good_products($goods_id, $conditions = '')
 
     $_goods_attr = array();
 
-    foreach ($result_goods_attr as $value)
-
-    {
-
+    foreach ($result_goods_attr as $value) {
         $_goods_attr[$value['goods_attr_id']] = $value['attr_value'];
-
     }
 
 
 
     /* 过滤货品 */
 
-    foreach ($result_products as $key => $value)
-
-    {
-
+    foreach ($result_products as $key => $value) {
         $goods_attr_array = explode('|', $value['goods_attr']);
 
-        if (is_array($goods_attr_array))
-
-        {
-
+        if (is_array($goods_attr_array)) {
             $goods_attr = array();
 
-            foreach ($goods_attr_array as $_attr)
-
-            {
-
+            foreach ($goods_attr_array as $_attr) {
                 $goods_attr[] = $_goods_attr[$_attr];
-
             }
 
 
 
             $goods_attr_str = implode('，', $goods_attr);
-
         }
 
 
 
         $result_products[$key]['goods_attr_str'] = $goods_attr_str;
-
     }
 
 
 
     return $result_products;
-
 }
 
 
@@ -5441,37 +3848,26 @@ function get_good_products($goods_id, $conditions = '')
  */
 
 function get_good_products_select($goods_id)
-
 {
-
     $return_array = array();
 
     $products = get_good_products($goods_id);
 
 
 
-    if (empty($products))
-
-    {
-
+    if (empty($products)) {
         return $return_array;
-
     }
 
 
 
-    foreach ($products as $value)
-
-    {
-
+    foreach ($products as $value) {
         $return_array[$value['product_id']] = $value['goods_attr_str'];
-
     }
 
 
 
     return $return_array;
-
 }
 
 
@@ -5493,7 +3889,6 @@ function get_good_products_select($goods_id)
  */
 
 function get_specifications_list($goods_id, $conditions = '')
-
 {
 
     /* 取商品属性 */
@@ -5514,18 +3909,13 @@ function get_specifications_list($goods_id, $conditions = '')
 
     $return_array = array();
 
-    foreach ($result as $value)
-
-    {
-
+    foreach ($result as $value) {
         $return_array[$value['goods_attr_id']] = $value;
-
     }
 
 
 
     return $return_array;
-
 }
 
 
@@ -5547,31 +3937,24 @@ function get_specifications_list($goods_id, $conditions = '')
  */
 
 if (!function_exists('array_combine')) {
-
     function array_combine($keys, $values)
-
     {
-
         if (!is_array($keys)) {
-
             user_error('array_combine() expects parameter 1 to be array, ' .
 
                 gettype($keys) . ' given', E_USER_WARNING);
 
             return;
-
         }
 
 
 
         if (!is_array($values)) {
-
             user_error('array_combine() expects parameter 2 to be array, ' .
 
                 gettype($values) . ' given', E_USER_WARNING);
 
             return;
-
         }
 
 
@@ -5581,21 +3964,17 @@ if (!function_exists('array_combine')) {
         $value_count = count($values);
 
         if ($key_count !== $value_count) {
-
             user_error('array_combine() Both parameters should have equal number of elements', E_USER_WARNING);
 
             return false;
-
         }
 
 
 
         if ($key_count === 0 || $value_count === 0) {
-
             user_error('array_combine() Both parameters should have number of elements at least 0', E_USER_WARNING);
 
             return false;
-
         }
 
 
@@ -5609,39 +3988,26 @@ if (!function_exists('array_combine')) {
         $combined = array();
 
         for ($i = 0; $i < $key_count; $i++) {
-
             $combined[$keys[$i]] = $values[$i];
-
         }
 
 
 
         return $combined;
-
     }
-
 }
 
 
 
 //正则匹配手机格式 by wang
 
-function is_mobile($mobile){
-
+function is_mobile($mobile)
+{
     $chars = "/^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{1}[0-9]{8}$/";
 
-    if (preg_match($chars, $mobile)){
-
+    if (preg_match($chars, $mobile)) {
         return true;
-
-    }else{
-
+    } else {
         return false;
-
     }
-
 }
-
-
-
-?>

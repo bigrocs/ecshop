@@ -659,7 +659,7 @@ if ($_REQUEST['step'] == 'add_to_cart') {
     $smarty->assign('user_jiubi', $user_info['jiubi']);  // 可用储值卡金额
     $smarty->assign('consume_jiubi', $jiubi['consume_jiubi']);  // 可用储值卡金额
     $smarty->assign('max_deductible_jine', price_format($jiubi['max_deductible_jine']));  // 最大储值卡金额抵扣金额
-    $deductible_jine = $jiubi['consume_jiubi']/$GLOBALS['_CFG']['jiubi'];
+    $deductible_jine = $jiubi['consume_jiubi'];
     $smarty->assign('deductible_jine', price_format($deductible_jine));  // 使用储值卡金额后的抵扣金额
     /**
      * 储值卡金额end

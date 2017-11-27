@@ -566,7 +566,19 @@ var card = document.getElementsByName('card');
 			    </dl>
 			 </div>
     <?php endif; ?>
-
+    <div class="dl_box">
+          <dl>
+            <dd>使用储值卡金额</dd>
+            <dd class="weiruan " bgcolor="#ffffff"><input name="jiubi" type="text" class="input" id="ECS_JIUBI" onblur="changeJiubi(this.value)" value="<?php echo empty($this->_var['consume_jiubi']) ? '0' : $this->_var['consume_jiubi']; ?>" size="10" />            </dd>
+          </dl>
+     </div>
+     <div class="dl_box">
+          <dl>
+            <dd>您当前可用储值卡金额:<?php echo empty($this->_var['user_jiubi']) ? '0' : $this->_var['user_jiubi']; ?> ，<?php echo $this->_var['lang']['noworder_can_integral']; ?><?php echo $this->_var['consume_jiubi']; ?>  .
+              <span id="ECS_JIUBI_NOTICE" class="notice"></span>
+            </dd>
+        </dl>
+     </div>
 
 
 

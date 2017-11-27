@@ -926,6 +926,8 @@ function order_fee($order, $goods, $consignee)
 
                     'integral_money'   => 0,
 
+                    'jiubi_money'      => 0,
+
                     'bonus'            => 0,
 
                     'surplus'          => 0,
@@ -1244,6 +1246,23 @@ function order_fee($order, $goods, $consignee)
 
     $total['integral_formated'] = price_format($total['integral_money'], false);
 
+    /* 储值卡金额 */
+    $order['jiubi'] = $order['jiubi'] > 0 ? $order['jiubi'] : 0;
+    if ($total['amount'] > 0 && $max_amount > 0 && $order['jiubi'] > 0) {
+        $jiubi_money = $order['jiubi'];
+
+        // 使用储值卡金额支付
+        $use_jiubi           = min($total['amount'], $max_amount, $jiubi_money); // 实际使用储值卡金额支付的金额
+
+        $total['amount']        -= $use_jiubi;
+        $total['jiubi_money'] = $use_jiubi;
+        $order['jiubi']       = $use_jiubi;
+    } else {
+        $total['jiubi_money'] = 0;
+        $order['jiubi']       = 0;
+    }
+    $total['jiubi'] = $order['jiubi'];
+    $total['jiubi_formated'] = price_format($total['jiubi_money'], false);
 
 
     /* 保存订单信息 */
@@ -1382,7 +1401,7 @@ function cart_goods($type = CART_GENERAL_GOODS)
 
             "market_price, goods_price,fencheng, goods_attr, is_real, extension_code, parent_id, is_gift, is_shipping, " .
 
-            "goods_price * goods_number AS subtotal " .
+            "goods_price * goods_number AS subtotal, jiubi " .
 
             "FROM " . $GLOBALS['ecs']->table('cart') .
 
@@ -1659,7 +1678,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
 
                 "g.promote_end_date, g.goods_weight, g.integral, g.extension_code,g.fencheng, ".
 
-                "g.goods_number, g.is_alone_sale, g.is_shipping,".
+                "g.goods_number, g.is_alone_sale, g.is_shipping, g.jiubi,".
 
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price ".
 
@@ -1826,7 +1845,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
         'is_gift'       => 0,
 
         'is_shipping'   => $goods['is_shipping'],
-
+        'jiubi'         => $goods['jiubi'],
         'rec_type'      => CART_GENERAL_GOODS
 
     );

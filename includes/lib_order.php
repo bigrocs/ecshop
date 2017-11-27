@@ -715,14 +715,14 @@ function order_fee($order, $goods, $consignee)
     /* 储值卡金额 */
     $order['jiubi'] = $order['jiubi'] > 0 ? $order['jiubi'] : 0;
     if ($total['amount'] > 0 && $max_amount > 0 && $order['jiubi'] > 0) {
-        $jiubi_money = value_of_jiubi($order['jiubi']);
+        $jiubi_money = $order['jiubi'];
 
         // 使用储值卡金额支付
         $use_jiubi           = min($total['amount'], $max_amount, $jiubi_money); // 实际使用储值卡金额支付的金额
 
         $total['amount']        -= $use_jiubi;
         $total['jiubi_money'] = $use_jiubi;
-        $order['jiubi']       = jiubi_of_value($use_jiubi);
+        $order['jiubi']       = $use_jiubi;
     } else {
         $total['jiubi_money'] = 0;
         $order['jiubi']       = 0;
@@ -1745,29 +1745,6 @@ function integral_of_value($value)
     $scale = floatval($GLOBALS['_CFG']['integral_scale']);
 
     return $scale > 0 ? round($value / $scale * 100) : 0;
-}
-/**
- * 计算储值卡金额的价值（能抵多少钱）
- * @param   int     $integral   积分
- * @return  float   积分价值
- */
-function value_of_jiubi($jiubi)
-{
-    $scale = floatval($GLOBALS['_CFG']['jiubi']);
-    return $scale > 0 ? round($jiubi/$scale, 2) : 0;
-}
-/**
- * 计算指定的金额需要多少储值卡金额
- *
- * @access  public
- * @param   integer $value  金额
- * @return  void
- */
-function jiubi_of_value($value)
-{
-    $scale = floatval($GLOBALS['_CFG']['jiubi']);
-
-    return $scale > 0 ? round($value*$scale) : 0;
 }
 /**
  * 订单退款
