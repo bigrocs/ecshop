@@ -718,7 +718,15 @@ function cat_options($spec_cat_id, $arr)
     }
 }
 
-
+/**
+ * [getShopConfig 根据字段获取商城配置]
+ * @return [type] [description] //**chognzhi
+ */
+function getShopConfigValue($code)
+{
+    $sql = 'SELECT value FROM ' . $GLOBALS['ecs']->table('shop_config') . " WHERE code = '$code'";
+    return $GLOBALS['db']->getOne($sql);
+}
 
 /**
 

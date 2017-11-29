@@ -17,10 +17,10 @@
 </head>
 <body>
 <div id="tbh5v0">
-  <div class="login"> 
-     
-    <?php if ($this->_var['action'] == 'profile'): ?> 
-    <?php echo $this->smarty_insert_scripts(array('files'=>'utils.js')); ?> 
+  <div class="login">
+    
+    <?php if ($this->_var['action'] == 'profile'): ?>
+    <?php echo $this->smarty_insert_scripts(array('files'=>'utils.js')); ?>
     <script type="text/javascript">
           <?php $_from = $this->_var['lang']['profile_js']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
     foreach ($_from AS $this->_var['key'] => $this->_var['item']):
@@ -55,7 +55,7 @@
             <dl>
               <dd class="dd1"><?php echo $this->_var['lang']['passwd_answer']; ?></dd>
               <input placeholder="<?php echo $this->_var['lang']['passwd_answer']; ?>" name="passwd_answer" type="text" class="dd2" value="<?php echo $this->_var['profile']['passwd_answer']; ?>" />
-            </dl>            
+            </dl>
             <?php elseif ($this->_var['field']['reg_field_name'] == '手机'): ?>
 		<?php if ($this->_var['_CFG'] [ 'ecsdxt_mobile_bind' ] == '1'): ?>
 		    <dl>
@@ -67,12 +67,12 @@
 		      <?php else: ?>
 		      <a href="user.php?act=bindmobile">绑定手机</a>
 		      <?php endif; ?>
-		    </dl>            
+		    </dl>
 		<?php else: ?>
 		    <dl>
 		      <dd class="dd1" <?php if ($this->_var['field']['is_need']): ?>id="extend_field<?php echo $this->_var['field']['id']; ?>i"<?php endif; ?>><?php echo $this->_var['field']['reg_field_name']; ?></dd>
 		      <input name="extend_field<?php echo $this->_var['field']['id']; ?>" type="text" class="dd2" value="<?php echo $this->_var['field']['content']; ?>"/><?php if ($this->_var['field']['is_need']): ?><font style="color:#FF0000"> *</font><?php endif; ?>
-		    </dl>            
+		    </dl>
 		<?php endif; ?>
             <?php else: ?>
             <dl>
@@ -84,14 +84,14 @@
 			<dl>
               <dd class="dd1">性别</dd>
 			  <dd>
-			<input  style="width: 3%;" type="radio" name="sex" value="1" <?php if ($this->_var['profile']['sex'] == 1): ?>checked<?php endif; ?> > 男<input       type="radio" style="width: 3%;" name="sex" value="0" <?php if ($this->_var['profile']['sex'] == 0): ?>checked<?php endif; ?>> 女 
-			</dd>			
+			<input  style="width: 3%;" type="radio" name="sex" value="1" <?php if ($this->_var['profile']['sex'] == 1): ?>checked<?php endif; ?> > 男<input       type="radio" style="width: 3%;" name="sex" value="0" <?php if ($this->_var['profile']['sex'] == 0): ?>checked<?php endif; ?>> 女
+			</dd>
             </dl>
 			<dl>
               <dd class="dd1">生日</dd>
 			  <dd>
 			<input type="date" name="birthday" value="<?php echo $this->_var['profile']['birthday']; ?>" />
-			</dd>			
+			</dd>
             </dl>
 
 
@@ -124,8 +124,8 @@
         <input name="submit" type="submit" class="c-btn3"     value="<?php echo $this->_var['lang']['confirm_edit']; ?>" />
       </form>
     </section>
-    <?php endif; ?> 
-     
+    <?php endif; ?>
+    
      
          <?php if ($this->_var['action'] == 'bindmobile'): ?>
          <script>var ztime=<?php echo $this->_var['ztime']; ?>;</script>
@@ -169,8 +169,8 @@
      <?php endif; ?>
      
 
-     
-    <?php if ($this->_var['action'] == 'dianpu'): ?> 
+    
+    <?php if ($this->_var['action'] == 'dianpu'): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="distribute.php"> 返回 </a> </div>
       <h1> 修改我的店铺名称</h1>
@@ -193,11 +193,11 @@
         <input name="submit" type="submit" value="<?php echo $this->_var['lang']['confirm_edit']; ?>" class="c-btn3"   />
       </form>
     </section>
-    <?php endif; ?> 
-     
-	
-		  
-    <?php if ($this->_var['action'] == 'act_dianpu'): ?> 
+    <?php endif; ?>
+    
+
+		 
+    <?php if ($this->_var['action'] == 'act_dianpu'): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="distribute.php"> 返回 </a> </div>
       <h1> 修改我的店铺名称</h1>
@@ -220,15 +220,15 @@
         <input name="submit" type="submit" value="<?php echo $this->_var['lang']['confirm_edit']; ?>" class="c-btn3"   />
       </form>
     </section>
-    <?php endif; ?> 
-     
-	
-	
-	
-	
-	
-	
-    <?php if ($this->_var['action'] == 'bonus'): ?> 
+    <?php endif; ?>
+    
+
+
+
+
+
+
+    <?php if ($this->_var['action'] == 'bonus'): ?>
     <script type="text/javascript">
         <?php $_from = $this->_var['lang']['profile_js']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
     foreach ($_from AS $this->_var['key'] => $this->_var['item']):
@@ -251,7 +251,7 @@
           <th align="center">截止日期</th>
           <th align="center">状态</th>
         </tr>
-        <?php if ($this->_var['bonus']): ?> 
+        <?php if ($this->_var['bonus']): ?>
         <?php $_from = $this->_var['bonus']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item');if (count($_from)):
     foreach ($_from AS $this->_var['item']):
 ?>
@@ -263,7 +263,7 @@
           <td align="center"><?php echo $this->_var['item']['use_enddate']; ?></td>
           <td align="center"><?php echo $this->_var['item']['status']; ?></td>
         </tr>
-        <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?> 
+        <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
         <?php else: ?>
         <tr>
           <td colspan="6" bgcolor="#FFFFFF"><?php echo $this->_var['lang']['user_bonus_empty']; ?></td>
@@ -280,9 +280,9 @@
       </form>
       </section>
     </section>
-    <?php endif; ?> 
-     
-     
+    <?php endif; ?>
+    
+    
     <?php if ($this->_var['action'] == 'order_list'): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="user.php"> 返回 </a> </div>
@@ -323,9 +323,9 @@
 		});
     });
     </script>
-    <?php endif; ?> 
-     
-     
+    <?php endif; ?>
+    
+    
     <?php if ($this->_var['action'] == 'track_packages'): ?>
     <header id="header">
       <div class="c-inav">
@@ -366,10 +366,10 @@
       </script>
       <div class="blank5"></div>
       <?php echo $this->fetch('library/pages.lbi'); ?> </div>
-    <?php endif; ?> 
+    <?php endif; ?>
     
 
-     
+    
     <?php if ($this->_var['action'] == 'order_tracking'): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
@@ -424,17 +424,17 @@ jQuery(function($){
 		}
 		$("body").animate({minHeight: "100px"});
 	}else if(resultJson.status == 400){
-		resultTable.append("<tr><td>订单暂未发货，请稍后再来查询</td></tr>");				
+		resultTable.append("<tr><td>订单暂未发货，请稍后再来查询</td></tr>");
 	}else{
-		resultTable.append("<tr><td>"+ resultJson.message +"</td></tr>");				
+		resultTable.append("<tr><td>"+ resultJson.message +"</td></tr>");
 	}
 })
 </script>
     </div>
-    <?php endif; ?> 
-     
+    <?php endif; ?>
     
-     
+
+    
     <?php if ($this->_var['action'] == order_detail): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
@@ -465,15 +465,15 @@ jQuery(function($){
           <td><?php echo $this->_var['lang']['virtual_card_info']; ?>：<br>
           	<?php $_from = $this->_var['virtual_card']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'vgoods');if (count($_from)):
     foreach ($_from AS $this->_var['vgoods']):
-?> 
+?>
             <?php $_from = $this->_var['vgoods']['info']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'card');if (count($_from)):
     foreach ($_from AS $this->_var['card']):
-?> 
+?>
             <hr style="border:none;border-top:1px #CCCCCC dashed; margin:5px 0" />
             <?php if ($this->_var['card']['card_sn']): ?><?php echo $this->_var['lang']['card_sn']; ?>:<span style="color:red;"><?php echo $this->_var['card']['card_sn']; ?></span><br><?php endif; ?>
-            <?php if ($this->_var['card']['card_password']): ?><?php echo $this->_var['lang']['card_password']; ?>:<span style="color:red;"><?php echo $this->_var['card']['card_password']; ?></span><br><?php endif; ?> 
+            <?php if ($this->_var['card']['card_password']): ?><?php echo $this->_var['lang']['card_password']; ?>:<span style="color:red;"><?php echo $this->_var['card']['card_password']; ?></span><br><?php endif; ?>
             <?php if ($this->_var['card']['end_date']): ?><?php echo $this->_var['lang']['end_date']; ?>:<?php echo $this->_var['card']['end_date']; ?><br><?php endif; ?>
-            <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?> 
+            <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?></td>
         </tr>
         <?php endif; ?>
@@ -484,7 +484,7 @@ jQuery(function($){
         <?php endif; ?>
       </table>
       </section>
-      
+
       <section class="order_box padd1 radius10">
       <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
         <tr>
@@ -498,9 +498,9 @@ jQuery(function($){
         <?php if ($this->_var['order']['exist_real_goods']): ?>
         <tr>
           <td align="right"><?php echo $this->_var['lang']['detailed_address']; ?>：</td>
-          <td align="left"><?php echo $this->_var['order']['address']; ?> 
-            <?php if ($this->_var['order']['zipcode']): ?> 
-            [<?php echo $this->_var['lang']['postalcode']; ?>: <?php echo $this->_var['order']['zipcode']; ?>] 
+          <td align="left"><?php echo $this->_var['order']['address']; ?>
+            <?php if ($this->_var['order']['zipcode']): ?>
+            [<?php echo $this->_var['lang']['postalcode']; ?>: <?php echo $this->_var['order']['zipcode']; ?>]
             <?php endif; ?></td>
         </tr>
         <?php endif; ?>
@@ -516,7 +516,7 @@ jQuery(function($){
         <?php endif; ?>
       </table>
       </section>
-      
+
       <section class="order_box padd1 radius10">
         <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
       	  <?php $_from = $this->_var['goods_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods');if (count($_from)):
@@ -534,45 +534,45 @@ jQuery(function($){
       </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
         <tr>
-          <td align="right"> <?php echo $this->_var['lang']['goods_all_price']; ?><?php if ($this->_var['order']['extension_code'] == "group_buy"): ?><?php echo $this->_var['lang']['gb_deposit']; ?><?php endif; ?>: <?php echo $this->_var['order']['formated_goods_amount']; ?> 
-            <?php if ($this->_var['order']['discount'] > 0): ?> 
-            - <?php echo $this->_var['lang']['discount']; ?>: <?php echo $this->_var['order']['formated_discount']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['tax'] > 0): ?> 
-            + <?php echo $this->_var['lang']['tax']; ?>: <?php echo $this->_var['order']['formated_tax']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['shipping_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['shipping_fee']; ?>: <?php echo $this->_var['order']['formated_shipping_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['insure_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['insure_fee']; ?>: <?php echo $this->_var['order']['formated_insure_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['pay_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['pay_fee']; ?>: <?php echo $this->_var['order']['formated_pay_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['pack_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['pack_fee']; ?>: <?php echo $this->_var['order']['formated_pack_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['card_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['card_fee']; ?>: <?php echo $this->_var['order']['formated_card_fee']; ?> 
+          <td align="right"> <?php echo $this->_var['lang']['goods_all_price']; ?><?php if ($this->_var['order']['extension_code'] == "group_buy"): ?><?php echo $this->_var['lang']['gb_deposit']; ?><?php endif; ?>: <?php echo $this->_var['order']['formated_goods_amount']; ?>
+            <?php if ($this->_var['order']['discount'] > 0): ?>
+            - <?php echo $this->_var['lang']['discount']; ?>: <?php echo $this->_var['order']['formated_discount']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['tax'] > 0): ?>
+            + <?php echo $this->_var['lang']['tax']; ?>: <?php echo $this->_var['order']['formated_tax']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['shipping_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['shipping_fee']; ?>: <?php echo $this->_var['order']['formated_shipping_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['insure_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['insure_fee']; ?>: <?php echo $this->_var['order']['formated_insure_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['pay_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['pay_fee']; ?>: <?php echo $this->_var['order']['formated_pay_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['pack_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['pack_fee']; ?>: <?php echo $this->_var['order']['formated_pack_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['card_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['card_fee']; ?>: <?php echo $this->_var['order']['formated_card_fee']; ?>
             <?php endif; ?></td>
         </tr>
         <tr>
-          <td align="right"><?php if ($this->_var['order']['money_paid'] > 0): ?> 
-            - <?php echo $this->_var['lang']['order_money_paid']; ?>: <?php echo $this->_var['order']['formated_money_paid']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['surplus'] > 0): ?> 
-            - <?php echo $this->_var['lang']['use_surplus']; ?>: <?php echo $this->_var['order']['formated_surplus']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['integral_money'] > 0): ?> 
-            - <?php echo $this->_var['lang']['use_integral']; ?>: <?php echo $this->_var['order']['formated_integral_money']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['bonus'] > 0): ?> 
-            - <?php echo $this->_var['lang']['use_bonus']; ?>: <?php echo $this->_var['order']['formated_bonus']; ?> 
+          <td align="right"><?php if ($this->_var['order']['money_paid'] > 0): ?>
+            - <?php echo $this->_var['lang']['order_money_paid']; ?>: <?php echo $this->_var['order']['formated_money_paid']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['surplus'] > 0): ?>
+            - <?php echo $this->_var['lang']['use_surplus']; ?>: <?php echo $this->_var['order']['formated_surplus']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['integral_money'] > 0): ?>
+            - <?php echo $this->_var['lang']['use_integral']; ?>: <?php echo $this->_var['order']['formated_integral_money']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['bonus'] > 0): ?>
+            - <?php echo $this->_var['lang']['use_bonus']; ?>: <?php echo $this->_var['order']['formated_bonus']; ?>
             <?php endif; ?></td>
         </tr>
         <tr>
-          <td align="right"><?php echo $this->_var['lang']['order_amount']; ?>: <?php echo $this->_var['order']['formated_order_amount']; ?> 
+          <td align="right"><?php echo $this->_var['lang']['order_amount']; ?>: <?php echo $this->_var['order']['formated_order_amount']; ?>
             <?php if ($this->_var['order']['extension_code'] == "group_buy"): ?><br />
             <?php echo $this->_var['lang']['notice_gb_order_amount']; ?><?php endif; ?></td>
         </tr>
@@ -590,7 +590,7 @@ jQuery(function($){
         <?php endif; ?>
       </table>
       </section>
-      
+
       <section class="order_box padd1 radius10">
       <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
         <tr>
@@ -599,14 +599,14 @@ jQuery(function($){
         </tr>
         <tr>
           <td bgcolor="#ffffff" align="center"><?php if ($this->_var['payment_list']): ?>
-            
+
             <form name="payment" method="post" action="user.php">
               <?php echo $this->_var['lang']['change_payment']; ?>: <br/>
               <select name="pay_id" style="margin:6px 0">
-                <?php $_from = $this->_var['payment_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'payment_0_20566500_1511846965');if (count($_from)):
-    foreach ($_from AS $this->_var['payment_0_20566500_1511846965']):
+                <?php $_from = $this->_var['payment_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'payment');if (count($_from)):
+    foreach ($_from AS $this->_var['payment']):
 ?>
-                <option value="<?php echo $this->_var['payment_0_20566500_1511846965']['pay_id']; ?>"> <?php echo $this->_var['payment_0_20566500_1511846965']['pay_name']; ?>(<?php echo $this->_var['lang']['pay_fee']; ?>:<?php echo $this->_var['payment_0_20566500_1511846965']['format_pay_fee']; ?>) </option>
+                <option value="<?php echo $this->_var['payment']['pay_id']; ?>"> <?php echo $this->_var['payment']['pay_name']; ?>(<?php echo $this->_var['lang']['pay_fee']; ?>:<?php echo $this->_var['payment']['format_pay_fee']; ?>) </option>
                 <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
               </select>
               <br/>
@@ -614,12 +614,12 @@ jQuery(function($){
               <input type="hidden" name="order_id" value="<?php echo $this->_var['order']['order_id']; ?>" />
               <input type="submit" name="Submit" class="c-btn3" value="<?php echo $this->_var['lang']['button_submit']; ?>" />
             </form>
-            
+
             <?php endif; ?></td>
         </tr>
       </table>
       </section>
-      
+
       <section class="order_box padd1 radius10">
       <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
         <?php if ($this->_var['order']['shipping_id'] > 0): ?>
@@ -628,41 +628,41 @@ jQuery(function($){
           <td colspan="3" width="75%" align="left" bgcolor="#ffffff"><?php echo $this->_var['order']['shipping_name']; ?></td>
         </tr>
         <?php endif; ?>
-        
+
         <tr>
           <td width="15%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['payment']; ?>：</td>
           <td colspan="3" align="left" bgcolor="#ffffff"><?php echo $this->_var['order']['pay_name']; ?></td>
         </tr>
-        <?php if ($this->_var['order']['insure_fee'] > 0): ?> 
-        <?php endif; ?> 
+        <?php if ($this->_var['order']['insure_fee'] > 0): ?>
+        <?php endif; ?>
         <?php if ($this->_var['order']['pack_name']): ?>
         <tr>
           <td width="15%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['use_pack']; ?>：</td>
           <td colspan="3" align="left" bgcolor="#ffffff"><?php echo $this->_var['order']['pack_name']; ?></td>
         </tr>
-        <?php endif; ?> 
+        <?php endif; ?>
         <?php if ($this->_var['order']['card_name']): ?>
         <tr>
           <td width="15%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['use_card']; ?>：</td>
           <td colspan="3" align="left" bgcolor="#ffffff"><?php echo $this->_var['order']['card_name']; ?></td>
         </tr>
-        <?php endif; ?> 
+        <?php endif; ?>
         <?php if ($this->_var['order']['card_message']): ?>
         <tr>
           <td width="15%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['bless_note']; ?>：</td>
           <td colspan="3" align="left" bgcolor="#ffffff"><?php echo $this->_var['order']['card_message']; ?></td>
         </tr>
-        <?php endif; ?> 
-        <?php if ($this->_var['order']['surplus'] > 0): ?> 
-        <?php endif; ?> 
+        <?php endif; ?>
+        <?php if ($this->_var['order']['surplus'] > 0): ?>
+        <?php endif; ?>
         <?php if ($this->_var['order']['integral'] > 0): ?>
         <tr>
           <td width="15%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['use_integral']; ?>：</td>
           <td colspan="3" align="left" bgcolor="#ffffff"><?php echo $this->_var['order']['integral']; ?></td>
         </tr>
-        <?php endif; ?> 
-        <?php if ($this->_var['order']['bonus'] > 0): ?> 
-        <?php endif; ?> 
+        <?php endif; ?>
+        <?php if ($this->_var['order']['bonus'] > 0): ?>
+        <?php endif; ?>
         <?php if ($this->_var['order']['inv_payee'] && $this->_var['order']['inv_content']): ?>
         <tr>
           <td width="15%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['invoice_title']; ?>：</td>
@@ -670,7 +670,7 @@ jQuery(function($){
           <td width="19%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['invoice_content']; ?>：</td>
           <td width="25%" align="left" bgcolor="#ffffff"><?php echo $this->_var['order']['inv_content']; ?></td>
         </tr>
-        <?php endif; ?> 
+        <?php endif; ?>
         <?php if ($this->_var['order']['postscript']): ?>
         <tr>
           <td width="15%" align="right" bgcolor="#ffffff"><?php echo $this->_var['lang']['order_postscript']; ?>：</td>
@@ -683,13 +683,13 @@ jQuery(function($){
         </tr>
       </table>
       </section>
-      
+
     </section>
-    <?php endif; ?> 
+    <?php endif; ?>
+
     
-     
-	
-		     
+
+		    
     <?php if ($this->_var['action'] == myorder_detail): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
@@ -720,15 +720,15 @@ jQuery(function($){
           <td><?php echo $this->_var['lang']['virtual_card_info']; ?>：<br>
           	<?php $_from = $this->_var['virtual_card']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'vgoods');if (count($_from)):
     foreach ($_from AS $this->_var['vgoods']):
-?> 
+?>
             <?php $_from = $this->_var['vgoods']['info']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'card');if (count($_from)):
     foreach ($_from AS $this->_var['card']):
-?> 
+?>
             <hr style="border:none;border-top:1px #CCCCCC dashed; margin:5px 0" />
             <?php if ($this->_var['card']['card_sn']): ?><?php echo $this->_var['lang']['card_sn']; ?>:<span style="color:red;"><?php echo $this->_var['card']['card_sn']; ?></span><br><?php endif; ?>
-            <?php if ($this->_var['card']['card_password']): ?><?php echo $this->_var['lang']['card_password']; ?>:<span style="color:red;"><?php echo $this->_var['card']['card_password']; ?></span><br><?php endif; ?> 
+            <?php if ($this->_var['card']['card_password']): ?><?php echo $this->_var['lang']['card_password']; ?>:<span style="color:red;"><?php echo $this->_var['card']['card_password']; ?></span><br><?php endif; ?>
             <?php if ($this->_var['card']['end_date']): ?><?php echo $this->_var['lang']['end_date']; ?>:<?php echo $this->_var['card']['end_date']; ?><br><?php endif; ?>
-            <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?> 
+            <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?></td>
         </tr>
         <?php endif; ?>
@@ -739,7 +739,7 @@ jQuery(function($){
         <?php endif; ?>
       </table>
       </section>
-      
+
       <section class="order_box padd1 radius10">
         <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
       	  <?php $_from = $this->_var['goods_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods');if (count($_from)):
@@ -757,52 +757,52 @@ jQuery(function($){
       </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
         <tr>
-          <td align="right"> <?php echo $this->_var['lang']['goods_all_price']; ?><?php if ($this->_var['order']['extension_code'] == "group_buy"): ?><?php echo $this->_var['lang']['gb_deposit']; ?><?php endif; ?>: <?php echo $this->_var['order']['formated_goods_amount']; ?> 
-            <?php if ($this->_var['order']['discount'] > 0): ?> 
-            - <?php echo $this->_var['lang']['discount']; ?>: <?php echo $this->_var['order']['formated_discount']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['tax'] > 0): ?> 
-            + <?php echo $this->_var['lang']['tax']; ?>: <?php echo $this->_var['order']['formated_tax']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['shipping_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['shipping_fee']; ?>: <?php echo $this->_var['order']['formated_shipping_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['insure_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['insure_fee']; ?>: <?php echo $this->_var['order']['formated_insure_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['pay_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['pay_fee']; ?>: <?php echo $this->_var['order']['formated_pay_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['pack_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['pack_fee']; ?>: <?php echo $this->_var['order']['formated_pack_fee']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['card_fee'] > 0): ?> 
-            + <?php echo $this->_var['lang']['card_fee']; ?>: <?php echo $this->_var['order']['formated_card_fee']; ?> 
+          <td align="right"> <?php echo $this->_var['lang']['goods_all_price']; ?><?php if ($this->_var['order']['extension_code'] == "group_buy"): ?><?php echo $this->_var['lang']['gb_deposit']; ?><?php endif; ?>: <?php echo $this->_var['order']['formated_goods_amount']; ?>
+            <?php if ($this->_var['order']['discount'] > 0): ?>
+            - <?php echo $this->_var['lang']['discount']; ?>: <?php echo $this->_var['order']['formated_discount']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['tax'] > 0): ?>
+            + <?php echo $this->_var['lang']['tax']; ?>: <?php echo $this->_var['order']['formated_tax']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['shipping_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['shipping_fee']; ?>: <?php echo $this->_var['order']['formated_shipping_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['insure_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['insure_fee']; ?>: <?php echo $this->_var['order']['formated_insure_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['pay_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['pay_fee']; ?>: <?php echo $this->_var['order']['formated_pay_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['pack_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['pack_fee']; ?>: <?php echo $this->_var['order']['formated_pack_fee']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['card_fee'] > 0): ?>
+            + <?php echo $this->_var['lang']['card_fee']; ?>: <?php echo $this->_var['order']['formated_card_fee']; ?>
             <?php endif; ?></td>
         </tr>
         <tr>
-          <td align="right"><?php if ($this->_var['order']['money_paid'] > 0): ?> 
-            - <?php echo $this->_var['lang']['order_money_paid']; ?>: <?php echo $this->_var['order']['formated_money_paid']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['surplus'] > 0): ?> 
-            - <?php echo $this->_var['lang']['use_surplus']; ?>: <?php echo $this->_var['order']['formated_surplus']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['integral_money'] > 0): ?> 
-            - <?php echo $this->_var['lang']['use_integral']; ?>: <?php echo $this->_var['order']['formated_integral_money']; ?> 
-            <?php endif; ?> 
-            <?php if ($this->_var['order']['bonus'] > 0): ?> 
-            - <?php echo $this->_var['lang']['use_bonus']; ?>: <?php echo $this->_var['order']['formated_bonus']; ?> 
+          <td align="right"><?php if ($this->_var['order']['money_paid'] > 0): ?>
+            - <?php echo $this->_var['lang']['order_money_paid']; ?>: <?php echo $this->_var['order']['formated_money_paid']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['surplus'] > 0): ?>
+            - <?php echo $this->_var['lang']['use_surplus']; ?>: <?php echo $this->_var['order']['formated_surplus']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['integral_money'] > 0): ?>
+            - <?php echo $this->_var['lang']['use_integral']; ?>: <?php echo $this->_var['order']['formated_integral_money']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['bonus'] > 0): ?>
+            - <?php echo $this->_var['lang']['use_bonus']; ?>: <?php echo $this->_var['order']['formated_bonus']; ?>
             <?php endif; ?></td>
         </tr>
         <tr>
-          <td align="right"><?php echo $this->_var['lang']['order_amount']; ?>: <?php echo $this->_var['order']['formated_order_amount']; ?> 
+          <td align="right"><?php echo $this->_var['lang']['order_amount']; ?>: <?php echo $this->_var['order']['formated_order_amount']; ?>
             <?php if ($this->_var['order']['extension_code'] == "group_buy"): ?><br />
             <?php echo $this->_var['lang']['notice_gb_order_amount']; ?><?php endif; ?></td>
         </tr>
 
       </table>
       </section>
-	  
+
 	      <section class="order_box padd1 radius10">
       <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
         <tr>
@@ -820,26 +820,27 @@ jQuery(function($){
         </tr>
 
       </table>
-      </section> 
+      </section>
     </section>
-    <?php endif; ?> 
+    <?php endif; ?>
+
     
-     
-	
-	
-     
-    <?php if ($this->_var['action'] == "account_raply" || $this->_var['action'] == "account_log" || $this->_var['action'] == "account_deposit" || $this->_var['action'] == "account_detail"): ?>
+
+
+    
+    
+    <?php if ($this->_var['action'] == "account_raply" || $this->_var['action'] == "account_log" || $this->_var['action'] == "account_deposit" || $this->_var['action'] == "account_detail" || $this->_var['action'] == "account_deposit_card"): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="user.php"> 返回 </a> </div>
       <h1> <?php echo $this->_var['lang']['user_balance']; ?> </h1>
     </header>
     <section class="wrap bonus_list">
 	  <section class="order_box padd1 radius10 single_item">
-      
+
       </section>
     </section>
-    
-    <div class="fullscreen"> 
+
+    <div class="fullscreen">
       <script type="text/javascript">
           <?php $_from = $this->_var['lang']['account_js']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
     foreach ($_from AS $this->_var['key'] => $this->_var['item']):
@@ -850,10 +851,11 @@ jQuery(function($){
       <div class="blank"></div>
       <table width="100%" border="0" cellpadding="5" cellspacing="1">
         <tr>
-          <td align="right" bgcolor=""><a href="user.php?act=account_deposit" class="f6"><?php echo $this->_var['lang']['surplus_type_0']; ?></a> | <a href="user.php?act=account_raply" class="f6"><?php echo $this->_var['lang']['surplus_type_1']; ?></a> | <a href="user.php?act=account_detail" class="f6"><?php echo $this->_var['lang']['add_surplus_log']; ?></a> | <a href="user.php?act=account_log" class="f6"><?php echo $this->_var['lang']['view_application']; ?></a></td>
+            
+          <td align="right" bgcolor="#ffffff"><a href="user.php?act=account_deposit_card" class="f6">充值卡</a> | <a href="user.php?act=account_deposit" class="f6"><?php echo $this->_var['lang']['surplus_type_0']; ?></a> | <a href="user.php?act=account_raply" class="f6"><?php echo $this->_var['lang']['surplus_type_1']; ?></a> | <a href="user.php?act=account_detail" class="f6"><?php echo $this->_var['lang']['add_surplus_log']; ?></a> | <a href="user.php?act=account_log" class="f6"><?php echo $this->_var['lang']['view_application']; ?></a></td>
         </tr>
       </table>
-      <?php endif; ?> 
+      <?php endif; ?>
       <?php if ($this->_var['action'] == "account_raply"): ?>
       <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
         <table width="100%" border="0" cellpadding="5" cellspacing="1" >
@@ -871,7 +873,7 @@ jQuery(function($){
           </tr>
         </table>
       </form>
-      <?php endif; ?> 
+      <?php endif; ?>
       <?php if ($this->_var['action'] == "account_deposit"): ?>
       <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
         <table width="100%" border="0" cellpadding="5" cellspacing="1" >
@@ -910,7 +912,51 @@ jQuery(function($){
           </tr>
         </table>
       </form>
-      <?php endif; ?> 
+      <?php endif; ?>
+      
+      <?php if ($this->_var['action'] == "account_deposit_card"): ?>
+      <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+          
+          <tr>
+            <td width="15%" bgcolor="#ffffff">面值:</td>
+            <td bgcolor="#ffffff"><input type="radio" name="amount" value="<?php echo $this->_var['faceValue']; ?>" checked> <?php echo $this->_var['faceValue']; ?>元（到账<?php echo $this->_var['accountAmount']; ?>元）</td>
+          </tr>
+          <tr>
+            <td bgcolor="#ffffff">数量:</td>
+            <td align="left" bgcolor="#ffffff"><input type="text" name="number"  class="inputBg" value="1" size="30" /></td>
+          </tr>
+        </table>
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" >
+            <tr align="center">
+              <td  colspan="3" align="left"><?php echo $this->_var['lang']['payment']; ?>:</td>
+            </tr>
+          <tr align="center">
+            <td ><?php echo $this->_var['lang']['pay_name']; ?></td>
+            <td  width="60%"><?php echo $this->_var['lang']['pay_desc']; ?></td>
+            <td  width="17%"><?php echo $this->_var['lang']['pay_fee']; ?></td>
+          </tr>
+          <?php $_from = $this->_var['payment']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'list');if (count($_from)):
+    foreach ($_from AS $this->_var['list']):
+?>
+          <tr>
+            <td  align="left"><input type="radio" name="payment_id" id="payment_id<?php echo $this->_var['list']['pay_id']; ?>" value="<?php echo $this->_var['list']['pay_id']; ?>" />
+              <label for="payment_id<?php echo $this->_var['list']['pay_id']; ?>"><?php echo $this->_var['list']['pay_name']; ?></label></td>
+            <td  align="left"><?php echo $this->_var['list']['pay_desc']; ?></td>
+            <td  align="center"><?php echo $this->_var['list']['pay_fee']; ?></td>
+          </tr>
+          <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
+          <tr>
+            <td colspan="3"  align="center"><input type="hidden" name="surplus_type" value="0" />
+              <input type="hidden" name="rec_id" value="<?php echo $this->_var['order']['id']; ?>" />
+              <input type="hidden" name="act" value="act_account" />
+              <input type="submit" class="c-btn" style="margin-right:5px;" name="submit" value="<?php echo $this->_var['lang']['submit_request']; ?>" />
+              <input type="reset"  class="c-btn"  name="reset" value="<?php echo $this->_var['lang']['button_reset']; ?>" /></td>
+          </tr>
+        </table>
+      </form>
+      <?php endif; ?>
+      
       <?php if ($this->_var['action'] == "act_account"): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="user.php"> 返回 </a> </div>
@@ -921,6 +967,11 @@ jQuery(function($){
         <tr>
           <td width="25%" align="right" ><?php echo $this->_var['lang']['surplus_amount']; ?></td>
           <td width="80%" bgcolor="#ffffff"><?php echo $this->_var['amount']; ?></td>
+        </tr>
+        
+        <tr>
+          <td width="25%" align="right" bgcolor="#ffffff">您的实际到账金额</td>
+          <td width="80%" bgcolor="#ffffff"><?php echo $this->_var['arrival']; ?></td>
         </tr>
         <tr>
           <td align="right" ><?php echo $this->_var['lang']['payment_name']; ?></td>
@@ -938,7 +989,7 @@ jQuery(function($){
           <td colspan="2" bgcolor="#ffffff"><?php echo $this->_var['payment']['pay_button']; ?></td>
         </tr>
       </table>
-      <?php endif; ?> 
+      <?php endif; ?>
       <?php if ($this->_var['action'] == "account_detail"): ?>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tr align="center">
@@ -961,14 +1012,15 @@ jQuery(function($){
           <td colspan="4" align="center" bgcolor="#ffffff"><div align="right"><?php echo $this->_var['lang']['current_surplus']; ?><?php echo $this->_var['surplus_amount']; ?></div></td>
         </tr>
       </table>
-      <?php echo $this->fetch('library/pages.lbi'); ?> 
-      <?php endif; ?> 
+      <?php echo $this->fetch('library/pages.lbi'); ?>
+      <?php endif; ?>
       <?php if ($this->_var['action'] == "account_log"): ?>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tr align="center">
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['process_time']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['surplus_pro_type']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['money']; ?></td>
+          <td bgcolor="#ffffff">实际到账</td>                        
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['process_notic']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['admin_notic']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['is_paid']; ?></td>
@@ -981,12 +1033,13 @@ jQuery(function($){
           <td align="center" bgcolor="#ffffff"><?php echo $this->_var['item']['add_time']; ?></td>
           <td align="left" bgcolor="#ffffff"><?php echo $this->_var['item']['type']; ?></td>
           <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['amount']; ?></td>
+          <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['arrival']; ?></td>            
           <td align="left" bgcolor="#ffffff"><?php echo $this->_var['item']['short_user_note']; ?></td>
           <td align="left" bgcolor="#ffffff"><?php echo $this->_var['item']['short_admin_note']; ?></td>
           <td align="center" bgcolor="#ffffff"><?php echo $this->_var['item']['pay_status']; ?></td>
-          <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['handle']; ?> 
-            <?php if (( $this->_var['item']['is_paid'] == 0 && $this->_var['item']['process_type'] == 1 ) || $this->_var['item']['handle']): ?> 
-            <a href="user.php?act=cancel&id=<?php echo $this->_var['item']['id']; ?>" onclick="if (!confirm('<?php echo $this->_var['lang']['confirm_remove_account']; ?>')) return false;"><?php echo $this->_var['lang']['is_cancel']; ?></a> 
+          <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['handle']; ?>
+            <?php if (( $this->_var['item']['is_paid'] == 0 && $this->_var['item']['process_type'] == 1 ) || $this->_var['item']['handle']): ?>
+            <a href="user.php?act=cancel&id=<?php echo $this->_var['item']['id']; ?>" onclick="if (!confirm('<?php echo $this->_var['lang']['confirm_remove_account']; ?>')) return false;"><?php echo $this->_var['lang']['is_cancel']; ?></a>
             <?php endif; ?></td>
         </tr>
         <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
@@ -995,9 +1048,9 @@ jQuery(function($){
         </tr>
       </table>
       <?php echo $this->fetch('library/pages.lbi'); ?> </div>
-    <?php endif; ?> 
-     
-     
+    <?php endif; ?>
+    
+    
     <?php if ($this->_var['action'] == 'address_list'): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="user.php"> 返回 </a> </div>
@@ -1019,9 +1072,9 @@ jQuery(function($){
         </tr>
         <tr>
           <td align="right"><?php echo $this->_var['lang']['detailed_address']; ?>：</td>
-          <td align="left"><?php echo htmlspecialchars($this->_var['consignee']['address']); ?> 
-            <?php if ($this->_var['consignee']['zipcode']): ?> 
-            [<?php echo $this->_var['lang']['postalcode']; ?>: <?php echo htmlspecialchars($this->_var['consignee']['zipcode']); ?>] 
+          <td align="left"><?php echo htmlspecialchars($this->_var['consignee']['address']); ?>
+            <?php if ($this->_var['consignee']['zipcode']): ?>
+            [<?php echo $this->_var['lang']['postalcode']; ?>: <?php echo htmlspecialchars($this->_var['consignee']['zipcode']); ?>]
             <?php endif; ?></td>
         </tr>
         <tr>
@@ -1036,16 +1089,16 @@ jQuery(function($){
       <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
       <a href="user.php?act=act_edit_address&flag=display" class="c-btn3"><?php echo $this->_var['lang']['add_address']; ?></a>
     </section>
-    <?php endif; ?> 
-     
-     
+    <?php endif; ?>
+    
+    
     <?php if ($this->_var['action'] == 'act_edit_address'): ?>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
       <h1> <?php echo $this->_var['lang']['consignee_info']; ?> </h1>
     </header>
       
-      <?php echo $this->smarty_insert_scripts(array('files'=>'utils.js,transport.js,region.js,shopping_flow.js')); ?> 
+      <?php echo $this->smarty_insert_scripts(array('files'=>'utils.js,transport.js,region.js,shopping_flow.js')); ?>
       <script type="text/javascript">
 		  region.isAdmin = false;
 		  <?php $_from = $this->_var['lang']['flow_js']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
@@ -1135,9 +1188,9 @@ jQuery(function($){
       </form>
       </section>
     </section>
-    <?php endif; ?> 
-     
-     
+    <?php endif; ?>
+    
+    
     <?php if ($this->_var['action'] == 'transform_points'): ?>
     <h5><span><?php echo $this->_var['lang']['transform_points']; ?></span></h5>
     <div class="blank"></div>
@@ -1161,18 +1214,18 @@ jQuery(function($){
           <th align="right" bgcolor="#FFFFFF"><label for="amount"><?php echo $this->_var['lang']['exchange_amount']; ?>:</label></th>
           <td bgcolor="#FFFFFF"><input size="15" name="amount" id="amount" value="0" onkeyup="calcredit();" type="text" />
             <select name="fromcredits" id="fromcredits" onchange="calcredit();">
-              
+
                   <?php echo $this->html_options(array('options'=>$this->_var['lang']['exchange_points'],'selected'=>$this->_var['selected_org'])); ?>
-                
+
             </select></td>
         </tr>
         <tr>
           <th align="right" bgcolor="#FFFFFF"><label for="desamount"><?php echo $this->_var['lang']['exchange_desamount']; ?>:</label></th>
           <td bgcolor="#FFFFFF"><input type="text" name="desamount" id="desamount" disabled="disabled" value="0" size="15" />
             <select name="tocredits" id="tocredits" onchange="calcredit();">
-              
+
                 <?php echo $this->html_options(array('options'=>$this->_var['to_credits_options'],'selected'=>$this->_var['selected_dst'])); ?>
-              
+
             </select></td>
         </tr>
         <tr>
@@ -1243,8 +1296,8 @@ jQuery(function($){
                 return false;
             }
         }
-       </script> 
-    <?php else: ?> 
+       </script>
+    <?php else: ?>
     <b><?php echo $this->_var['lang']['cur_points']; ?>:</b>
     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
       <tr>
@@ -1276,7 +1329,7 @@ jQuery(function($){
       <?php $_from = $this->_var['rule_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'rule');if (count($_from)):
     foreach ($_from AS $this->_var['rule']):
 ?>
-      <li><font class="f1">·</font>"<?php echo $this->_var['rule']['from']; ?>" <?php echo $this->_var['lang']['transform']; ?> "<?php echo $this->_var['rule']['to']; ?>" <?php echo $this->_var['lang']['rate_is']; ?> <?php echo $this->_var['rule']['rate']; ?> 
+      <li><font class="f1">·</font>"<?php echo $this->_var['rule']['from']; ?>" <?php echo $this->_var['lang']['transform']; ?> "<?php echo $this->_var['rule']['to']; ?>" <?php echo $this->_var['lang']['rate_is']; ?> <?php echo $this->_var['rule']['rate']; ?>
         <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
     </ul>
     <form action="user.php" method="post" name="theForm">
@@ -1342,10 +1395,10 @@ jQuery(function($){
               document.getElementById('ECS_RESULT').innerHTML = 0;
             }
           //]]>
-       </script> 
-    <?php endif; ?> 
-    <?php endif; ?> 
-     
+       </script>
+    <?php endif; ?>
+    <?php endif; ?>
+    
             
         <?php if ($this->_var['action'] == "user_card"): ?>
              <style type="text/css">
@@ -1357,7 +1410,7 @@ jQuery(function($){
 </header>
 
  <section class="wrap">
-  <section class="order_box padd1 radius10">    
+  <section class="order_box padd1 radius10">
      <h2>您已绑定的卡号</h2>
                  <?php if ($this->_var['card_list']): ?>
           <table border="0" cellpadding="0" cellspacing="0" width="80%" align="center">
@@ -1372,7 +1425,7 @@ jQuery(function($){
   <?php $_from = $this->_var['card_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'card');if (count($_from)):
     foreach ($_from AS $this->_var['card']):
 ?>
-          
+
   <tr>
     <td align="center"><?php echo $this->_var['card']['card_no']; ?></td>
     <td  align="center"><?php echo $this->_var['card']['card_level']; ?></td>
@@ -1382,12 +1435,12 @@ jQuery(function($){
      <td  align="center"><?php echo $this->_var['card']['des']; ?></td>
   </tr>
    <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
-          
+
           </table>
            <?php else: ?>
           暂无
-          <?php endif; ?>       
-          
+          <?php endif; ?>
+
           <div class="cart_tips">
               <ul>
                  <span class="f4">提示：</span><br />
@@ -1396,12 +1449,12 @@ jQuery(function($){
 <li>3.建议将会员卡登陆密码与用户名登陆密码设为同一密码 有疑问联系QQ</li>
                </ul>
           </div>
-         
+
     </section>
 </section>
-        
+
 <section class="wrap">
-        <section class="order_box padd1 radius10">    
+        <section class="order_box padd1 radius10">
      <h2>您已绑定的卡号</h2>
     <form  action="user.php" method="post">
    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
@@ -1411,26 +1464,26 @@ jQuery(function($){
           <tr>
           <td align="right">卡密：</td>
           <td align="left"><input name="card_pass" type="password" size="25"  class="inputBg" value="" /></td>
-          
+
         </tr>
         <tr><td colspan="2" align="center">
         <input name="act" type="hidden" value="user_card" />
         <input name="bind" type="submit" value="绑定" class="c-btn3 radius5" style="border:none; margin-right:10px; width:30%; float:left" />
         <input name="unbind" type="submit" value="解绑" class="c-btn3 radius5" style="border:none; margin-right:10px; width:30%; background:#096; float:left" />
         <input name="chgcardpass" type="submit" value="修改卡密" class="c-btn3 radius5" style="border:none; width:30%; float:left; background:#960" /></td></tr>
-    </table>    
+    </table>
     </form>
     </section>
 </section>
-        
+
         <?php endif; ?>
         
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
     <?php echo $this->fetch('library/page_footer.lbi'); ?> </div>
 </div>
 <div style="width:1px; height:1px; overflow:hidden"><?php $_from = $this->_var['lang']['p_y']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'pv');if (count($_from)):

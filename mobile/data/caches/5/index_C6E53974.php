@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1511850536;s:8:"maketime";i:1511846936;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1511945973;s:8:"maketime";i:1511942373;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -260,7 +260,7 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=171">
+            <a href="goods.php?id=171&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/171_thumb_G_1511568892414.jpg" alt="西王玉米胚芽油" />
             </a>
             <div style="text-align:center">
@@ -269,7 +269,7 @@ TouchSlide({
                         <br>西王玉米胚芽油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=182">
+            <a href="goods.php?id=182&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/182_thumb_G_1511570888835.jpg" alt="西王葵花籽油" />
             </a>
             <div style="text-align:center">
@@ -278,7 +278,7 @@ TouchSlide({
                         <br>西王葵花籽油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=187">
+            <a href="goods.php?id=187&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/187_thumb_G_1511571187942.jpg" alt="西王橄榄玉米胚芽油" />
             </a>
             <div style="text-align:center">
@@ -297,7 +297,7 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=48">
+            <a href="goods.php?id=48&u=12">
                 <img src="http://ecshop.dev/images/201512/thumb_img/48_thumb_G_1448943988607.jpg" alt="新疆巴尔鲁克生鲜牛排眼肉牛扒1200g" />
             </a>
             <div style="text-align:center">
@@ -307,7 +307,7 @@ TouchSlide({
             <br>新疆巴尔鲁克生鲜牛排眼肉...            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=47">
+            <a href="goods.php?id=47&u=12">
                 <img src="http://ecshop.dev/images/201512/thumb_img/47_thumb_G_1448946213633.jpg" alt="日本蒜蓉粉丝扇贝270克6只装" />
             </a>
             <div style="text-align:center">
@@ -317,7 +317,7 @@ TouchSlide({
             <br>日本蒜蓉粉丝扇贝270克...            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=11">
+            <a href="goods.php?id=11&u=12">
                 <img src="http://ecshop.dev/images/201512/thumb_img/11_thumb_G_1448944388914.jpg" alt="澳洲进口120天谷饲牛仔骨4份原味生鲜" />
             </a>
             <div style="text-align:center">
@@ -327,7 +327,7 @@ TouchSlide({
             <br>澳洲进口120天谷饲牛仔...            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=10">
+            <a href="goods.php?id=10&u=12">
                 <img src="http://ecshop.dev/images/201512/thumb_img/10_thumb_G_1448944572962.jpg" alt="内蒙新鲜牛肉1斤清真生鲜牛肉火锅食材" />
             </a>
             <div style="text-align:center">
@@ -337,7 +337,7 @@ TouchSlide({
             <br>内蒙新鲜牛肉1斤清真生鲜...            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=9">
+            <a href="goods.php?id=9&u=12">
                 <img src="http://ecshop.dev/images/201512/thumb_img/9_thumb_G_1448944791708.jpg" alt="爱食派内蒙古呼伦贝尔冷冻生鲜牛腱子肉1000g" />
             </a>
             <div style="text-align:center">
@@ -347,7 +347,7 @@ TouchSlide({
             <br>爱食派内蒙古呼伦贝尔冷冻...            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=8">
+            <a href="goods.php?id=8&u=12">
                 <img src="http://ecshop.dev/images/201512/thumb_img/8_thumb_G_1448945032585.jpg" alt="五星眼肉牛排套餐8片装原味原切生鲜牛肉" />
             </a>
             <div style="text-align:center">
@@ -385,7 +385,7 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=202">
+            <a href="goods.php?id=202&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/202_thumb_G_1511572087353.jpg" alt="怀庄53-神秘茅台" />
             </a>
             <div style="text-align:center">
@@ -395,7 +395,7 @@ TouchSlide({
             <br>怀庄53-神秘茅台            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=201">
+            <a href="goods.php?id=201&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/201_thumb_G_1511572024910.jpg" alt="怀庄53-喜酱" />
             </a>
             <div style="text-align:center">
@@ -405,7 +405,7 @@ TouchSlide({
             <br>怀庄53-喜酱            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=200">
+            <a href="goods.php?id=200&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/200_thumb_G_1511571984596.jpg" alt="怀庄53-六合文化" />
             </a>
             <div style="text-align:center">
@@ -415,7 +415,7 @@ TouchSlide({
             <br>怀庄53-六合文化            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=199">
+            <a href="goods.php?id=199&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/199_thumb_G_1511571931323.jpg" alt="怀庄53-和贵福" />
             </a>
             <div style="text-align:center">
@@ -425,7 +425,7 @@ TouchSlide({
             <br>怀庄53-和贵福            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=198">
+            <a href="goods.php?id=198&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/198_thumb_G_1511571890681.jpg" alt="怀庄53-人赐福" />
             </a>
             <div style="text-align:center">
@@ -435,7 +435,7 @@ TouchSlide({
             <br>怀庄53-人赐福            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=197">
+            <a href="goods.php?id=197&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/197_thumb_G_1511571848286.jpg" alt="怀庄53-地赐福" />
             </a>
             <div style="text-align:center">
@@ -471,7 +471,7 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=195">
+            <a href="goods.php?id=195&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/195_thumb_G_1511571690703.jpg" alt="西王花生油" />
             </a>
             <div style="text-align:center">
@@ -481,7 +481,7 @@ TouchSlide({
             <br>西王花生油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=188">
+            <a href="goods.php?id=188&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/188_thumb_G_1511571245946.jpg" alt="西王鲜胚玉米胚芽油" />
             </a>
             <div style="text-align:center">
@@ -491,7 +491,7 @@ TouchSlide({
             <br>西王鲜胚玉米胚芽油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=187">
+            <a href="goods.php?id=187&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/187_thumb_G_1511571187942.jpg" alt="西王橄榄玉米胚芽油" />
             </a>
             <div style="text-align:center">
@@ -501,7 +501,7 @@ TouchSlide({
             <br>西王橄榄玉米胚芽油            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=182">
+            <a href="goods.php?id=182&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/182_thumb_G_1511570888835.jpg" alt="西王葵花籽油" />
             </a>
             <div style="text-align:center">
@@ -511,7 +511,7 @@ TouchSlide({
             <br>西王葵花籽油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=178">
+            <a href="goods.php?id=178&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/178_thumb_G_1511570646292.jpg" alt="西王玉米胚芽油4L+葵花籽油1L" />
             </a>
             <div style="text-align:center">
@@ -521,7 +521,7 @@ TouchSlide({
             <br>西王玉米胚芽油4L+葵花...            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=177">
+            <a href="goods.php?id=177&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/177_thumb_G_1511570297432.jpg" alt="西王玉米胚芽油4L+鲜胚玉米胚芽油900ML" />
             </a>
             <div style="text-align:center">
@@ -659,7 +659,8 @@ function get_search_box(){
 		document.getElementById('keywordfoot').focus();
  	}
 }
-</script><nav id="menu" style="display:None">
+</script>
+<nav id="menu" style="display:None">
   <ul>
         <li> <a href="category.php?id=2"> 生鲜食品 </a>
       <ul>
@@ -1000,9 +1001,9 @@ $(function() {
   wx.config({
     debug: false,
     appId: '',
-    timestamp: 1511846937,
-    nonceStr: '5uDK86iwRcUyDQjx',
-    signature: '797bc904220456cef4f613dd5f454cc15a9a1af3',
+    timestamp: 1511942373,
+    nonceStr: '5V4f2hJtkGgeg5mU',
+    signature: 'c96ffef9af78fca538d50ae981f68fd58d3a16bb',
     jsApiList: [
         'onMenuShareTimeline',
         'onMenuShareAppMessage'
@@ -1013,13 +1014,14 @@ $(function() {
     wx.onMenuShareAppMessage({
       title: '汇丰石化测试网站',
       desc: '汇丰石化测试网站',
-      link: '',
+      link: 'http://ecshop.dev/mobile/index.php?u=12',
       imgUrl: '',
       trigger: function (res) {
-				alert('糟糕，需要分销商登录才能获得提成哦！');
+		        alert('恭喜！分享可以获取提成哦！');
 		
       },
       success: function (res) {
+		        window.location.href="http://ecshop.dev/mobile/re_url.php?user_id=12&type=1";
 		      },
       cancel: function (res) {
         alert('很遗憾，您已取消分享');
@@ -1031,13 +1033,14 @@ $(function() {
 	//分享到朋友圈模板之家
     wx.onMenuShareTimeline({
       title: '汇丰石化测试网站',
-      link: '',
+      link: 'http://ecshop.dev/mobile/index.php?u=12',
       imgUrl: '',
       trigger: function (res) {
-        			alert('糟糕，需要分销商登录才能获得提成哦！');
+        			alert('恭喜！分享可以获取提成哦！');
 		      },
       success: function (res) {
-       	      },
+       	        window.location.href="http://ecshop.dev/mobile/re_url.php?user_id=12&type=2";
+		      },
       cancel: function (res) {
          alert('很遗憾，您已取消分享');
       },

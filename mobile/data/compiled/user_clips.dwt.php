@@ -33,7 +33,7 @@
     <ul>
       <li> <a href="user.php?act=order_list"> <strong><?php echo $this->_var['info']['order_count']; ?></strong> <img  src="<?php echo $this->_var['ectouch_themes']; ?>/images/ico_user_01.png"> <span>30天订单</span> </a> </li>
       <li> <a href="user.php?act=point"> <strong><?php echo $this->_var['info']['integral']; ?></strong> <img  src="<?php echo $this->_var['ectouch_themes']; ?>/images/ico_user_02.png"> <span>积分</span> </a> </li>
-      <li> <a href="distribute.php?act=account_detail"> <strong><?php echo $this->_var['info']['surplus']; ?></strong> <img  src="<?php echo $this->_var['ectouch_themes']; ?>/images/ico_user_03.png"> <span>余额</span> </a> </li>
+      <li> <a href="user.php?act=account_detail"> <strong><?php echo $this->_var['info']['surplus']; ?></strong> <img  src="<?php echo $this->_var['ectouch_themes']; ?>/images/ico_user_03.png"> <span>余额</span> </a> </li>
       <li> <a class="fragment" href="user.php?act=bonus"> <strong><?php echo $this->_var['info']['bonus']; ?></strong> <img  src="<?php echo $this->_var['ectouch_themes']; ?>/images/ico_user_04.png"> <span>红包</span> </a> </li>
     </ul>
   </div>

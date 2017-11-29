@@ -14,11 +14,11 @@
 {insert_scripts files='common.js,user.js'}
 </head>
 <body class="user_center">
-<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem --> 
-<div id="wrapper" class="cle">	<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem --> 
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div id="wrapper" class="cle">	<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
     <div class="my_nala_main">
-        <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem --> 
-			
+        <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem -->
+
     <div class="my_nala_centre ilizi_centre">
     <div class="ilizi cle">
       	<div class="box">
@@ -311,7 +311,7 @@
 					<a href="./group_buy.php?act=view&id={$order.extension_id}" class="f6"><strong>{$lang.order_is_group_buy}</strong></a>
 					<!-- {elseif $order.extension_code eq "exchange_goods"} -->
 					<a href="./exchange.php?act=view&id={$order.extension_id}" class="f6"><strong>{$lang.order_is_exchange}</strong></a>
-					<!--{/if}-->  
+					<!--{/if}-->
 					<a href="user.php?act=message_list&order_id={$order.order_id}" class="f6">[{$lang.business_message}]</a>
 					</td>
         </tr>
@@ -653,7 +653,8 @@
       <!--{/if} -->
     <!--#订单详情页 end-->
     <!--#会员余额 start-->
-      <!--{if $action eq "account_raply" || $action eq "account_log" || $action eq "account_deposit" || $action eq "account_detail"} -->
+    <!-- // **chognzhi -->
+      <!--{if $action eq "account_raply" || $action eq "account_log" || $action eq "account_deposit" || $action eq "account_detail" || $action eq "account_deposit_card"} -->
         <script type="text/javascript">
           {foreach from=$lang.account_js item=item key=key}
             var {$key} = "{$item}";
@@ -663,7 +664,8 @@
         <div class="blank"></div>
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr>
-            <td align="right" bgcolor="#ffffff"><a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> | <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a> </td>
+              <!-- // **chognzhi -->
+            <td align="right" bgcolor="#ffffff"><a href="user.php?act=account_deposit_card" class="f6">充值卡</a> | <a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> | <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a> </td>
           </tr>
         </table>
         <!-- {/if} -->
@@ -731,11 +733,60 @@
           </table>
         </form>
         <!-- {/if} -->
+        <!-- // **chognzhi begin -->
+        <!-- {if $action eq "account_deposit_card"} -->
+        <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <!-- //**chognzhi -->
+            <tr>
+              <td width="15%" bgcolor="#ffffff">面值:</td>
+              <td bgcolor="#ffffff"><input type="radio" name="amount" value="{$faceValue}" checked> {$faceValue}元（到账{$accountAmount}元）</td>
+            </tr>
+            <tr>
+              <td bgcolor="#ffffff">数量:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="number"  class="inputBg" value="1" size="30" /></td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff"  colspan="3" align="left">{$lang.payment}:</td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#ffffff">{$lang.pay_name}</td>
+              <td bgcolor="#ffffff" width="60%">{$lang.pay_desc}</td>
+              <td bgcolor="#ffffff" width="17%">{$lang.pay_fee}</td>
+            </tr>
+            <!-- {foreach from=$payment item=list} -->
+            <tr>
+              <td bgcolor="#ffffff" align="left">
+              <input type="radio" name="payment_id" value="{$list.pay_id}" />{$list.pay_name}</td>
+              <td bgcolor="#ffffff" align="left">{$list.pay_desc}</td>
+              <td bgcolor="#ffffff" align="center">{$list.pay_fee}</td>
+            </tr>
+            <!-- {/foreach} -->
+            <tr>
+        <td bgcolor="#ffffff" colspan="3"  align="center">
+        <input type="hidden" name="surplus_type" value="0" />
+          <input type="hidden" name="rec_id" value="{$order.id}" />
+          <input type="hidden" name="act" value="act_account" />
+          <input type="submit" class="bnt_blue_1" name="submit" value="{$lang.submit_request}" />
+          <input type="reset" class="bnt_blue_1" name="reset" value="{$lang.button_reset}" />
+        </td>
+      </tr>
+          </table>
+        </form>
+        <!-- {/if} -->
+        <!-- // **chognzhi end -->
         <!-- {if $action eq "act_account"} -->
         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr>
             <td width="25%" align="right" bgcolor="#ffffff">{$lang.surplus_amount}</td>
             <td width="80%" bgcolor="#ffffff">{$amount}</td>
+          </tr>
+          <!-- //**chognzhi -->
+          <tr>
+            <td width="25%" align="right" bgcolor="#ffffff">您的实际到账金额</td>
+            <td width="80%" bgcolor="#ffffff">{$arrival}</td>
           </tr>
           <tr>
             <td align="right" bgcolor="#ffffff">{$lang.payment_name}</td>
@@ -782,6 +833,7 @@
             <td bgcolor="#ffffff">{$lang.process_time}</td>
             <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
             <td bgcolor="#ffffff">{$lang.money}</td>
+            <td bgcolor="#ffffff">实际到账</td>                        <!-- //**chognzhi -->
             <td bgcolor="#ffffff">{$lang.process_notic}</td>
             <td bgcolor="#ffffff">{$lang.admin_notic}</td>
             <td bgcolor="#ffffff">{$lang.is_paid}</td>
@@ -792,6 +844,7 @@
             <td align="center" bgcolor="#ffffff">{$item.add_time}</td>
             <td align="left" bgcolor="#ffffff">{$item.type}</td>
             <td align="right" bgcolor="#ffffff">{$item.amount}</td>
+            <td align="right" bgcolor="#ffffff">{$item.arrival}</td>            <!-- //**chognzhi -->
             <td align="left" bgcolor="#ffffff">{$item.short_user_note}</td>
             <td align="left" bgcolor="#ffffff">{$item.short_admin_note}</td>
             <td align="center" bgcolor="#ffffff">{$item.pay_status}</td>
@@ -1108,7 +1161,7 @@
      </div>
     </div>
     </div>
-    
+
     </div>
     </div>
     </div>

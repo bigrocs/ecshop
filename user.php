@@ -30,15 +30,15 @@ $smarty->assign('categories', get_categories_tree());  // 分类树
 $back_act='';
 $smarty->assign('_CFG', $_CFG);//附加系统配置
 
-
 // 不需要登录的操作或自己验证是否登录（如ajax处理）的act
 $not_login_arr =
 array('login','act_login','register','act_register','act_edit_password','get_password','send_pwd_email','send_pwd_mobile','password', 'signin', 'add_tag', 'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', 'order_query', 'is_registered', 'check_email','clear_history','qpassword_name', 'get_passwd_question', 'check_answer','oath' , 'oath_login', 'other_login', 'mpassword_name');
 
 /* 显示页面的action列表 */
+// **chognzhi account_deposit_card
 $ui_arr = array('register', 'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list',
 'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking', 'account_raply',
-'account_deposit', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name','mpassword_name', 'get_passwd_question','send_pwd_mobile', 'check_answer','bindmobile');
+'account_deposit', 'account_deposit_card', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name','mpassword_name', 'get_passwd_question','send_pwd_mobile', 'check_answer','bindmobile');
 
 /* 未登录处理 */
 if (empty($_SESSION['user_id'])) {
@@ -1572,7 +1572,21 @@ elseif ($action == 'account_deposit') {
     $smarty->assign('order', $account);
     $smarty->display('user_transaction.dwt');
 }
-
+/**
+ * [elseif 购卡充值]// **chognzhi begin
+ * @var [type]
+ */
+elseif ($action == 'account_deposit_card') {
+    include_once(ROOT_PATH . 'includes/lib_clips.php');
+    $surplus_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    $account    = get_surplus_info($surplus_id);
+    $smarty->assign('accountAmount', getShopConfigValue('account_amount'));
+    $smarty->assign('faceValue', getShopConfigValue('face_value'));
+    $smarty->assign('payment', get_online_payment_list(false));
+    $smarty->assign('order', $account);
+    $smarty->display('user_transaction.dwt');
+}
+// **chognzhi end
 /* 会员账目明细界面 */
 elseif ($action == 'account_detail') {
     include_once(ROOT_PATH . 'includes/lib_clips.php');
@@ -1657,7 +1671,9 @@ elseif ($action == 'account_log') {
 elseif ($action == 'act_account') {
     include_once(ROOT_PATH . 'includes/lib_clips.php');
     include_once(ROOT_PATH . 'includes/lib_order.php');
-    $amount = isset($_POST['amount']) ? floatval($_POST['amount']) : 0;
+    // **chognzhi
+    $number = isset($_POST['number'])   ? intval($_POST['number'])   : 1;
+    $amount = (isset($_POST['amount']) ? floatval($_POST['amount']) : 0)*$number;//根据数量计算 充值金额 默认1
     if ($amount <= 0) {
         show_message($_LANG['amount_gt_zero']);
     }
@@ -1671,7 +1687,6 @@ elseif ($action == 'act_account') {
             'user_note'    => isset($_POST['user_note'])    ? trim($_POST['user_note'])      : '',
             'amount'       => $amount
     );
-
     /* 退款申请的处理 */
     if ($surplus['process_type'] == 1) {
         /* 判断是否有足够的余额的进行退款的操作 */
@@ -1697,6 +1712,12 @@ elseif ($action == 'act_account') {
     }
     /* 如果是会员预付款，跳转到下一步，进行线上支付的操作 */
     else {
+        //**chognzhi使用充值卡充值时 根据充值比例计算实际到账金额 begin
+        $arrival = $amount;
+        if ($_POST['number']) {
+            $arrival = getShopConfigValue('account_amount')*$number;//后台数据写入 待写
+        }
+        //end
         if ($surplus['payment_id'] <= 0) {
             show_message($_LANG['select_payment_pls']);
         }
@@ -1707,7 +1728,7 @@ elseif ($action == 'act_account') {
         $payment_info = array();
         $payment_info = payment_info($surplus['payment_id']);
         $surplus['payment'] = $payment_info['pay_name'];
-
+        $surplus['arrival'] = $arrival; //**chognzhi
         if ($surplus['rec_id'] > 0) {
             //更新会员账目明细
             $surplus['rec_id'] = update_user_account($surplus);
@@ -1745,6 +1766,7 @@ elseif ($action == 'act_account') {
         $smarty->assign('payment', $payment_info);
         $smarty->assign('pay_fee', price_format($payment_info['pay_fee'], false));
         $smarty->assign('amount', price_format($amount, false));
+        $smarty->assign('arrival', price_format($arrival, false));//bigrocs 实际到账金额 **chognzhi
         $smarty->assign('order', $order);
         $smarty->display('user_transaction.dwt');
     }

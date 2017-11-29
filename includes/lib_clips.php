@@ -336,9 +336,14 @@ function add_booking($booking)
  */
 function insert_user_account($surplus, $amount)
 {
+    //bigrocs 增加实际到账金额 begin //**chognzhi
+    if (empty($surplus['arrival'])) {
+        $surplus['arrival'] = 0;
+    }
+    //end
     $sql = 'INSERT INTO ' .$GLOBALS['ecs']->table('user_account').
-           ' (user_id, admin_user, amount, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid)'.
-            " VALUES ('$surplus[user_id]', '', '$amount', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0)";
+           ' (user_id, admin_user, amount, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid, arrival)'.//**chognzhi
+            " VALUES ('$surplus[user_id]', '', '$amount', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0, '$surplus[arrival]')";//**chognzhi
     $GLOBALS['db']->query($sql);
 
     return $GLOBALS['db']->insert_id();

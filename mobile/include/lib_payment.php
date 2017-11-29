@@ -13,8 +13,7 @@
  * $Id: lib_payment.php 17218 2011-01-24 04:10:41Z yehuaixiao $
  */
 
-if (!defined('IN_ECTOUCH'))
-{
+if (!defined('IN_ECTOUCH')) {
     die('Hacking attempt');
 }
 
@@ -37,12 +36,10 @@ function get_payment($code)
            " WHERE pay_code = '$code' AND enabled = '1'";
     $payment = $GLOBALS['db']->getRow($sql);
 
-    if ($payment)
-    {
+    if ($payment) {
         $config_list = unserialize($payment['pay_config']);
 
-        foreach ($config_list AS $config)
-        {
+        foreach ($config_list as $config) {
             $payment[$config['name']] = $config['value'];
         }
     }
@@ -57,31 +54,21 @@ function get_payment($code)
  */
 function get_order_id_by_sn($order_sn, $voucher = 'false')
 {
-    if ($voucher == 'true')
-    {
-        if(is_numeric($order_sn))
-        {
-              return $GLOBALS['db']->getOne("SELECT log_id FROM " . $GLOBALS['ecs']->table('pay_log') . " WHERE order_id=" . $order_sn . ' AND order_type=1');
-        }
-        else
-        {
+    if ($voucher == 'true') {
+        if (is_numeric($order_sn)) {
+            return $GLOBALS['db']->getOne("SELECT log_id FROM " . $GLOBALS['ecs']->table('pay_log') . " WHERE order_id=" . $order_sn . ' AND order_type=1');
+        } else {
             return "";
         }
-    }
-    else
-    {
-        if(is_numeric($order_sn))
-        {
+    } else {
+        if (is_numeric($order_sn)) {
             $sql = 'SELECT order_id FROM ' . $GLOBALS['ecs']->table('order_info'). " WHERE order_sn = '$order_sn'";
             $order_id = $GLOBALS['db']->getOne($sql);
         }
-        if (!empty($order_id))
-        {
+        if (!empty($order_id)) {
             $pay_log_id = $GLOBALS['db']->getOne("SELECT log_id FROM " . $GLOBALS['ecs']->table('pay_log') . " WHERE order_id='" . $order_id . "'");
             return $pay_log_id;
-        }
-        else
-        {
+        } else {
             return "";
         }
     }
@@ -108,22 +95,16 @@ function get_goods_name_by_id($order_id)
  */
 function check_money($log_id, $money)
 {
-    if(is_numeric($log_id))
-    {
+    if (is_numeric($log_id)) {
         $sql = 'SELECT order_amount FROM ' . $GLOBALS['ecs']->table('pay_log') .
               " WHERE log_id = '$log_id'";
         $amount = $GLOBALS['db']->getOne($sql);
-    }
-    else
-    {
+    } else {
         return false;
     }
-    if ($money == $amount)
-    {
+    if ($money == $amount) {
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
@@ -141,22 +122,19 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
 {
     /* 取得支付编号 */
     $log_id = intval($log_id);
-    if ($log_id > 0)
-    {
+    if ($log_id > 0) {
         /* 取得要修改的支付记录信息 */
         $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('pay_log') .
                 " WHERE log_id = '$log_id'";
         $pay_log = $GLOBALS['db']->getRow($sql);
-        if ($pay_log && $pay_log['is_paid'] == 0)
-        {
+        if ($pay_log && $pay_log['is_paid'] == 0) {
             /* 修改此次支付操作的状态为已付款 */
             $sql = 'UPDATE ' . $GLOBALS['ecs']->table('pay_log') .
                     " SET is_paid = '1' WHERE log_id = '$log_id'";
             $GLOBALS['db']->query($sql);
 
             /* 根据记录类型做相应处理 */
-            if ($pay_log['order_type'] == PAY_ORDER)
-            {
+            if ($pay_log['order_type'] == PAY_ORDER) {
                 /* 取得订单信息 */
                 $sql = 'SELECT order_id, user_id, order_sn, consignee, address, tel, shipping_id, extension_code, extension_id, goods_amount ' .
                         'FROM ' . $GLOBALS['ecs']->table('order_info') .
@@ -179,79 +157,70 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
                 /* 记录订单操作记录 */
                 order_action($order_sn, OS_CONFIRMED, SS_UNSHIPPED, $pay_status, $note, $GLOBALS['_LANG']['buyer']);
 
-				/* 客户付款时给商家发送短信提醒 */
-				$order['mobile']=$order['mobile'] ? $order['mobile']:$order['tel'];
-				if ($GLOBALS['_CFG']['ecsdxt_order_payed'] == '1' && $GLOBALS['_CFG']['ecsdxt_shop_mobile'] != '')
-				{
-					require_once(ROOT_PATH . 'include/lib_sms.php');
+                /* 客户付款时给商家发送短信提醒 */
+                $order['mobile']=$order['mobile'] ? $order['mobile']:$order['tel'];
+                if ($GLOBALS['_CFG']['ecsdxt_order_payed'] == '1' && $GLOBALS['_CFG']['ecsdxt_shop_mobile'] != '') {
+                    require_once(ROOT_PATH . 'include/lib_sms.php');
 
-					$GLOBALS['smarty']->assign('shop_name',	$GLOBALS['_CFG']['shop_name']);
-					$GLOBALS['smarty']->assign('order_sn',		$order['order_sn']);
-					$GLOBALS['smarty']->assign('consignee',	$order['consignee']);
-					$GLOBALS['smarty']->assign('tel',			$order['mobile']);
-					$content = $GLOBALS['smarty']->fetch('str:' . $GLOBALS['_CFG']['ecsdxt_order_payed_value']);
-					$ret = sendsms($GLOBALS['_CFG']['ecsdxt_shop_mobile'], $content);
-				}
+                    $GLOBALS['smarty']->assign('shop_name', $GLOBALS['_CFG']['shop_name']);
+                    $GLOBALS['smarty']->assign('order_sn', $order['order_sn']);
+                    $GLOBALS['smarty']->assign('consignee', $order['consignee']);
+                    $GLOBALS['smarty']->assign('tel', $order['mobile']);
+                    $content = $GLOBALS['smarty']->fetch('str:' . $GLOBALS['_CFG']['ecsdxt_order_payed_value']);
+                    $ret = sendsms($GLOBALS['_CFG']['ecsdxt_shop_mobile'], $content);
+                }
 
-				/* 获取用户手机号 */
-				$sql = "SELECT user_id, mobile_phone FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id='$order[user_id]' LIMIT 1";
-				$row = $GLOBALS['db']->getRow($sql);
+                /* 获取用户手机号 */
+                $sql = "SELECT user_id, mobile_phone FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id='$order[user_id]' LIMIT 1";
+                $row = $GLOBALS['db']->getRow($sql);
 
-				/* 客户付款时给客户发送短信提醒 */
-				if ($GLOBALS['_CFG']['ecsdxt_customer_payed'] == '1' && $row['mobile_phone'] != '')
-				{
-					require_once(ROOT_PATH . 'include/lib_sms.php');
+                /* 客户付款时给客户发送短信提醒 */
+                if ($GLOBALS['_CFG']['ecsdxt_customer_payed'] == '1' && $row['mobile_phone'] != '') {
+                    require_once(ROOT_PATH . 'include/lib_sms.php');
 
-					$sql = "SELECT pay_time FROM " . $GLOBALS['ecs']->table('order_info') . " WHERE order_id='$order_id'";
-					$pay_time=$GLOBALS['db']->getOne($sql);
+                    $sql = "SELECT pay_time FROM " . $GLOBALS['ecs']->table('order_info') . " WHERE order_id='$order_id'";
+                    $pay_time=$GLOBALS['db']->getOne($sql);
 
-					$GLOBALS['smarty']->assign('shop_name',	$GLOBALS['_CFG']['shop_name']);
-					$GLOBALS['smarty']->assign('order_sn',		$order['order_sn']);
-					$GLOBALS['smarty']->assign('time',			local_date($GLOBALS['_CFG']['date_format'], $pay_time));
-					$content = $GLOBALS['smarty']->fetch('str:' . $GLOBALS['_CFG']['ecsdxt_customer_payed_value']);
-					$ret = sendsms($row['mobile_phone'], $content);
-				}
+                    $GLOBALS['smarty']->assign('shop_name', $GLOBALS['_CFG']['shop_name']);
+                    $GLOBALS['smarty']->assign('order_sn', $order['order_sn']);
+                    $GLOBALS['smarty']->assign('time', local_date($GLOBALS['_CFG']['date_format'], $pay_time));
+                    $content = $GLOBALS['smarty']->fetch('str:' . $GLOBALS['_CFG']['ecsdxt_customer_payed_value']);
+                    $ret = sendsms($row['mobile_phone'], $content);
+                }
 
-		/* 微信发送付款通知*/
-		$sql ="select autoload from ". $GLOBALS['ecs']->table('weixin_order') ." where order_name='pay'";
-		$autoload=$GLOBALS['db']->getOne($sql);
-		if($autoload=="yes"){
-			include_once(ROOT_PATH . 'wxch_notice.php');
-			weixin_notice($order,'pay');
-		}
+                /* 微信发送付款通知*/
+                $sql ="select autoload from ". $GLOBALS['ecs']->table('weixin_order') ." where order_name='pay'";
+                $autoload=$GLOBALS['db']->getOne($sql);
+                if ($autoload=="yes") {
+                    include_once(ROOT_PATH . 'wxch_notice.php');
+                    weixin_notice($order, 'pay');
+                }
                 /* 对虚拟商品的支持 */
                 $virtual_goods = get_virtual_goods($order_id);
-                if (!empty($virtual_goods))
-                {
+                if (!empty($virtual_goods)) {
                     $msg = '';
-                    if (!virtual_goods_ship($virtual_goods, $msg, $order_sn, true))
-                    {
+                    if (!virtual_goods_ship($virtual_goods, $msg, $order_sn, true)) {
                         $GLOBALS['_LANG']['pay_success'] .= '<div style="color:red;">'.$msg.'</div>'.$GLOBALS['_LANG']['virtual_goods_ship_fail'];
                     }
 
                     /* 如果订单没有配送方式，自动完成发货操作 */
-                    if ($order['shipping_id'] == -1)
-                    {
+                    if ($order['shipping_id'] == -1) {
                         /* 将订单标识为已发货状态，并记录发货记录 */
                         $sql = 'UPDATE ' . $GLOBALS['ecs']->table('order_info') .
                                " SET shipping_status = '" . SS_SHIPPED . "', shipping_time = '" . gmtime() . "'" .
                                " WHERE order_id = '$order_id'";
                         $GLOBALS['db']->query($sql);
 
-                         /* 记录订单操作记录 */
+                        /* 记录订单操作记录 */
                         order_action($order_sn, OS_CONFIRMED, SS_SHIPPED, $pay_status, $note, $GLOBALS['_LANG']['buyer']);
                         $integral = integral_to_give($order);
                         log_account_change($order['user_id'], 0, 0, intval($integral['rank_points']), intval($integral['custom_points']), sprintf($GLOBALS['_LANG']['order_gift_integral'], $order['order_sn']));
                     }
                 }
-
-            }
-            elseif ($pay_log['order_type'] == PAY_SURPLUS)
-            {			
-				$sql = 'SELECT `id` FROM ' . $GLOBALS['ecs']->table('user_account') .  " WHERE `id` = '$pay_log[user_account_id]' AND `is_paid` = 1  LIMIT 1";
+            } elseif ($pay_log['order_type'] == PAY_SURPLUS) {
+                $sql = 'SELECT `id` FROM ' . $GLOBALS['ecs']->table('user_account') .  " WHERE `id` = '$pay_log[user_account_id]' AND `is_paid` = 1  LIMIT 1";
                 $res_id=$GLOBALS['db']->getOne($sql);
-                if(empty($res_id))
-                {
+                if (empty($res_id)) {
                     /* 更新会员预付款的到款状态 */
                     $sql = 'UPDATE ' . $GLOBALS['ecs']->table('user_account') .
                            " SET paid_time = '" .gmtime(). "', is_paid = 1" .
@@ -271,59 +240,51 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
                     /* 修改会员帐户金额 */
                     $_LANG = array();
                     include_once(ROOT_PATH . 'lang/' . $GLOBALS['_CFG']['lang'] . '/user.php');
+                    //**chognzhi begin
+                    if ($account['arrival']) {
+                        $arr['amount'] = $arr['arrival'];
+                    }
+                    //**chognzhi end
                     log_account_change($arr['user_id'], $arr['amount'], 0, 0, 0, $_LANG['surplus_type_0'], ACT_SAVING);
                 }
             }
-        }
-        else
-        {
+        } else {
             /* 取得已发货的虚拟商品信息 */
             $post_virtual_goods = get_virtual_goods($pay_log['order_id'], true);
 
             /* 有已发货的虚拟商品 */
-            if (!empty($post_virtual_goods))
-            {
+            if (!empty($post_virtual_goods)) {
                 $msg = '';
                 /* 检查两次刷新时间有无超过12小时 */
                 $sql = 'SELECT pay_time, order_sn FROM ' . $GLOBALS['ecs']->table('order_info') . " WHERE order_id = '$pay_log[order_id]'";
                 $row = $GLOBALS['db']->getRow($sql);
                 $intval_time = gmtime() - $row['pay_time'];
-                if ($intval_time >= 0 && $intval_time < 3600 * 12)
-                {
+                if ($intval_time >= 0 && $intval_time < 3600 * 12) {
                     $virtual_card = array();
-                    foreach ($post_virtual_goods as $code => $goods_list)
-                    {
+                    foreach ($post_virtual_goods as $code => $goods_list) {
                         /* 只处理虚拟卡 */
-                        if ($code == 'virtual_card')
-                        {
-                            foreach ($goods_list as $goods)
-                            {
-                                if ($info = virtual_card_result($row['order_sn'], $goods))
-                                {
+                        if ($code == 'virtual_card') {
+                            foreach ($goods_list as $goods) {
+                                if ($info = virtual_card_result($row['order_sn'], $goods)) {
                                     $virtual_card[] = array('goods_id'=>$goods['goods_id'], 'goods_name'=>$goods['goods_name'], 'info'=>$info);
                                 }
                             }
 
-                            $GLOBALS['smarty']->assign('virtual_card',      $virtual_card);
+                            $GLOBALS['smarty']->assign('virtual_card', $virtual_card);
                         }
                     }
-                }
-                else
-                {
+                } else {
                     $msg = '<div>' .  $GLOBALS['_LANG']['please_view_order_detail'] . '</div>';
                 }
 
                 $GLOBALS['_LANG']['pay_success'] .= $msg;
             }
 
-           /* 取得未发货虚拟商品 */
-           $virtual_goods = get_virtual_goods($pay_log['order_id'], false);
-           if (!empty($virtual_goods))
-           {
-               $GLOBALS['_LANG']['pay_success'] .= '<br />' . $GLOBALS['_LANG']['virtual_goods_ship_fail'];
-           }
+            /* 取得未发货虚拟商品 */
+            $virtual_goods = get_virtual_goods($pay_log['order_id'], false);
+            if (!empty($virtual_goods)) {
+                $GLOBALS['_LANG']['pay_success'] .= '<br />' . $GLOBALS['_LANG']['virtual_goods_ship_fail'];
+            }
         }
     }
 }
-
-?>
