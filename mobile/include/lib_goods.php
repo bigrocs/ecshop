@@ -1171,7 +1171,7 @@ function assign_cat_goods($cat_id, $num = 0, $from = 'web', $order_rule = '')
     if ($region) {
         $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
                    "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
-                  'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img ' .
+                  'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, g.jiubi ' .//**chognzhi
                "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
                'LEFT JOIN ' . $GLOBALS['ecs']->table('goods_region') . ' AS gr ON gr.goods_id = g.goods_id ' .
                "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
@@ -1182,7 +1182,7 @@ function assign_cat_goods($cat_id, $num = 0, $from = 'web', $order_rule = '')
     } else {
         $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
                     "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
-                   'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img ' .
+                   'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, g.jiubi ' .//**chognzhi
                 "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
                 "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
                         "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
@@ -1232,7 +1232,7 @@ function assign_cat_goods($cat_id, $num = 0, $from = 'web', $order_rule = '')
             $goods[$idx]['promote_price'] = '';
         }
 
-
+        $goods[$idx]['jiubi']           = $row['jiubi'];//**chognzhi
 
         $goods[$idx]['id']           = $row['goods_id'];
 

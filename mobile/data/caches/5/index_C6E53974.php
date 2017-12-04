@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1511945973;s:8:"maketime";i:1511942373;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1512275998;s:8:"maketime";i:1512272398;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -260,31 +260,31 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=171&u=12">
-                <img src="http://ecshop.dev/images/201711/thumb_img/171_thumb_G_1511568892414.jpg" alt="西王玉米胚芽油" />
+            <a href="goods.php?id=202&u=12">
+                <img src="http://ecshop.dev/images/201711/thumb_img/202_thumb_G_1511572087353.jpg" alt="怀庄53-神秘茅台" />
+            </a>
+            <div style="text-align:center">
+             
+            <span class="price_s"> ￥<span>98</span> </span> 
+                        <br>怀庄53-神秘茅台            </div>
+        </div>
+                         <div class="goodsItem flex_in">
+            <a href="goods.php?id=50&u=12">
+                <img src="http://ecshop.dev/images/201512/thumb_img/50_thumb_G_1448946542088.jpg" alt="Johnnie Walker尊尼获加黑牌威士忌" />
             </a>
             <div style="text-align:center">
              
             <span class="price_s"> ￥<span>20</span> </span> 
-                        <br>西王玉米胚芽油            </div>
+                        <br>Johnnie Walk...            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=182&u=12">
-                <img src="http://ecshop.dev/images/201711/thumb_img/182_thumb_G_1511570888835.jpg" alt="西王葵花籽油" />
+            <a href="goods.php?id=49&u=12">
+                <img src="http://ecshop.dev/images/201511/thumb_img/49_thumb_G_1448162819357.jpg" alt="1分钱支付测试商品" />
             </a>
             <div style="text-align:center">
              
-            <span class="price_s"> ￥<span>20</span> </span> 
-                        <br>西王葵花籽油            </div>
-        </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=187&u=12">
-                <img src="http://ecshop.dev/images/201711/thumb_img/187_thumb_G_1511571187942.jpg" alt="西王橄榄玉米胚芽油" />
-            </a>
-            <div style="text-align:center">
-             
-            <span class="price_s"> ￥<span>80</span> </span> 
-                        <br>西王橄榄玉米胚芽油            </div>
+            <span class="price_s"> ￥<span>1</span> </span> 
+                        <br>1分钱支付测试商品            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
 </section>
@@ -303,7 +303,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>88</span> </span>
                         <del style="color:#878D99">￥<span>126</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 60.00 </span>
             <br>新疆巴尔鲁克生鲜牛排眼肉...            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -313,7 +313,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>108</span> </span>
                         <del style="color:#878D99">￥<span>130</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>日本蒜蓉粉丝扇贝270克...            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -323,7 +323,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>26</span> </span>
                         <del style="color:#878D99">￥<span>31</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>澳洲进口120天谷饲牛仔...            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
@@ -333,7 +333,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>88</span> </span>
                         <del style="color:#878D99">￥<span>106</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>内蒙新鲜牛肉1斤清真生鲜...            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -343,7 +343,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>168</span> </span>
                         <del style="color:#878D99">￥<span>202</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>爱食派内蒙古呼伦贝尔冷冻...            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -353,7 +353,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>125</span> </span>
                         <del style="color:#878D99">￥<span>150</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>五星眼肉牛排套餐8片装原...            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
@@ -391,7 +391,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>98</span> </span>
                         <del style="color:#878D99">￥<span>298</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>怀庄53-神秘茅台            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -401,7 +401,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>268</span> </span>
                         <del style="color:#878D99">￥<span>268</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>怀庄53-喜酱            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -411,7 +411,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>598</span> </span>
                         <del style="color:#878D99">￥<span>598</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>怀庄53-六合文化            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
@@ -421,7 +421,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>380</span> </span>
                         <del style="color:#878D99">￥<span>380</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>怀庄53-和贵福            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -431,7 +431,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>580</span> </span>
                         <del style="color:#878D99">￥<span>580</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>怀庄53-人赐福            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -441,7 +441,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>780</span> </span>
                         <del style="color:#878D99">￥<span>780</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>怀庄53-地赐福            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
@@ -477,7 +477,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>139</span> </span>
                         <del style="color:#878D99">￥<span>139</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王花生油            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -487,7 +487,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>22</span> </span>
                         <del style="color:#878D99">￥<span>22</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王鲜胚玉米胚芽油            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -497,7 +497,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>80</span> </span>
                         <del style="color:#878D99">￥<span>80</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王橄榄玉米胚芽油            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
@@ -507,7 +507,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>20</span> </span>
                         <del style="color:#878D99">￥<span>20</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王葵花籽油            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -517,7 +517,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>70</span> </span>
                         <del style="color:#878D99">￥<span>70</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王玉米胚芽油4L+葵花...            </div>
         </div>
                          <div class="goodsItem flex_in">
@@ -527,7 +527,7 @@ TouchSlide({
             <div style="text-align:center">
                         <span class="price_s"> ￥<span>70</span> </span>
                         <del style="color:#878D99">￥<span>70</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王玉米胚芽油4L+鲜胚...            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
@@ -1001,9 +1001,9 @@ $(function() {
   wx.config({
     debug: false,
     appId: '',
-    timestamp: 1511942373,
-    nonceStr: '5V4f2hJtkGgeg5mU',
-    signature: 'c96ffef9af78fca538d50ae981f68fd58d3a16bb',
+    timestamp: 1512272398,
+    nonceStr: 'Oa0utPKXHULNPZMt',
+    signature: 'd2cfb0981d223e4872f44b072d3665cc425d7370',
     jsApiList: [
         'onMenuShareTimeline',
         'onMenuShareAppMessage'

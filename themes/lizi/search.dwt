@@ -85,7 +85,7 @@
                     <!--{if $goods.promote_price neq "" } -->{$goods.promote_price} <!--{else}-->{$goods.shop_price}<!--{/if}-->
                     <del style="color:#878D99">{$goods.market_price}</del></b>
                    </span>
-                   <span style="">可用储值卡:<span style="color:#EB9E05"> 100 </span></span>
+                   <span style="">可用储值卡:<span style="color:#EB9E05"> {$goods.jiubi} </span></span>
                    <span class="productname">{$goods.goods_name}</span>
                    <span class="description">{$goods.goods_brief}</span>
                    <span class="price"> 专柜价：{$goods.market_price} </span>

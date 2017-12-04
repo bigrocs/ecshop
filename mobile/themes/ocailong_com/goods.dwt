@@ -212,7 +212,7 @@ function showPic(){
 {/if}
   </ul>
   <ul>
-      <li>可用储值卡:<b class="price">{$goods.deductible_jiubi}</b></li>
+      <li>可用储值卡:<b class="price">{$goods.jiubi}</b></li>
   </ul>
   <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
   {insert_scripts files='lefttime.js'}

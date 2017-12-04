@@ -432,7 +432,7 @@ function category_get_goods($children, $brand, $min, $max, $ext, $size, $page, $
     if ($region) {
         $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style,g.sales_volume_base, g.comments_number, g.market_price, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ' .
                     "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, g.promote_price, g.goods_type, " .
-                    'g.promote_start_date, g.promote_end_date, g.goods_brief, g.goods_thumb , g.goods_img ' .
+                    'g.promote_start_date, g.promote_end_date, g.goods_brief, g.goods_thumb , g.goods_img, g.jiubi ' .//**chognzhi
                 'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
                 'LEFT JOIN ' . $GLOBALS['ecs']->table('goods_region') . ' AS gr ON gr.goods_id = g.goods_id ' .
                 'LEFT JOIN ' . $GLOBALS['ecs']->table('member_price') . ' AS mp ' .
@@ -441,7 +441,7 @@ function category_get_goods($children, $brand, $min, $max, $ext, $size, $page, $
     } else {
         $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style,g.sales_volume_base, g.comments_number, g.market_price, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ' .
                     "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, g.promote_price, g.goods_type, " .
-                    'g.promote_start_date, g.promote_end_date, g.goods_brief, g.goods_thumb , g.goods_img ' .
+                    'g.promote_start_date, g.promote_end_date, g.goods_brief, g.goods_thumb , g.goods_img, g.jiubi ' .//**chognzhi
                 'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
                 'LEFT JOIN ' . $GLOBALS['ecs']->table('member_price') . ' AS mp ' .
                     "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' " .
@@ -483,6 +483,7 @@ function category_get_goods($children, $brand, $min, $max, $ext, $size, $page, $
         } else {
             $arr[$row['goods_id']]['goods_name']       = $row['goods_name'];
         }
+        $arr[$row['goods_id']]['jiubi']             = $row['jiubi'];
         $arr[$row['goods_id']]['name']             = $row['goods_name'];
         $arr[$row['goods_id']]['goods_brief']      = $row['goods_brief'];
         $arr[$row['goods_id']]['sales_volume_base']      = get_sales_counts($row['goods_id']);

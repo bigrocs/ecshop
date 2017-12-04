@@ -20,7 +20,7 @@
             <span class="price_s"> {$goods.shop_price} </span>
             <!--{/if}-->
             <del style="color:#878D99">{$goods.market_price}</del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 100 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> {$goods.jiubi} </span>
             <br>{$goods.name|escape:html|truncate:12}
             </div>
         </div>

@@ -36,7 +36,7 @@
               <!--{/if}-->
               <del style="color:#878D99">{$goods.market_price}</del>
             </div>
-            <div class="proService">可用储值卡:<span style="color:#EB9E05"> 100 </span></div>
+            <div class="proService">可用储值卡:<span style="color:#EB9E05"> {$goods.jiubi} </span></div>
             <div class="proService"> <del>{$goods.market_price}</del></div>
             <div class="proSales">月销:<em>{$goods.sales_count}</em></div>
             <div class="proIcons">
