@@ -637,7 +637,8 @@ function user_list()
         /* 分页大小 */
         $filter = page_and_size($filter);
         // $sql = "SELECT user_id, user_name, mobile_phone, email, is_validated, user_money, frozen_money, rank_points, pay_points, reg_time ".
-        $sql = "SELECT user_id, user_name, mobile_phone, email, is_validated, user_money, frozen_money, rank_points, jiubi, pay_points, reg_time ".
+        // vip_money
+        $sql = "SELECT user_id, user_name, mobile_phone, email, is_validated, user_money, frozen_money, rank_points, jiubi, vip_money, pay_points, reg_time ".
                 " FROM " . $GLOBALS['ecs']->table('users') . $ex_where .
                 " ORDER by " . $filter['sort_by'] . ' ' . $filter['sort_order'] .
                 " LIMIT " . $filter['start'] . ',' . $filter['page_size'];

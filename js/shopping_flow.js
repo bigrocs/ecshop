@@ -6,6 +6,7 @@ var selectedSurplus  = '';
 var selectedBonus    = 0;
 var selectedIntegral = 0;
 var selectedJiubi = 0;
+var selectedVipMoney = 0;
 var selectedOOS      = null;
 var alertedSurplus   = false;
 
@@ -304,6 +305,47 @@ function changeSurplusResponse(obj)
     try
     {
       document.getElementById("ECS_SURPLUS_NOTICE").innerHTML = '';
+    }
+    catch (ex) { }
+    orderSelectedResponse(obj.content);
+  }
+}
+/* *
+ * 改变vip金额
+ */
+function changeVipMoney(val)
+{
+  if (selectedVipMoney == val)
+  {
+    return;
+  }
+  else
+  {
+    selectedVipMoney= val;
+  }
+
+  Ajax.call('flow.php?step=change_vipMoney', 'points=' + val, changeVipMoneyResponse, 'GET', 'JSON');
+}
+/* *
+ * 改变vip金额额回调函数
+ */
+function changeVipMoneyResponse(obj)
+{
+  if (obj.error)
+  {
+    try
+    {
+      document.getElementById('ECS_VIP_MONEY_NOTICE').innerHTML = obj.error;
+      document.getElementById('ECS_VIP_MONEY').value = '0';
+      document.getElementById('ECS_VIP_MONEY').focus();
+    }
+    catch (ex) { }
+  }
+  else
+  {
+    try
+    {
+      document.getElementById('ECS_VIP_MONEY_NOTICE').innerHTML = '';
     }
     catch (ex) { }
     orderSelectedResponse(obj.content);

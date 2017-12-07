@@ -1743,7 +1743,9 @@ elseif ($action == 'async_order_list') {
             //获取订单第一个商品的图片
 
             $img = $db->getOne("SELECT g.goods_thumb FROM " .$ecs->table('order_goods'). " as og left join " .$ecs->table('goods'). " g on og.goods_id = g.goods_id WHERE og.order_id = ".$vo['order_id']." limit 1");
-
+            if (empty($img)) {
+                $config['site_url'] = '#';//防止为空时报错
+            }
             $tracking = ($vo['shipping_id'] > 0) ? '<a href="user.php?act=order_tracking&order_id='.$vo['order_id'].'" class="c-btn3">订单跟踪</a>':'';
 
             $asyList[] = array(
@@ -1916,7 +1918,6 @@ elseif ($action == 'order_detail') {
     $order['pay_status'] = $_LANG['ps'][$order['pay_status']];
 
     $order['shipping_status'] = $_LANG['ss'][$order['shipping_status']];
-
 
 
     $smarty->assign('order', $order);
@@ -2878,6 +2879,8 @@ elseif ($action == 'account_deposit_card') {
     $account    = get_surplus_info($surplus_id);
     $smarty->assign('accountAmount', getShopConfigValue('account_amount'));
     $smarty->assign('faceValue', getShopConfigValue('face_value'));
+    $smarty->assign('vipAccountAmount', getShopConfigValue('vip_account_amount'));
+    $smarty->assign('vipFaceValue', getShopConfigValue('vip_face_value'));
     $smarty->assign('payment', get_online_payment_list(false));
     $smarty->assign('order', $account);
     $smarty->display('user_transaction.dwt');
@@ -3113,9 +3116,11 @@ elseif ($action == 'act_account') {
 
     else {
         //**chognzhi使用充值卡充值时 根据充值比例计算实际到账金额 begin
+        //**vip_money
         $arrival = $amount;
         if ($_POST['number']) {
-            $arrival = getShopConfigValue('account_amount')*$number;//后台数据写入 待写
+            $ArrivalMoney = getArrivalInfo($_POST['amount'], $number);  //vip_money
+            $arrival = $ArrivalMoney['user_money'];//后台数据写入 待写
         }
         //end
         if ($surplus['payment_id'] <= 0) {
@@ -3136,7 +3141,7 @@ elseif ($action == 'act_account') {
 
         $surplus['payment'] = $payment_info['pay_name'];
         $surplus['arrival'] = $arrival; //**chognzhi
-
+        $surplus['vip_money'] = $ArrivalMoney['vip_money']; //**vip_money
 
         if ($surplus['rec_id'] > 0) {
 
@@ -3235,6 +3240,11 @@ elseif ($action == 'act_account') {
         $smarty->assign('amount', price_format($amount, false));
 
         $smarty->assign('arrival', price_format($arrival, false));//bigrocs 实际到账金额 **chognzhi
+        $smarty->assign('vip_money', price_format($ArrivalMoney['vip_money'], false));//vip_money
+        if (empty($ArrivalMoney['jiubi'])) {
+            $ArrivalMoney['jiubi'] = $amount;
+        }
+        $smarty->assign('jiubi', price_format($ArrivalMoney['jiubi'], false));//vip_money 到账储值卡金额
         $smarty->assign('order', $order);
 
         $smarty->display('user_transaction.dwt');
@@ -6086,4 +6096,29 @@ function kuaidi100($shipping_name, $invoice_sn)
         }
     $url = 'http://m.kuaidi100.com/query?type=' .$shipping. '&id=1&postid=' .$invoice_sn. '&temp='.time();
     return $url;
+}
+/**
+ * [getArrivalInfo 获取到账信息]
+ * @param  [type] $amount [description]
+ * @param  [type] $number [description]
+ * @return [type]         [description]
+ */
+function getArrivalInfo($amount, $number)
+{
+    $arrivalInfo = array();
+    $face_value = getShopConfigValue('face_value');
+    $vip_face_value = getShopConfigValue('vip_face_value');
+    if ($amount == $face_value) {
+        $account_amount = getShopConfigValue('account_amount')*$number;
+        $arrivalInfo['user_money'] = $account_amount; //到账用户金额
+        $arrivalInfo['jiubi'] = $account_amount; //到账储值卡金额
+        $arrivalInfo['vip_money'] = 0; //到账VIP金额
+    }
+    if ($amount == $vip_face_value) {
+        $vip_account_amount = getShopConfigValue('vip_account_amount')*$number;
+        $arrivalInfo['user_money'] = 0; //到账用户金额
+        $arrivalInfo['jiubi'] = $vip_account_amount; //到账储值卡金额
+        $arrivalInfo['vip_money'] = $vip_account_amount; //到账VIP金额
+    }
+    return $arrivalInfo;
 }

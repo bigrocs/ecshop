@@ -564,6 +564,12 @@ jQuery(function($){
             <?php if ($this->_var['order']['surplus'] > 0): ?>
             - <?php echo $this->_var['lang']['use_surplus']; ?>: <?php echo $this->_var['order']['formated_surplus']; ?>
             <?php endif; ?>
+            <?php if ($this->_var['order']['jiubi'] > 0): ?>
+            - 使用储值卡: <?php echo $this->_var['order']['formated_jiubi']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['vip_money'] > 0): ?>
+            - 使用VIP余额: <?php echo $this->_var['order']['formated_vip_money']; ?>
+            <?php endif; ?>
             <?php if ($this->_var['order']['integral_money'] > 0): ?>
             - <?php echo $this->_var['lang']['use_integral']; ?>: <?php echo $this->_var['order']['formated_integral_money']; ?>
             <?php endif; ?>
@@ -787,6 +793,12 @@ jQuery(function($){
             <?php if ($this->_var['order']['surplus'] > 0): ?>
             - <?php echo $this->_var['lang']['use_surplus']; ?>: <?php echo $this->_var['order']['formated_surplus']; ?>
             <?php endif; ?>
+            <?php if ($this->_var['order']['jiubi'] > 0): ?>
+            - 使用储值卡: <?php echo $this->_var['order']['formated_jiubi']; ?>
+            <?php endif; ?>
+            <?php if ($this->_var['order']['vip_money'] > 0): ?>
+            - 使用VIP余额: <?php echo $this->_var['order']['formated_vip_money']; ?>
+            <?php endif; ?>
             <?php if ($this->_var['order']['integral_money'] > 0): ?>
             - <?php echo $this->_var['lang']['use_integral']; ?>: <?php echo $this->_var['order']['formated_integral_money']; ?>
             <?php endif; ?>
@@ -921,6 +933,7 @@ jQuery(function($){
           <tr>
             <td width="15%" bgcolor="#ffffff">面值:</td>
             <td bgcolor="#ffffff"><input type="radio" name="amount" value="<?php echo $this->_var['faceValue']; ?>" checked> <?php echo $this->_var['faceValue']; ?>元（到账<?php echo $this->_var['accountAmount']; ?>元）</td>
+            <td bgcolor="#ffffff"><input type="radio" name="amount" value="<?php echo $this->_var['vipFaceValue']; ?>" checked> <?php echo $this->_var['vipFaceValue']; ?>元（到账<?php echo $this->_var['vipAccountAmount']; ?>元）</td>
           </tr>
           <tr>
             <td bgcolor="#ffffff">数量:</td>
@@ -973,6 +986,15 @@ jQuery(function($){
           <td width="25%" align="right" bgcolor="#ffffff">您的实际到账金额</td>
           <td width="80%" bgcolor="#ffffff"><?php echo $this->_var['arrival']; ?></td>
         </tr>
+        
+        <tr>
+          <td width="25%" align="right" bgcolor="#ffffff">您的实际到账VIP金额</td>
+          <td width="80%" bgcolor="#ffffff"><?php echo $this->_var['vip_money']; ?></td>
+        </tr>
+        <tr>
+          <td width="25%" align="right" bgcolor="#ffffff">您的实际到账储值卡金额</td>
+          <td width="80%" bgcolor="#ffffff"><?php echo $this->_var['jiubi']; ?></td>
+        </tr>
         <tr>
           <td align="right" ><?php echo $this->_var['lang']['payment_name']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['payment']['pay_name']; ?></td>
@@ -1020,7 +1042,9 @@ jQuery(function($){
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['process_time']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['surplus_pro_type']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['money']; ?></td>
-          <td bgcolor="#ffffff">实际到账</td>                        
+          <td bgcolor="#ffffff">余额到账</td>                        
+          <td bgcolor="#ffffff">VIP到账</td>                        
+          <td bgcolor="#ffffff">储值卡到账</td>                        
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['process_notic']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['admin_notic']; ?></td>
           <td bgcolor="#ffffff"><?php echo $this->_var['lang']['is_paid']; ?></td>
@@ -1034,6 +1058,8 @@ jQuery(function($){
           <td align="left" bgcolor="#ffffff"><?php echo $this->_var['item']['type']; ?></td>
           <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['amount']; ?></td>
           <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['arrival']; ?></td>            
+          <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['vip_money']; ?></td>            
+          <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['jiubi']; ?></td>            
           <td align="left" bgcolor="#ffffff"><?php echo $this->_var['item']['short_user_note']; ?></td>
           <td align="left" bgcolor="#ffffff"><?php echo $this->_var['item']['short_admin_note']; ?></td>
           <td align="center" bgcolor="#ffffff"><?php echo $this->_var['item']['pay_status']; ?></td>

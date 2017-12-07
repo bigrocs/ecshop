@@ -340,10 +340,14 @@ function insert_user_account($surplus, $amount)
     if (empty($surplus['arrival'])) {
         $surplus['arrival'] = 0;
     }
+    //vip_money
+    if (empty($surplus['vip_money'])) {
+        $surplus['vip_money'] = 0;
+    }
     //end
     $sql = 'INSERT INTO ' .$GLOBALS['ecs']->table('user_account').
-           ' (user_id, admin_user, amount, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid, arrival)'.//**chognzhi
-            " VALUES ('$surplus[user_id]', '', '$amount', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0, '$surplus[arrival]')";//**chognzhi
+           ' (user_id, admin_user, amount, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid, arrival, vip_money)'.//**chognzhi  vip_money
+            " VALUES ('$surplus[user_id]', '', '$amount', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0, '$surplus[arrival]', '$surplus[vip_money]')";//**chognzhi  vip_money
     $GLOBALS['db']->query($sql);
 
     return $GLOBALS['db']->insert_id();
@@ -470,7 +474,11 @@ function get_account_log($user_id, $num, $start)
             $rows['short_user_note']  = ($rows['user_note'] > '') ? sub_str($rows['user_note'], 30) : 'N/A';
             $rows['pay_status']       = ($rows['is_paid'] == 0) ? $GLOBALS['_LANG']['un_confirm'] : $GLOBALS['_LANG']['is_confirm'];
             $rows['amount']           = price_format(abs($rows['amount']), false);
-
+            if ($rows['vip_money'] != 0.00) {
+                $rows['jiubi'] = $rows['vip_money'];
+            } else {
+                $rows['jiubi'] = $rows['arrival'];
+            }
             /* 会员的操作类型： 冲值，提现 */
             if ($rows['process_type'] == 0) {
                 $rows['type'] = $GLOBALS['_LANG']['surplus_type_0'];
@@ -490,7 +498,6 @@ function get_account_log($user_id, $num, $start)
 
             $account_log[] = $rows;
         }
-
         return $account_log;
     } else {
         return false;
@@ -538,10 +545,11 @@ function get_user_surplus($user_id)
 function get_user_default($user_id)
 {
     $user_bonus = get_user_bonus();
-
-    $sql = "SELECT jiubi, pay_points, user_money, credit_line, last_login, is_validated FROM " .$GLOBALS['ecs']->table('users'). " WHERE user_id = '$user_id'";
+    // vip_money
+    $sql = "SELECT vip_money, jiubi, pay_points, user_money, credit_line, last_login, is_validated FROM " .$GLOBALS['ecs']->table('users'). " WHERE user_id = '$user_id'";
     $row = $GLOBALS['db']->getRow($sql);
     $info = array();
+    $info['vip_money']  = $row['vip_money']; //vip_money
     $info['jiubi']  = $row['jiubi'];
     $info['username']  = stripslashes($_SESSION['user_name']);
     $info['shop_name'] = $GLOBALS['_CFG']['shop_name'];

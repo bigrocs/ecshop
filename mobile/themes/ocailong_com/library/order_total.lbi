@@ -37,7 +37,8 @@
 + {$lang.card_fee}: <font class="f4_b">{$total.card_fee_formated}</font>
 <!-- {/if} -->
 <br/>
-<!-- {if $total.surplus > 0 or $total.integral > 0 or $total.bonus > 0 or $total.jiubi > 0} 使用余额或积分或红包 -->
+<!-- //vip_money -->
+<!-- {if $total.surplus > 0 or $total.integral > 0 or $total.bonus > 0 or $total.jiubi > 0 or $total.vip_money > 0} 使用余额或积分或红包 -->
   <!-- {if $total.surplus > 0} 使用余额 -->
   - {$lang.use_surplus}: <font class="f4_b">{$total.surplus_formated}</font>
   <!-- {/if} -->
@@ -45,7 +46,10 @@
   - {$lang.use_integral}: <font class="f4_b">{$total.integral_formated}</font>
   <!-- {/if} -->
   <!-- {if $total.jiubi > 0} 使用储值卡金额 -->
-  - 使用储值卡金额: <font class="f4_b">{$total.jiubi_formated}</font>
+  - 储值卡金额: <font class="f4_b">{$total.jiubi_formated}</font>
+  <!-- {/if} -->
+  <!-- {if $total.vip_money > 0} 使用VIP余额 //vip_money -->
+  - VIP余额: <font class="f4_b">{$total.vip_money_formated}</font>
   <!-- {/if} -->
   <!-- {if $total.bonus > 0} 使用红包 -->
   - {$lang.use_bonus}: <font class="f4_b">{$total.bonus_formated}</font>

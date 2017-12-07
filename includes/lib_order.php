@@ -388,6 +388,9 @@ function order_info($order_id, $order_sn = '')
 
     /* 格式化金额字段 */
     if ($order) {
+        $order['formated_jiubi']          = price_format($order['jiubi'], false); //jiubi
+        $order['formated_vip_money']          = price_format($order['vip_money'], false); //vip_money
+
         $order['formated_goods_amount']   = price_format($order['goods_amount'], false);
         $order['formated_discount']       = price_format($order['discount'], false);
         $order['formated_tax']            = price_format($order['tax'], false);
@@ -522,6 +525,7 @@ function order_fee($order, $goods, $consignee)
                     'shipping_insure'  => 0,
                     'integral_money'   => 0,
                     'jiubi_money'      => 0,
+                    'vip_money_formated'=> 0,//vip_money
                     'bonus'            => 0,
                     'surplus'          => 0,
                     'cod_fee'          => 0,
@@ -729,7 +733,22 @@ function order_fee($order, $goods, $consignee)
     }
     $total['jiubi'] = $order['jiubi'];
     $total['jiubi_formated'] = price_format($total['jiubi_money'], false);
+    //vip_money begin
+    $order['vip_money'] = $order['vip_money'] > 0 ? $order['vip_money'] : 0;
+    if ($total['amount'] > 0 && $max_amount > 0 && $order['vip_money'] > 0) {
+        $vipMoney = $order['vip_money'];
 
+        // 使用储值卡金额支付
+        $use_vipMoney          = min($total['amount'], $max_amount, $vipMoney); // 实际使用储值卡金额支付的金额
+        $total['amount']        -= $use_vipMoney;
+        $total['vip_money']   = $use_vipMoney;
+        $order['vip_money']       = $use_vipMoney;
+    } else {
+        $total['vip_money'] = 0;
+        $order['vip_money']       = 0;
+    }
+    $total['vip_money_formated'] = price_format($total['vip_money'], false);
+    //vip_money end
     /* 保存订单信息 */
     $_SESSION['flow_order'] = $order;
 
@@ -809,7 +828,7 @@ function cart_goods($type = CART_GENERAL_GOODS)
 {
     $sql = "SELECT rec_id, user_id, goods_id, goods_name, goods_sn, goods_number, " .
             "market_price, goods_price, fencheng, goods_attr, is_real, extension_code, parent_id, is_gift, is_shipping, " .
-            "goods_price * goods_number AS subtotal, jiubi " .
+            "goods_price * goods_number AS subtotal, jiubi, is_vip_money " .//vip_money
             "FROM " . $GLOBALS['ecs']->table('cart') .
             " WHERE session_id = '" . SESS_ID . "' " .
             "AND rec_type = '$type'";
@@ -959,7 +978,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
     $sql = "SELECT g.goods_name, g.goods_sn, g.is_on_sale, g.is_real, ".
                 "g.market_price, g.shop_price AS org_price, g.promote_price, g.promote_start_date, ".
                 "g.promote_end_date, g.goods_weight, g.integral, g.extension_code, g.fencheng, ".
-                "g.goods_number, g.is_alone_sale, g.is_shipping, g.jiubi,".
+                "g.goods_number, g.is_alone_sale, g.is_shipping, g.jiubi, g.is_vip_money,". //vip_money
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price ".
             " FROM " .$GLOBALS['ecs']->table('goods'). " AS g ".
             " LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
@@ -1055,6 +1074,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
         'is_gift'       => 0,
         'is_shipping'   => $goods['is_shipping'],
         'jiubi'         => $goods['jiubi'],
+        'is_vip_money'  => $goods['is_vip_money'],//vip_money
         'rec_type'      => CART_GENERAL_GOODS
     );
 

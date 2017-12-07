@@ -1582,6 +1582,8 @@ elseif ($action == 'account_deposit_card') {
     $account    = get_surplus_info($surplus_id);
     $smarty->assign('accountAmount', getShopConfigValue('account_amount'));
     $smarty->assign('faceValue', getShopConfigValue('face_value'));
+    $smarty->assign('vipAccountAmount', getShopConfigValue('vip_account_amount'));
+    $smarty->assign('vipFaceValue', getShopConfigValue('vip_face_value'));
     $smarty->assign('payment', get_online_payment_list(false));
     $smarty->assign('order', $account);
     $smarty->display('user_transaction.dwt');
@@ -1713,9 +1715,11 @@ elseif ($action == 'act_account') {
     /* 如果是会员预付款，跳转到下一步，进行线上支付的操作 */
     else {
         //**chognzhi使用充值卡充值时 根据充值比例计算实际到账金额 begin
+        //**vip_money
         $arrival = $amount;
         if ($_POST['number']) {
-            $arrival = getShopConfigValue('account_amount')*$number;//后台数据写入 待写
+            $ArrivalMoney = getArrivalInfo($_POST['amount'], $number);  //vip_money
+            $arrival = $ArrivalMoney['user_money'];//后台数据写入 待写
         }
         //end
         if ($surplus['payment_id'] <= 0) {
@@ -1729,6 +1733,7 @@ elseif ($action == 'act_account') {
         $payment_info = payment_info($surplus['payment_id']);
         $surplus['payment'] = $payment_info['pay_name'];
         $surplus['arrival'] = $arrival; //**chognzhi
+        $surplus['vip_money'] = $ArrivalMoney['vip_money']; //**vip_money
         if ($surplus['rec_id'] > 0) {
             //更新会员账目明细
             $surplus['rec_id'] = update_user_account($surplus);
@@ -1767,6 +1772,11 @@ elseif ($action == 'act_account') {
         $smarty->assign('pay_fee', price_format($payment_info['pay_fee'], false));
         $smarty->assign('amount', price_format($amount, false));
         $smarty->assign('arrival', price_format($arrival, false));//bigrocs 实际到账金额 **chognzhi
+        $smarty->assign('vip_money', price_format($ArrivalMoney['vip_money'], false));//vip_money
+        if (empty($ArrivalMoney['jiubi'])) {
+            $ArrivalMoney['jiubi'] = $amount;
+        }
+        $smarty->assign('jiubi', price_format($ArrivalMoney['jiubi'], false));//vip_money 到账储值卡金额
         $smarty->assign('order', $order);
         $smarty->display('user_transaction.dwt');
     }
@@ -2821,4 +2831,29 @@ elseif ($action == 'send_hash_mail') {
 /* 清除商品浏览历史 */
 elseif ($action == 'clear_history') {
     setcookie('ECS[history]', '', 1);
+}
+/**
+ * [getArrivalInfo 获取到账信息]
+ * @param  [type] $amount [description]
+ * @param  [type] $number [description]
+ * @return [type]         [description]
+ */
+function getArrivalInfo($amount, $number)
+{
+    $arrivalInfo = array();
+    $face_value = getShopConfigValue('face_value');
+    $vip_face_value = getShopConfigValue('vip_face_value');
+    if ($amount == $face_value) {
+        $account_amount = getShopConfigValue('account_amount')*$number;
+        $arrivalInfo['user_money'] = $account_amount; //到账用户金额
+        $arrivalInfo['jiubi'] = $account_amount; //到账储值卡金额
+        $arrivalInfo['vip_money'] = 0; //到账VIP金额
+    }
+    if ($amount == $vip_face_value) {
+        $vip_account_amount = getShopConfigValue('vip_account_amount')*$number;
+        $arrivalInfo['user_money'] = 0; //到账用户金额
+        $arrivalInfo['jiubi'] = $vip_account_amount; //到账储值卡金额
+        $arrivalInfo['vip_money'] = $vip_account_amount; //到账VIP金额
+    }
+    return $arrivalInfo;
 }

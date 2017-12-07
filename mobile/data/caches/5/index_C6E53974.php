@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1512275998;s:8:"maketime";i:1512272398;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1512555249;s:8:"maketime";i:1512551649;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -471,6 +471,16 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
+            <a href="goods.php?id=216&u=12">
+                <img src="http://ecshop.dev/data/static/images/no_picture.gif" alt="测试加油1元" />
+            </a>
+            <div style="text-align:center">
+                        <span class="price_s"> ￥<span>1</span> </span>
+                        <del style="color:#878D99">￥<span>1</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>测试加油1元            </div>
+        </div>
+                         <div class="goodsItem flex_in">
             <a href="goods.php?id=195&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/195_thumb_G_1511571690703.jpg" alt="西王花生油" />
             </a>
@@ -490,7 +500,7 @@ TouchSlide({
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王鲜胚玉米胚芽油            </div>
         </div>
-                         <div class="goodsItem flex_in">
+         </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
             <a href="goods.php?id=187&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/187_thumb_G_1511571187942.jpg" alt="西王橄榄玉米胚芽油" />
             </a>
@@ -500,7 +510,7 @@ TouchSlide({
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王橄榄玉米胚芽油            </div>
         </div>
-         </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
+                         <div class="goodsItem flex_in">
             <a href="goods.php?id=182&u=12">
                 <img src="http://ecshop.dev/images/201711/thumb_img/182_thumb_G_1511570888835.jpg" alt="西王葵花籽油" />
             </a>
@@ -519,16 +529,6 @@ TouchSlide({
                         <del style="color:#878D99">￥<span>70</span></del>
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
             <br>西王玉米胚芽油4L+葵花...            </div>
-        </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=177&u=12">
-                <img src="http://ecshop.dev/images/201711/thumb_img/177_thumb_G_1511570297432.jpg" alt="西王玉米胚芽油4L+鲜胚玉米胚芽油900ML" />
-            </a>
-            <div style="text-align:center">
-                        <span class="price_s"> ￥<span>70</span> </span>
-                        <del style="color:#878D99">￥<span>70</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>西王玉米胚芽油4L+鲜胚...            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
     <div class="item_tags clearfix">
@@ -958,7 +958,6 @@ function get_search_box(){
   <div class="main">
       <ul>
           <li><a href="index.php?regionCity=1">全国</a></li>
-                  <li><a href="index.php?regionCity=299">淄博</a></li>
                   <li><a href="index.php?regionCity=298">枣庄</a></li>
                   <li><a href="index.php?regionCity=285">滨州</a></li>
                   <li><a href="index.php?regionCity=284">青岛</a></li>
@@ -1001,9 +1000,9 @@ $(function() {
   wx.config({
     debug: false,
     appId: '',
-    timestamp: 1512272398,
-    nonceStr: 'Oa0utPKXHULNPZMt',
-    signature: 'd2cfb0981d223e4872f44b072d3665cc425d7370',
+    timestamp: 1512551649,
+    nonceStr: '8ufYWkWGMSXUJac6',
+    signature: '74ab665549ad63aec870918104cb2e98e3b85b11',
     jsApiList: [
         'onMenuShareTimeline',
         'onMenuShareAppMessage'

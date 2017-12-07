@@ -169,6 +169,11 @@
               <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticPoints">{$lang.notice_integral}</span>
             </td>
           </tr>
+          <!-- vip_money -->
+          <tr id="vip_money_1">
+            <td class="label" id="vip_money_2">是否可用vip余额</td>
+            <td id="vip_money_3"><input type="checkbox" name="is_vip_money" value="1" {if $goods.is_vip_money}checked="checked"{/if} /> 默认不可用（一般用于油品出售）</td>
+          </tr>
           <tr>
             <td class="label">可用储值卡金额</td>
             <td><input type="text" name="jiubi_price" value="{$goods.jiubi}" size="20";/>

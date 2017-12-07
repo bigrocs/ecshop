@@ -543,6 +543,12 @@ jQuery(function($){
             <!-- {if $order.surplus > 0} -->
             - {$lang.use_surplus}: {$order.formated_surplus}
             <!-- {/if} -->
+            <!-- {if $order.jiubi > 0} -->
+            - 使用储值卡: {$order.formated_jiubi}
+            <!-- {/if} -->
+            <!-- {if $order.vip_money > 0} -->
+            - 使用VIP余额: {$order.formated_vip_money}
+            <!-- {/if} -->
             <!-- {if $order.integral_money > 0} -->
             - {$lang.use_integral}: {$order.formated_integral_money}
             <!-- {/if} -->
@@ -758,6 +764,12 @@ jQuery(function($){
             <!-- {if $order.surplus > 0} -->
             - {$lang.use_surplus}: {$order.formated_surplus}
             <!-- {/if} -->
+            <!-- {if $order.jiubi > 0} -->
+            - 使用储值卡: {$order.formated_jiubi}
+            <!-- {/if} -->
+            <!-- {if $order.vip_money > 0} -->
+            - 使用VIP余额: {$order.formated_vip_money}
+            <!-- {/if} -->
             <!-- {if $order.integral_money > 0} -->
             - {$lang.use_integral}: {$order.formated_integral_money}
             <!-- {/if} -->
@@ -888,6 +900,7 @@ jQuery(function($){
           <tr>
             <td width="15%" bgcolor="#ffffff">面值:</td>
             <td bgcolor="#ffffff"><input type="radio" name="amount" value="{$faceValue}" checked> {$faceValue}元（到账{$accountAmount}元）</td>
+            <td bgcolor="#ffffff"><input type="radio" name="amount" value="{$vipFaceValue}" checked> {$vipFaceValue}元（到账{$vipAccountAmount}元）</td>
           </tr>
           <tr>
             <td bgcolor="#ffffff">数量:</td>
@@ -938,6 +951,15 @@ jQuery(function($){
           <td width="25%" align="right" bgcolor="#ffffff">您的实际到账金额</td>
           <td width="80%" bgcolor="#ffffff">{$arrival}</td>
         </tr>
+        <!-- vip_money -->
+        <tr>
+          <td width="25%" align="right" bgcolor="#ffffff">您的实际到账VIP金额</td>
+          <td width="80%" bgcolor="#ffffff">{$vip_money}</td>
+        </tr>
+        <tr>
+          <td width="25%" align="right" bgcolor="#ffffff">您的实际到账储值卡金额</td>
+          <td width="80%" bgcolor="#ffffff">{$jiubi}</td>
+        </tr>
         <tr>
           <td align="right" >{$lang.payment_name}</td>
           <td bgcolor="#ffffff">{$payment.pay_name}</td>
@@ -983,7 +1005,9 @@ jQuery(function($){
           <td bgcolor="#ffffff">{$lang.process_time}</td>
           <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
           <td bgcolor="#ffffff">{$lang.money}</td>
-          <td bgcolor="#ffffff">实际到账</td>                        <!-- //**chognzhi -->
+          <td bgcolor="#ffffff">余额到账</td>                        <!-- //**chognzhi -->
+          <td bgcolor="#ffffff">VIP到账</td>                        <!-- //**vip_money -->
+          <td bgcolor="#ffffff">储值卡到账</td>                        <!-- //**vip_money -->
           <td bgcolor="#ffffff">{$lang.process_notic}</td>
           <td bgcolor="#ffffff">{$lang.admin_notic}</td>
           <td bgcolor="#ffffff">{$lang.is_paid}</td>
@@ -995,6 +1019,8 @@ jQuery(function($){
           <td align="left" bgcolor="#ffffff">{$item.type}</td>
           <td align="right" bgcolor="#ffffff">{$item.amount}</td>
           <td align="right" bgcolor="#ffffff">{$item.arrival}</td>            <!-- //**chognzhi -->
+          <td align="right" bgcolor="#ffffff">{$item.vip_money}</td>            <!-- //**vip_money -->
+          <td align="right" bgcolor="#ffffff">{$item.jiubi}</td>            <!-- //**vip_money -->
           <td align="left" bgcolor="#ffffff">{$item.short_user_note}</td>
           <td align="left" bgcolor="#ffffff">{$item.short_admin_note}</td>
           <td align="center" bgcolor="#ffffff">{$item.pay_status}</td>

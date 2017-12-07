@@ -120,7 +120,6 @@ elseif ($_REQUEST['act'] == 'info') {
     if (empty($order)) {
         die('order does not exist');
     }
-
     /* 根据订单是否完成检查权限 */
     if (order_finished($order)) {
         admin_priv('order_view_finished');
@@ -4395,7 +4394,7 @@ function order_list()
 
         /* 查询 */
         $sql = "SELECT o.order_id, o.order_sn, o.add_time, o.order_status, o.shipping_status, o.order_amount, o.money_paid," .
-                    "o.pay_status, o.consignee, o.address, o.email, o.tel, o.extension_code, o.extension_id, " .
+                    "o.pay_status, o.consignee, o.address, o.email, o.tel, o.extension_code, o.extension_id, o.jiubi, o.vip_money, " .
                     "(" . order_amount_field('o.') . ") AS total_fee, " .
                     "IFNULL(u.user_name, '" .$GLOBALS['_LANG']['anonymous']. "') AS buyer ".
                 " FROM " . $GLOBALS['ecs']->table('order_info') . " AS o " .
@@ -4419,6 +4418,8 @@ function order_list()
         $row[$key]['formated_order_amount'] = price_format($value['order_amount']);
         $row[$key]['formated_money_paid'] = price_format($value['money_paid']);
         $row[$key]['formated_total_fee'] = price_format($value['total_fee']);
+        $row[$key]['formated_jiubi'] = price_format($value['jiubi']);
+        $row[$key]['formated_vip_money'] = price_format($value['vip_money']);
         $row[$key]['short_order_time'] = local_date('m-d H:i', $value['add_time']);
         if ($value['order_status'] == OS_INVALID || $value['order_status'] == OS_CANCELED) {
             /* 如果该订单为无效或取消则显示删除链接 */
@@ -4428,7 +4429,6 @@ function order_list()
         }
     }
     $arr = array('orders' => $row, 'filter' => $filter, 'page_count' => $filter['page_count'], 'record_count' => $filter['record_count']);
-
     return $arr;
 }
 

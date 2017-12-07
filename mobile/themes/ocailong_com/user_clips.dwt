@@ -25,8 +25,9 @@
   <dt> {if $info.avatar neq ''}<img src="{$info.avatar}">{else}<img src="{$ectouch_themes}/images/get_avatar.png">{/if} </dt>
   <dd>
     <p>{$info.username}</p>
-    <p><span>{$xkfla}</span></p>
-    <p>储值卡金额:<span>{$info.jiubi}</span></p>
+    <!-- <p><span>{$xkfla}</span></p> -->
+    <p>储值卡金额:<span> {$info.jiubi}元</span></p>
+    <p>vip余额:<span> {$info.vip_money}元</span></p>
   </dd>
   <div class="user_top_list">
     <ul>

@@ -541,6 +541,7 @@ var card = document.getElementsByName('card');
 			    </dl>
 			 </div>
     <!-- {/if} 是否使用积分 -->
+    <!-- {if $consume_jiubi} 储值卡金额 -->
     <div class="dl_box">
           <dl>
             <dd>使用储值卡金额</dd>
@@ -554,7 +555,23 @@ var card = document.getElementsByName('card');
             </dd>
         </dl>
      </div>
-
+     <!-- {/if} 储值卡金额-->
+     <!-- vip_money -->
+     <!-- {if $isVipMoney} 是否vip余额 -->
+     <div class="dl_box">
+           <dl>
+             <dd>使用vip金额</dd>
+             <dd class="weiruan " bgcolor="#ffffff"><input name="vipMoney" type="text" class="input" id="ECS_VIP_MONEY" onblur="changeVipMoney(this.value)" value="{$vipUsableMoney|default:0}" size="10" />            </dd>
+           </dl>
+      </div>
+      <div class="dl_box">
+           <dl>
+             <dd>您当前可用VIP余额:{$user_info[vip_money]|default:0} .
+               <span id="ECS_VIP_MONEY_NOTICE" class="notice"></span>
+             </dd>
+         </dl>
+      </div>
+    <!-- {/if} 是否vip余额 -->
 
 
       </div>

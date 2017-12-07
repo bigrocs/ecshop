@@ -607,7 +607,6 @@ function load_config()
         $arr['invoice_type']         = empty($arr['invoice_type']) ? array('type' => array(), 'rate' => array()) : unserialize($arr['invoice_type']);
         $arr['show_order_type']      = isset($arr['show_order_type']) ? $arr['show_order_type'] : 0;    // 显示方式默认为列表方式
         $arr['help_open']            = isset($arr['help_open']) ? $arr['help_open'] : 1;    // 显示方式默认为列表方式
-
         if (!isset($GLOBALS['_CFG']['ecs_version'])) {
             /* 如果没有版本号则默认为2.0.5 */
             $GLOBALS['_CFG']['ecs_version'] = 'v2.0.5';
@@ -1672,7 +1671,7 @@ function formated_weight($weight)
  * @param   int     $change_type    变动类型：参见常量文件
  * @return  void
  */
-function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER, $jiubi = 0)
+function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER, $jiubi = 0, $vipMoney = 0)
 {
     /* 插入帐户变动记录 */
     $account_log = array(
@@ -1681,6 +1680,7 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
         'frozen_money'  => $frozen_money,
         'rank_points'   => $rank_points,
         'jiubi'         => $jiubi,
+        'vip_money'     => $vipMoney,
         'pay_points'    => $pay_points,
         'change_time'   => gmtime(),
         'change_desc'   => $change_desc,
@@ -1694,6 +1694,7 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
             " frozen_money = frozen_money + ('$frozen_money')," .
             " rank_points = rank_points + ('$rank_points')," .
             " jiubi = jiubi + ('$jiubi')," .
+            " vip_money = vip_money + ('$vipMoney')," .
             " pay_points = pay_points + ('$pay_points')" .
             " WHERE user_id = '$user_id' LIMIT 1";
     $GLOBALS['db']->query($sql);

@@ -228,12 +228,20 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
                     /* 修改会员帐户金额 */
                     $_LANG = array();
                     include_once(ROOT_PATH . 'languages/' . $GLOBALS['_CFG']['lang'] . '/user.php');
-                    //**chognzhi begin
-                    if ($account['arrival']) {
+                    //**chognzhi begin vip_money
+                    $vip_money = 0;
+                    $jiubi = 0;
+                    if ($account['arrival'] != 0.00) {
+                        $jiubi = $arr['arrival'];
                         $arr['amount'] = $arr['arrival'];
                     }
+                    if ($account['vip_money'] != 0.00) {
+                        $arr['amount'] = $arr['arrival'];
+                        $jiubi = $arr['vip_money'];
+                        $vip_money = $arr['vip_money'];
+                    }
                     //**chognzhi end
-                    log_account_change($arr['user_id'], $arr['amount'], 0, 0, 0, $_LANG['surplus_type_0'], ACT_SAVING);
+                    log_account_change($arr['user_id'], $arr['amount'], 0, 0, 0, $_LANG['surplus_type_0'], ACT_SAVING, $jiubi, $vip_money);//vip_money
                 }
             }
         } else {

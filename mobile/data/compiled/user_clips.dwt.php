@@ -26,8 +26,9 @@
   <dt> <?php if ($this->_var['info']['avatar'] != ''): ?><img src="<?php echo $this->_var['info']['avatar']; ?>"><?php else: ?><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/get_avatar.png"><?php endif; ?> </dt>
   <dd>
     <p><?php echo $this->_var['info']['username']; ?></p>
-    <p><span><?php echo $this->_var['xkfla']; ?></span></p>
-    <p>储值卡金额:<span><?php echo $this->_var['info']['jiubi']; ?></span></p>
+    <!-- <p><span><?php echo $this->_var['xkfla']; ?></span></p> -->
+    <p>储值卡金额:<span> <?php echo $this->_var['info']['jiubi']; ?>元</span></p>
+    <p>vip余额:<span> <?php echo $this->_var['info']['vip_money']; ?>元</span></p>
   </dd>
   <div class="user_top_list">
     <ul>

@@ -279,7 +279,7 @@ function setRegionId()
 {
     if (empty($_SESSION['region_id'])) {//选择过地区则不重复定义
         $CityId = getIpCityId();
-        if ($CityId) {
+        if ($CityId && isCityKeyExists($CityId)) {
             $_SESSION['region_id']    = $CityId; //bigrocs//地区编号
             $GLOBALS['_region_id'] = array(
                     'region_id' => $_SESSION['region_id'],
@@ -324,6 +324,16 @@ function setHeaderCity($smarty)
     }
     $smarty->assign('regionCityList', $citys);//允许切换城市列表
     $smarty->assign('regionCitys', $GLOBALS['_region_id']['name']);//当前城市名称
+}
+/**
+ * [isCityKeyExists 是否设置城市]
+ * @param  [type]  $cityId [description]
+ * @return boolean         [description]
+ */
+function isCityKeyExists($cityId)
+{
+    $cityArray = unserialize(getShopConfigValue('shop_country'));
+    return in_array($cityId, $cityArray);
 }
 /**
  * [getIpCityId 根据ip获取当前城市id]

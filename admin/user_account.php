@@ -257,7 +257,12 @@ elseif ($_REQUEST['act'] == 'check') {
 
     $sql = "SELECT user_name FROM " .$ecs->table('users'). " WHERE user_id = '$account[user_id]'";
     $user_name = $db->getOne($sql);
-
+    if ($account['arrival'] != 0.00) {
+        $account['jiubi'] = $account['arrival'];
+    }
+    if ($account['vip_money'] != 0.00) {
+        $account['jiubi'] = $account['vip_money'];
+    }
     /* 模板赋值 */
     $smarty->assign('ur_here', $_LANG['check']);
     $account['user_note'] = htmlspecialchars($account['user_note']);
@@ -316,13 +321,21 @@ elseif ($_REQUEST['act'] == 'action') {
         } elseif ($is_paid == '1' && $account['process_type'] == '0') {
             //如果是预付款，并且已完成, 更新此条记录，增加相应的余额
             update_user_account($id, $amount, $admin_note, $is_paid);
-            //**chognzhi begin
-            if ($account['arrival']) {
+            //**chognzhi begin vip_money
+            $vip_money = 0;
+            $jiubi = 0;
+            if ($account['arrival'] != 0.00) {
+                $jiubi = $account['arrival'];
                 $amount = $account['arrival'];
+            }
+            if ($account['vip_money'] != 0.00) {
+                $amount = $account['arrival'];
+                $jiubi = $account['vip_money'];
+                $vip_money = $account['vip_money'];
             }
             //**chognzhi end
             //更新会员余额数量
-            log_account_change($account['user_id'], $amount, 0, 0, 0, $_LANG['surplus_type_0'], ACT_SAVING);
+            log_account_change($account['user_id'], $amount, 0, 0, 0, $_LANG['surplus_type_0'], ACT_SAVING, $jiubi, $vip_money); //vip_money
         } elseif ($is_paid == '0') {
             /* 否则更新信息 */
             $sql = "UPDATE " .$ecs->table('user_account'). " SET ".

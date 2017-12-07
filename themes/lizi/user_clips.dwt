@@ -50,7 +50,9 @@
           <!-- {if $info.credit_line gt 0} 如果有信用额度 -->
           {$lang.credit_line}:{$info.formated_credit_line}<br />
           <!-- {/if} -->
-          储值卡金额:<a href="#" style="color:#f70;">{$info.jiubi} 元</a><br />
+          储值卡余额:<a href="#" style="color:#f70;">{$info.jiubi} 元</a><br />
+          <!-- vip_money -->
+          vip余额:<a href="#" style="color:#f70;">{$info.vip_money} 元</a><br />
           {$lang.your_bonus}:<a href="user.php?act=bonus" style="color:#f70;">{$info.bonus}</a><br />
           {$lang.your_integral}:{$info.integral}<br />
           </div>

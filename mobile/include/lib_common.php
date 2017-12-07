@@ -2617,7 +2617,7 @@ function formated_weight($weight)
 
  */
 
-function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER, $jiubi = 0)
+function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER, $jiubi = 0, $vipMoney = 0)
 {
 
     /* 插入帐户变动记录 */
@@ -2633,7 +2633,7 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
         'rank_points'   => $rank_points,
 
         'jiubi'         => $jiubi,
-
+        'vip_money'     => $vipMoney,
         'pay_points'    => $pay_points,
 
         'change_time'   => gmtime(),
@@ -2659,7 +2659,7 @@ function log_account_change($user_id, $user_money = 0, $frozen_money = 0, $rank_
             " rank_points = rank_points + ('$rank_points')," .
 
             " jiubi = jiubi + ('$jiubi')," .
-
+            " vip_money = vip_money + ('$vipMoney')," .
             " pay_points = pay_points + ('$pay_points')" .
 
             " WHERE user_id = '$user_id' LIMIT 1";

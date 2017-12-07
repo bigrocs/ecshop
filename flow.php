@@ -664,6 +664,17 @@ if ($_REQUEST['step'] == 'add_to_cart') {
     /**
      * 储值卡金额end
      */
+    /**
+     * vip余额 vip_money begin
+     */
+    $order['vip_money'] = getUsableVipMoney($cart_goods);//可用vip余额
+    $smarty->assign('user_info', $user_info);  // 用户信息
+    $smarty->assign('isVipMoney', isVipMoney($cart_goods));  // 是否可用vip可用余额
+    $smarty->assign('vipUsableMoney', $order['vip_money']);  // vip可用余额
+
+    /**
+     * vip余额 vip_money end
+     */
     /*
      * 计算订单的费用
      */
@@ -1209,7 +1220,7 @@ if ($_REQUEST['step'] == 'add_to_cart') {
     die($json->encode($result));
 } elseif ($_REQUEST['step'] == 'change_jiubi') {
     /*------------------------------------------------------ */
-    //-- 改变积分
+    //-- 改变储值卡
     /*------------------------------------------------------ */
     include_once('includes/cls_json.php');
 
@@ -1268,6 +1279,63 @@ if ($_REQUEST['step'] == 'add_to_cart') {
     }
     $json = new JSON();
     die($json->encode($result));
+    //vip_money
+} elseif ($_REQUEST['step'] == 'change_vipMoney') {
+    /*------------------------------------------------------ */
+    //-- 改变vip余额----------------------------- */
+    include_once('includes/cls_json.php');
+
+    $points    = floatval($_GET['points']);
+    $user_info = user_info($_SESSION['user_id']);
+
+    /* 取得订单信息 */
+    $order = flow_order_info();
+
+    $order['jiubi'] = 0;
+    $order['integral'] = 0;
+
+    /* 取得购物类型 */
+    $flow_type = isset($_SESSION['flow_type']) ? intval($_SESSION['flow_type']) : CART_GENERAL_GOODS;
+    /* 获得收货人信息 */
+    $consignee = get_consignee($_SESSION['user_id']);
+    /* 对商品信息赋值 */
+    $cart_goods = cart_goods($flow_type); // 取得商品列表，计算合计
+    /**
+     * vip可用金额begin
+     */
+    $vipMoney= getUsableVipMoney($cart_goods);
+
+
+    // $flow_points = flow_available_points();  // 该订单允许使用的积分
+    // $user_points = $user_info['pay_points']; // 用户的积分总数
+
+    if ($points > $user_info['vip_money']) {
+        $result['error'] = '您使用的VIP余额不能超过您现有的VIP余额。';
+    } elseif ($points > $vipMoney) {
+        $result['error'] = sprintf('您使用的VIP余额不能超过%d 个', $vipMoney);
+    } else {
+        if (empty($cart_goods) || !check_consignee_info($consignee, $flow_type)) {
+            $result['error'] = $_LANG['no_goods_in_cart'];
+        } else {
+            $order['vip_money'] = $points;
+
+            /* 计算订单的费用 */
+            $total = order_fee($order, $cart_goods, $consignee);
+            $smarty->assign('total', $total);
+            $smarty->assign('config', $_CFG);
+
+            /* 团购标志 */
+            if ($flow_type == CART_GROUP_BUY_GOODS) {
+                $smarty->assign('is_group_buy', 1);
+            }
+
+            $result['content'] = $smarty->fetch('library/order_total.lbi');
+            $result['error'] = '';
+        }
+    }
+    $json = new JSON();
+    die($json->encode($result));
+    //vip_money
 } elseif ($_REQUEST['step'] == 'change_integral') {
     /*------------------------------------------------------ */
     //-- 改变积分
@@ -1529,6 +1597,7 @@ elseif ($_REQUEST['step'] == 'done') {
         'surplus'         => isset($_POST['surplus']) ? floatval($_POST['surplus']) : 0.00,
         'integral'        => isset($_POST['integral']) ? intval($_POST['integral']) : 0,
         'jiubi'           => isset($_POST['jiubi']) ? intval($_POST['jiubi']) : 0,
+        'vip_money'        => isset($_POST['vipMoney']) ? intval($_POST['vipMoney']) : 0,
         'bonus_id'        => isset($_POST['bonus']) ? intval($_POST['bonus']) : 0,
         'need_inv'        => empty($_POST['need_inv']) ? 0 : 1,
         'inv_type'        => $_POST['inv_type'],
@@ -1593,7 +1662,21 @@ elseif ($_REQUEST['step'] == 'done') {
     } else {
         $order['jiubi'] = 0;
     }
-
+    /* 检查vip金额余额是否合法 vip_money*/
+    if ($user_id > 0) {
+        $user_info = user_info($user_id);
+        /* 对商品信息赋值 */
+        $cart_goods = cart_goods($flow_type); // 取得商品列表，计算合计
+        $vipMoney = getUsableVipMoney($cart_goods);
+        $user_points = $user_info['vip_money']; // 用户的积分总数
+        $order['vip_money'] = min($order['vip_money'], $user_points, $vipMoney);
+        if ($order['vip_money'] < 0) {
+            $order['vip_money'] = 0;
+        }
+    } else {
+        $order['vip_money'] = 0;
+    }
+    // 检查vip end vip_money
     /* 检查红包是否存在 */
     if ($order['bonus_id'] > 0) {
         $bonus = bonus_info($order['bonus_id']);
@@ -1722,10 +1805,12 @@ elseif ($_REQUEST['step'] == 'done') {
 
     $order['integral_money']   = $total['integral_money'];
     $order['integral']         = $total['integral'];
+
     //储值卡金额加入订单
     $order['jiubi_money']   = $total['jiubi_money'];
     $order['jiubi']         = $total['jiubi'];
-
+    //vip金额加入订单
+    $order['vip_money']   = $total['vip_money'];
     if ($order['extension_code'] == 'exchange_goods') {
         $order['integral_money']   = 0;
         $order['integral']         = $total['exchange_integral'];
@@ -1810,7 +1895,10 @@ elseif ($_REQUEST['step'] == 'done') {
     if ($order['user_id'] > 0 && $order['jiubi'] > 0) {
         log_account_change($order['user_id'], 0, 0, 0, 0, sprintf($_LANG['pay_order'], $order['order_sn']), ACT_OTHER, $order['jiubi'] * (-1));
     }
-
+    // vip_money
+    if ($order['user_id'] > 0 && $order['vip_money'] > 0) {
+        log_account_change($order['user_id'], 0, 0, 0, 0, sprintf($_LANG['pay_order'], $order['order_sn']), ACT_OTHER, 0, $order['vip_money'] * (-1));
+    }
     if ($order['bonus_id'] > 0 && $temp_amout > 0) {
         use_bonus($order['bonus_id'], $new_order_id);
     }
@@ -2473,7 +2561,40 @@ function flow_available_points()
 
     return integral_of_value($val);
 }
-
+/**
+ * [isVipMoney 是否可用vip余额] vip_money
+ * @param  [type]  $goods [description]
+ * @return boolean        [description]
+ */
+function isVipMoney($goods)
+{
+    $is_vip_money = false;
+    foreach ($goods as $val) {
+        if ($val['is_vip_money']==0) {
+            $is_vip_money = false;
+            break;
+        } else {
+            $is_vip_money = true;
+        }
+    }
+    return $is_vip_money;
+}
+/**
+ * [getUsableVipMoney 获取可用vip余额]
+ * @param  [type] $goods [description]
+ * @return [type]        [description]
+ */
+function getUsableVipMoney($goods)
+{
+    if (!isVipMoney($goods)) {
+        return 0;
+    }
+    foreach ($goods as $val) {
+        $goods_price  += $val['goods_price'] * $val['goods_number'];
+    }
+    $user_info = user_info($_SESSION['user_id']);
+    return ($user_info['vip_money']<$goods_price)? $user_info['vip_money']: $goods_price;
+}
 /**
  * 获得当前订单最大抵扣金额
  *
@@ -2491,11 +2612,11 @@ function flow_max_jiubi($goods)
     $user_info = user_info($_SESSION['user_id']);
 
     //当储值卡金额归零时自动充值为初始化储值卡金额
-    if ($user_info['jiubi']==0&&$user_info['init_jiubi']!=0) {
-        $sqlUpdate ="UPDATE ". $GLOBALS['ecs']->table('users'). "SET `jiubi`='$user_info[init_jiubi]' WHERE user_name= '$user_info[user_name]'";
-        $GLOBALS['db']->query($sqlUpdate);
-        $user_info['jiubi'] =  $user_info['init_jiubi'];
-    }
+    // if ($user_info['jiubi']==0&&$user_info['init_jiubi']!=0) {
+    //     $sqlUpdate ="UPDATE ". $GLOBALS['ecs']->table('users'). "SET `jiubi`='$user_info[init_jiubi]' WHERE user_name= '$user_info[user_name]'";
+    //     $GLOBALS['db']->query($sqlUpdate);
+    //     $user_info['jiubi'] =  $user_info['init_jiubi'];
+    // }
 
     if ($user_info['jiubi']<$max_deductible_jine) {
         $consume_jiubi = $user_info['jiubi'];
