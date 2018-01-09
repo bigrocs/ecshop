@@ -18,6 +18,7 @@ define('IN_ECS', true);
 require(dirname(__FILE__) . '/includes/init.php');
 require_once(ROOT_PATH . 'includes/lib_order.php');
 require_once(ROOT_PATH . 'includes/lib_goods.php');
+include_once(ROOT_PATH .'includes/lib_seller.php');
 
 /*------------------------------------------------------ */
 //-- 订单查询
@@ -751,7 +752,16 @@ elseif ($_REQUEST['act'] == 'delivery_ship') {
     $arr['shipping_time']       = GMTIME_UTC; // 发货时间
     $arr['invoice_no']          = trim($order['invoice_no'] . '<br>' . $invoice_no, '<br>');
     update_order($order_id, $arr);
-
+    // 确认收获写入业绩 spread_id
+    $spreadId = $order['spread_id'];
+    if ($spreadId) {
+        /* 更新商家业绩信息 */
+        $spread = $order['order_amount']+$order['surplus']+$order['money_paid'];
+        $sql = "UPDATE " . $GLOBALS['ecs']->table('user_seller') .
+                " SET spread = spread + ('$spread')" .
+                " WHERE user_id = '$spreadId' LIMIT 1";
+        $GLOBALS['db']->query($sql);
+    }
     /* 发货单发货记录log */
     order_action($order['order_sn'], OS_CONFIRMED, $shipping_status, $order['pay_status'], $action_note, null, 1);
 
@@ -4265,7 +4275,8 @@ function order_list()
 
         $filter['start_time'] = empty($_REQUEST['start_time']) ? '' : (strpos($_REQUEST['start_time'], '-') > 0 ?  local_strtotime($_REQUEST['start_time']) : $_REQUEST['start_time']);
         $filter['end_time'] = empty($_REQUEST['end_time']) ? '' : (strpos($_REQUEST['end_time'], '-') > 0 ?  local_strtotime($_REQUEST['end_time']) : $_REQUEST['end_time']);
-
+        $seller_name = empty($_REQUEST['seller_name']) ? 0 : trim($_REQUEST['seller_name']);
+        $filter['spread_id']  = getUserId($seller_name);
         $where = 'WHERE 1 ';
         if ($filter['order_sn']) {
             $where .= " AND o.order_sn LIKE '%" . mysql_like_quote($filter['order_sn']) . "%'";
@@ -4317,6 +4328,9 @@ function order_list()
         }
         if ($filter['user_id']) {
             $where .= " AND o.user_id = '$filter[user_id]'";
+        }
+        if ($filter['spread_id']) {
+            $where .= " AND o.spread_id = '$filter[spread_id]'";
         }
         if ($filter['user_name']) {
             $where .= " AND u.user_name LIKE '%" . mysql_like_quote($filter['user_name']) . "%'";
@@ -4393,8 +4407,8 @@ function order_list()
         $filter['page_count']     = $filter['record_count'] > 0 ? ceil($filter['record_count'] / $filter['page_size']) : 1;
 
         /* 查询 */
-        $sql = "SELECT o.order_id, o.order_sn, o.add_time, o.order_status, o.shipping_status, o.order_amount, o.money_paid," .
-                    "o.pay_status, o.consignee, o.address, o.email, o.tel, o.extension_code, o.extension_id, o.jiubi, o.vip_money, " .
+        $sql = "SELECT o.order_id, o.order_sn, o.spread_id, o.surplus, o.add_time, o.order_status, o.shipping_status, o.order_amount, o.money_paid," .
+                    "o.pay_status, o.consignee, o.address, o.email, o.tel, o.extension_code, o.extension_id, o.jiubi, o.vip_money, o.cost_money, " .
                     "(" . order_amount_field('o.') . ") AS total_fee, " .
                     "IFNULL(u.user_name, '" .$GLOBALS['_LANG']['anonymous']. "') AS buyer ".
                 " FROM " . $GLOBALS['ecs']->table('order_info') . " AS o " .
@@ -4415,12 +4429,21 @@ function order_list()
 
     /* 格式话数据 */
     foreach ($row as $key => $value) {
+        $accountAmount = getShopConfigValue('account_amount')/100;
+        $surplus = sprintf("%.2f", $value['surplus']/$accountAmount, $n);//余额实际到账金额
+        $actual_money = $surplus+$rows['money_paid'];//实际金额 余额+第三发支付金额 例如支付宝
+
         $row[$key]['formated_order_amount'] = price_format($value['order_amount']);
         $row[$key]['formated_money_paid'] = price_format($value['money_paid']);
         $row[$key]['formated_total_fee'] = price_format($value['total_fee']);
         $row[$key]['formated_jiubi'] = price_format($value['jiubi']);
         $row[$key]['formated_vip_money'] = price_format($value['vip_money']);
+        $row[$key]['formated_surplus'] = price_format($value['surplus']);
         $row[$key]['short_order_time'] = local_date('m-d H:i', $value['add_time']);
+        $row[$key]['spread_name'] = getUserInfo($value['spread_id']);//获取用户id
+        $row[$key]['formated_actual_money'] = price_format($actual_money);
+        $row[$key]['formated_cost_money'] = price_format($value['cost_money']);
+        $row[$key]['formated_profit_money'] = price_format($actual_money-$value['cost_money']);
         if ($value['order_status'] == OS_INVALID || $value['order_status'] == OS_CANCELED) {
             /* 如果该订单为无效或取消则显示删除链接 */
             $row[$key]['can_remove'] = 1;

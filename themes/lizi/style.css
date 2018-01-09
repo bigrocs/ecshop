@@ -1207,8 +1207,8 @@ a.productitem span.sales {
 	padding:0 2px
 }
 a.productitem span.xszk {
-	padding-left:55px;
-	background:url(images/xsdz-ico.png?0226) 10px center no-repeat
+	/* padding-left:55px;
+	background:url(images/xsdz-ico.png?0226) 10px center no-repeat */
 }
 a.productitem span.price {
 	display:none

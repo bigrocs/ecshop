@@ -569,6 +569,8 @@ function get_user_default($user_id)
 
     $info['last_time'] = local_date($GLOBALS['_CFG']['time_format'], $last_time);
     $info['surplus']   = $row['user_money']; //不显示价格格式 by wang
+    $info['user_money']   = $row['user_money'];
+    $info['show_vip_money']   = price_format($row['vip_money'], false);
     $info['bonus']     = $user_bonus['bonus_count']; //不是红包格式 //by wang
 
     $sql = "SELECT COUNT(*) FROM " .$GLOBALS['ecs']->table('order_info').

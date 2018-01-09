@@ -27,7 +27,7 @@
    <div calss="clear"></div>
   </div>
  </div>
- 
+
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
@@ -40,7 +40,7 @@
     signature: '{$signPackage.signature}',
     jsApiList: [
         'onMenuShareTimeline',
-        'onMenuShareAppMessage' 
+        'onMenuShareAppMessage'
     ]
   });
  wx.ready(function () {
@@ -51,17 +51,17 @@
       link: '{$url}',
       imgUrl: '',
       trigger: function (res) {
-		
+
 		{if $url}
         alert('恭喜！分享可以获取提成哦！');
 		{else}
 		alert('糟糕，需要分销商登录才能获得提成哦！');
 		{/if}
-		
+
       },
       success: function (res) {
 		{if $dourl }
-        window.location.href="{$dourl}&type=1"; 
+        window.location.href="{$dourl}&type=1";
 		{/if}
       },
       cancel: function (res) {
@@ -78,7 +78,7 @@
       link: '{$url}',
       imgUrl: '',
       trigger: function (res) {
-			
+
         {if $url}
 			alert('恭喜！分享可以获取提成哦！');
 		{else}
@@ -87,7 +87,7 @@
       },
       success: function (res) {
        	{if $dourl }
-        window.location.href="{$dourl}&type=2"; 
+        window.location.href="{$dourl}&type=2";
 		{/if}
       },
       cancel: function (res) {

@@ -157,6 +157,8 @@ $_LANG['15_rec'] = '推荐管理';
 $_LANG['16_email_manage'] = '邮件群发管理';
 $_LANG['17_weixin_manage'] = '微信模块'; // 增加 by www.68ecshop.com 微商城
 $_LANG['18_virtual'] = '虚拟团购管理';
+$_LANG['23_seller'] = '商家管理';
+
 
 /* 商品管理 */
 /* 代码增加_start By supplier.68ecshop.com */
@@ -206,8 +208,8 @@ $_LANG['virtual_card_list'] = '虚拟券订单列表';
 $_LANG['virtual_goods_sup'] = '入驻商虚拟商品列表';
 $_LANG['virtual_goods_list'] = '自营虚拟商品列表';
 $_LANG['virtual_goods_add'] = '添加虚拟商品';
-$_LANG['virtual_category']	= '虚拟劵商品分类管理';
-$_LANG['virtual_district']	= '入驻商商圈管理';
+$_LANG['virtual_category']    = '虚拟劵商品分类管理';
+$_LANG['virtual_district']    = '入驻商商圈管理';
 $_LANG['virtual_validate'] = '虚拟券验证';
 $_LANG['virtual_goods_s'] = '虚拟商品列表';
 /* 虚拟团购 代码增加 by www.68ecshop.com end */
@@ -531,5 +533,3 @@ $_LANG['cfg_range']['takegoods_check_money']['0'] = '关闭';
 $_LANG['template_files']['takegoods'] = '提货商品页模板';
 /* 代码增加_end By www.68ecshop.com */
 $_LANG['sendmail'] = '发送邮件';
-
-?>

@@ -482,6 +482,24 @@
     <!--{/if}-->
         </table>
          <div class="blank"></div>
+         <h5><span>自提点信息</span></h5>
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr>
+               <td align="right" bgcolor="#ffffff">自提点名称：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$pickup_point.shop_name} </td>
+             </tr>
+           <tr>
+             <td width="15%" align="right" bgcolor="#ffffff" >联系人：</td>
+             <td width="35%" align="left" bgcolor="#ffffff">{$pickup_point.contact}</td>
+             <td width="15%" align="right" bgcolor="#ffffff">{$lang.phone}：</td>
+             <td width="35%" align="left" bgcolor="#ffffff">{$pickup_point.phone}</td>
+           </tr>
+           <tr>
+             <td align="right" bgcolor="#ffffff">{$lang.detailed_address}：</td>
+             <td colspan="3" align="left" bgcolor="#ffffff">{$pickup_point.address}</td>
+           </tr>
+         </table>
+           <div class="blank"></div>
         <h5><span>{$lang.consignee_info}</span></h5>
         <div class="blank"></div>
          <!-- {if $order.allow_update_address gt 0} -->
@@ -671,7 +689,13 @@
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr>
               <!-- // **chognzhi -->
-            <td align="right" bgcolor="#ffffff"><a href="user.php?act=account_deposit_card" class="f6">充值卡</a> | <a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> | <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a> </td>
+            <td align="right" bgcolor="#ffffff">
+                <a href="user.php?act=account_deposit_card" class="f6">充值卡</a> |
+                <a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> |
+                <!-- <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | -->
+                <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> |
+                <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a>
+            </td>
           </tr>
         </table>
         <!-- {/if} -->
@@ -749,7 +773,9 @@
               <td bgcolor="#ffffff">
                   <input type="radio" name="amount" value="{$faceValue}" checked> {$faceValue}元（到账{$accountAmount}元）
                   <!-- //**vip_money -->
-                  <input type="radio" name="amount" value="{$vipFaceValue}" > {$vipFaceValue}元（到账{$vipAccountAmount}元）
+                  <div style="display:none;">
+                      <input type="radio" name="amount" value="{$vipFaceValue}" > {$vipFaceValue}元（到账{$vipAccountAmount}元）
+                  </div>
               </td>
             </tr>
             <tr>
@@ -763,7 +789,7 @@
             </tr>
             <tr align="center">
               <td bgcolor="#ffffff">{$lang.pay_name}</td>
-              <td bgcolor="#ffffff" width="60%">{$lang.pay_desc}</td>
+              <!--<td bgcolor="#ffffff" width="60%">{$lang.pay_desc}</td>-->
               <td bgcolor="#ffffff" width="17%">{$lang.pay_fee}</td>
             </tr>
             <!-- {foreach from=$payment item=list} -->
@@ -787,6 +813,40 @@
         </form>
         <!-- {/if} -->
         <!-- // **chognzhi end -->
+        <!-- 加油begin -->
+        <!-- {if $action eq "gas"} -->
+        <form name="formGas" method="post" action="user.php" onSubmit="return submitSurplus()">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr>
+              <td bgcolor="#ffffff">支付商家:</td>
+              <td align="left" bgcolor="#ffffff">{$sellerInfo.name} (商家账户:{$sellerInfo.user_name})</td>
+            </tr>
+            <tr>
+              <td bgcolor="#ffffff">消费金额:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="amount"  class="inputBg" value="100" size="30" /> 元</td>
+            </tr>
+            <tr>
+              <td width="15%" bgcolor="#ffffff">支付方式:</td>
+              <td bgcolor="#ffffff">
+                  <input type="radio" name="payment" value="money" checked> 余额支付（可用:{$userInfo.surplus}）
+                  <input type="radio" name="payment" value="vip_money" > VIP余额支付（可用:{$userInfo.show_vip_money}）
+                 
+              </td>
+            </tr>
+            <tr>
+                <td bgcolor="#ffffff" colspan="3"  align="center">
+                  <input type="hidden" name="Verifying" value="{$Verifying}" />
+                  <input type="hidden" name="callblock" value="{$callblock}" />
+                  <input type="hidden" name="sellerId" value="{$sellerInfo.user_id}" />
+                  <input type="hidden" name="act" value="act_pay_gas" />
+                  <input type="submit" class="bnt_blue_1" name="submit" value="{$lang.submit_request}" />
+                  <input type="reset" class="bnt_blue_1" name="reset" value="{$lang.button_reset}" />
+                </td>
+              </tr>
+          </table>
+        </form>
+        <!-- {/if} -->
+        <!-- 加油end -->
         <!-- {if $action eq "act_account"} -->
         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr>

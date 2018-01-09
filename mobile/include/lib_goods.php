@@ -464,20 +464,20 @@ function get_recommend_region_goods()
     $region = $GLOBALS['_region_id']['region_id'];//获取缓存地区
     $province = $GLOBALS['_region_id']['province_id'];//省级id
 
-    if ($region) {
-        $sql = 'SELECT g.goods_id, g.is_best, g.is_new, g.is_hot, g.is_promote, b.brand_name,g.sort_order ' .
+    // if ($region) {
+    $sql = 'SELECT g.goods_id, g.is_best, g.is_new, g.is_hot, g.is_promote, b.brand_name,g.sort_order ' .
            ' FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
            ' LEFT JOIN ' . $GLOBALS['ecs']->table('brand') . ' AS b ON b.brand_id = g.brand_id ' .
            ' LEFT JOIN ' . $GLOBALS['ecs']->table('goods_region') . ' AS gr ON gr.goods_id = g.goods_id ' .
-           ' WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND (g.is_best = 1 OR g.is_new =1 OR g.is_hot = 1) AND (gr.region_id = '.$region.' OR gr.region_id = '.$province.')'.
+           ' WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND (g.is_best = 1 OR g.is_new =1 OR g.is_hot = 1) AND (gr.region_id = '.$region.' OR gr.region_id = '.$province.' OR gr.region_id = 1)'.
            ' ORDER BY g.sort_order, g.last_update DESC';
-    } else {
-        $sql = 'SELECT g.goods_id, g.is_best, g.is_new, g.is_hot, g.is_promote, b.brand_name,g.sort_order ' .
-           ' FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
-           ' LEFT JOIN ' . $GLOBALS['ecs']->table('brand') . ' AS b ON b.brand_id = g.brand_id ' .
-           ' WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND (g.is_best = 1 OR g.is_new =1 OR g.is_hot = 1)'.
-           ' ORDER BY g.sort_order, g.last_update DESC';
-    }
+    // } else {
+    //     $sql = 'SELECT g.goods_id, g.is_best, g.is_new, g.is_hot, g.is_promote, b.brand_name,g.sort_order ' .
+    //        ' FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
+    //        ' LEFT JOIN ' . $GLOBALS['ecs']->table('brand') . ' AS b ON b.brand_id = g.brand_id ' .
+    //        ' WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND (g.is_best = 1 OR g.is_new =1 OR g.is_hot = 1)'.
+    //        ' ORDER BY g.sort_order, g.last_update DESC';
+    // }
 
     $goods_res = $GLOBALS['db']->getAll($sql);
 
@@ -529,7 +529,7 @@ function get_promote_goods($cats = '')
     $num = get_library_number("recommend_promotion");
     $region = $GLOBALS['_region_id']['region_id'];//获取缓存地区
     $province = $GLOBALS['_region_id']['province_id'];//省级id
-    if ($region) {
+    // if ($region) {
         $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price, ' .
                        "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
                        "promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, goods_img, b.brand_name, " .
@@ -540,19 +540,19 @@ function get_promote_goods($cats = '')
                    "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
                        "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
                    'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 '.
-                   " AND g.is_promote = 1 AND promote_start_date <= '$time' AND promote_end_date >= '$time' AND (gr.region_id = '$region' OR gr.region_id = '$province')";
-    } else {
-        $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price, ' .
-                    "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
-                    "promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, goods_img, b.brand_name, " .
-                    "g.is_best, g.is_new, g.is_hot, g.is_promote, RAND() AS rnd " .
-                'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
-                'LEFT JOIN ' . $GLOBALS['ecs']->table('brand') . ' AS b ON b.brand_id = g.brand_id ' .
-                "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
-                    "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
-                'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 ' .
-                " AND g.is_promote = 1 AND promote_start_date <= '$time' AND promote_end_date >= '$time' ";
-    }
+                   " AND g.is_promote = 1 AND promote_start_date <= '$time' AND promote_end_date >= '$time' AND (gr.region_id = '$region' OR gr.region_id = '$province' OR gr.region_id = 1)";
+    // } else {
+    //     $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price, ' .
+    //                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
+    //                 "promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, goods_img, b.brand_name, " .
+    //                 "g.is_best, g.is_new, g.is_hot, g.is_promote, RAND() AS rnd " .
+    //             'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
+    //             'LEFT JOIN ' . $GLOBALS['ecs']->table('brand') . ' AS b ON b.brand_id = g.brand_id ' .
+    //             "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
+    //                 "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
+    //             'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 ' .
+    //             " AND g.is_promote = 1 AND promote_start_date <= '$time' AND promote_end_date >= '$time' ";
+    // }
     $sql .= $order_type == 0 ? ' ORDER BY g.sort_order, g.last_update DESC' : ' ORDER BY rnd';
 
     $sql .= " LIMIT $num ";
@@ -1168,7 +1168,7 @@ function assign_cat_goods($cat_id, $num = 0, $from = 'web', $order_rule = '')
     //bigrocs_region 根据地区查询
     $region = $GLOBALS['_region_id']['region_id'];//获取缓存地区
     $province = $GLOBALS['_region_id']['province_id'];//省级id
-    if ($region) {
+    // if ($region) {
         $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
                    "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
                   'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, g.jiubi ' .//**chognzhi
@@ -1178,17 +1178,17 @@ function assign_cat_goods($cat_id, $num = 0, $from = 'web', $order_rule = '')
                        "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
                'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
                    'g.is_delete = 0 AND (' . $children . 'OR ' . get_extension_goods($children) . ') '.
-                   " AND (gr.region_id = '$region' OR gr.region_id = '$province')";
-    } else {
-        $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
-                    "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
-                   'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, g.jiubi ' .//**chognzhi
-                "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
-                "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
-                        "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
-                'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
-                    'g.is_delete = 0 AND (' . $children . 'OR ' . get_extension_goods($children) . ') ';
-    }
+                   " AND (gr.region_id = '$region' OR gr.region_id = '$province' OR gr.region_id = 1)";
+    // } else {
+    //     $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
+    //                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
+    //                'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, g.jiubi ' .//**chognzhi
+    //             "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
+    //             "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
+    //                     "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
+    //             'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
+    //                 'g.is_delete = 0 AND (' . $children . 'OR ' . get_extension_goods($children) . ') ';
+    // }
 
 
     // $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
@@ -1511,7 +1511,53 @@ function spec_price($spec)
 }
 
 
+/**
+ * [getFinalJiubi 取得最终储值卡可用金额]
+ * @param    [type]         $goods_id [description]
+ * @param    [type]         $attr_id  [description]
+ * @return   [type]                   [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2017-12-22
+ */
+function getFinalJiubi($goods_id, $attr_id)
+{
+    $sql = 'SELECT jiubi FROM ' . $GLOBALS['ecs']->table('goods') . " WHERE goods_id = $goods_id";
+    $goodsJiubi = floatval($GLOBALS['db']->getOne($sql));
+    $specJiuBi =specJiuBi($attr_id);
+    return $goodsJiubi+$specJiuBi;
+}
+/**
+ * [specJiuBi 获得指定的规格的可用储值卡金额]
+ * @param    [type]         $spec [description]
+ * @return   [type]               [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2017-12-22
+ */
+function specJiuBi($spec)
+{
+    if (!empty($spec)) {
+        if (is_array($spec)) {
+            foreach ($spec as $key=>$val) {
+                $spec[$key]=addslashes($val);
+            }
+        } else {
+            $spec=addslashes($spec);
+        }
 
+        $where = db_create_in($spec, 'goods_attr_id');
+
+        $sql = 'SELECT SUM(attr_jiubi) AS attr_jiubi FROM ' . $GLOBALS['ecs']->table('goods_attr') . " WHERE $where";
+        $price = floatval($GLOBALS['db']->getOne($sql));
+    } else {
+        $price = 0;
+    }
+
+    return $price;
+}
 /**
 
  * 取得团购活动信息
@@ -2382,4 +2428,68 @@ function getParentRegionsId($regionId)
 {
     $sql = "SELECT parent_id FROM " .$GLOBALS['ecs']->table('region'). " WHERE region_id='$regionId'";
     return $GLOBALS['db']->getOne($sql);
+}
+
+/**
+ * [getRandGoods 随机获得商品]
+ * @return   [type]         [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2018-01-05
+ */
+function getRandGoods($num = 0)
+{
+    //bigrocs_region 根据地区查询
+    $region = $GLOBALS['_region_id']['region_id'];//获取缓存地区
+    $province = $GLOBALS['_region_id']['province_id'];//省级id
+        $sql = 'SELECT g.goods_id, g.goods_name, g.market_price, g.shop_price AS org_price, ' .
+                   "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
+                  'g.promote_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, g.jiubi ' .//**chognzhi
+               "FROM " . $GLOBALS['ecs']->table('goods') . ' AS g '.
+               'LEFT JOIN ' . $GLOBALS['ecs']->table('goods_region') . ' AS gr ON gr.goods_id = g.goods_id ' .
+               "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
+                       "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
+               'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
+                   'g.is_delete = 0 '.
+                   " AND (gr.region_id = '$region' OR gr.region_id = '$province' OR gr.region_id = 1)";
+    if ($num > 0) {
+        $sql .= '  ORDER BY RAND() LIMIT ' . $num;
+    }
+
+    $res = $GLOBALS['db']->getAll($sql);
+    $goods = array();
+
+    foreach ($res as $idx => $row) {
+        if ($row['promote_price'] > 0) {
+            $promote_price = bargain_price($row['promote_price'], $row['promote_start_date'], $row['promote_end_date']);
+
+            $goods[$idx]['promote_price'] = $promote_price > 0 ? price_format($promote_price) : '';
+        } else {
+            $goods[$idx]['promote_price'] = '';
+        }
+
+        $goods[$idx]['jiubi']           = $row['jiubi'];//**chognzhi
+
+        $goods[$idx]['id']           = $row['goods_id'];
+
+        $goods[$idx]['name']         = $row['goods_name'];
+
+        $goods[$idx]['brief']        = $row['goods_brief'];
+
+        $goods[$idx]['market_price'] = price_format($row['market_price']);
+
+        $goods[$idx]['short_name']   = $GLOBALS['_CFG']['goods_name_length'] > 0 ?
+
+                                        sub_str($row['goods_name'], $GLOBALS['_CFG']['goods_name_length']) : $row['goods_name'];
+
+        $goods[$idx]['shop_price']   = price_format($row['shop_price']);
+
+        $goods[$idx]['thumb']        = get_image_path($row['goods_id'], $row['goods_thumb'], true);
+
+        $goods[$idx]['goods_img']    = get_image_path($row['goods_id'], $row['goods_img']);
+
+        $goods[$idx]['url']          = build_uri('goods', array('gid' => $row['goods_id']), $row['goods_name']);
+    }
+    return $goods;
 }

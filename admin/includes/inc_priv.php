@@ -13,8 +13,7 @@
  * $Id: inc_priv.php 15503 2008-12-24 09:22:45Z sunxiaodong $
 */
 
-if (!defined('IN_ECS'))
-{
+if (!defined('IN_ECS')) {
     die('Hacking attempt');
 }
 
@@ -96,7 +95,12 @@ if (!defined('IN_ECS'))
     $purview['z_clicks_stats']       = 'ad_manage';
     $purview['ad_position']          = 'ad_manage';
     $purview['ad_list']              = 'ad_manage';
-
+    /* 商家管理 */
+    $purview['021_seller_list']      = 'seller_view';
+    $purview['022_seller_order']     = 'seller_view';
+    $purview['023_seller_cash']      = 'seller_view';
+    $purview['024_seller_log']       = 'seller_view';
+    /* 商家管理 */
 //订单管理权限
     $purview['02_order_list']        = 'order_view';
     $purview['03_order_query']       = 'order_view';
@@ -151,6 +155,4 @@ if (!defined('IN_ECS'))
     $purview['view_sendlist']        = 'view_sendlist';
 
 //第三方快捷登录
-	$purview['website']              = 'website';
-
-?>
+    $purview['website']              = 'website';

@@ -445,7 +445,7 @@ function category_get_goods($children, $brand, $min, $max, $ext, $size, $page, $
     //bigrocs_region 根据地区查询 begin
         $region = $GLOBALS['_region_id']['region_id'];//获取缓存地区
         $province = $GLOBALS['_region_id']['province_id'];//省级id
-        if ($region) {
+        // if ($region) {
             $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style,g.sales_volume_base, g.comments_number, g.market_price, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ' .
                         "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, g.promote_price, g.goods_type, " .
                         'g.promote_start_date, g.promote_end_date, g.goods_brief, g.goods_thumb , g.goods_img, g.jiubi ' .//**chognzhi
@@ -453,16 +453,16 @@ function category_get_goods($children, $brand, $min, $max, $ext, $size, $page, $
                     'LEFT JOIN ' . $GLOBALS['ecs']->table('goods_region') . ' AS gr ON gr.goods_id = g.goods_id ' .
                     'LEFT JOIN ' . $GLOBALS['ecs']->table('member_price') . ' AS mp ' .
                         "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' " .
-                    "WHERE $where AND (gr.region_id = '$region' OR gr.region_id = '$province') $ext ORDER BY $sort $order";
-        } else {
-            $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style,g.sales_volume_base, g.comments_number, g.market_price, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ' .
-                        "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, g.promote_price, g.goods_type, " .
-                        'g.promote_start_date, g.promote_end_date, g.goods_brief, g.goods_thumb , g.goods_img, g.jiubi ' .//**chognzhi
-                    'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
-                    'LEFT JOIN ' . $GLOBALS['ecs']->table('member_price') . ' AS mp ' .
-                        "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' " .
-                    "WHERE $where $ext ORDER BY $sort $order";
-        }
+                    "WHERE $where AND (gr.region_id = '$region' OR gr.region_id = '$province' OR gr.region_id = 1) $ext ORDER BY $sort $order";
+    // } else {
+    //     $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style,g.sales_volume_base, g.comments_number, g.market_price, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ' .
+    //                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, g.promote_price, g.goods_type, " .
+    //                 'g.promote_start_date, g.promote_end_date, g.goods_brief, g.goods_thumb , g.goods_img, g.jiubi ' .//**chognzhi
+    //             'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
+    //             'LEFT JOIN ' . $GLOBALS['ecs']->table('member_price') . ' AS mp ' .
+    //                 "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' " .
+    //             "WHERE $where $ext ORDER BY $sort $order";
+    // }
     // end bigrocs_region
     // $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.sales_volume_base, g.market_price, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ' .
     //             "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, g.promote_price, g.goods_type, " .
@@ -550,13 +550,13 @@ function get_cagtegory_goods_count($children, $brand = 0, $min = 0, $max = 0, $e
     //bigrocs_region 根据地区查询 begin
     $region = $GLOBALS['_region_id']['region_id'];//获取缓存地区
     $province = $GLOBALS['_region_id']['province_id'];//省级id
-    if ($region) {
+    // if ($region) {
         $sql = 'SELECT COUNT(*) FROM ' . $GLOBALS['ecs']->table('goods') . " AS g ".
                 'LEFT JOIN ' . $GLOBALS['ecs']->table('goods_region') . ' AS gr ON gr.goods_id = g.goods_id '
-                ."WHERE $where $ext AND (gr.region_id = '$region' OR gr.region_id = '$province')";
-    } else {
-        $sql = 'SELECT COUNT(*) FROM ' . $GLOBALS['ecs']->table('goods') . " AS g WHERE $where $ext";
-    }
+                ."WHERE $where $ext AND (gr.region_id = '$region' OR gr.region_id = '$province' OR gr.region_id = 1)";
+    // } else {
+    //     $sql = 'SELECT COUNT(*) FROM ' . $GLOBALS['ecs']->table('goods') . " AS g WHERE $where $ext";
+    // }
     // end bigrocs_region
     /* 返回商品总数 */
     return $GLOBALS['db']->getOne($sql);

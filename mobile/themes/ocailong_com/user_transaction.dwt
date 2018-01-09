@@ -216,7 +216,48 @@
     <!--{/if}-->
     <!--#修改店铺名字结束 end-->
 
-
+    <!-- 加油专用链接 start-->
+<!--{if $action eq 'gas'}-->
+<header id="header">
+ <div class="header_l header_return"> <a class="ico_10" href="seller.php"> 返回 </a> </div>
+ <h1> 加油 </h1>
+</header>
+<div class="blank3"></div>
+<section class="wrap">
+ <form name="formGas" action="user.php" method="post" >
+   <section class="order_box padd1 radius10" style="padding:15px">
+     <div class="table_box table_box2">
+       <dl>
+         <dd class="dd1">支付商家 </dd>
+          <td align="left" bgcolor="#ffffff">{$sellerInfo.name} (商家账户:{$sellerInfo.user_name})</td>
+       </dl>
+       <dl>
+         <dd class="dd1">消费金额 </dd>
+         <input name="amount" type="text"  value="100" class="dd2" />元
+       </dl>
+       <dl>
+         <dd class="dd1">支付方式 </dd>
+             <td  align="left">
+                 <input style="width:12px" type="radio" name="payment" id="payment_id1" value="money" />
+                 <label for="payment_id1">余额支付（可用:{$userInfo.surplus}）</label>
+             </td><br>
+             <td  align="left">
+                 <input style="width:12px" type="radio" name="payment" id="payment_id2" value="vip_money" />
+                 <label for="payment_id2">VIP余额支付（可用:{$userInfo.show_vip_money}）</label>
+             </td>
+       </dl>
+      </div>
+   </section>
+   <div class="blank3"></div>
+   <input type="hidden" name="Verifying" value="{$Verifying}" />
+   <input type="hidden" name="callblock" value="{$callblock}" />
+   <input type="hidden" name="sellerId" value="{$sellerInfo.user_id}" />
+   <input type="hidden" name="act" value="act_pay_gas" />
+   <input name="submit" type="submit" value="确认支付" class="c-btn3"   />
+ </form>
+</section>
+<!--{/if}-->
+<!--#加油专用链接 end-->
 
 
 
@@ -489,6 +530,10 @@ jQuery(function($){
           <td align="right">{$lang.phone}：</td>
           <td align="left">{$order.tel} </td>
         </tr>
+        <tr>
+          <td align="right">手机：</td>
+          <td align="left">{$order.mobile} </td>
+        </tr>
         <!-- {if $order.exist_real_goods} -->
         <tr>
           <td align="right">{$lang.deliver_goods_time}：</td>
@@ -497,7 +542,26 @@ jQuery(function($){
         <!--{/if}-->
       </table>
       </section>
-
+      <section class="order_box padd1 radius10">
+      <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
+          <tr>
+            <td width="32%" align="right">自提点名称：</td>
+            <td width="68%" align="left">{$pickup_point.shop_name}</td>
+          </tr>
+        <tr>
+          <td width="32%" align="right">自提点联系人：</td>
+          <td width="68%" align="left">{$pickup_point.contact}</td>
+        </tr>
+        <tr>
+          <td align="right">自提点电话：</td>
+          <td align="left">{$pickup_point.phone}</td>
+        </tr>
+        <tr>
+          <td align="right">{$lang.detailed_address}：</td>
+          <td align="left">{$pickup_point.address}</td>
+        </tr>
+      </table>
+      </section>
       <section class="order_box padd1 radius10">
         <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
       	  <!-- {foreach from=$goods_list item=goods} -->
@@ -833,7 +897,13 @@ jQuery(function($){
       <table width="100%" border="0" cellpadding="5" cellspacing="1">
         <tr>
             <!-- // **chognzhi -->
-          <td align="right" bgcolor="#ffffff"><a href="user.php?act=account_deposit_card" class="f6">充值卡</a> | <a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> | <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a></td>
+          <td align="right" bgcolor="#ffffff">
+              <a href="user.php?act=account_deposit_card" class="f6">充值卡</a> |
+              <a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> |
+              <!-- <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> |  -->
+              <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> |
+              <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a>
+          </td>
         </tr>
       </table>
       <!-- {/if} -->
@@ -900,7 +970,7 @@ jQuery(function($){
           <tr>
             <td width="15%" bgcolor="#ffffff">面值:</td>
             <td bgcolor="#ffffff"><input type="radio" name="amount" value="{$faceValue}" checked> {$faceValue}元（到账{$accountAmount}元）</td>
-            <td bgcolor="#ffffff"><input type="radio" name="amount" value="{$vipFaceValue}" checked> {$vipFaceValue}元（到账{$vipAccountAmount}元）</td>
+            <td bgcolor="#ffffff" style="display:none;"><input type="radio" name="amount" value="{$vipFaceValue}" checked> {$vipFaceValue}元（到账{$vipAccountAmount}元）</td>
           </tr>
           <tr>
             <td bgcolor="#ffffff">数量:</td>

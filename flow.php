@@ -656,7 +656,7 @@ if ($_REQUEST['step'] == 'add_to_cart') {
     $order['jiubi'] = $jiubi['consume_jiubi'];
 
     $user_info = user_info($_SESSION['user_id']);
-    $smarty->assign('user_jiubi', $user_info['jiubi']);  // 可用储值卡金额
+    $smarty->assign('user_jiubi', $user_info['jiubi']);  // 用户可用储值卡金额
     $smarty->assign('consume_jiubi', $jiubi['consume_jiubi']);  // 可用储值卡金额
     $smarty->assign('max_deductible_jine', price_format($jiubi['max_deductible_jine']));  // 最大储值卡金额抵扣金额
     $deductible_jine = $jiubi['consume_jiubi'];
@@ -1645,7 +1645,7 @@ elseif ($_REQUEST['step'] == 'done') {
         $order['surplus']  = 0;
         $order['integral'] = 0;
     }
-    /* 检查储值卡金额余额是否合法 */
+    /* 检查储值卡金额余额是否合法 begin */
     if ($user_id > 0) {
         $user_info = user_info($user_id);
         /* 对商品信息赋值 */
@@ -1662,6 +1662,7 @@ elseif ($_REQUEST['step'] == 'done') {
     } else {
         $order['jiubi'] = 0;
     }
+    /* 检查储值卡金额余额是否合法end */
     /* 检查vip金额余额是否合法 vip_money*/
     if ($user_id > 0) {
         $user_info = user_info($user_id);
@@ -1737,6 +1738,7 @@ elseif ($_REQUEST['step'] == 'done') {
     $order['discount']     = $total['discount'];
     $order['surplus']      = $total['surplus'];
     $order['tax']          = $total['tax'];
+    $order['cost_money']   = $total['cost_money']; //cost_money成本价
 
     // 购物车中的商品能享受红包支付的总额
     $discount_amout = compute_discount_amount();
@@ -1857,6 +1859,7 @@ elseif ($_REQUEST['step'] == 'done') {
     /* 插入订单表 */
     $error_no = 0;
     do {
+        $order['spread_id']   = $user_info['seller_id']; //获取商家业务员编号 spread_id
         $order['order_sn'] = get_order_sn(); //获取新订单号
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('order_info'), $order, 'INSERT');
 
@@ -2611,12 +2614,6 @@ function flow_max_jiubi($goods)
     }
     $user_info = user_info($_SESSION['user_id']);
 
-    //当储值卡金额归零时自动充值为初始化储值卡金额
-    // if ($user_info['jiubi']==0&&$user_info['init_jiubi']!=0) {
-    //     $sqlUpdate ="UPDATE ". $GLOBALS['ecs']->table('users'). "SET `jiubi`='$user_info[init_jiubi]' WHERE user_name= '$user_info[user_name]'";
-    //     $GLOBALS['db']->query($sqlUpdate);
-    //     $user_info['jiubi'] =  $user_info['init_jiubi'];
-    // }
 
     if ($user_info['jiubi']<$max_deductible_jine) {
         $consume_jiubi = $user_info['jiubi'];

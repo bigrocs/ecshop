@@ -2064,7 +2064,9 @@ function show_message($content, $links = '', $hrefs = '', $type = 'info', $auto_
         $GLOBALS['smarty']->assign('helps', get_shop_help()); // 网店帮助
     }
 
+    $randGoods = getRandGoods(9);//随机获取商品10个
 
+    $GLOBALS['smarty']->assign('randGoods', $randGoods);
 
     $GLOBALS['smarty']->assign('auto_redirect', $auto_redirect);
 

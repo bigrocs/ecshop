@@ -180,6 +180,11 @@
             </td>
           </tr>
           <tr>
+            <td class="label">成本价</td>
+            <td><input type="text" name="cost_money" value="{$goods.cost_money}" size="20";/>
+            </td>
+          </tr>
+          <tr>
             <td class="label"><label for="is_promote"><input type="checkbox" id="is_promote" name="is_promote" value="1" {if $goods.is_promote}checked="checked"{/if} onclick="handlePromote(this.checked);" /> {$lang.lab_promote_price}</label></td>
             <td id="promote_3"><input type="text" id="promote_1" name="promote_price" value="{$goods.promote_price}" size="20" /></td>
           </tr>

@@ -1,0 +1,67 @@
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- 卖家管理 -->
+ <!--<div class="form-div">
+  <!-- <form action="javascript:searchOrder()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    {$lang.order_sn}<input name="order_sn" type="text" id="order_sn" size="15">
+    {$lang.consignee|escape}<input name="consignee" type="text" id="consignee" size="15">
+    {$lang.all_status}
+    <select name="status" id="status">
+      <option value="-1">{$lang.select_please}</option>
+      {html_options options=$status_list}
+    </select>
+    <input type="submit" value="{$lang.button_search}" class="button" />
+    <a href="order.php?act=list&composite_status={$os_unconfirmed}">{$lang.cs.$os_unconfirmed}</a>
+    <a href="order.php?act=list&composite_status={$cs_await_pay}">{$lang.cs.$cs_await_pay}</a>
+    <a href="order.php?act=list&composite_status={$cs_await_ship}">{$lang.cs.$cs_await_ship}</a>
+  </form>
+</div>-->
+
+<!-- 订单列表 -->
+<form method="post" action="seller.php?act=operate" name="listForm" onsubmit="return check()">
+  <div class="list-div" id="listDiv">
+{/if}
+
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <!-- <th>
+      <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" /><a href="#">卖家ID</a>{$sort_user_id}
+    </th> -->
+    <th><a href="#">会员名</th>
+    <th><a href="#">公司名称</th>
+    <th><a href="#">可用资金</th>
+    <th>{$lang.handler}</th>
+  <tr>
+  {foreach from=$seller_list item=seller key=okey}
+  <tr>
+    <!-- <td valign="top" nowrap="nowrap"><input type="checkbox" name="checkboxes" value="{$seller.user_id}" />{$seller.user_id}</td> -->
+    <td align="left" valign="top">{$seller.user_name}</td>
+    <td align="left" valign="top">{$seller.name}</td>
+    <td align="left" valign="top">{$seller.user_money}</td>
+    <td align="center" valign="top"  nowrap="nowrap">
+     <a href="javascript:;" onclick="listTable.remove({$seller.user_id}, '您确定要删除此卖家吗？', 'remove_seller')">删除</a>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+
+<!-- 分页 -->
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+  </div>
+
+</form>
+
+{/literal}
+
+{include file="pagefooter.htm"}
+{/if}

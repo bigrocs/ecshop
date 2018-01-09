@@ -158,7 +158,14 @@ $_LANG['15_rec'] = '推荐管理';
 $_LANG['16_email_manage'] = '邮件群发管理';
 $_LANG['17_weixin_manage'] = '微信模块'; // 增加 by www.68ecshop.com 微商城
 $_LANG['18_virtual'] = '虚拟团购管理';
+$_LANG['02_seller'] = '商家管理';//seller
 
+/* 商家管理 */
+$_LANG['021_seller_list'] = '商家列表';
+$_LANG['022_seller_order'] = '商家订单';
+$_LANG['023_seller_cash'] = '商家充值和提现申请';
+$_LANG['024_seller_log'] = '资金记录';
+/* 商家管理 */
 
 /* 商品管理 */
 $_LANG['01_goods_list'] = '商品列表';

@@ -36,7 +36,7 @@ array('login','act_login','register','act_register','act_edit_password','get_pas
 
 /* 显示页面的action列表 */
 // **chognzhi account_deposit_card
-$ui_arr = array('register', 'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list',
+$ui_arr = array('gas','register', 'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list',
 'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking', 'account_raply',
 'account_deposit', 'account_deposit_card', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name','mpassword_name', 'get_passwd_question','send_pwd_mobile', 'check_answer','bindmobile');
 
@@ -116,7 +116,8 @@ if ($action == 'register') {
         $smarty->assign('enabled_captcha', 1);
         $smarty->assign('rand', mt_rand());
     }
-
+    //推广商家ID
+    $smarty->assign('sellerId', $_GET['sellerId']);
     /* 密码提示问题 */
     $smarty->assign('passwd_questions', $_LANG['passwd_questions']);
 
@@ -148,7 +149,7 @@ elseif ($action == 'act_register') {
         $other['mobile_phone'] = isset($_POST['extend_field5']) ? $_POST['extend_field5'] : '';
         $sel_question = empty($_POST['sel_question']) ? '' : compile_str($_POST['sel_question']);
         $passwd_answer = isset($_POST['passwd_answer']) ? compile_str(trim($_POST['passwd_answer'])) : '';
-
+        $sellerId = isset($_POST['sellerId']) ? trim($_POST['sellerId']) : 0;
 
         $back_act = isset($_POST['back_act']) ? trim($_POST['back_act']) : '';
 
@@ -270,6 +271,11 @@ elseif ($action == 'act_register') {
             /* 判断是否需要自动发送注册邮件 */
             if ($GLOBALS['_CFG']['member_email_validate'] && $GLOBALS['_CFG']['send_verify_email']) {
                 send_regiter_hash($_SESSION['user_id']);
+            }
+            /* 写入推广商家id */
+            if (!empty($sellerId)) {
+                $sql = 'UPDATE ' . $ecs->table('users') . " SET `seller_id`='$sellerId'  WHERE `user_id`='" . $_SESSION['user_id'] . "'";
+                $db->query($sql);
             }
             $ucdata = empty($user->ucdata)? "" : $user->ucdata;
             show_message(sprintf($_LANG['register_success'], $username . $ucdata), array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act, 'user.php'), 'info');
@@ -1116,6 +1122,9 @@ elseif ($action == 'order_detail') {
     $order['order_status'] = $_LANG['os'][$order['order_status']];
     $order['pay_status'] = $_LANG['ps'][$order['pay_status']];
     $order['shipping_status'] = $_LANG['ss'][$order['shipping_status']];
+    $sql = "SELECT * FROM " .$GLOBALS['ecs']->table('pickup_point'). " WHERE id='$order[pickup_point]'";
+    $pickup_point = $GLOBALS['db']->GetRow($sql);
+    $smarty->assign('pickup_point', $pickup_point);
     $smarty->assign('order', $order);
     $smarty->assign('goods_list', $goods_list);
     $smarty->display('user_transaction.dwt');
@@ -1567,7 +1576,6 @@ elseif ($action == 'account_deposit') {
 
     $surplus_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     $account    = get_surplus_info($surplus_id);
-
     $smarty->assign('payment', get_online_payment_list(false));
     $smarty->assign('order', $account);
     $smarty->display('user_transaction.dwt');
@@ -2831,6 +2839,45 @@ elseif ($action == 'send_hash_mail') {
 /* 清除商品浏览历史 */
 elseif ($action == 'clear_history') {
     setcookie('ECS[history]', '', 1);
+}
+/**
+ * [elseif 通过余额VIP余额加油]
+ * @var [type]
+ */
+elseif ($action == 'gas') {
+    include_once(ROOT_PATH .'includes/lib_seller.php');
+    include_once(ROOT_PATH .'includes/lib_clips.php');
+    $sellerId = $_REQUEST['sellerId'];
+    if (empty($sellerId)) {
+        show_message('没有选择商家');
+    }
+    if (!isSeller($sellerId)) {
+        show_message('商家不存在');
+    }
+    //加密验证
+    $_SESSION['VerifyingId'] = rand(10000, 99999);//设置验证ID
+    $Verifying = md5($sellerId.$_SESSION['VerifyingId'].$user_id);//
+    $smarty->assign('Verifying', $Verifying);
+    $smarty->assign('callblock', $_SERVER['REQUEST_URI']);
+    $smarty->assign('userInfo', get_user_default($user_id));//获取用户信息
+    $smarty->assign('sellerInfo', getSellerInfo($sellerId));//获取商家信息
+    $smarty->display('user_transaction.dwt');
+}
+/**
+ * [elseif 加油消费]
+ * @var [type]
+ */
+elseif ($action == 'act_pay_gas') {
+    include_once(ROOT_PATH .'includes/lib_clips.php');
+    include_once(ROOT_PATH .'includes/lib_seller.php');
+    $input = payGasCheckInput($user_id);
+    $_SESSION['VerifyingId'] = 0;//清空 防止刷新
+
+    log_account_change($user_id, (-1) * $input['money'], 0, 0, 0, '加油-'.$input['sellerInfo']['name'], 66, 0, (-1) * $input['vip_money']); //用户账号资金改变
+    logSellerAccountChange($input['sellerId'], $user_id, $input['accountAmount'], '加油收入-'.$input['userInfo']['username'], 1);//卖家账户余额变化
+    gasOrder($input['sellerId'], $user_id, $input['vip_money'], $input['money'], $input['accountAmount'], '加油-'.$input['userInfo']['username']);//写入加油订单
+    // show_message('支付成功', '', $_REQUEST['callblock'], 'success', false);
+    show_message('支付成功', '消费记录', 'user.php?act=account_detail', 'success', false);
 }
 /**
  * [getArrivalInfo 获取到账信息]

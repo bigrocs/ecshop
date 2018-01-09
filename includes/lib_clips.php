@@ -568,6 +568,8 @@ function get_user_default($user_id)
 
     $info['last_time'] = local_date($GLOBALS['_CFG']['time_format'], $last_time);
     $info['surplus']   = price_format($row['user_money'], false);
+    $info['user_money']   = $row['user_money'];
+    $info['show_vip_money']   = price_format($row['vip_money'], false);
     $info['bonus']     = sprintf($GLOBALS['_LANG']['user_bonus_info'], $user_bonus['bonus_count'], price_format($user_bonus['bonus_value'], false));
 
     $sql = "SELECT COUNT(*) FROM " .$GLOBALS['ecs']->table('order_info').

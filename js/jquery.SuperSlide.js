@@ -1,5 +1,5 @@
 /*!
- * SuperSlide v2.0 
+ * SuperSlide v2.0
  * 轻松解决网站大部分特效展示问题
  * 详尽信息请看官网：http://www.SuperSlide2.com/
  *

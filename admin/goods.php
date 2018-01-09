@@ -706,6 +706,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update') {
     $rank_integral = isset($_POST['rank_integral']) ? intval($_POST['rank_integral']) : '-1';
     $suppliers_id = isset($_POST['suppliers_id']) ? intval($_POST['suppliers_id']) : '0';
     $jiubi_price = !empty($_POST['jiubi_price']) ? $_POST['jiubi_price'] : 0;
+    $cost_money = !empty($_POST['cost_money']) ? $_POST['cost_money'] : 0;
     $is_vip_money = !empty($_POST['is_vip_money']) ? $_POST['is_vip_money'] : 0;//vip_money
     $goods_name_style = $_POST['goods_name_color'] . '+' . $_POST['goods_name_style'];
 
@@ -722,25 +723,25 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update') {
                     "cat_id, brand_id, shop_price, market_price, is_promote, promote_price, " .
                     "promote_start_date, promote_end_date, goods_img, goods_thumb, original_img, keywords, goods_brief, " .
                     "seller_note, goods_weight, goods_number, warn_number, integral, give_integral, is_best, is_new, is_hot, " .
-                    "is_on_sale, is_alone_sale, is_shipping, goods_desc, seller_desc, add_time, last_update, goods_type, rank_integral, fencheng, suppliers_id, jiubi, is_vip_money)" .//vip_money
+                    "is_on_sale, is_alone_sale, is_shipping, goods_desc, seller_desc, add_time, last_update, goods_type, rank_integral, fencheng, suppliers_id, jiubi, is_vip_money, cost_money)" .//vip_money
                 "VALUES ('$_POST[goods_name]', '$goods_name_style', '$goods_sn', '$catgory_id', " .
                     "'$brand_id', '$shop_price', '$market_price', '$is_promote','$promote_price', ".
                     "'$promote_start_date', '$promote_end_date', '$goods_img', '$goods_thumb', '$original_img', ".
                     "'$_POST[keywords]', '$_POST[goods_brief]', '$_POST[seller_note]', '$goods_weight', '$goods_number',".
                     " '$warn_number', '$_POST[integral]', '$give_integral', '$is_best', '$is_new', '$is_hot', '$is_on_sale', '$is_alone_sale', $is_shipping, ".
-                    " '$_POST[goods_desc]', '$_POST[seller_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$rank_integral', '$fencheng', '$suppliers_id', '$jiubi_price', '$is_vip_money')";//vip_money
+                    " '$_POST[goods_desc]', '$_POST[seller_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$rank_integral', '$fencheng', '$suppliers_id', '$jiubi_price', '$is_vip_money', '$cost_money')";//vip_money
         } else {
             $sql = "INSERT INTO " . $ecs->table('goods') . " (goods_name, goods_name_style, goods_sn, " .
                     "cat_id, brand_id, shop_price, market_price, is_promote, promote_price, " .
                     "promote_start_date, promote_end_date, goods_img, goods_thumb, original_img, keywords, goods_brief, " .
                     "seller_note, goods_weight, goods_number, warn_number, integral, give_integral, is_best, is_new, is_hot, is_real, " .
-                    "is_on_sale, is_alone_sale, is_shipping, goods_desc, seller_desc, add_time, last_update, goods_type, extension_code, rank_integral, fencheng, jiubi, is_vip_money)" .//vip_money
+                    "is_on_sale, is_alone_sale, is_shipping, goods_desc, seller_desc, add_time, last_update, goods_type, extension_code, rank_integral, fencheng, jiubi, is_vip_money, cost_money)" .//vip_money
                 "VALUES ('$_POST[goods_name]', '$goods_name_style', '$goods_sn', '$catgory_id', " .
                     "'$brand_id', '$shop_price', '$market_price', '$is_promote','$promote_price', ".
                     "'$promote_start_date', '$promote_end_date', '$goods_img', '$goods_thumb', '$original_img', ".
                     "'$_POST[keywords]', '$_POST[goods_brief]', '$_POST[seller_note]', '$goods_weight', '$goods_number',".
                     " '$warn_number', '$_POST[integral]', '$give_integral', '$is_best', '$is_new', '$is_hot', 0, '$is_on_sale', '$is_alone_sale', $is_shipping, ".
-                    " '$_POST[goods_desc]', '$_POST[seller_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$code', '$rank_integral', '$fencheng', '$jiubi_price', '$is_vip_money')";//vip_money
+                    " '$_POST[goods_desc]', '$_POST[seller_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$code', '$rank_integral', '$fencheng', '$jiubi_price', '$is_vip_money', '$cost_money')";//vip_money
         }
     } else {
         /* 如果有上传图片，删除原来的商品图 */
@@ -802,7 +803,8 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update') {
                 "last_update = '". gmtime() ."', ".
                 "goods_type = '$goods_type', " .
                 "jiubi = '$jiubi_price', ".
-                "is_vip_money = '$is_vip_money' ".//vip_money
+                "is_vip_money = '$is_vip_money', ".//vip_money
+                "cost_money = '$cost_money' ".
                 "WHERE goods_id = '$_REQUEST[goods_id]' LIMIT 1";
     }
     $db->query($sql);
@@ -857,15 +859,18 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update') {
             foreach ($_POST['attr_id_list'] as $key => $attr_id) {
                 $attr_value = $_POST['attr_value_list'][$key];
                 $attr_price = $_POST['attr_price_list'][$key];
+                $attr_jiubi = $_POST['attr_jiubi_list'][$key];
                 if (!empty($attr_value)) {
                     if (isset($goods_attr_list[$attr_id][$attr_value])) {
                         // 如果原来有，标记为更新
                         $goods_attr_list[$attr_id][$attr_value]['sign'] = 'update';
                         $goods_attr_list[$attr_id][$attr_value]['attr_price'] = $attr_price;
+                        $goods_attr_list[$attr_id][$attr_value]['attr_jiubi'] = $attr_jiubi;
                     } else {
                         // 如果原来没有，标记为新增
                         $goods_attr_list[$attr_id][$attr_value]['sign'] = 'insert';
                         $goods_attr_list[$attr_id][$attr_value]['attr_price'] = $attr_price;
+                        $goods_attr_list[$attr_id][$attr_value]['attr_jiubi'] = $attr_jiubi;
                     }
                     $val_arr = explode(' ', $attr_value);
                     foreach ($val_arr as $k => $v) {
@@ -886,10 +891,10 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update') {
         foreach ($goods_attr_list as $attr_id => $attr_value_list) {
             foreach ($attr_value_list as $attr_value => $info) {
                 if ($info['sign'] == 'insert') {
-                    $sql = "INSERT INTO " .$ecs->table('goods_attr'). " (attr_id, goods_id, attr_value, attr_price)".
-                            "VALUES ('$attr_id', '$goods_id', '$attr_value', '$info[attr_price]')";
+                    $sql = "INSERT INTO " .$ecs->table('goods_attr'). " (attr_id, goods_id, attr_value, attr_price, attr_jiubi)".
+                            "VALUES ('$attr_id', '$goods_id', '$attr_value', '$info[attr_price]', '$info[attr_jiubi]')";
                 } elseif ($info['sign'] == 'update') {
-                    $sql = "UPDATE " .$ecs->table('goods_attr'). " SET attr_price = '$info[attr_price]' WHERE goods_attr_id = '$info[goods_attr_id]' LIMIT 1";
+                    $sql = "UPDATE " .$ecs->table('goods_attr'). " SET attr_price = '$info[attr_price]', attr_jiubi = '$info[attr_jiubi]' WHERE goods_attr_id = '$info[goods_attr_id]' LIMIT 1";
                 } else {
                     $sql = "DELETE FROM " .$ecs->table('goods_attr'). " WHERE goods_attr_id = '$info[goods_attr_id]' LIMIT 1";
                 }
@@ -2375,6 +2380,9 @@ function update_goods_stock($goods_id, $value)
 function setRegions($goodsId)
 {
     $regions = getPostRegions();
+    if (empty($regions)) {
+        $regions = array(1);
+    }//空也要写入地域0 方便全国
     /* 清除原有的城市和地区 */
     $GLOBALS['db']->query("DELETE FROM ".$GLOBALS['ecs']->table("goods_region")." WHERE goods_id='$goodsId'");
 

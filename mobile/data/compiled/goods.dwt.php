@@ -130,7 +130,7 @@ spec_arr = getSelectedAttributes(frm);
 </head>
 <body>
 <header id="header">
-  <div class="header_l header_return"> <a class="ico_10" href="cat_all.php"> 返回 </a> </div>
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div>
   <h1> 商品详情 </h1>
 
 </header>
@@ -221,7 +221,7 @@ function showPic(){
 <?php endif; ?>
   </ul>
   <ul>
-      <li>可用储值卡:<b class="price"><?php echo $this->_var['goods']['jiubi']; ?></b></li>
+      <li>可用储值卡:<b class="price" id="ECS_SHOP_JIUBI"><?php echo $this->_var['goods']['jiubi']; ?></b></li>
   </ul>
   <?php if ($this->_var['goods']['is_promote'] && $this->_var['goods']['gmt_end_time']): ?>
   <?php echo $this->smarty_insert_scripts(array('files'=>'lefttime.js')); ?>
@@ -619,8 +619,12 @@ function changePriceResponse(res)
   {
     document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
 
-    if (document.getElementById('ECS_GOODS_AMOUNT'))
+    if (document.getElementById('ECS_GOODS_AMOUNT')){
       document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+    }
+    if (document.getElementById('ECS_SHOP_JIUBI')){
+      document.getElementById('ECS_SHOP_JIUBI').innerHTML = res.resultJiuBi;
+    }
   }
 }
 
@@ -713,7 +717,7 @@ function hiddenweixin(){
 	// document.getElementById("weixin_gz").style.display='none';
 }
 </script>
-<div style="position:relative;position:absolute;position:fixed;bottom:0px;display:block;" id="weixin_gz" class="weixingz-con">
+<!-- <div style="position:relative;position:absolute;position:fixed;bottom:0px;display:block;" id="weixin_gz" class="weixingz-con">
   <div class="weixin_gz">
     <div class="weixingz-logo">
     </div>
@@ -736,7 +740,7 @@ function hiddenweixin(){
       </span>
     </div>
   </div>
-</div>
+</div> -->
 <?php endif; ?>
 <?php echo $this->smarty_insert_scripts(array('files'=>'transportjq.js,utils.js')); ?>
 

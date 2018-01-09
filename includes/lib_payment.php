@@ -224,7 +224,6 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
                     $sql = "SELECT user_id, amount, arrival FROM " . $GLOBALS['ecs']->table('user_account') .
                             " WHERE id = '$pay_log[order_id]'";
                     $arr = $GLOBALS['db']->getRow($sql);
-                    print_R($arr);
                     /* 修改会员帐户金额 */
                     $_LANG = array();
                     include_once(ROOT_PATH . 'languages/' . $GLOBALS['_CFG']['lang'] . '/user.php');
@@ -243,6 +242,22 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
                     //**chognzhi end
                     log_account_change($arr['user_id'], $arr['amount'], 0, 0, 0, $_LANG['surplus_type_0'], ACT_SAVING, $jiubi, $vip_money);//vip_money
                 }
+            }
+            if ($pay_log['order_type'] == PAY_SELLER_SURPLUS) {
+                /* 更新会员预付款的到款状态 */
+                $sql = 'UPDATE ' . $GLOBALS['ecs']->table('user_seller_account') .
+                       " SET paid_time = '" .gmtime(). "', is_paid = 1" .
+                       " WHERE id = '$pay_log[order_id]' LIMIT 1";
+                $GLOBALS['db']->query($sql);
+
+                /* 取得添加预付款的用户以及金额 */
+                $sql = "SELECT user_id, amount, arrival FROM " . $GLOBALS['ecs']->table('user_seller_account') .
+                        " WHERE id = '$pay_log[order_id]'";
+                $arr = $GLOBALS['db']->getRow($sql);
+                /* 修改会员帐户金额 */
+                $_LANG = array();
+                include_once(ROOT_PATH . 'languages/' . $GLOBALS['_CFG']['lang'] . '/user.php');
+                logSellerAccountChange($arr['user_id'], $arr['user_id'], $arr['amount'], $_LANG['surplus_type_0'], ACT_SAVING);//商家充值到账
             }
         } else {
             /* 取得已发货的虚拟商品信息 */

@@ -729,9 +729,9 @@ function setRegionId()
                     'name' => getRegionName($_SESSION['region_id'])
                 );
         } else {
-            $_SESSION['region_id']    = 0; //bigrocs//地区编号
+            $_SESSION['region_id']    = 1; //bigrocs//地区编号
             $GLOBALS['_region_id'] = array(
-                    'region_id' => 0,
+                    'region_id' => 1,
                     'province_id' => 0,
                     'name' => '全国'
                 );
@@ -740,7 +740,7 @@ function setRegionId()
     } else {
         if ($_SESSION['region_id']==1) {
             $GLOBALS['_region_id'] = array(
-                    'region_id' => 0,
+                    'region_id' => 1,
                     'province_id' => 0,
                     'name' => '全国'
                 );

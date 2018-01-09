@@ -16,18 +16,18 @@
 <script type="text/javascript" src="<?php echo $this->_var['ectouch_themes']; ?>/js/jquery-1.4.4.min.js"></script>
 <?php echo $this->smarty_insert_scripts(array('files'=>'utils.js')); ?>
 <script type="text/javascript">
-//检查号码是否符合规范，包括长度，类型  
-isCardNo = function(card)  
-{  
-    //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X  
-    var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;  
-    if(reg.test(card) === false)  
-    {  
-        return false;  
-    }  
-  
-    return true;  
-};  
+//检查号码是否符合规范，包括长度，类型
+isCardNo = function(card)
+{
+    //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+    var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;
+    if(reg.test(card) === false)
+    {
+        return false;
+    }
+
+    return true;
+};
 
 /* *
  * 处理注册用户
@@ -160,7 +160,7 @@ function register()
 </head>
 <body>
 
- 
+
 <?php if ($this->_var['action'] == 'login' || $this->_var['action'] == 'register'): ?>
 <div id="page">
   <header id="header">
@@ -213,7 +213,7 @@ function register()
           </dl>
           <div class="hezuo">
             <p class="t">使用合作账号登录</p>
-            <p class="b"><a href="user.php?act=oath&type=qq"><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/quicklogin/qq.png"></a> <a href="user.php?act=oath&type=weibo"><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/quicklogin/weibo.png"></a> <a href="user.php?act=oath&type=alipay"><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/quicklogin/zhifubao.png"></a> 
+            <p class="b"><a href="user.php?act=oath&type=qq"><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/quicklogin/qq.png"></a> <a href="user.php?act=oath&type=weibo"><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/quicklogin/weibo.png"></a> <a href="user.php?act=oath&type=alipay"><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/quicklogin/zhifubao.png"></a>
 	    <?php if ($this->_var['is_wechat_browser']): ?><a href="user.php?act=oath&type=weixin"><img src="<?php echo $this->_var['ectouch_themes']; ?>/images/quicklogin/weixin.png"></a><?php endif; ?>
 	    </p>
           </div>
@@ -259,7 +259,7 @@ function register()
               <dd>
               <input id="zphone" name="sendsms" type="button" value="获取验证码" onclick="getverifycode1('extend_field<?php echo $this->_var['field']['id']; ?>', '<?php echo $this->_var['field']['reg_field_name']; ?>');" class="c-btn3" />
               </dd>
-            </dl>			
+            </dl>
 		<?php else: ?>
             <dl>
               <dd>
@@ -290,6 +290,8 @@ function register()
             <dl>
               <dd>
                 <input name="act" type="hidden" value="act_register" />
+                
+                <input name="sellerId" type="hidden" value="<?php echo $this->_var['sellerId']; ?>" >
                 <input name="enabled_sms" type="hidden" value="1" />
                 <input type="hidden" name="back_act" value="<?php echo $this->_var['back_act']; ?>" />
                 <input name="Submit" type="submit" value="下一步" class="c-btn3" />
@@ -313,12 +315,12 @@ jQuery(function($){
 	})
 })
 </script>
-<?php endif; ?> 
- 
+<?php endif; ?>
 
- 
-<?php if ($this->_var['action'] == 'get_password'): ?> 
-<?php echo $this->smarty_insert_scripts(array('files'=>'utils.js')); ?> 
+
+
+<?php if ($this->_var['action'] == 'get_password'): ?>
+<?php echo $this->smarty_insert_scripts(array('files'=>'utils.js')); ?>
 <script type="text/javascript">
     <?php $_from = $this->_var['lang']['password_js']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');if (count($_from)):
     foreach ($_from AS $this->_var['key'] => $this->_var['item']):
@@ -390,7 +392,7 @@ jQuery(function($){
     </div>
   </div>
 </section>
-<?php endif; ?> 
+<?php endif; ?>
 
 
 

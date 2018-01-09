@@ -100,11 +100,9 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price') {
 
         $shop_price  = get_final_price($goods_id, $number, true, $attr_id);
 
-        //模板之家修复。
-
-        $xkfla2015=$shop_price * $number;
-
-        $res['result'] = "￥".$xkfla2015;
+        $jiuBi = getFinalJiubi($goods_id, $attr_id);
+        $res['resultJiuBi'] = price_format($jiuBi * $number);
+        $res['result'] = price_format($shop_price * $number);
     }
 
 

@@ -32,10 +32,15 @@
     <th><a href="javascript:listTable.sort('add_time', 'DESC'); ">{$lang.order_time}</a>{$sort_order_time}</th>
     <th><a href="javascript:listTable.sort('consignee', 'DESC'); ">{$lang.consignee}</a>{$sort_consignee}</th>
     <th><a href="javascript:listTable.sort('total_fee', 'DESC'); ">{$lang.total_fee}</a>{$sort_total_fee}</th>
+    <th>使用余额</th>
     <th>使用储值卡</th>
     <th>使用VIP余额</th>
+    <th>实际收入</th>
+    <th>成本</th>
+    <th>利润</th>
     <th><a href="javascript:listTable.sort('order_amount', 'DESC'); ">{$lang.order_amount}</a>{$sort_order_amount}</th>
     <th>{$lang.all_status}</th>
+    <th>推荐人</th>
     <th>{$lang.handler}</th>
   <tr>
   {foreach from=$order_list item=order key=okey}
@@ -44,10 +49,15 @@
     <td>{$order.buyer|escape}<br />{$order.short_order_time}</td>
     <td align="left" valign="top"><a href="mailto:{$order.email}"> {$order.consignee|escape}</a>{if $order.tel} [TEL: {$order.tel|escape}]{/if} <br />{$order.address|escape}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_total_fee}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$order.formated_surplus}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_jiubi}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_vip_money}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$order.formated_actual_money}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$order.formated_cost_money}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$order.formated_profit_money}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_order_amount}</td>
     <td align="center" valign="top" nowrap="nowrap">{$lang.os[$order.order_status]},{$lang.ps[$order.pay_status]},{$lang.ss[$order.shipping_status]}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$order.spread_name}</td>
     <td align="center" valign="top"  nowrap="nowrap">
      <a href="order.php?act=info&order_id={$order.order_id}">{$lang.detail}</a>
      {if $order.can_remove}

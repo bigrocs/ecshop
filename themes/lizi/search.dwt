@@ -90,7 +90,8 @@
                    <span class="description">{$goods.goods_brief}</span>
                    <span class="price"> 专柜价：{$goods.market_price} </span>
                    <span class="salerow"> 销量：<span class="sales">{$goods.sales_volume_base}</span>件 </span>
-              </a> <a href="javascript:addToCart({$goods.goods_id})" class="addcart" target="_blank" rel="nofollow">加入购物车</a> </li>
+              </a> <a href="javascript:addToCart({$goods.goods_id})" class="addcart" target="_blank" rel="nofollow">加入购物车</a>
+          </li>
           <!--{/if}-->
           <!--{/foreach}-->
 

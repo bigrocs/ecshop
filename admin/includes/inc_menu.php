@@ -35,6 +35,12 @@ $modules['02_cat_and_goods']['51_virtual_card_add']    = 'goods.php?act=add&exte
 $modules['02_cat_and_goods']['52_virtual_card_change'] = 'virtual_card.php?act=change';
 $modules['02_cat_and_goods']['goods_auto']             = 'goods_auto.php?act=list';
 
+/* 商家管理 */
+$modules['02_seller']['021_seller_list']             = 'seller.php?act=list';
+$modules['02_seller']['022_seller_order']            = 'seller.php?act=order';
+$modules['02_seller']['023_seller_cash']             = 'seller_account.php?act=list';
+// $modules['02_seller']['024_seller_log']              = 'seller.php?act=account_log';
+/* 商家管理 */
 
 $modules['03_promotion']['02_snatch_list']          = 'snatch.php?act=list';
 $modules['03_promotion']['04_bonustype_list']       = 'bonus.php?act=list';
@@ -59,7 +65,7 @@ $modules['04_order']['06_undispose_booking']        = 'goods_booking.php?act=lis
 $modules['04_order']['08_add_order']                = 'order.php?act=add';
 $modules['04_order']['09_delivery_order']           = 'order.php?act=delivery_list';
 $modules['04_order']['10_back_order']               = 'order.php?act=back_list';
-
+$modules['04_order']['12_order_excel']               = 'excel.php?act=order_excel';
 $modules['05_banner']['ad_position']                = 'ad_position.php?act=list';
 $modules['05_banner']['ad_list']                    = 'ads.php?act=list';
 

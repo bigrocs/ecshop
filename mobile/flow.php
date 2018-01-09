@@ -2782,7 +2782,7 @@ elseif ($_REQUEST['step'] == 'done') {
         $order['integral'] = 0;
     }
 
-    /* 检查储值卡金额余额是否合法 */
+    /* 检查储值卡金额余额是否合法begin */
     if ($user_id > 0) {
         $user_info = user_info($user_id);
         /* 对商品信息赋值 */
@@ -2799,6 +2799,7 @@ elseif ($_REQUEST['step'] == 'done') {
     } else {
         $order['jiubi'] = 0;
     }
+    /* 检查储值卡金额余额是否合法end */
     /* 检查vip金额余额是否合法 vip_money*/
     if ($user_id > 0) {
         $user_info = user_info($user_id);
@@ -2911,7 +2912,7 @@ elseif ($_REQUEST['step'] == 'done') {
 
     $order['tax']          = $total['tax'];
 
-
+    $order['cost_money']   = $total['cost_money']; //cost_money成本价
 
     // 购物车中的商品能享受红包支付的总额
 
@@ -3098,6 +3099,7 @@ elseif ($_REQUEST['step'] == 'done') {
     $error_no = 0;
 
     do {
+        $order['spread_id']   = $user_info['seller_id']; //获取商家业务员编号 spread_id
         $order['order_sn'] = get_order_sn(); //获取新订单号
 
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('order_info'), $order, 'INSERT');

@@ -55,7 +55,10 @@
 	</div>
 	-->
 	<div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
-	 <a  href="distribute.php" class="clearfix"> <span>分销中心</span><i></i> </a>
+     <?php if (isSeller ( $this->_var['user_id'] )): ?>
+         <a  href="seller.php" class="clearfix"> <span>卖家中心</span><i></i> </a>
+     <?php endif; ?>
+	 <!-- <a  href="distribute.php" class="clearfix"> <span>分销中心</span><i></i> </a> -->
 	</div>
 	  <div class="blank3"></div>
 

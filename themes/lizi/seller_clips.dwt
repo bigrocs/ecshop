@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="user.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,user.js,qrcode.js'}
+</head>
+<body class="user_center">
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div id="wrapper" class="cle">
+	<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+
+    <div class="my_nala_main">
+        <!-- #BeginLibraryItem "/library/seller_menu.lbi" --><!-- #EndLibraryItem -->
+
+    <div class="my_nala_centre ilizi_centre">
+    <div class="ilizi cle">
+      	<div class="box">
+     <div class="box_1">
+      <div class="userCenterBox boxCenterList clearfix" style="_height:1%; font-size:14px;">
+          <!-- 卖家加油订单记录 -->
+          <!-- {if $action eq 'order_list'} -->
+          <h5><span>加油订单</span></h5>
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff">订单ID</td>
+              <td bgcolor="#ffffff">买家</td>
+              <td bgcolor="#ffffff">到账金额</td>
+              <td bgcolor="#ffffff">余额支付</td>
+              <td bgcolor="#ffffff">VIP余额支付</td>
+              <td bgcolor="#ffffff">订单时间</td>
+            </tr>
+            <!--{foreach from=$orderGas item=item}-->
+            <tr>
+              <td align="center" bgcolor="#ffffff">{$item.order_id}</td>
+              <td align="center" bgcolor="#ffffff">{$item.user_name}</td>
+              <td align="center" bgcolor="#ffffff">{$item.show_arrival_money}</td>
+              <td align="right" bgcolor="#ffffff">{$item.show_money}</td>
+              <td bgcolor="#ffffff" >{$item.show_vip_money}</td>
+              <td align="center" bgcolor="#ffffff">{$item.change_time}</td>
+            </tr>
+            <!--{/foreach}-->
+          </table>
+          <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+          <!-- {/if} -->
+          <!-- 卖家加油订单记录 -->
+         <!-- *用户中心默认显示页面 start-->
+         <!-- {if $action eq 'default'} -->
+          <font class="f5"><b class="f4">{$info.username}</b> {$lang.welcome_to} {$info.shop_name}！</font><br />
+          <font class="f5">{$lang.affiliated_company}: <b class="f4">{$sellerInfo.name}</b></font><br />
+          <div class="blank"></div>
+          {$lang.last_time}: {$info.last_time}<br />
+          公司类型: {if $insurance eq '0'}加油站{else}保险公司{/if}<br />
+          <div class="blank5"></div>
+
+          <div class="f_l" style="width:350px;">
+          <h5><span>{$lang.your_account}</span></h5>
+          <div class="blank"></div>
+          {$lang.seller_capital}: <a href="seller.php?act=account_log" style="color:#f70;">{$sellerInfo.show_user_money}</a><br />
+          <div class="blank"></div>
+          冻结资金:<span style="color:#f70;">{$sellerInfo.show_frozen_money}</span><br />
+          </div>
+         <!-- {/if} -->
+         <!-- #用户中心默认显示页面 end-->
+         <!-- 卖家专用加油二维码 -->
+         <!-- {if $action eq 'gas'} -->
+         <h5><span>加油二维码</span></h5>
+         <div class="blank"></div>
+         <div>
+             加油网址（可自行生成二维码）<br />
+             pc端：<a href="{$pcGasUrl}" style="color:#f70;">{$pcGasUrl}</a><br />
+             wap端：<a href="{$gasUrl}" style="color:#f70;">{$gasUrl}</a><br />
+         </div>
+         <div style="margin-top:30px;">
+             <div id="seller_qrcode"></div>
+         </div>
+         <!-- {/if} -->
+         <!-- 卖家专用加油二维码 -->
+         <!-- *卖家信息页面 start-->
+         <!-- {if $action eq 'info'} -->
+         <h5><span>信息管理</span></h5>
+         <form name="formInfo" action="seller.php" method="post" >
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr>
+               <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.seller_corporate}：</td>
+               <td width="76%" align="left" bgcolor="#FFFFFF"><input name="name" type="text" size="25"  class="inputBg" value="{$sellerInfo.name}"/></td>
+             </tr>
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.seller_bank}：</td>
+              <td width="76%" align="left" bgcolor="#FFFFFF"><input name="bank" type="text" size="25"  class="inputBg" value="{$sellerInfo.bank}"/></td>
+            </tr>
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.seller_bank_name}：</td>
+              <td align="left" bgcolor="#FFFFFF"><input name="bank_name" type="text" size="25"  class="inputBg" value="{$sellerInfo.bank_name}"/></td>
+            </tr>
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.seller_bank_account}：</td>
+              <td align="left" bgcolor="#FFFFFF"><input name="bank_account" type="text" size="25"  class="inputBg" value="{$sellerInfo.bank_account}"/></td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_info" />
+                <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="{$lang.confirm_edit}" />
+              </td>
+            </tr>
+          </table>
+        </form>
+         <!-- {/if} -->
+         <!-- #卖家信息页面 end-->
+         <!-- 卖家资金记录 -->
+         <!-- {if $action eq 'account_log'} -->
+         <h5><span>资金记录</span></h5>
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+           <tr align="center">
+             <td bgcolor="#ffffff">{$lang.process_time}</td>
+             <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
+             <td bgcolor="#ffffff">{$lang.money}</td>
+             <td bgcolor="#ffffff">{$lang.change_desc}</td>
+           </tr>
+           <!--{foreach from=$account_log item=item}-->
+           <tr>
+             <td align="center" bgcolor="#ffffff">{$item.change_time}</td>
+             <td align="center" bgcolor="#ffffff">{$item.type}</td>
+             <td align="right" bgcolor="#ffffff">{$item.seller_money}</td>
+             <td bgcolor="#ffffff" title="{$item.change_desc}">&nbsp;&nbsp;{$item.short_change_desc}</td>
+           </tr>
+           <!--{/foreach}-->
+         </table>
+         <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+         <!-- {/if} -->
+         <!-- 卖家资金记录 -->
+
+         <!-- *卖家提现 start-->
+         <!-- {if $action eq 'cash'} -->
+         <h5><span>卖家提现</span></h5>
+         <div class="blank"></div>
+         <div style="margin:15px;padding:25px;background:#909399;border-radius:5px;color:#FFF">
+            <h2>提现资料</h2><br />
+            银行名称: {$sellerInfo.bank}<br />
+            收款人: {$sellerInfo.bank_name}<br />
+            银行账号: {$sellerInfo.bank_account}<br />
+         </div>
+         <div style="margin:15px;padding:25px;background:#C0C4CC;border-radius:5px;color:#FFF">
+            可用余额: {$sellerInfo.show_user_money}<br />
+            冻结余额: {$sellerInfo.show_frozen_money}<br />
+            提现手续费: {$sellerCash}%<br />
+         </div>
+         <a href="seller.php?act=info">修改提现资料</a>
+         <form name="formInfo" action="seller.php" method="post" >
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr>
+               <td width="28%" align="right" bgcolor="#FFFFFF">提现金额：</td>
+               <td width="76%" align="left" bgcolor="#FFFFFF"><input name="money" type="text" size="25"  class="inputBg" value="{$sellerInfo.user_money}"/></td>
+             </tr>
+            <tr>
+              <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_cash" />
+                <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="确认" />
+              </td>
+            </tr>
+          </table>
+        </form>
+         <!-- {/if} -->
+         <!-- #卖家提现 end-->
+         <!-- *卖家提现充值记录 start-->
+         <!-- {if $action eq 'seller_account'} -->
+         <h5><span>申请记录</span></h5>
+         <div class="blank"></div>
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr align="center">
+               <td bgcolor="#ffffff">{$lang.process_time}</td>
+               <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
+               <td bgcolor="#ffffff">{$lang.money}</td>
+               <td bgcolor="#ffffff">实际到账</td>
+               <td bgcolor="#ffffff">手续费</td>
+               <td bgcolor="#ffffff">{$lang.is_paid}</td>
+               <td bgcolor="#ffffff">{$lang.handle}</td>
+             </tr>
+             <!--{foreach from=$account_log item=item}-->
+             <tr>
+               <td align="center" bgcolor="#ffffff">{$item.add_time}</td>
+               <td align="left" bgcolor="#ffffff">{$item.type}</td>
+               <td align="right" bgcolor="#ffffff">{$item.amount}</td>
+               <td align="right" bgcolor="#ffffff">{$item.show_arrival}</td>
+               <td align="left" bgcolor="#ffffff">{$item.show_cash_amount}</td>
+               <td align="center" bgcolor="#ffffff">{$item.pay_status}</td>
+               <td align="right" bgcolor="#ffffff">{$item.handle}
+                 <!-- {if ($item.is_paid eq 0 && $item.process_type eq 1) || $item.handle} -->
+                 <a href="seller.php?act=cancel&id={$item.id}" onclick="if (!confirm('{$lang.confirm_remove_account}')) return false;">{$lang.is_cancel}</a>
+                 <!-- {/if} -->
+                               </td>
+             </tr>
+             <!--{/foreach}-->
+           </table>
+           <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+         <!-- {/if} -->
+         <!-- #卖家提现充值记录 end-->
+
+         <!-- *卖家VIP充值 start-->
+         <!-- {if $action eq 'vip_deposit'} -->
+         <h5><span>VIP充值</span></h5>
+         <div class="blank"></div>
+         <div style="margin:15px;padding:25px;background:#C0C4CC;border-radius:5px;color:#FFF">
+            可用余额: {$sellerInfo.show_user_money}<br />
+         </div>
+         <form name="formInfo" action="seller.php" method="post" >
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr>
+               <td width="28%" align="right" bgcolor="#FFFFFF">充值账号：</td>
+               <td width="76%" align="left" bgcolor="#FFFFFF"><input name="username" type="text" size="25"  class="inputBg" value=""/></td>
+             </tr>
+             <tr>
+               <td width="28%" align="right" bgcolor="#FFFFFF">充值金额：</td>
+               <td width="76%" align="left" bgcolor="#FFFFFF"><input name="money" type="text" size="25"  class="inputBg" value="{$sellerDepositMin}"/></td>
+             </tr>
+            <tr>
+              <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_vip_deposit" />
+                <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="充值" />
+              </td>
+            </tr>
+          </table>
+        </form>
+         <!-- {/if} -->
+         <!-- #卖家VIP充值 end-->
+         <!-- *卖家自提点信息 start-->
+         <!-- {if $action eq 'pickup_point'} -->
+         <h5><span>自提点信息管理</span></h5>
+         <div class="blank"></div>
+             {* 包含脚本文件 *}
+            {insert_scripts files='utils.js,transport_jquery.js,region.js,shopping_flow.js'}
+            <script type="text/javascript">
+              region.isAdmin = false;
+              {foreach from=$lang.flow_js item=item key=key}
+              var {$key} = "{$item}";
+              {/foreach}
+              {literal}
+              onload = function() {
+                if (!document.all)
+                {
+                  document.forms['theForm'].reset();
+                }
+              }
+              {/literal}
+            </script>
+         <form name="formInfo" action="seller.php" method="post" >
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr>
+               <td width="28%" align="right" bgcolor="#FFFFFF">联系人：</td>
+               <td width="76%" align="left" bgcolor="#FFFFFF"><input name="contact" type="text" size="25"  class="inputBg" value="{$pickupPoint.contact}"/></td>
+             </tr>
+             <tr>
+               <td width="28%" align="right" bgcolor="#FFFFFF">联系方式：</td>
+               <td width="76%" align="left" bgcolor="#FFFFFF"><input name="phone" type="text" size="25"  class="inputBg" value="{$pickupPoint.phone}"/></td>
+             </tr>
+             <tr>
+                 <td align="right" bgcolor="#ffffff">地区：</td>
+                 <td colspan="3" align="left" bgcolor="#ffffff">
+                   <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')">
+                     <option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+                     {foreach from=$province_list item=province}
+                     <option value="{$province.region_id}"{if $pickupPoint.province_id eq $province.region_id}selected="selected"{/if}>{$province.region_name}</option>
+                     {/foreach}
+                   </select>
+                   <select name="city" id="selCities" onchange="region.changed(this, 3, 'selDistricts')">
+                     <option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+                     {foreach from=$city_list item=city}
+                     <option value="{$city.region_id}"{if $pickupPoint.city_id eq $city.region_id}selected="selected"{/if}>{$city.region_name}</option>
+                     {/foreach}
+                   </select>
+                   <select name="district" id="selDistricts" {if !$district_list}style="display:none"{/if}>
+                     <option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+                     {foreach from=$district_list item=district}
+                     <option value="{$district.region_id}"{if $pickupPoint.district_id eq $district.region_id}selected="selected"{/if}>{$district.region_name}</option>
+                     {/foreach}
+                   </select>
+                  </td>
+             </tr>
+             <tr>
+               <td width="28%" align="right" bgcolor="#FFFFFF">地址：</td>
+               <td width="76%" align="left" bgcolor="#FFFFFF"><input name="address" type="text" size="25"  class="inputBg" value="{$pickupPoint.address}"/></td>
+             </tr>
+            <tr>
+              <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_pickup_point" />
+                <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="确定修改" />
+              </td>
+            </tr>
+          </table>
+        </form>
+         <!-- {/if} -->
+         <!-- #卖家自提点信息 end-->
+         <!--#订单列表界面 start-->
+          <!-- {if $action eq 'pickup_point_order'} -->
+          <h5><span>{$lang.label_order}</span></h5>
+          <div class="blank"></div>
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr align="center">
+               <td bgcolor="#ffffff">{$lang.order_number}</td>
+               <td bgcolor="#ffffff">{$lang.order_addtime}</td>
+               <td bgcolor="#ffffff">{$lang.order_money}</td>
+               <td bgcolor="#ffffff">{$lang.order_status}</td>
+             </tr>
+             <!--{foreach from=$orders item=item}-->
+             <tr>
+               <td align="center" bgcolor="#ffffff">
+                   <a href="seller.php?act=pickup_point_order_detail&order_id={$item.order_id}" class="f6">{$item.order_sn}</a>
+               </td>
+               <td align="center" bgcolor="#ffffff">{$item.order_time}</td>
+               <td align="right" bgcolor="#ffffff">{$item.total_fee}</td>
+               <td align="center" bgcolor="#ffffff">{$item.order_status}</td>
+             </tr>
+             <!--{/foreach}-->
+             </table>
+           <div class="blank5"></div>
+          <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+          <!--{/if}-->
+         <!--#订单列表界面 end-->
+
+         <!-- ==========订单详情页面,包括：订单状态，商品列表，费用总计，收货人信息，支付方式，其它信息========== -->
+         <!--{if $action eq pickup_point_order_detail} -->
+           <h5><span>{$lang.order_status}</span></h5>
+           <div class="blank"></div>
+            <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+           <tr>
+             <td width="15%" align="right" bgcolor="#ffffff">{$lang.detail_order_sn}：</td>
+             <td align="left" bgcolor="#ffffff">{$order.order_sn}
+             <!-- {if $order.extension_code eq "group_buy"} -->
+                       <a href="./group_buy.php?act=view&id={$order.extension_id}" class="f6"><strong>{$lang.order_is_group_buy}</strong></a>
+                       <!-- {elseif $order.extension_code eq "exchange_goods"} -->
+                       <a href="./exchange.php?act=view&id={$order.extension_id}" class="f6"><strong>{$lang.order_is_exchange}</strong></a>
+                       <!--{/if}-->
+                       </td>
+           </tr>
+           <tr>
+             <td align="right" bgcolor="#ffffff">{$lang.detail_order_status}：</td>
+             <td align="left" bgcolor="#ffffff">{$order.order_status}&nbsp;&nbsp;&nbsp;&nbsp;{$order.confirm_time}</td>
+           </tr>
+           <tr>
+             <td align="right" bgcolor="#ffffff">{$lang.detail_pay_status}：</td>
+             <td align="left" bgcolor="#ffffff">{$order.pay_status}&nbsp;&nbsp;&nbsp;&nbsp;{if $order.order_amount gt 0}{$order.pay_online}{/if}{$order.pay_time}</td>
+           </tr>
+           <tr>
+             <td align="right" bgcolor="#ffffff">{$lang.detail_shipping_status}：</td>
+             <td align="left" bgcolor="#ffffff">{$order.shipping_status}&nbsp;&nbsp;&nbsp;&nbsp;{$order.shipping_time}</td>
+           </tr>
+           <!-- {if $order.invoice_no}-->
+           <tr>
+             <td align="right" bgcolor="#ffffff">{$lang.consignment}：</td>
+             <td align="left" bgcolor="#ffffff" id="invoice_no">{$order.invoice_no}</td>
+           </tr>
+           <!--{/if}-->
+        </table>
+           <!-- {if $order.invoice_no}-->
+           <h5><span>物流跟踪</span></h5>
+           <div class="blank"></div>
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+        <tr>
+           <td bgcolor="#ffffff"><div id="retData"></div></td>
+        </tr>
+        </table>
+           <!--{/if}-->
+        <table>
+           <!--{if $order.to_buyer}-->
+           <tr>
+             <td align="right" bgcolor="#ffffff">{$lang.detail_to_buyer}：</td>
+             <td align="left" bgcolor="#ffffff">{$order.to_buyer}</td>
+           </tr>
+           <!-- {/if} -->
+
+           <!--{if $virtual_card}-->
+           <tr>
+             <td align="right" bgcolor="#ffffff">{$lang.virtual_card_info}：</td>
+             <td colspan="3" align="left" bgcolor="#ffffff">
+             <!--{foreach from=$virtual_card item=vgoods}-->
+               <!--{foreach from=$vgoods.info item=card}-->
+                 <!--{if $card.card_sn}-->{$lang.card_sn}:<span style="color:red;">{$card.card_sn}</span><!--{/if}-->
+                 <!--{if $card.card_password}-->{$lang.card_password}:<span style="color:red;">{$card.card_password}</span><!--{/if}-->
+                 <!--{if $card.end_date}-->{$lang.end_date}:{$card.end_date}<!--{/if}--><br />
+               <!--{/foreach}-->
+             <!--{/foreach}-->
+             </td>
+           </tr>
+           <!--{/if}-->
+         </table>
+           <div class="blank"></div>
+           <h5><span>{$lang.goods_list}</span>
+           <!-- {if $allow_to_cart} -->
+           <a href="javascript:;" onclick="returnToCart({$order.order_id})" class="fr">{$lang.return_to_cart}</a>
+           <!-- {/if} -->
+           </h5>
+           <div class="blank"></div>
+            <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr>
+               <th width="23%" align="center" bgcolor="#ffffff">{$lang.goods_name}</th>
+               <th width="29%" align="center" bgcolor="#ffffff">{$lang.goods_attr}</th>
+               <!--<th>{$lang.market_price}</th>-->
+               <th width="26%" align="center" bgcolor="#ffffff">{$lang.goods_price}<!-- {if $order.extension_code eq "group_buy"} -->{$lang.gb_deposit}<!-- {/if} --></th>
+               <th width="9%" align="center" bgcolor="#ffffff">{$lang.number}</th>
+               <th width="20%" align="center" bgcolor="#ffffff">{$lang.subtotal}</th>
+             </tr>
+             <!-- {foreach from=$goods_list item=goods} -->
+             <tr>
+               <td bgcolor="#ffffff">
+                 <!-- {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'} 商品 -->
+                   <a href="goods.php?id={$goods.goods_id}" target="_blank" class="f6">{$goods.goods_name}</a>
+                   <!-- {if $goods.parent_id > 0} -->
+                   <span style="color:#FF0000">（{$lang.accessories}）</span>
+                   <!-- {elseif $goods.is_gift} -->
+                   <span style="color:#FF0000">（{$lang.largess}）</span>
+                   <!-- {/if} -->
+                 <!-- {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} -->
+                   <a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})" class="f6">{$goods.goods_name}<span style="color:#FF0000;">（礼包）</span></a>
+                   <div id="suit_{$goods.goods_id}" style="display:none">
+                       <!-- {foreach from=$goods.package_goods_list item=package_goods_list} -->
+                         <a href="goods.php?id={$package_goods_list.goods_id}" target="_blank" class="f6">{$package_goods_list.goods_name}</a><br />
+                       <!-- {/foreach} -->
+                   </div>
+                 <!-- {/if} -->
+                 </td>
+               <td align="left" bgcolor="#ffffff">{$goods.goods_attr|nl2br}</td>
+               <!--<td align="right">{$goods.market_price}</td>-->
+               <td align="right" bgcolor="#ffffff">{$goods.goods_price}</td>
+               <td align="center" bgcolor="#ffffff">{$goods.goods_number}</td>
+               <td align="right" bgcolor="#ffffff">{$goods.subtotal}</td>
+             </tr>
+             <!-- {/foreach} -->
+             <tr>
+               <td colspan="8" bgcolor="#ffffff" align="right">
+               {$lang.shopping_money}<!-- {if $order.extension_code eq "group_buy"} -->{$lang.gb_deposit}<!-- {/if} -->: {$order.formated_goods_amount}
+               </td>
+             </tr>
+           </table>
+            <div class="blank"></div>
+           <h5><span>{$lang.fee_total}</span></h5>
+           <div class="blank"></div>
+            <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <tr>
+               <td align="right" bgcolor="#ffffff">
+                   {$lang.goods_all_price}<!-- {if $order.extension_code eq "group_buy"} -->{$lang.gb_deposit}<!-- {/if} -->: {$order.formated_goods_amount}
+                 <!-- {if $order.discount gt 0} 折扣 -->
+                 - {$lang.discount}: {$order.formated_discount}
+                 <!-- {/if} -->
+                 <!-- {if $order.tax gt 0} -->
+                 + {$lang.tax}: {$order.formated_tax}
+                 <!-- {/if} -->
+                 <!-- {if $order.shipping_fee > 0} -->
+                 + {$lang.shipping_fee}: {$order.formated_shipping_fee}
+                 <!-- {/if} -->
+                 <!-- {if $order.insure_fee > 0} -->
+                 + {$lang.insure_fee}: {$order.formated_insure_fee}
+                 <!-- {/if} -->
+                 <!-- {if $order.pay_fee > 0} -->
+                 + {$lang.pay_fee}: {$order.formated_pay_fee}
+                 <!-- {/if} -->
+                 <!-- {if $order.pack_fee > 0} -->
+                 + {$lang.pack_fee}: {$order.formated_pack_fee}
+                 <!-- {/if} -->
+                 <!-- {if $order.card_fee > 0} -->
+                 + {$lang.card_fee}: {$order.formated_card_fee}
+                 <!-- {/if} -->        </td>
+             </tr>
+             <tr>
+               <td align="right" bgcolor="#ffffff">
+                 <!-- {if $order.money_paid > 0} -->
+                 - {$lang.order_money_paid}: {$order.formated_money_paid}
+                 <!-- {/if} -->
+                 <!-- {if $order.surplus > 0} -->
+                 - {$lang.use_surplus}: {$order.formated_surplus}
+                 <!-- {/if} -->
+                 <!-- {if $order.jiubi > 0} -->
+                 - 使用储值卡: {$order.formated_jiubi}
+                 <!-- {/if} -->
+                 <!-- {if $order.vip_money > 0} -->
+                 - 使用VIP余额: {$order.formated_vip_money}
+                 <!-- {/if} -->
+                 <!-- {if $order.integral_money > 0} -->
+                 - {$lang.use_integral}: {$order.formated_integral_money}
+                 <!-- {/if} -->
+                 <!-- {if $order.bonus > 0} -->
+                 - {$lang.use_bonus}: {$order.formated_bonus}
+                 <!-- {/if} -->        </td>
+             </tr>
+             <tr>
+               <td align="right" bgcolor="#ffffff">{$lang.order_amount}: {$order.formated_order_amount}
+               <!-- {if $order.extension_code eq "group_buy"} --><br />
+               {$lang.notice_gb_order_amount}<!-- {/if} --></td>
+             </tr>
+               <!-- {if $allow_edit_surplus} 如果可以编辑使用余额数 -->
+             <tr>
+               <td align="right" bgcolor="#ffffff">
+         <form action="user.php" method="post" name="formFee" id="formFee">{$lang.use_more_surplus}:
+               <input name="surplus" type="text" size="8" value="0" style="border:1px solid #ccc;"/>{$max_surplus}
+               <input type="submit" name="Submit" class="submit" value="{$lang.button_submit}" />
+         <input type="hidden" name="act" value="act_edit_surplus" />
+         <input type="hidden" name="order_id" value="{$smarty.get.order_id}" />
+         </form></td>
+             </tr>
+        <!--{/if}-->
+           </table>
+           <div class="blank"></div>
+          <h5><span>自提点信息</span></h5>
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+              <tr>
+                <td align="right" bgcolor="#ffffff">自提点名称：</td>
+                <td colspan="3" align="left" bgcolor="#ffffff">{$pickup_point.shop_name} </td>
+              </tr>
+            <tr>
+              <td width="15%" align="right" bgcolor="#ffffff" >联系人：</td>
+              <td width="35%" align="left" bgcolor="#ffffff">{$pickup_point.contact}</td>
+              <td width="15%" align="right" bgcolor="#ffffff">{$lang.phone}：</td>
+              <td width="35%" align="left" bgcolor="#ffffff">{$pickup_point.phone}</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#ffffff">{$lang.detailed_address}：</td>
+              <td colspan="3" align="left" bgcolor="#ffffff">{$pickup_point.address}</td>
+            </tr>
+          </table>
+            <div class="blank"></div>
+           <h5><span>{$lang.consignee_info}</span></h5>
+           <div class="blank"></div>
+             <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+               <tr>
+                 <td width="15%" align="right" bgcolor="#ffffff">{$lang.consignee_name}：</td>
+                 <td width="35%" align="left" bgcolor="#ffffff">{$order.consignee}</td>
+                 <td width="15%" align="right" bgcolor="#ffffff" >{$lang.email_address}：</td>
+                 <td width="35%" align="left" bgcolor="#ffffff">{$order.email}</td>
+               </tr>
+               <!-- {if $order.exist_real_goods} -->
+               <tr>
+                 <td align="right" bgcolor="#ffffff">{$lang.detailed_address}：</td>
+                 <td colspan="3" align="left" bgcolor="#ffffff">{$order.address}
+                   <!-- {if $order.zipcode} -->
+                   [{$lang.postalcode}: {$order.zipcode}]
+                   <!-- {/if} --></td>
+               </tr>
+               <!-- {/if}-->
+               <tr>
+                 <td align="right" bgcolor="#ffffff">{$lang.phone}：</td>
+                 <td align="left" bgcolor="#ffffff">{$order.tel} </td>
+                 <td align="right" bgcolor="#ffffff">{$lang.backup_phone}：</td>
+                 <td align="left" bgcolor="#ffffff">{$order.mobile}</td>
+               </tr>
+               <!-- {if $order.exist_real_goods} -->
+               <tr>
+                 <td align="right" bgcolor="#ffffff" >{$lang.sign_building}：</td>
+                 <td align="left" bgcolor="#ffffff">{$order.sign_building} </td>
+                 <td align="right" bgcolor="#ffffff" >{$lang.deliver_goods_time}：</td>
+                 <td align="left" bgcolor="#ffffff">{$order.best_time}</td>
+               </tr>
+               <!--{/if}-->
+             </table>
+             <div class="blank"></div>
+           <h5><span>{$lang.payment}</span></h5>
+           <div class="blank"></div>
+           <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                   <tr>
+                     <td bgcolor="#ffffff">
+                     {$lang.select_payment}: {$order.pay_name}。{$lang.order_amount}: <strong>{$order.formated_order_amount}</strong><br />
+                     {$order.pay_desc}
+                     </td>
+                   </tr>
+                     <tr>
+                     <td bgcolor="#ffffff" align="right">
+                     <!--{if $payment_list}-->
+                 <form name="payment" method="post" action="user.php">
+                 {$lang.change_payment}:
+                 <select name="pay_id">
+                   <!--{foreach from=$payment_list item=payment}-->
+                   <option value="{$payment.pay_id}">
+                   {$payment.pay_name}({$lang.pay_fee}:{$payment.format_pay_fee})
+                   </option>
+                   <!--{/foreach}-->
+                 </select>
+                 <input type="hidden" name="act" value="act_edit_payment" />
+                 <input type="hidden" name="order_id" value="{$order.order_id}" />
+                 <input type="submit" name="Submit" class="submit" value="{$lang.button_submit}" />
+                 </form>
+                 <!--{/if}-->
+                     </td>
+                   </tr>
+                 </table>
+           <div class="blank"></div>
+           <h5><span>{$lang.other_info}</span></h5>
+           <div class="blank"></div>
+           <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+             <!-- {if $order.shipping_id > 0} -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.shipping}：</td>
+               <td colspan="3" width="85%" align="left" bgcolor="#ffffff" id="shipping_name">{$order.shipping_name}</td>
+             </tr>
+             <!-- {/if} -->
+
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.payment}：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$order.pay_name}</td>
+             </tr>
+             <!--{if $order.insure_fee > 0}-->
+             <!--{/if}-->
+             <!-- {if $order.pack_name} 是否使用包装 -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.use_pack}：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$order.pack_name}</td>
+             </tr>
+             <!-- {/if} 是否使用包装 -->
+             <!-- {if $order.card_name} 是否使用贺卡 -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.use_card}：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$order.card_name}</td>
+             </tr>
+             <!-- {/if} -->
+             <!-- {if $order.card_message} 是否使用贺卡 -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.bless_note}：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$order.card_message}</td>
+             </tr>
+             <!-- {/if} 是否使用贺卡 -->
+             <!-- {if $order.surplus > 0} 是否使用余额 -->
+             <!-- {/if} -->
+             <!-- {if $order.integral > 0} 是否使用积分 -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.use_integral}：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$order.integral}</td>
+             </tr>
+             <!-- {/if} 是否使用积分 -->
+             <!-- {if $order.bonus > 0} 是否使用红包 -->
+             <!-- {/if} -->
+             <!-- {if $order.inv_payee && $order.inv_content} 是否开发票 -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.invoice_title}：</td>
+               <td width="36%" align="left" bgcolor="#ffffff">{$order.inv_payee}</td>
+               <td width="19%" align="right" bgcolor="#ffffff">{$lang.invoice_content}：</td>
+               <td width="25%" align="left" bgcolor="#ffffff">{$order.inv_content}</td>
+             </tr>
+             <!-- {/if} -->
+             <!-- {if $order.postscript} 是否有订单附言 -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.order_postscript}：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$order.postscript}</td>
+             </tr>
+             <!-- {/if} -->
+             <tr>
+               <td width="15%" align="right" bgcolor="#ffffff">{$lang.booking_process}：</td>
+               <td colspan="3" align="left" bgcolor="#ffffff">{$order.how_oos_name}</td>
+             </tr>
+           </table>
+         <!--{/if} -->
+        <!--#订单详情页 end-->
+        <!-- 卖家充值begin -->
+        <!-- {if $action eq "seller_deposit"} -->
+        <h5><span>卖家充值</span></h5>
+        <div class="blank"></div>
+        <form name="formSurplus" method="post" action="seller.php" onSubmit="return submitSurplus()">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr>
+              <td width="15%" bgcolor="#ffffff">{$lang.deposit_money}:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="amount"  class="inputBg" value="{$order.amount|escape}" size="30" /></td>
+            </tr>
+            <tr>
+              <td bgcolor="#ffffff">{$lang.process_notic}:</td>
+              <td align="left" bgcolor="#ffffff"><textarea name="user_note" cols="55" rows="6" style="border:1px solid #ccc;">{$order.user_note|escape}</textarea></td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff"  colspan="3" align="left">{$lang.payment}:</td>
+            </tr>
+            <tr align="center">
+              <td bgcolor="#ffffff">{$lang.pay_name}</td>
+              <td bgcolor="#ffffff" width="60%">{$lang.pay_desc}</td>
+              <td bgcolor="#ffffff" width="17%">{$lang.pay_fee}</td>
+            </tr>
+            <!-- {foreach from=$payment item=list} -->
+            <tr>
+              <td bgcolor="#ffffff" align="left">
+              <input type="radio" name="payment_id" value="{$list.pay_id}" />{$list.pay_name}</td>
+              <td bgcolor="#ffffff" align="left">{$list.pay_desc}</td>
+              <td bgcolor="#ffffff" align="center">{$list.pay_fee}</td>
+            </tr>
+            <!-- {/foreach} -->
+            <tr>
+        <td bgcolor="#ffffff" colspan="3"  align="center">
+        <input type="hidden" name="surplus_type" value="0" />
+          <input type="hidden" name="rec_id" value="{$order.id}" />
+          <input type="hidden" name="act" value="act_seller_deposit" />
+          <input type="submit" class="bnt_blue_1" name="submit" value="{$lang.submit_request}" />
+          <input type="reset" class="bnt_blue_1" name="reset" value="{$lang.button_reset}" />
+        </td>
+      </tr>
+          </table>
+        </form>
+        <!-- {/if} -->
+        <!-- 卖家充值end -->
+        <!-- 卖家充值确认页面begin -->
+        <!-- {if $action eq "act_seller_deposit"} -->
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+          <tr>
+            <td width="25%" align="right" bgcolor="#ffffff">{$lang.surplus_amount}</td>
+            <td width="80%" bgcolor="#ffffff">{$amount}</td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#ffffff">{$lang.payment_name}</td>
+            <td bgcolor="#ffffff">{$payment.pay_name}</td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#ffffff">{$lang.payment_fee}</td>
+            <td bgcolor="#ffffff">{$pay_fee}</td>
+          </tr>
+          <tr>
+            <td align="right" valign="middle" bgcolor="#ffffff">{$lang.payment_desc}</td>
+            <td bgcolor="#ffffff">{$payment.pay_desc}</td>
+          </tr>
+          <tr>
+            <td colspan="2" bgcolor="#ffffff">{$payment.pay_button}</td>
+          </tr>
+        </table>
+        <!-- {/if} -->
+        <!-- 卖家充值确认页面end -->
+        <!-- 卖家推广二维码 -->
+        <!-- {if $action eq 'extension'} -->
+        <h5><span>注册推广</span></h5>
+        <div class="blank"></div>
+        <div>
+            注册推广网址（可自行生成二维码）<br />
+            pc端：<a href="{$pcGasUrl}" style="color:#f70;">{$pcGasUrl}</a><br />
+            wap端：<a href="{$gasUrl}" style="color:#f70;">{$gasUrl}</a><br />
+        </div>
+        <div style="margin-top:30px;">
+            <div id="seller_qrcode"></div>
+        </div>
+        <!-- {/if} -->
+        <!-- 卖家推广二维码 -->
+      </div>
+     </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --> <!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+{foreach from=$lang.clips_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+
+new QRCode(document.getElementById("seller_qrcode"), '{$gasUrl}');  // 设置要生成二维码的链接
+
+</script>
+</html>

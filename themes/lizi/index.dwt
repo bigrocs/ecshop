@@ -36,10 +36,10 @@
     </div>
     <div class="surprise-con clearfix bgwhite border-eee">
         <div class="day-surimg fl" id="day-surimg" >
-              <?php
+   <?php
 	   $GLOBALS['smarty']->assign('adlist',get_advlist('天天惊喜左侧广告',1));
 	?>
-	<!--{foreach from=$adlist item=ad name=ad}-->
+	<!--{foreach from=$adlist item=ad name=ad}-->  
 	   {$ad.content}
 	<!--{/foreach}-->
         </div>
@@ -74,10 +74,11 @@
 
 <!-- {if $new_goods} -->
         <div class="w-max ct bgwh mb30 ovh border-eee">
-        	      	<div class="newopro-l fl pointer"><?php
+        	<div class="newopro-l fl">
+			<?php
 	   $GLOBALS['smarty']->assign('adlist',get_advlist('刚出炉新品左侧广告',1));
 	?>
-	<!--{foreach from=$adlist item=ad name=ad}-->
+	<!--{foreach from=$adlist item=ad name=ad}-->  
 	   {$ad.content}
 	<!--{/foreach}-->
         	</div>
@@ -131,17 +132,13 @@
  <!--{/foreach}-->
  </ul>
 </div>
-<!-- {/if} -->
+<!-- {/if} --> 
 
  <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable -->
 <!-- <div class="brand_temai">
   <ul id="brand_temai" class="cle">
     <!-- TemplateBeginEditable name="首页倒计时广告位" -->
-<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
-
-{insert name='ads' id=$ads_id num=$ads_num}
- <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable -->
   </ul>
 </div> -->
@@ -193,12 +190,16 @@
           {$goods.promote_price}
           <!-- {else}-->
           {$goods.shop_price}
-          <!--{/if}--></p>
+          <!--{/if}-->
+          <del style="color:#878D99">{$goods.market_price}</del>
+          </p>
+          <p>可用储值卡:<span style="color:#EB9E05"> {$goods.jiubi} </span></p>
           </a> </li>
 		<!--{/foreach}-->
       </ul>
     </div>
 </div>
+
  <!-- #EndLibraryItem -->
 <!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
 
@@ -246,12 +247,16 @@
           {$goods.promote_price}
           <!-- {else}-->
           {$goods.shop_price}
-          <!--{/if}--></p>
+          <!--{/if}-->
+          <del style="color:#878D99">{$goods.market_price}</del>
+          </p>
+          <p>可用储值卡:<span style="color:#EB9E05"> {$goods.jiubi} </span></p>
           </a> </li>
 		<!--{/foreach}-->
       </ul>
     </div>
 </div>
+
  <!-- #EndLibraryItem -->
 <!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
 
@@ -299,12 +304,16 @@
           {$goods.promote_price}
           <!-- {else}-->
           {$goods.shop_price}
-          <!--{/if}--></p>
+          <!--{/if}-->
+          <del style="color:#878D99">{$goods.market_price}</del>
+          </p>
+          <p>可用储值卡:<span style="color:#EB9E05"> {$goods.jiubi} </span></p>
           </a> </li>
 		<!--{/foreach}-->
       </ul>
     </div>
 </div>
+
  <!-- #EndLibraryItem -->
 <!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
 
@@ -352,12 +361,16 @@
           {$goods.promote_price}
           <!-- {else}-->
           {$goods.shop_price}
-          <!--{/if}--></p>
+          <!--{/if}-->
+          <del style="color:#878D99">{$goods.market_price}</del>
+          </p>
+          <p>可用储值卡:<span style="color:#EB9E05"> {$goods.jiubi} </span></p>
           </a> </li>
 		<!--{/foreach}-->
       </ul>
     </div>
 </div>
+
  <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable --> </div>
 

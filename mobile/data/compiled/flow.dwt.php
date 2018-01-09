@@ -23,7 +23,8 @@
 <?php if ($this->_var['step'] == "cart"): ?>
 <div id="page">
   <header id="header">
-    <div class="header_l"> <a class="ico_10" href="<?php echo $this->_var['jump_http_referer']; ?>"> 返回 </a> </div>
+    <!-- <div class="header_l"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div> -->
+        <div class="header_l"> <a class="ico_10" href="/"> 返回 </a> </div>
     <h1>购物车</h1>
     <div class="header_r"></div>
   </header>
@@ -125,7 +126,7 @@
             <?php else: ?>
             <?php echo $this->_var['goods']['goods_number']; ?>
             <?php endif; ?>
-            </span> <a href="javascript:if (confirm('<?php echo $this->_var['lang']['drop_goods_confirm']; ?>')) location.href='flow.php?step=drop_goods&amp;id=<?php echo $this->_var['goods']['rec_id']; ?>'; "   class="ico_08 cha"> </a> </div>
+        </span> <a href="javascript:if (confirm('<?php echo $this->_var['lang']['drop_goods_confirm']; ?>')) location.href='flow.php?step=drop_goods&amp;id=<?php echo $this->_var['goods']['rec_id']; ?>&amp;isLastUrl=1'; "   class="ico_08 cha"> </a> </div>
         </div>
       </li>
       <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>

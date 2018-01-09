@@ -69,6 +69,8 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price') {
         }
 
         $shop_price  = get_final_price($goods_id, $number, true, $attr_id);
+        $jiuBi = getFinalJiubi($goods_id, $attr_id);
+        $res['resultJiuBi'] = price_format($jiuBi * $number);
         $res['result'] = price_format($shop_price * $number);
     }
 

@@ -1,0 +1,36 @@
+<!-- $Id: category_info.htm 16752 2009-10-20 09:59:38Z wangleisvn $ -->
+{include file="pageheader.htm"}
+<!-- start add new category form -->
+<div class="main-div">
+  <form action="seller.php" method="post" name="theForm">
+  <table width="100%" id="general-table">
+      <tr>
+        <td class="label">用户名:</td>
+        <td>
+          <input type='text' name='user_name' maxlength="20"  size='27' /> <font color="red">*</font>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">公司名称:</td>
+        <td>
+          <input type='text' name='name' maxlength="20"  size='27' /> <font color="red">*</font>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">保险公司:</td>
+        <td>
+          <input type="checkbox" name="insurance" value="1"> 打勾表示次商家为保险公司权限。</td>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">&nbsp;</td>
+        <td>
+        	<input type="submit" value="{$lang.button_submit}" class="button"/>
+        	<input type="reset" value="{$lang.button_reset}" class="button"/>
+        </td>
+        </tr>
+      </table>
+    <input type="hidden" name="act" value="{$form_action}" />
+  </form>
+</div>
+{include file="pagefooter.htm"}

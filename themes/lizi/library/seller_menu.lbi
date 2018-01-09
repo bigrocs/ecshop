@@ -1,0 +1,70 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="slidebar">
+    <h3 class="my_nala">
+        <a href="seller.php">卖家中心</a>
+    </h3>
+    <ul class="slide_item">
+
+        {if $insurance eq '0'}
+        <li class="item">
+            <div class="root_node"><i class="iconfont"></i>订单中心</div>
+            <ul>
+                <li>
+                    <a class="{if $action eq 'order_list'|| $action eq 'order_detail'}on{/if}" href="seller.php?act=order_list">加油订单列表</a>
+
+                </li>
+
+            </ul>
+        </li>
+        <li class="item">
+            <div class="root_node"><i class="iconfont"></i>自提点</div>
+            <ul>
+                <li>
+                    <a class="{if $action eq 'pickup_point'}on{/if}" href="seller.php?act=pickup_point">自提点管理</a>
+                </li>
+                <li>
+                    <a class="{if $action eq 'pickup_point_order'}on{/if}" href="seller.php?act=pickup_point_order">自提订单列表</a>
+                </li>
+            </ul>
+        </li>
+        {/if}
+        <li class="item">
+            <div class="root_node"><i class="iconfont"></i>管理中心</div>
+            <ul>
+                <li>
+                    <a class="{if $action eq 'extension'}on{/if}" href="seller.php?act=extension">推广注册</a>
+                </li>
+                {if $insurance eq '0'}
+                    <li>
+                        <a class="{if $action eq 'gas'}on{/if}" href="seller.php?act=gas">{$lang.seller_gas}</a>
+                    </li>
+                {/if}
+                <li>
+                    <a class="{if $action eq 'info'}on{/if}" href="seller.php?act=info">{$lang.seller_info}</a>
+                </li>
+                <li>
+                    <a class="{if $action eq 'vip_deposit'}on{/if}" href="seller.php?act=vip_deposit">VIP充值</a>
+                </li>
+            </ul>
+        </li>
+        <li class="item">
+            <div class="root_node"><i class="iconfont"></i>资金管理</div>
+            <ul>
+                <li>
+                    <a class="{if $action eq 'seller_deposit'}on{/if}" href="seller.php?act=seller_deposit">{$lang.seller_deposit}</a>
+                </li>
+                <li>
+                    <a class="{if $action eq 'cash'}on{/if}" href="seller.php?act=cash">{$lang.seller_cash}</a>
+                </li>
+                <li>
+                    <a class="{if $action eq 'account_log'}on{/if}" href="seller.php?act=account_log">{$lang.seller_log}</a>
+                </li>
+                <li>
+                    <a class="{if $action eq 'seller_account'}on{/if}" href="seller.php?act=seller_account">提现充值记录</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
