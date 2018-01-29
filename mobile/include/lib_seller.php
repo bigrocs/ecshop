@@ -21,6 +21,8 @@ function getSellerInfo($userId)
 
     $row['show_user_money'] = price_format($row['user_money'], false);//显示可用资金
     $row['show_frozen_money'] = price_format($row['frozen_money'], false);//显示冻结资金
+    $row['show_spread'] = price_format($row['spread'], false);//显示可用资金
+    $row['show_pickup'] = price_format($row['pickup'], false);//显示冻结资金
     return $row;
 }
 /**
@@ -483,32 +485,75 @@ function setPickupPoint($userId, $post)
  * @Email    bigrocs@qq.com
  * @DateTime 2017-12-20
  */
-function getPickupPointOrders($pickupPoint, $num = 10, $start = 0)
-{
-    /* 取得订单列表 */
-    $arr    = array();
+ function getPickupPointOrders($pickupPoint, $num = 10, $start = 0)
+ {
+     /* 取得订单列表 */
+     $arr    = array();
+     $sql = "SELECT order_id, order_sn, order_status, shipping_status, pay_status, add_time, is_pickup, pickup_money," .
+            "(goods_amount + shipping_fee + insure_fee + pay_fee + pack_fee + card_fee + tax - discount) AS total_fee ".
+            " FROM " .$GLOBALS['ecs']->table('order_info') .
+            " WHERE pickup_point = '$pickupPoint' ORDER BY add_time DESC";
+     $res = $GLOBALS['db']->SelectLimit($sql, $num, $start);
 
-    $sql = "SELECT order_id, order_sn, order_status, shipping_status, pay_status, add_time, is_pickup," .
-           "(goods_amount + shipping_fee + insure_fee + pay_fee + pack_fee + card_fee + tax - discount) AS total_fee ".
-           " FROM " .$GLOBALS['ecs']->table('order_info') .
-           " WHERE pickup_point = '$pickupPoint' ORDER BY add_time DESC";
-    $res = $GLOBALS['db']->SelectLimit($sql, $num, $start);
+     while ($row = $GLOBALS['db']->fetchRow($res)) {
+         $row['shipping_status'] = ($row['shipping_status'] == SS_SHIPPED_ING) ? SS_PREPARING : $row['shipping_status'];
+         $row['order_status'] = $GLOBALS['_LANG']['os'][$row['order_status']] . ',' . $GLOBALS['_LANG']['ps'][$row['pay_status']] . ',' . $GLOBALS['_LANG']['ss'][$row['shipping_status']];
 
-    while ($row = $GLOBALS['db']->fetchRow($res)) {
-        $row['shipping_status'] = ($row['shipping_status'] == SS_SHIPPED_ING) ? SS_PREPARING : $row['shipping_status'];
-        $row['order_status'] = $GLOBALS['_LANG']['os'][$row['order_status']] . ',' . $GLOBALS['_LANG']['ps'][$row['pay_status']] . ',' . $GLOBALS['_LANG']['ss'][$row['shipping_status']];
+         $arr[] = array('order_id'       => $row['order_id'],
+                        'order_sn'       => $row['order_sn'],
+                        'order_time'     => local_date('Y-m-d', $row['add_time']),
+                        'order_status'   => $row['order_status'],
+                        'pickup_money'   => price_format($row['pickup_money'], false),
+                        'total_fee'      => price_format($row['total_fee'], false)
+                    );
+     }
 
-        $arr[] = array('order_id'       => $row['order_id'],
-                       'order_sn'       => $row['order_sn'],
-                       'order_time'     => local_date($GLOBALS['_CFG']['time_format'], $row['add_time']),
-                       'order_status'   => $row['order_status'],
-                       'total_fee'      => price_format($row['total_fee'], false)
-                   );
-    }
+     return $arr;
+ }
+ /**
+  * [getSpreadOrders 获取自提点制定范围订单]
+  * @param    [type]         $user_id [description]
+  * @param    integer        $num     [列表最大数量]
+  * @param    integer        $start   [列表起始位置]
+  * @return   [type]                  [description]
+  * @Author   bigrocs
+  * @QQ       532388887
+  * @Email    bigrocs@qq.com
+  * @DateTime 2017-12-20
+  */
+ function getSpreadOrders($spread_id, $num = 10, $start = 0, $pickup_point)
+ {
+     /* 取得订单列表 */
+     $arr    = array();
 
-    return $arr;
-}
+     $sql = "SELECT order_id, order_sn, order_status, shipping_status, pay_status, add_time, is_pickup, spread_money, pickup_point," .
+            "(goods_amount + shipping_fee + insure_fee + pay_fee + pack_fee + card_fee + tax - discount) AS total_fee ".
+            " FROM " .$GLOBALS['ecs']->table('order_info') .
+            " WHERE spread_id = '$spread_id' ORDER BY add_time DESC";
+     $res = $GLOBALS['db']->SelectLimit($sql, $num, $start);
 
+     while ($row = $GLOBALS['db']->fetchRow($res)) {
+         $row['shipping_status'] = ($row['shipping_status'] == SS_SHIPPED_ING) ? SS_PREPARING : $row['shipping_status'];
+         $row['order_status'] = $GLOBALS['_LANG']['os'][$row['order_status']] . ',' . $GLOBALS['_LANG']['ps'][$row['pay_status']] . ',' . $GLOBALS['_LANG']['ss'][$row['shipping_status']];
+
+         if ($row['pickup_point'] == $pickup_point) {
+             $pickup_point_title = '<b style="color:#67C23A">本站点取货</b>';
+         } else {
+             $pickup_point_title = '<b style="color:#F56C6C">非本站点取货</b>';
+         }
+
+         $arr[] = array('order_id'       => $row['order_id'],
+                        'order_sn'       => $row['order_sn'],
+                        'order_time'     => local_date('Y-m-d', $row['add_time']),
+                        'order_status'   => $row['order_status'],
+                        'pickup_point_title'   => $pickup_point_title,
+                        'spread_money'   => price_format($row['spread_money'], false),
+                        'total_fee'      => price_format($row['total_fee'], false)
+                    );
+     }
+
+     return $arr;
+ }
 /**
  *  获取指订单的详情
  *

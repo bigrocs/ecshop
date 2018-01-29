@@ -25,7 +25,9 @@ $smarty->assign('_CFG', $_CFG);//附加系统配置
 
 // 不需要登录的操作或自己验证是否登录（如ajax处理）的act
 $not_login_arr =
-array('oil');
+array(
+    'oil',
+);
 
 /* 显示页面的action列表 */
 $ui_arr = array(
@@ -40,14 +42,21 @@ $ui_arr = array(
     'seller_account',
     'vip_deposit',
     'act_vip_deposit',
+    'kuaibi_deposit',
+    'act_kuaibi_deposit',
     'pickup_point',
     'act_pickup_point',
     'pickup_point_order',
+    'spread_order',
     'pickup_point_order_detail',
     'seller_deposit',
     'act_seller_deposit',
     'pay',
-    'extension'
+    'extension',
+    'mapInfo',
+    'oilPrice',
+    'oilPriceAdd',
+    'oilPriceEdit'
 );
 /* 未登录处理 */
 if (empty($_SESSION['user_id'])) {
@@ -126,7 +135,10 @@ elseif ($action == 'gas') {
 /* 卖家油品销售页面 */
 /* 卖家资料页面 */
 elseif ($action == 'info') {
-    $smarty->assign('sellerInfo', getSellerInfo($user_id));
+    include_once(ROOT_PATH . 'includes/fckeditor/fckeditor.php'); // 包含 html editor 类文件
+    $sellerInfo = getSellerInfo($user_id);
+    create_seller_html_editor('seller_desc', $sellerInfo['seller_desc'], 'Seller');
+    $smarty->assign('sellerInfo', $sellerInfo);
     $smarty->display('seller_clips.dwt');
 }
 /* 卖家资料页面 */
@@ -136,11 +148,52 @@ elseif ($action == 'act_info') {
     $bank = $_POST['bank'];
     $bank_name = $_POST['bank_name'];
     $bank_account = $_POST['bank_account'];
-    $sql = 'UPDATE ' . $ecs->table('user_seller') . " SET `name`='$name', `bank`='$bank', `bank_name`='$bank_name', `bank_account`='$bank_account'  WHERE `user_id`='" . $user_id . "'";
+    $seller_desc = $_POST['seller_desc'];
+
+    if ($_FILES['board']['name']) {
+        $board = addBoard();
+        $sql = 'UPDATE ' . $ecs->table('user_seller') . " SET
+        `name`='$name',
+        `bank`='$bank',
+        `bank_name`='$bank_name',
+        `bank_account`='$bank_account',
+        `seller_desc`='$seller_desc',
+        `board`='$board'  WHERE `user_id`='" . $user_id . "'";
+    } else {
+        $sql = 'UPDATE ' . $ecs->table('user_seller') . " SET
+        `name`='$name',
+        `bank`='$bank',
+        `bank_name`='$bank_name',
+        `bank_account`='$bank_account',
+        `seller_desc`='$seller_desc'  WHERE `user_id`='" . $user_id . "'";
+    }
+
     $db->query($sql);
     show_message($_LANG['seller_edit_info'], $_LANG['back_page_up'], '', 'info');
 }
+
 /* 卖家资料保存 */
+/* 卖家地图资料页面 */
+elseif ($action == 'mapInfo') {
+    $smarty->assign('sellerInfo', getSellerInfo($user_id));
+    $smarty->display('seller_clips.dwt');
+}
+/* 卖家地图资料页面 */
+/* 卖家地图资料保存 */
+elseif ($action == 'act_mapInfo') {
+    $address = $_POST['address'];
+    $tel = $_POST['tel'];
+    $latitude = $_POST['latitude'];
+    $longitude = $_POST['longitude'];
+    $sql = 'UPDATE ' . $ecs->table('user_seller') . " SET
+        `address`='$address',
+        `latitude`='$latitude',
+        `longitude`='$longitude',
+        `tel`='$tel'  WHERE `user_id`='" . $user_id . "'";
+    $db->query($sql);
+    show_message($_LANG['seller_edit_info'], $_LANG['back_page_up'], '', 'info');
+}
+/* 卖家地图资料保存 */
 /* 卖家资金记录 */
 elseif ($action == 'account_log') {
     // include_once(ROOT_PATH . 'includes/lib_clips.php');
@@ -315,6 +368,29 @@ if ($action == 'act_vip_deposit') {
     }
 }
 /* 卖家vip充值逻辑 */
+/* 卖家储值卡充值页面 */
+if ($action == 'kuaibi_deposit') {
+    $smarty->assign('sellerDepositMin', getShopConfigValue('seller_deposit_min'));
+    $smarty->assign('sellerInfo', getSellerInfo($user_id));
+    $smarty->display('seller_clips.dwt');
+}
+/* 卖家vip充值页面 */
+/* 卖家vip充值逻辑 */
+if ($action == 'act_kuaibi_deposit') {
+    $sellerDepositMin = getShopConfigValue('seller_kuaibi_deposit');
+    $money = $_POST['money'];
+    if (!$sellerDepositMin) {
+        show_message('平台已禁止商家充值储值卡');
+    }
+    $userId = getUserId($_POST['username']);
+    if (empty($userId)) {
+        show_message('用户不存在请输入正确用户名!', $_LANG['back_page_up'], '', 'error');
+    }
+    $sellerId = $sellerInfo['user_id'];
+    log_account_change($userId, 0, 0, 0, 0, '商家储值卡充值', ACT_SAVING, $money);
+    show_message('充值成功! 充值账号:'.$_POST['username'].' 充值储值卡金额:'.$money.'元', $_LANG['back_page_up'], '', 'info');
+}
+/* 卖家储值卡充值逻辑 */
 /* 卖家自提点信息 */
 if ($action == 'pickup_point') {
     $pickupPoint = getPickupPoint($user_id);
@@ -350,8 +426,6 @@ if ($action == 'pickup_point_order') {
     $record_count = $db->getOne("SELECT COUNT(*) FROM " .$ecs->table('order_info'). " WHERE pickup_point = '$sellerInfo[pickup_point]'");
     $pager  = get_pager('seller.php', array('act' => $action), $record_count, $page);
 
-    $sellerInfo = getSellerInfo($user_id);
-
     $orders = getPickupPointOrders($sellerInfo['pickup_point'], $pager['size'], $pager['start']);
 
     $smarty->assign('pager', $pager);
@@ -359,6 +433,19 @@ if ($action == 'pickup_point_order') {
     $smarty->display('seller_clips.dwt');
 }
 /* 卖家自提点订单 */
+/* 卖家推荐人订单 */
+if ($action == 'spread_order') {
+    $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+    $record_count = $db->getOne("SELECT COUNT(*) FROM " .$ecs->table('order_info'). " WHERE spread_id = '$user_id'");
+    $pager  = get_pager('seller.php', array('act' => $action), $record_count, $page);
+    $sellerInfo = getSellerInfo($user_id);
+    $orders = getSpreadOrders($user_id, $pager['size'], $pager['start'], $sellerInfo['pickup_point']);
+
+    $smarty->assign('pager', $pager);
+    $smarty->assign('orders', $orders);
+    $smarty->display('seller_clips.dwt');
+}
+/* 卖家推荐人订单 */
 /* 查看订单详情 */
 if ($action == 'pickup_point_order_detail') {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
@@ -573,4 +660,130 @@ if ($action == 'extension') {
     $smarty->assign('gasUrl', $gasUrl);
     $smarty->display('seller_clips.dwt');
 }
-/* 推广注册 */
+/* 油品设置 */
+if ($action == 'oilPrice') {
+    $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+
+    $account_type = 'money';
+
+    /* 获取记录条数 */
+    $sql = "SELECT COUNT(*) FROM " .$ecs->table('seller_oil').
+           " WHERE seller_id = '$user_id'";
+    $record_count = $db->getOne($sql);
+
+    //分页函数
+    $pager = get_pager('seller.php', array('act' => $action), $record_count, $page);
+
+
+    //获取余额记录
+    $orderGas = array();
+    $sql = "SELECT * FROM " . $ecs->table('seller_oil').
+           " WHERE seller_id = '$user_id'" .
+           " ORDER BY id DESC";
+    $res = $GLOBALS['db']->selectLimit($sql, $pager['size'], $pager['start']);
+    while ($row = $db->fetchRow($res)) {
+        $oilList[] = $row;
+    }
+    //模板赋值
+    $smarty->assign('oilList', $oilList);
+    $smarty->assign('pager', $pager);
+    $smarty->display('seller_clips.dwt');
+}
+/* 油品设置 */
+/*新增油品报价*/
+if ($action == 'oilPriceAdd') {
+    $smarty->display('seller_clips.dwt');
+}
+/*新增油品报价*/
+/*新增油品报价*/
+if ($action == 'act_oilPriceAdd') {
+    $parent = array();
+    $parent['seller_id'] = $user_id;
+    $parent['type'] = $_POST['type'];
+    $parent['spec'] = $_POST['spec'];
+    $parent['model'] = $_POST['model'];
+    $parent['price'] = $_POST['price'];
+    $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('seller_oil'), $parent, 'INSERT');
+    show_message('新增成功', '油品列表', '/seller.php?act=oilPrice');
+}
+/*新增油品报价*/
+/*删除油品报价*/
+if ($action == 'oilPriceDelete') {
+    $sql = "DELETE FROM " . $GLOBALS['ecs']->table('seller_oil') .
+            " WHERE seller_id = '" . $user_id . "' AND id = '$_REQUEST[id]'";
+    $GLOBALS['db']->query($sql);
+    show_message('删除成功', '油品列表', '/seller.php?act=oilPrice');
+}
+/*删除油品报价*/
+/*修改油品报价*/
+if ($action == 'oilPriceEdit') {
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('seller_oil') .
+            " WHERE id = '$_REQUEST[id]'";
+    $oilinfo = $GLOBALS['db']->GetRow($sql);
+    $smarty->assign('oilinfo', $oilinfo);
+    $smarty->display('seller_clips.dwt');
+}
+/*修改油品报价*/
+/*修改油品报价*/
+if ($action == 'act_oilPriceEdit') {
+    $parent = array();
+    $seller_id = $user_id;
+    $type = $_POST['type'];
+    $spec = $_POST['spec'];
+    $model = $_POST['model'];
+    $price = $_POST['price'];
+
+    $sql = 'UPDATE ' . $ecs->table('seller_oil') . " SET
+    `seller_id`='$seller_id',
+    `type`='$type',
+    `spec`='$spec',
+    `model`='$model',
+    `price`='$price'  WHERE `id`='" . $_POST['id'] . "'";
+    $db->query($sql);
+    show_message('修改成功', '油品列表', '/seller.php?act=oilPrice');
+}
+/*修改油品报价*/
+/**
+ * [addBoard 上传店铺头标]
+ * @param    [type]         $upload [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2018-01-12
+ */
+function addBoard($upload)
+{
+    $upload_size_limit = $GLOBALS['_CFG']['upload_size_limit'] == '-1' ? ini_get('upload_max_filesize') : $GLOBALS['_CFG']['upload_size_limit'];
+    $last_char = strtolower($upload_size_limit{strlen($upload_size_limit)-1});
+
+    if ($_FILES['board']['size'] / 1024 > $upload_size_limit*1024) {
+        $GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['upload_file_limit'], $upload_size_limit));
+        return false;
+    }
+
+    $img_name = upload_file($_FILES['board'], 'images');
+
+    if ($img_name === false) {
+        return false;
+    }
+    return $img_name;
+}
+
+/**
+ * 生成编辑器
+ * @param   string  input_name  输入框名称
+ * @param   string  input_value 输入框值
+ */
+function create_seller_html_editor($input_name, $input_value = '', $bianhao = '')
+{
+    global $smarty;
+
+    $editor = new FCKeditor($input_name);
+    $editor->BasePath   = '../includes/fckeditor/';
+    $editor->ToolbarSet = 'Normal';
+    $editor->Width      = '100%';
+    $editor->Height     = '320';
+    $editor->Value      = $input_value;
+    $FCKeditor = $editor->CreateHtml();
+    $smarty->assign('FCKeditor'.$bianhao, $FCKeditor);
+}

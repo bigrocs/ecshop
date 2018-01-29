@@ -103,8 +103,10 @@ class weixin
         $charset = strtoupper($charset);
         $root=$GLOBALS['ecs']->url();
         $notify_url=$root."respondwx.php";
-
-        $this->setParameter("body", $order['order_sn']); // 商品描述
+        if (empty($order['name'])) {
+            $order['name'] = null;
+        }
+        $this->setParameter("body", $order['name'].' 订单号:'.$order['order_sn']); // 商品描述
         $this->setParameter("out_trade_no", $order['order_sn'] . 'O' . $order['log_id'].'O'.$order['order_amount'] * 100); // 商户订单号
         $this->setParameter("total_fee", $order['order_amount'] * 100); // 总金额
         $this->setParameter("notify_url", urlencode($notify_url)); // 通知地址

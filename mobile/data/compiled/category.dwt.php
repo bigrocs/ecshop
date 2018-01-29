@@ -15,7 +15,7 @@
 <body>
 <div id="page" style="right: 0px; left: 0px; display: block;">
   <header id="header" style="z-index:1">
-    <div class="header_l"> <a class="ico_10" href="cat_all.php"> 返回 </a> </div>
+    <div class="header_l"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div>
     <div id="search_box2" >
       <div class="search_box" >
         <form method="post" action="search.php" name="searchForm" id="searchForm_id">
@@ -38,10 +38,10 @@
       <button class="attrExtra-submit" type="submit">确定</button>
       <button class="attrExtra-cancel" type="button"  onclick="mtShowMenu()">取消</button>
     </div>
-    <div class="attrs attr-fix" style="overflow: auto;height: 100%"> 
-       
-      <?php if ($this->_var['brands']['1'] || $this->_var['price_grade']['1'] || $this->_var['filter_attr_list']): ?> 
+    <div class="attrs attr-fix" style="overflow: auto;height: 100%">
       
+      <?php if ($this->_var['brands']['1'] || $this->_var['price_grade']['1'] || $this->_var['filter_attr_list']): ?>
+
       <?php if ($this->_var['brands']['1']): ?>
       <div class="attr brandAttr">
         <div class="attrKey"><?php echo $this->_var['lang']['brand']; ?></div>
@@ -49,12 +49,12 @@
           <ul class="av-collapse filter_list">
             <?php $_from = $this->_var['brands']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'brand');if (count($_from)):
     foreach ($_from AS $this->_var['brand']):
-?> 
+?>
             <?php if ($this->_var['brand']['selected']): ?>
-            <li class="av-selected"> 
+            <li class="av-selected">
               <?php else: ?>
-            <li> 
-              <?php endif; ?> 
+            <li>
+              <?php endif; ?>
               <a href="javascript:void(0);" data="<?php echo $this->_var['brand']['brand_id']; ?>"><?php echo $this->_var['brand']['brand_name']; ?></a></li>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             <input type="hidden" name="brand" value="<?php echo $this->_var['brand_id']; ?>" />
@@ -62,8 +62,8 @@
           <div class="av-options"><a class="j_More avo-more avo-more-down" href="javascript:;">查看更多<i></i></a> </div>
         </div>
       </div>
-      <?php endif; ?> 
-      
+      <?php endif; ?>
+
       <?php if ($this->_var['price_grade']['1']): ?>
       <div class="attr brandAttr">
         <div class="attrKey"><?php echo $this->_var['lang']['price']; ?></div>
@@ -71,12 +71,12 @@
           <ul class="av-collapse filter_list">
             <?php $_from = $this->_var['price_grade']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'grade');if (count($_from)):
     foreach ($_from AS $this->_var['grade']):
-?> 
+?>
             <?php if ($this->_var['grade']['selected']): ?>
-            <li class="av-selected"> 
+            <li class="av-selected">
               <?php else: ?>
-            <li> 
-              <?php endif; ?> 
+            <li>
+              <?php endif; ?>
               <a href="javascript:void(0);" data="<?php echo $this->_var['grade']['start']; ?>|<?php echo $this->_var['grade']['end']; ?>"><?php echo $this->_var['grade']['price_range']; ?></a></li>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             <input type="hidden" name="price_min" value="<?php echo $this->_var['price_min']; ?>" />
@@ -85,23 +85,23 @@
           <div class="av-options"><a class="j_More avo-more avo-more-down" href="javascript:;">查看更多<i></i></a> </div>
         </div>
       </div>
-      <?php endif; ?> 
-      
-      <?php $_from = $this->_var['filter_attr_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'filter_attr_0_93252200_1515390034');if (count($_from)):
-    foreach ($_from AS $this->_var['filter_attr_0_93252200_1515390034']):
+      <?php endif; ?>
+
+      <?php $_from = $this->_var['filter_attr_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'filter_attr_0_47442400_1516930914');if (count($_from)):
+    foreach ($_from AS $this->_var['filter_attr_0_47442400_1516930914']):
 ?>
       <div class="attr brandAttr">
-        <div class="attrKey"><?php echo htmlspecialchars($this->_var['filter_attr_0_93252200_1515390034']['filter_attr_name']); ?></div>
+        <div class="attrKey"><?php echo htmlspecialchars($this->_var['filter_attr_0_47442400_1516930914']['filter_attr_name']); ?></div>
         <div class="attrValues">
           <ul class="av-collapse filter_list">
-            <?php $_from = $this->_var['filter_attr_0_93252200_1515390034']['attr_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'attr');if (count($_from)):
+            <?php $_from = $this->_var['filter_attr_0_47442400_1516930914']['attr_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'attr');if (count($_from)):
     foreach ($_from AS $this->_var['attr']):
-?> 
+?>
             <?php if ($this->_var['attr']['selected']): ?>
-            <li class="av-selected filter_attr"> 
+            <li class="av-selected filter_attr">
               <?php else: ?>
-            <li class="filter_attr"> 
-              <?php endif; ?> 
+            <li class="filter_attr">
+              <?php endif; ?>
               <a href="javascript:void(0);" data="<?php echo $this->_var['attr']['attr_id']; ?>"><?php echo $this->_var['attr']['attr_value']; ?></a></li>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
           </ul>
@@ -110,8 +110,8 @@
       </div>
       <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
       <input type="hidden" name="filter_attr" value="<?php echo $this->_var['filter_attr']; ?>"/>
-      <?php endif; ?> 
-       
+      <?php endif; ?>
+      
     </div>
   </form>
 </div>

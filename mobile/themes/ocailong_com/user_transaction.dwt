@@ -11,7 +11,7 @@
 <link href="{$ectouch_themes}/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 <link href="{$ectouch_css}" rel="stylesheet" type="text/css" />
 {* 包含脚本文件 *}
-{insert_scripts files='transport.js,common.js,user.js'}
+{insert_scripts files='common.js,user.js'}
 <script type="text/javascript" src="{$ectouch_themes}/js/jquery-1.4.4.min.js"></script>
 </head>
 <body>
@@ -877,15 +877,184 @@ jQuery(function($){
     <!--#会员余额 start-->
     <!-- // **chognzhi -->
     <!--{if $action eq "account_raply" || $action eq "account_log" || $action eq "account_deposit" || $action eq "account_detail" || $action eq "account_deposit_card"} } -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet"  href="themes/ocailong_com/css/element-ui.css">
+    <style>
+        .tip{padding:8px 16px;background-color:#ecf8ff;border-radius:4px;border-left:5px solid #50bfff;margin:0px 0 10px 0}
+        .el-radio.is-bordered{
+            padding:2px 2px 2px 2px;
+        }
+        .el-radio__input{
+            margin-top:-22px;
+            margin-right:-5px;
+        }
+        .el-tag{
+            height:36px;
+            line-height:34px;
+            font-size:14px;
+        }
+    </style>
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="user.php"> 返回 </a> </div>
       <h1> {$lang.user_balance} </h1>
     </header>
-    <section class="wrap bonus_list">
-	  <section class="order_box padd1 radius10 single_item">
-
-      </section>
-    </section>
+    <script src="themes/ocailong_com/js/vue.js"></script>
+    <script src="themes/ocailong_com/js/element-ui.js"></script>
+    <div id="app" style="margin-top:5px;">
+        <el-tabs type="border-card" v-model="activeName" @tab-click="handleClickTab">
+          <el-tab-pane name="account_deposit_card">
+            <span slot="label"> 充值卡</span>
+          </el-tab-pane>
+          <el-tab-pane name="account_deposit">
+            <span slot="label"> 充值</span>
+          </el-tab-pane>
+          <el-tab-pane  name="account_detail">
+            <span slot="label"> 账户明细</span>
+          </el-tab-pane>
+          <el-tab-pane  name="account_log">
+            <span slot="label"> 申请记录</span>
+          </el-tab-pane>
+          <!-- {if $action eq "account_deposit"} -->
+          <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
+             <div class="tip">
+                 您的当余额:{$userInfo.user_money}
+             </div>
+             <el-input placeholder="请输入充值金额" name="amount" value="{$order.amount|escape}">
+                <template slot="prepend">充值金额</template>
+             </el-input>
+             <div style="margin: 10px 0;"></div>
+             <el-input
+              type="textarea"
+              :autosize="{ minRows: 2, maxRows: 4}"
+              placeholder="会员备注"
+              name="user_note">
+             </el-input>
+             <div>
+                 <!-- {foreach from=$payment item=list} -->
+                    <el-radio name="payment_id" v-model="payId" label="{$list.pay_id}" border style="margin: 10px 0;">
+                        <img src="themes/ocailong_com/images/payimg/{$list.pay_code}.png" style="width:99px;height:35px;overflow:hidden;">
+                    </el-radio>
+                 <!-- {/foreach} -->
+             </div>
+             <div style="margin: 10px 0;">
+                 <input type="hidden" name="rec_id" value="{$order.id}" />
+                 <input type="hidden" name="act" value="act_account" />
+                 <input type="submit" class="c-btn3" style="margin-right:5px;" name="submit" value="{$lang.submit_request}" />
+                 <input style="margin: 5px 0;" type="reset"  class="c-btn3"  name="reset" value="{$lang.button_reset}" /></td>
+             </div>
+          </form>
+          <!-- {/if} -->
+          <!-- {if $action eq "account_deposit_card"} -->
+          <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
+             <div class="tip">
+                 您的当余额:{$userInfo.user_money}
+             </div>
+             <input type="hidden" name="amount" value="{$faceValue}" />
+             <el-input placeholder="{$faceValue}" name="amounts" value="{$faceValue}" :disabled="true">
+                <template slot="prepend">面值</template>
+                <template slot="append">到账{$accountAmount}元</template>
+             </el-input>
+             <div style="margin: 10px 0;"></div>
+                 <el-tag>数量：</el-tag>
+                 <el-input-number v-model="cardNumber" name="number" :min="1" :max="1000" label="充值卡数量" @change="handleChangeCardNumber"></el-input-number>
+             <div>
+                 <!-- {foreach from=$payment item=list} -->
+                    <el-radio name="payment_id" v-model="payId" label="{$list.pay_id}" border style="margin: 10px 0;">
+                        <img src="themes/ocailong_com/images/payimg/{$list.pay_code}.png" style="width:99px;height:35px;overflow:hidden;">
+                    </el-radio>
+                 <!-- {/foreach} -->
+             </div>
+             <div style="margin: 10px 0;">
+                 <input type="hidden" name="rec_id" value="{$order.id}" />
+                 <input type="hidden" name="act" value="act_account" />
+                 <input type="submit" class="c-btn3" style="margin-right:5px;" name="submit" value="{$lang.submit_request}" />
+                 <input style="margin: 5px 0;" type="reset"  class="c-btn3"  name="reset" value="{$lang.button_reset}" /></td>
+             </div>
+          </form>
+          <!-- {/if} -->
+          <!-- {if $action eq "account_detail"} -->
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff">{$lang.process_time}</td>
+              <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
+              <td bgcolor="#ffffff">{$lang.money}</td>
+              <td bgcolor="#ffffff">{$lang.change_desc}</td>
+            </tr>
+            <!--{foreach from=$account_log item=item}-->
+            <tr>
+              <td align="center" bgcolor="#ffffff">{$item.change_time}</td>
+              <td align="center" bgcolor="#ffffff">{$item.type}</td>
+              <td align="right" bgcolor="#ffffff">{$item.amount}</td>
+              <td bgcolor="#ffffff" title="{$item.change_desc}">&nbsp;&nbsp;{$item.short_change_desc}</td>
+            </tr>
+            <!--{/foreach}-->
+            <tr>
+              <td colspan="4" align="center" bgcolor="#ffffff"><div align="right">{$lang.current_surplus}{$surplus_amount}</div></td>
+            </tr>
+          </table>
+          <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+          <!-- {/if} -->
+          <!-- {if $action eq "account_log"} -->
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff">{$lang.process_time}</td>
+              <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
+              <td bgcolor="#ffffff">{$lang.money}</td>
+              <td bgcolor="#ffffff">余额到账</td>                        <!-- //**chognzhi -->
+              <td bgcolor="#ffffff">VIP到账</td>                        <!-- //**vip_money -->
+              <td bgcolor="#ffffff">储值卡到账</td>                        <!-- //**vip_money -->
+              <td bgcolor="#ffffff">{$lang.process_notic}</td>
+              <td bgcolor="#ffffff">{$lang.admin_notic}</td>
+              <td bgcolor="#ffffff">{$lang.is_paid}</td>
+              <td bgcolor="#ffffff">{$lang.handle}</td>
+            </tr>
+            <!--{foreach from=$account_log item=item}-->
+            <tr>
+              <td align="center" bgcolor="#ffffff">{$item.add_time}</td>
+              <td align="left" bgcolor="#ffffff">{$item.type}</td>
+              <td align="right" bgcolor="#ffffff">{$item.amount}</td>
+              <td align="right" bgcolor="#ffffff">{$item.arrival}</td>            <!-- //**chognzhi -->
+              <td align="right" bgcolor="#ffffff">{$item.vip_money}</td>            <!-- //**vip_money -->
+              <td align="right" bgcolor="#ffffff">{$item.jiubi}</td>            <!-- //**vip_money -->
+              <td align="left" bgcolor="#ffffff">{$item.short_user_note}</td>
+              <td align="left" bgcolor="#ffffff">{$item.short_admin_note}</td>
+              <td align="center" bgcolor="#ffffff">{$item.pay_status}</td>
+              <td align="right" bgcolor="#ffffff">{$item.handle}
+                <!-- {if ($item.is_paid eq 0 && $item.process_type eq 1) || $item.handle} -->
+                <a href="user.php?act=cancel&id={$item.id}" onclick="if (!confirm('{$lang.confirm_remove_account}')) return false;">{$lang.is_cancel}</a>
+                <!-- {/if} --></td>
+            </tr>
+            <!--{/foreach}-->
+            <tr>
+              <td colspan="7" align="right" bgcolor="#ffffff">{$lang.current_surplus}{$surplus_amount}</td>
+            </tr>
+          </table>
+          <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem --> </div>
+        <!-- {/if} -->
+        </el-tabs>
+    </div>
+     <script>
+         var Main = {
+            data() {
+              return {
+                activeName: '{$action}',
+                cardNumber: 1,
+                payId: '{$payment[0][pay_id]}'
+              };
+            },
+            methods: {
+                handleClickTab(tab, event) {
+                    //跳转到指定页面
+                    location.href='user.php?act='+tab.name
+                },
+                handleChangeCardNumber(value) {
+                    console.log(value);
+                }
+            }
+          };
+        var Ctor = Vue.extend(Main)
+        new Ctor().$mount('#app')
+     </script>
 
     <div class="fullscreen">
       <script type="text/javascript">
@@ -894,18 +1063,7 @@ jQuery(function($){
           {/foreach}
         </script>
       <div class="blank"></div>
-      <table width="100%" border="0" cellpadding="5" cellspacing="1">
-        <tr>
-            <!-- // **chognzhi -->
-          <td align="right" bgcolor="#ffffff">
-              <a href="user.php?act=account_deposit_card" class="f6">充值卡</a> |
-              <a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> |
-              <!-- <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> |  -->
-              <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> |
-              <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a>
-          </td>
-        </tr>
-      </table>
+
       <!-- {/if} -->
       <!-- {if $action eq "account_raply"} -->
       <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
@@ -925,86 +1083,7 @@ jQuery(function($){
         </table>
       </form>
       <!-- {/if} -->
-      <!-- {if $action eq "account_deposit"} -->
-      <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
-        <table width="100%" border="0" cellpadding="5" cellspacing="1" >
-          <tr>
-            <td align="left" ><input placeholder="{$lang.deposit_money}" type="text" name="amount"  class="inputBg" value="{$order.amount|escape}" size="30" /></td>
-          </tr>
-          <tr>
-            <td align="left" ><textarea  placeholder="{$lang.process_notic}" name="user_note" cols="55" rows="6"  class="B_blue">{$order.user_note|escape}</textarea></td>
-          </tr>
-        </table>
-        <table width="100%" border="0" cellpadding="5" cellspacing="1" >
-          <tr align="center">
-            <td  colspan="3" align="left">{$lang.payment}:</td>
-          </tr>
-          <tr align="center">
-            <td >{$lang.pay_name}</td>
-            <td  width="60%">{$lang.pay_desc}</td>
-            <td  width="17%">{$lang.pay_fee}</td>
-          </tr>
-          <!-- {foreach from=$payment item=list} -->
-          <tr>
-            <td  align="left"><input type="radio" name="payment_id" id="payment_id{$list.pay_id}" value="{$list.pay_id}" />
-              <label for="payment_id{$list.pay_id}">{$list.pay_name}</label></td>
-            <td  align="left">{$list.pay_desc}</td>
-            <td  align="center">{$list.pay_fee}</td>
-          </tr>
-          <!-- {/foreach} -->
-          <tr>
-            <td colspan="3"  align="center"><input type="hidden" name="surplus_type" value="0" />
-              <input type="hidden" name="rec_id" value="{$order.id}" />
-              <input type="hidden" name="act" value="act_account" />
-              <input type="submit" class="c-btn" style="margin-right:5px;" name="submit" value="{$lang.submit_request}" />
-              <input type="reset"  class="c-btn"  name="reset" value="{$lang.button_reset}" /></td>
-          </tr>
-        </table>
-      </form>
-      <!-- {/if} -->
-      <!-- // **chognzhi begin -->
-      <!-- {if $action eq "account_deposit_card"} -->
-      <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
-      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-          <!-- //**chognzhi -->
-          <tr>
-            <td width="15%" bgcolor="#ffffff">面值:</td>
-            <td bgcolor="#ffffff"><input type="radio" name="amount" value="{$faceValue}" checked> {$faceValue}元（到账{$accountAmount}元）</td>
-            <td bgcolor="#ffffff" style="display:none;"><input type="radio" name="amount" value="{$vipFaceValue}" checked> {$vipFaceValue}元（到账{$vipAccountAmount}元）</td>
-          </tr>
-          <tr>
-            <td bgcolor="#ffffff">数量:</td>
-            <td align="left" bgcolor="#ffffff"><input type="text" name="number"  class="inputBg" value="1" size="30" /></td>
-          </tr>
-        </table>
-        <table width="100%" border="0" cellpadding="5" cellspacing="1" >
-            <tr align="center">
-              <td  colspan="3" align="left">{$lang.payment}:</td>
-            </tr>
-          <tr align="center">
-            <td >{$lang.pay_name}</td>
-            <td  width="60%">{$lang.pay_desc}</td>
-            <td  width="17%">{$lang.pay_fee}</td>
-          </tr>
-          <!-- {foreach from=$payment item=list} -->
-          <tr>
-            <td  align="left"><input type="radio" name="payment_id" id="payment_id{$list.pay_id}" value="{$list.pay_id}" />
-              <label for="payment_id{$list.pay_id}">{$list.pay_name}</label></td>
-            <td  align="left">{$list.pay_desc}</td>
-            <td  align="center">{$list.pay_fee}</td>
-          </tr>
-          <!-- {/foreach} -->
-          <tr>
-            <td colspan="3"  align="center"><input type="hidden" name="surplus_type" value="0" />
-              <input type="hidden" name="rec_id" value="{$order.id}" />
-              <input type="hidden" name="act" value="act_account" />
-              <input type="submit" class="c-btn" style="margin-right:5px;" name="submit" value="{$lang.submit_request}" />
-              <input type="reset"  class="c-btn"  name="reset" value="{$lang.button_reset}" /></td>
-          </tr>
-        </table>
-      </form>
-      <!-- {/if} -->
-      <!-- // **chognzhi end -->
+
       <!-- {if $action eq "act_account"} -->
     <header id="header">
       <div class="header_l header_return"> <a class="ico_10" href="user.php"> 返回 </a> </div>
@@ -1047,65 +1126,6 @@ jQuery(function($){
         </tr>
       </table>
       <!-- {/if} -->
-      <!-- {if $action eq "account_detail"} -->
-      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-        <tr align="center">
-          <td bgcolor="#ffffff">{$lang.process_time}</td>
-          <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
-          <td bgcolor="#ffffff">{$lang.money}</td>
-          <td bgcolor="#ffffff">{$lang.change_desc}</td>
-        </tr>
-        <!--{foreach from=$account_log item=item}-->
-        <tr>
-          <td align="center" bgcolor="#ffffff">{$item.change_time}</td>
-          <td align="center" bgcolor="#ffffff">{$item.type}</td>
-          <td align="right" bgcolor="#ffffff">{$item.amount}</td>
-          <td bgcolor="#ffffff" title="{$item.change_desc}">&nbsp;&nbsp;{$item.short_change_desc}</td>
-        </tr>
-        <!--{/foreach}-->
-        <tr>
-          <td colspan="4" align="center" bgcolor="#ffffff"><div align="right">{$lang.current_surplus}{$surplus_amount}</div></td>
-        </tr>
-      </table>
-      <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
-      <!-- {/if} -->
-      <!-- {if $action eq "account_log"} -->
-      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-        <tr align="center">
-          <td bgcolor="#ffffff">{$lang.process_time}</td>
-          <td bgcolor="#ffffff">{$lang.surplus_pro_type}</td>
-          <td bgcolor="#ffffff">{$lang.money}</td>
-          <td bgcolor="#ffffff">余额到账</td>                        <!-- //**chognzhi -->
-          <td bgcolor="#ffffff">VIP到账</td>                        <!-- //**vip_money -->
-          <td bgcolor="#ffffff">储值卡到账</td>                        <!-- //**vip_money -->
-          <td bgcolor="#ffffff">{$lang.process_notic}</td>
-          <td bgcolor="#ffffff">{$lang.admin_notic}</td>
-          <td bgcolor="#ffffff">{$lang.is_paid}</td>
-          <td bgcolor="#ffffff">{$lang.handle}</td>
-        </tr>
-        <!--{foreach from=$account_log item=item}-->
-        <tr>
-          <td align="center" bgcolor="#ffffff">{$item.add_time}</td>
-          <td align="left" bgcolor="#ffffff">{$item.type}</td>
-          <td align="right" bgcolor="#ffffff">{$item.amount}</td>
-          <td align="right" bgcolor="#ffffff">{$item.arrival}</td>            <!-- //**chognzhi -->
-          <td align="right" bgcolor="#ffffff">{$item.vip_money}</td>            <!-- //**vip_money -->
-          <td align="right" bgcolor="#ffffff">{$item.jiubi}</td>            <!-- //**vip_money -->
-          <td align="left" bgcolor="#ffffff">{$item.short_user_note}</td>
-          <td align="left" bgcolor="#ffffff">{$item.short_admin_note}</td>
-          <td align="center" bgcolor="#ffffff">{$item.pay_status}</td>
-          <td align="right" bgcolor="#ffffff">{$item.handle}
-            <!-- {if ($item.is_paid eq 0 && $item.process_type eq 1) || $item.handle} -->
-            <a href="user.php?act=cancel&id={$item.id}" onclick="if (!confirm('{$lang.confirm_remove_account}')) return false;">{$lang.is_cancel}</a>
-            <!-- {/if} --></td>
-        </tr>
-        <!--{/foreach}-->
-        <tr>
-          <td colspan="7" align="right" bgcolor="#ffffff">{$lang.current_surplus}{$surplus_amount}</td>
-        </tr>
-      </table>
-      <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem --> </div>
-    <!-- {/if} -->
     <!--#会员余额 end-->
     <!--#收货地址页面 -->
     <!--{if $action eq 'address_list'} -->
@@ -1510,8 +1530,78 @@ jQuery(function($){
         <!--{/if} -->
         <!--#会员卡 -->
 
+        <!--#一键导航店铺 -->
+    <!-- {if $action eq "nav_list"} -->
 
+        <div id="nav_list"><section class="order_box padd1 radius10"> 定位中。。。    </section></div>
 
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+      <!--通过config接口注入权限验证配置,文档上有详细的说明-->
+      wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: {$signPackage.timestamp},
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: [
+          // 所有要调用的 API 都要加到这个列表中
+            'checkJsApi',
+            'openLocation',
+            'getLocation'
+        ]
+      });
+    <!--通过ready接口处理成功验证-->
+      wx.ready(function () {
+        // 在这里调用 API
+    <!--通过checkJsApi判断当前客户端版本是否支持指定获取地理位置-->
+        wx.checkJsApi({
+            jsApiList: [
+                'getLocation'
+            ],
+            success: function (res) {
+                // alert(JSON.stringify(res));
+                // alert(JSON.stringify(res.checkResult.getLocation));
+                if (res.checkResult.getLocation == false) {
+                    alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                    return;
+                }
+            }
+        });
+
+        <!--使用getLocation接口获取地理位置坐标-->
+        wx.getLocation({
+        success: function (res) {
+            var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+            var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+            var speed = res.speed; // 速度，以米/每秒计
+            var accuracy = res.accuracy; // 位置精度
+            $.ajax({
+                type: "POST",
+                url: "user.php?act=ajxa_nav_list",
+                data: "latitude="+latitude+"&longitude="+longitude,
+                dataType: "html",
+                async: false,
+                success: function(result){
+                    // console.log(result);
+                     $("#nav_list").html( result );
+                    // if (result.code!=2){
+                    //     alert(result.msg);
+                    //     status = false;
+                    // }
+                }
+            });
+            // alert('纬度位置：'+latitude+'经度位置：'+longitude);//弹出经纬度，就这样就获取到了用户的位置
+
+        },
+        cancel: function (res) {
+            alert('用户拒绝授权获取地理位置');
+        }
+        });
+      });
+    </script>
+    <!--{/if} -->
+    <!--#一键导航店铺 -->
 
 
 

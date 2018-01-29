@@ -87,9 +87,11 @@ class wx_new_jspay
 
         if ($openid) {
             $unifiedOrder = new UnifiedOrder_pub();
-
+            if (empty($order['name'])) {
+                $order['name'] = null;
+            }
             $unifiedOrder->setParameter("openid", "$openid");//商品描述
-            $unifiedOrder->setParameter("body", $order['order_sn']);//商品描述
+            $unifiedOrder->setParameter("body", $order['name'].' 订单号:'.$order['order_sn']);//商品描述
             $out_trade_no = $order['order_sn'].mt_rand(1, 20);
             $unifiedOrder->setParameter("out_trade_no", "$out_trade_no");//商户订单号
             $unifiedOrder->setParameter("attach", strval($order['log_id']));//商户支付日志

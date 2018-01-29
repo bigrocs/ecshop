@@ -74,6 +74,12 @@
   </tr>
   {/if}
   {/foreach}
+  {if $group_buy.goods_id}
+  <tr>
+    <td class="label">当前订单数量：</td>
+    <td style="coloer:#ff0000">{$group_buy.total_order|default:0}</td>
+  </tr>
+  {/if}
   <tr>
     <td class="label">{$lang.label_desc}</td>
     <td><textarea  name="act_desc" cols="40" rows="3"  >{$group_buy.act_desc}</textarea></td>

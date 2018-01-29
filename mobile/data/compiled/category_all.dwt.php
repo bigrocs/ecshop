@@ -44,23 +44,24 @@ if ($this->_foreach['no']['total'] > 0):
       </div>
     </li>
     <ul class="clist clist_sub clearfix" style="opacity: 1; display: none;">
-      <li class="crow"> 
+      <li class="crow">
         <?php $_from = $this->_var['cat']['cat_id']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'child');$this->_foreach['no1'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['no1']['total'] > 0):
     foreach ($_from AS $this->_var['child']):
         $this->_foreach['no1']['iteration']++;
 ?>
         <div class="crow_item   <?php if (($this->_foreach['no1']['iteration'] - 1) % 3 == 0): ?>  crow_item_clear <?php endif; ?> "> <a href="<?php echo $this->_var['child']['url']; ?>"><?php echo htmlspecialchars($this->_var['child']['name']); ?></a> </div>
-        <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?> 
+        <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
         <div class="crow_item"> <a href="<?php echo $this->_var['cat']['url']; ?>">全部商品</a> </div>
       </li>
     </ul>
     <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
   </ul>
 </div>
-<script type="text/javascript" src="<?php echo $this->_var['ectouch_themes']; ?>/js/zepto.min.js"></script> 
+<?php echo $this->fetch('library/page_footer.lbi'); ?>
+<script type="text/javascript" src="<?php echo $this->_var['ectouch_themes']; ?>/js/zepto.min.js"></script>
 <script type="text/javascript">
-/*头部搜索点击关闭或者弹出搜索框*/  
+/*头部搜索点击关闭或者弹出搜索框*/
 function showSearch( ){
 	document.getElementById("search_box").style.display="block";
 }
@@ -119,7 +120,7 @@ function check(Id){
 						window.scroll(0, _gp.offset().top);
 					} else {
 						window.scroll(0, _gp.offset().top - 50);
-					}					
+					}
 				},15)*/
 				return;
 			}
@@ -147,7 +148,7 @@ function check(Id){
 				$("div.crow_arrow", $curMenuDom).html(btn_down.cloneNode(true));
 			}
 		},
-		
+
 	}
 	window.Menu = Menu;
 	Menu.initEvent();// 初始化事件

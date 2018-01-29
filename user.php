@@ -32,7 +32,9 @@ $smarty->assign('_CFG', $_CFG);//附加系统配置
 
 // 不需要登录的操作或自己验证是否登录（如ajax处理）的act
 $not_login_arr =
-array('login','act_login','register','act_register','act_edit_password','get_password','send_pwd_email','send_pwd_mobile','password', 'signin', 'add_tag', 'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', 'order_query', 'is_registered', 'check_email','clear_history','qpassword_name', 'get_passwd_question', 'check_answer','oath' , 'oath_login', 'other_login', 'mpassword_name');
+array('login','act_login','register','act_register','act_edit_password','get_password','send_pwd_email','send_pwd_mobile','password', 'signin', 'add_tag', 'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', 'order_query', 'is_registered', 'check_email','clear_history','qpassword_name',
+'get_passwd_question', 'check_answer','oath' , 'oath_login', 'other_login', 'mpassword_name',
+);
 
 /* 显示页面的action列表 */
 // **chognzhi account_deposit_card
@@ -138,7 +140,9 @@ elseif ($action == 'act_register') {
         $smarty->display('user_passport.dwt');
     } else {
         include_once(ROOT_PATH . 'includes/lib_passport.php');
-
+        if (empty($_POST['sellerId'])) {
+            show_message('抱歉只能通过邀请注册！');
+        }
         $username = isset($_POST['username']) ? trim($_POST['username']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
         $email    = isset($_POST['email']) ? trim($_POST['email']) : '';
@@ -1759,6 +1763,7 @@ elseif ($action == 'act_account') {
         $order['user_name']      = $_SESSION['user_name'];
         $order['surplus_amount'] = $amount;
 
+        $order['name'] = $_SESSION['user_name'].'充值';
         //计算支付手续费用
         $payment_info['pay_fee'] = pay_fee($surplus['payment_id'], $order['surplus_amount'], 0);
 

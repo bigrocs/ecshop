@@ -14,6 +14,9 @@
                     <a class="{if $action eq 'order_list'|| $action eq 'order_detail'}on{/if}" href="seller.php?act=order_list">加油订单列表</a>
 
                 </li>
+                <li>
+                    <a class="{if $action eq 'spread_order'}on{/if}" href="seller.php?act=spread_order">推荐订单列表</a>
+                </li>
 
             </ul>
         </li>
@@ -30,6 +33,17 @@
         </li>
         {/if}
         <li class="item">
+            <div class="root_node"><i class="iconfont"></i>充值管理</div>
+            <ul>
+                <li>
+                    <a class="{if $action eq 'kuaibi_deposit'}on{/if}" href="seller.php?act=kuaibi_deposit">储值卡充值</a>
+                </li>
+                <li>
+                    <a class="{if $action eq 'vip_deposit'}on{/if}" href="seller.php?act=vip_deposit">VIP充值</a>
+                </li>
+            </ul>
+        </li>
+        <li class="item">
             <div class="root_node"><i class="iconfont"></i>管理中心</div>
             <ul>
                 <li>
@@ -37,14 +51,17 @@
                 </li>
                 {if $insurance eq '0'}
                     <li>
+                        <a class="{if $action eq 'oilPrice'}on{/if}" href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
+                    </li>
+                    <li>
                         <a class="{if $action eq 'gas'}on{/if}" href="seller.php?act=gas">{$lang.seller_gas}</a>
+                    </li>
+                    <li>
+                        <a class="{if $action eq 'mapInfo'}on{/if}" href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
                     </li>
                 {/if}
                 <li>
                     <a class="{if $action eq 'info'}on{/if}" href="seller.php?act=info">{$lang.seller_info}</a>
-                </li>
-                <li>
-                    <a class="{if $action eq 'vip_deposit'}on{/if}" href="seller.php?act=vip_deposit">VIP充值</a>
                 </li>
             </ul>
         </li>

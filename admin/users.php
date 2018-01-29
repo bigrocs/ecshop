@@ -178,7 +178,32 @@ elseif ($_REQUEST['act'] == 'insert') {
     $link[] = array('text' => $_LANG['go_back'], 'href'=>'users.php?act=list');
     sys_msg(sprintf($_LANG['add_success'], htmlspecialchars(stripslashes($_POST['username']))), 0, $link);
 }
-
+/*------------------------------------------------------ */
+//-- 添加会员储值卡余额
+/*------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'kuaibi') {
+    /* 检查权限 */
+    admin_priv('users_manage');
+    $smarty->assign('form_action', 'kuaibi_update');
+    $smarty->display('user_kuaibi.htm');
+}
+/*------------------------------------------------------ */
+//-- 添加会员储值卡余额
+/*------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'kuaibi_update') {
+    include_once(ROOT_PATH .'includes/lib_seller.php');
+    $link[] = array('text' => $_LANG['go_back'], 'href'=>'users.php?act=kuaibi');
+    /* 检查权限 */
+    admin_priv('users_manage');
+    $money = $_POST['money'];
+    $userId = getUserId($_POST['username']);
+    if (empty($userId)) {
+        sys_msg('用户不存在请输入正确用户名!', 1, $link);
+    }
+    $sellerId = $sellerInfo['user_id'];
+    log_account_change($userId, 0, 0, 0, 0, '商家储值卡充值', ACT_SAVING, $money);
+    sys_msg('充值成功! 充值账号:'.$_POST['username'].' 充值储值卡金额:'.$money.'元', 0, $link);
+}
 /*------------------------------------------------------ */
 //-- 编辑用户帐号
 /*------------------------------------------------------ */

@@ -15,6 +15,9 @@ var alertedSurplus   = false;
 var groupBuyShipping = null;
 var groupBuyPayment  = null;
 
+function ziTiSelectShipping(key){
+    Ajax.call('flow.php?step=select_shipping', 'shipping=' + key, orderShippingSelectedResponse, 'GET', 'JSON');
+}
 /* *
  * 改变配送方式
  */

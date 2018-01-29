@@ -39,19 +39,20 @@
       </div>
     </li>
     <ul class="clist clist_sub clearfix" style="opacity: 1; display: none;">
-      <li class="crow"> 
+      <li class="crow">
         <!--{foreach from=$cat.cat_id item=child name=no1 }-->
         <div class="crow_item   <!--{if $smarty.foreach.no1.index mod 3 eq 0}-->  crow_item_clear <!-- {/if} --> "> <a href="{$child.url}">{$child.name|escape:html}</a> </div>
-        <!--{/foreach}--> 
+        <!--{/foreach}-->
         <div class="crow_item"> <a href="{$cat.url}">全部商品</a> </div>
       </li>
     </ul>
     <!--{/foreach}-->
   </ul>
 </div>
-<script type="text/javascript" src="{$ectouch_themes}/js/zepto.min.js"></script> 
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<script type="text/javascript" src="{$ectouch_themes}/js/zepto.min.js"></script>
 <script type="text/javascript">
-/*头部搜索点击关闭或者弹出搜索框*/  
+/*头部搜索点击关闭或者弹出搜索框*/
 function showSearch( ){
 	document.getElementById("search_box").style.display="block";
 }
@@ -110,7 +111,7 @@ function check(Id){
 						window.scroll(0, _gp.offset().top);
 					} else {
 						window.scroll(0, _gp.offset().top - 50);
-					}					
+					}
 				},15)*/
 				return;
 			}
@@ -138,7 +139,7 @@ function check(Id){
 				$("div.crow_arrow", $curMenuDom).html(btn_down.cloneNode(true));
 			}
 		},
-		
+
 	}
 	window.Menu = Menu;
 	Menu.initEvent();// 初始化事件

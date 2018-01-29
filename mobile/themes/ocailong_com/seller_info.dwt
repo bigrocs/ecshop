@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title} 触屏版</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<link href="{$ectouch_themes}/images/touch-icon.png" rel="apple-touch-icon-precomposed" />
+<link href="{$ectouch_themes}/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="{$ectouch_css}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='transport.js,common.js,user.js'}
+<script type="text/javascript" src="{$ectouch_themes}/js/jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="tbh5v0">
+    <!-- #商家详情页面 end-->
+    <!-- {if $action eq 'seller_index'} -->
+    <header id="header">
+      <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+      <h1> 站点详情 </h1>
+    </header>
+    <section class="wrap message_list">
+        <section class="order_box padd1 radius10 single_item">
+            <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table_no_border">
+                <tbody>
+                  <tr>
+                    <td><img src="/data/images/{$sellerInfo.board}" width="150" height="100"></td>
+
+                    <td><h1 style="font-size:18px;">{$sellerInfo.name}</h1><br>
+                        电话:{$sellerInfo.tel}<br>
+                        地址:{$sellerInfo.address}<br>
+                    </td>
+
+                </tr>
+              </tbody>
+          </table>
+        </section>
+        <section class="order_box padd1 radius10 single_item">
+            {$sellerInfo.seller_desc}
+        </section>
+        <section class="order_box padd1 radius10 single_item">
+            <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+              <tr align="center">
+                <td bgcolor="#ffffff">类型</td>
+                <td bgcolor="#ffffff">规格</td>
+                <td bgcolor="#ffffff">型号</td>
+                <td bgcolor="#ffffff">价格</td>
+              </tr>
+              <!--{foreach from=$oilList item=item}-->
+              <tr>
+                <td align="center" bgcolor="#ffffff">{$item.type}</td>
+                <td align="center" bgcolor="#ffffff">{$item.spec}</td>
+                <td align="center" bgcolor="#ffffff">{$item.model}</td>
+                <td align="center" bgcolor="#ffffff">{$item.price}元/升</td>
+              </tr>
+              <!--{/foreach}-->
+            </table>
+        </section>
+    </section>
+    <!-- {/if} -->
+    <!-- #商家详情页面 end-->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> </div>
+</div>
+<div style="width:1px; height:1px; overflow:hidden">{foreach from=$lang.p_y item=pv}{$pv}{/foreach}</div>
+</body>
+<script type="text/javascript">
+{foreach from=$lang.clips_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+</html>

@@ -61,7 +61,8 @@
       {/if}
       <a href="shipping.php?act=edit_print_template&shipping={$module.id}">{$lang.shipping_print_edit}</a>
 	  {else}
-
+            <a href="shipping_area.php?act=list&shipping={$module.id}">{$lang.shipping_area}</a>
+      <a href="shipping.php?act=edit_print_template&shipping={$module.id}">{$lang.shipping_print_edit}</a>
 	  <a href="javascript:confirm_redirect(lang_isdefaultshowconfirm,'shipping.php?act=is_default_show&code={$module.code}');">{$lang.isdefaultshow}</a>
 
 	  {/if}

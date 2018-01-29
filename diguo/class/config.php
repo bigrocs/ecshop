@@ -6,10 +6,10 @@ if(!defined('InEmpireBak'))
 
 //Database
 $phome_db_ver="5.0";
-$phome_db_server="192.168.10.168";
+$phome_db_server="localhost";
 $phome_db_port="";
-$phome_db_username="root";
-$phome_db_password="root";
+$phome_db_username="zhongyan3";
+$phome_db_password="b6Q7j2S6";
 $phome_db_dbname="";
 $baktbpre="";
 $phome_db_char="";

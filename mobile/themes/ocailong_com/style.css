@@ -135,13 +135,18 @@ Template Type: type_0
      首页模块
 ==================== */
 	/*头部*/
-	#header{z-index:999;background-color:#0072e3;position:relative;  height:3rem;display: block;}
+	#header{z-index:999;background-color:#0072e3;position:relative;  height:3rem;display: block;
+	}
 	#header h1{color: #fff;font-size: 1.2rem;line-height: 3rem;text-align:center;  font-weight:normal;}
 	#header .header_r{position: absolute;top: 0;right: 0;}
 	#header .header_r a {width: 3rem;height:3rem;display: block;padding: 0 0.2rem;text-indent: -999em;overflow: hidden;}
 	#header .header_l{position: absolute;top: 0;left: 0;}
 	#header .header_l a {width: 3rem;height:3rem;display: block;padding: 0 0.2rem;text-indent: -999em;overflow: hidden;}
 	#header .header_search .ico_03{ -webkit-background-size:2rem 2rem;-moz-background-size:2rem 2rem;background-size:2rem 2rem; }
+	.goods_header{
+			position:fixed!important;
+			width: 100%;
+	}
 	/*搜索*/
 	/*底部搜索以及全局搜索样式*/
 	.search_box{position:relative; top:0.4rem; width:100%; background:#fff; border-radius:20px; text-align:center;}
@@ -785,7 +790,10 @@ Template Type: type_0
 
 	/* 商品页详细图 */
 	.goods_slider{background-color:#fff; height:auto;position:relative}
-	.goods_slider .scroller{transition-property: transform; transition-timing-function: cubic-bezier(0, 0, 0.25, 1); transition-duration: 0ms; transform: translate3d(0px, 0px, 0px); max-width:100%; overflow:hidden; margin: 0 auto;display:-webkit-box;-webkit-box-lines:multiple}
+	.goods_slider .scroller{transition-property: transform; transition-timing-function: cubic-bezier(0, 0, 0.25, 1); transition-duration: 0ms;
+		transform: translate3d(0px, 0px, 0px); max-width:100%; overflow:hidden; margin: 0 auto;display:-webkit-box;-webkit-box-lines:multiple;
+		margin-top:3rem;
+	}
 	.goods_slider .scroller div{width:100%; overflow:hidden;display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center}
 	.goods_slider .scroller img{-webkit-user-drag:none;-webkit-user-select:none;}
 	.goods_slider .scroller ul li{ text-align:center}
@@ -2021,12 +2029,7 @@ box-shadow: 0 0 0.6rem rgba(250,0,0,0.1);
 	font-size:1.0rem;
 }
 
-.marketPrice{
-	position:relative;
-	top:-59px;
-	left:59px;
-	margin:0;
-}
+
 .srp.album .proSales{
 	top:-56px!important;
 }
@@ -2039,8 +2042,38 @@ box-shadow: 0 0 0.6rem rgba(250,0,0,0.1);
 .srp.album .proPrice{
 	top:-40px!important;
 }
-.proChuZhiKa{
+.srp .marketPrice{
 	position:relative;
 	top:-59px;
+	left:59px;
+	margin:0;
+}
+.srp .proChuZhiKa{
+	position:relative;
+	top:-59px;
+	margin:0;
+}
+.srp.grid .marketPrice{
+	position:relative;
+	top:2px;
+	left:60px;
+	margin:0;
+}
+.srp.grid .proChuZhiKa{
+	position:relative;
+	top:2px;
+	left:60px;
+	margin:0;
+}
+.srp.list .marketPrice{
+	position:relative;
+	top:2px;
+	left:60px;
+	margin:0;
+}
+.srp.list .proChuZhiKa{
+	position:relative;
+	top:2px;
+	left:60px;
 	margin:0;
 }

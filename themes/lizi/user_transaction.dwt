@@ -740,15 +740,15 @@
             </tr>
             <tr align="center">
               <td bgcolor="#ffffff">{$lang.pay_name}</td>
-              <td bgcolor="#ffffff" width="60%">{$lang.pay_desc}</td>
-              <td bgcolor="#ffffff" width="17%">{$lang.pay_fee}</td>
+              <!-- <td bgcolor="#ffffff" width="60%">{$lang.pay_desc}</td>
+              <td bgcolor="#ffffff" width="17%">{$lang.pay_fee}</td> -->
             </tr>
             <!-- {foreach from=$payment item=list} -->
             <tr>
               <td bgcolor="#ffffff" align="left">
               <input type="radio" name="payment_id" value="{$list.pay_id}" />{$list.pay_name}</td>
-              <td bgcolor="#ffffff" align="left">{$list.pay_desc}</td>
-              <td bgcolor="#ffffff" align="center">{$list.pay_fee}</td>
+              <!-- <td bgcolor="#ffffff" align="left">{$list.pay_desc}</td>
+              <td bgcolor="#ffffff" align="center">{$list.pay_fee}</td> -->
             </tr>
             <!-- {/foreach} -->
             <tr>
@@ -790,14 +790,14 @@
             <tr align="center">
               <td bgcolor="#ffffff">{$lang.pay_name}</td>
               <!--<td bgcolor="#ffffff" width="60%">{$lang.pay_desc}</td>-->
-              <td bgcolor="#ffffff" width="17%">{$lang.pay_fee}</td>
+              <!-- <td bgcolor="#ffffff" width="17%">{$lang.pay_fee}</td> -->
             </tr>
             <!-- {foreach from=$payment item=list} -->
             <tr>
               <td bgcolor="#ffffff" align="left">
               <input type="radio" name="payment_id" value="{$list.pay_id}" />{$list.pay_name}</td>
-              <td bgcolor="#ffffff" align="left">{$list.pay_desc}</td>
-              <td bgcolor="#ffffff" align="center">{$list.pay_fee}</td>
+              <!-- <td bgcolor="#ffffff" align="left">{$list.pay_desc}</td>
+              <td bgcolor="#ffffff" align="center">{$list.pay_fee}</td> -->
             </tr>
             <!-- {/foreach} -->
             <tr>
@@ -830,7 +830,7 @@
               <td bgcolor="#ffffff">
                   <input type="radio" name="payment" value="money" checked> 余额支付（可用:{$userInfo.surplus}）
                   <input type="radio" name="payment" value="vip_money" > VIP余额支付（可用:{$userInfo.show_vip_money}）
-                 
+
               </td>
             </tr>
             <tr>

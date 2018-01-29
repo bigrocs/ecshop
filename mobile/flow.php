@@ -3463,6 +3463,8 @@ elseif ($_REQUEST['step'] == 'done') {
 
         /* 订单信息 */
 
+        $smarty->assign('pickupPointInfo', get_pickup_one_info($order['pickup_point']));
+
         $smarty->assign('order', $order);
 
         $smarty->assign('total', $total);

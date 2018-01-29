@@ -37,6 +37,8 @@
     <th>使用VIP余额</th>
     <th>实际收入</th>
     <th>成本</th>
+    <th>推荐人分成</th>
+    <th>自提点分成</th>
     <th>利润</th>
     <th><a href="javascript:listTable.sort('order_amount', 'DESC'); ">{$lang.order_amount}</a>{$sort_order_amount}</th>
     <th>{$lang.all_status}</th>
@@ -54,6 +56,8 @@
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_vip_money}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_actual_money}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_cost_money}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$order.formated_spread_money}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$order.formated_pickup_money}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_profit_money}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_order_amount}</td>
     <td align="center" valign="top" nowrap="nowrap">{$lang.os[$order.order_status]},{$lang.ps[$order.pay_status]},{$lang.ss[$order.shipping_status]}</td>

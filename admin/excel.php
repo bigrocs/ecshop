@@ -71,6 +71,8 @@ if ($_REQUEST['act'] == 'order_excel') {
             . "o.money_paid, " //微信支付宝转账等第三方支付金额
             . "o.jiubi_money, "//储值卡付款金额
             . "o.cost_money,"
+            . "o.spread_money,"
+            . "o.pickup_money,"
             . "g.goods_name, " // 商品名称
             . "g.goods_price, " // 商品价格
             . "g.goods_number, " // 购买数量
@@ -118,11 +120,13 @@ if ($_REQUEST['act'] == 'order_excel') {
         $list[$key]['surplus'] = $rows['surplus'];
         $list[$key]['jiubi_money'] = $rows['jiubi_money'];
 
-        $accountAmount = getShopConfigValue('account_amount')/100;
-        $surplus = sprintf("%.2f", $rows['surplus']/$accountAmount, $n);//余额实际到账金额
-        $list[$key]['actual_money'] = $surplus+$rows['money_paid'];//余额+第三发支付金额 例如支付宝
+        $list[$key]['actual_money'] = actualMoney($rows);//余额+第三发支付金额 例如支付宝
         $list[$key]['cost_money'] = $rows['cost_money'];
-        $list[$key]['profit_money'] = $list[$key]['actual_money']-$list[$key]['cost_money'];
+
+        $list[$key]['spread_money'] = $rows['spread_money'];
+        $list[$key]['pickup_money'] = $rows['pickup_money'];
+
+        $list[$key]['profit_money'] = $list[$key]['actual_money']-$list[$key]['cost_money']-$list[$key]['spread_money']-$list[$key]['pickup_money'];
         $list[$key]['spread_name'] = getUserInfo($rows['spread_id']);
 
         $list[$key]['add_time'] = local_date('y-m-d H:i', $rows['add_time']);
@@ -138,6 +142,8 @@ if ($_REQUEST['act'] == 'order_excel') {
         . "<th bgcolor='#909399'>储值卡付款</th>"
         . "<th bgcolor='#909399'>实际收入</th>"
         . "<th bgcolor='#909399'>成本</th>"
+        . "<th bgcolor='#909399'>推荐分成</th>"
+        . "<th bgcolor='#909399'>自提分成</th>"
         . "<th bgcolor='#909399'>利润</th>"
         . "<th bgcolor='#909399'>推荐人</th>"
         . "<th bgcolor='#909399'>购买日期</th>"
@@ -152,6 +158,8 @@ if ($_REQUEST['act'] == 'order_excel') {
                     . "</th><th>" . $val['jiubi_money']
                     . "</th><th>" . $val['actual_money']
                     . "</th><th>" . $val['cost_money']
+                    . "</th><th>" . $val['spread_money']
+                    . "</th><th>" . $val['pickup_money']
                     . "</th><th>" . $val['profit_money']
                     . "</th><th>" . $val['spread_name']
                     . "</th><th>" . $val['add_time']
@@ -174,4 +182,21 @@ if ($_REQUEST['act'] == 'order_excel') {
 
     $data .= "</table>";
     echo $data. "\t";
+}
+
+
+/**
+ * [actualMoney 计算实际收款]
+ * @param    [type]         $order [description]
+ * @return   [type]                [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2018-01-18
+ */
+function actualMoney($order)
+{
+    $accountAmount = getShopConfigValue('account_amount')/100;
+    $surplus = sprintf("%.2f", $order['surplus']/$accountAmount, $n);//余额实际到账金额
+    return $surplus+$order['money_paid'];//实际金额 余额+第三发支付金额 例如支付宝
 }

@@ -11,7 +11,7 @@
 <link href="{$ectouch_themes}/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 <link href="{$ectouch_css}" rel="stylesheet" type="text/css" />
 {* 包含脚本文件 *}
-{insert_scripts files='transport.js,common.js,user.js,qrcode.js'}
+{insert_scripts files='common.js,user.js,qrcode.js'}
 <script type="text/javascript" src="{$ectouch_themes}/js/jquery-1.4.4.min.js"></script>
 </head>
 <body>
@@ -21,14 +21,16 @@
   <div class="header_l header_return"> <a class="ico_10" href="./"> 返回 </a> </div>
   <h1> 卖家中心 </h1>
 </header>
-<dl class="user_top" style="height:8.5rem">
-  <dt style="width:5rem;height:5rem;" > {if $info.avatar neq ''}<img style="width:5rem;height:5rem;" src="{$info.avatar}">{else}<img style="width:5rem;height:5rem;"  src="{$ectouch_themes}/images/get_avatar.png">{/if} </dt>
+<dl class="user_top" style="height:10.5rem">
+  <dt style="width:7rem;height:7rem;" > {if $info.avatar neq ''}<img style="width:7rem;height:7rem;" src="{$info.avatar}">{else}<img style="width:7rem;height:7rem;"  src="{$ectouch_themes}/images/get_avatar.png">{/if} </dt>
   <dd>
     <p>{$info.username}</p>
     <p>公司类型: {if $insurance eq '0'}加油站{else}保险公司{/if}</p>
     <p>{$lang.affiliated_company}:<span><b>{$sellerInfo.name}</b></span></p>
     <p>{$lang.seller_capital}:<span><a href="seller.php?act=account_log" style="color:#f70;">{$sellerInfo.show_user_money}</a></span></p>
     <p>冻结资金:<span><a href="#" style="color:#f70;">{$sellerInfo.show_frozen_money}</a></span></p>
+    <p>推荐分成:<span><a href="#" style="color:#f70;">{$sellerInfo.show_spread}</a></span></p>
+    <p>自提分成:<span><a href="#" style="color:#f70;">{$sellerInfo.show_pickup}</a></span></p>
   </dd>
   <div class="quan1"></div>
   <div class="quan2"></div>
@@ -38,7 +40,8 @@
 <section class="wrap">
     {if $insurance eq '0'}
 	<div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
-	 <a  href="seller.php?act=order_list" class="clearfix"> <span>订单列表</span><i></i> </a>
+	 <a  href="seller.php?act=order_list" class="clearfix"> <span>加油订单列表</span><i></i> </a>
+     <a  href="seller.php?act=spread_order" class="clearfix"> <span>推荐订单列表</span><i></i> </a>
 	</div>
 	<div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
@@ -48,12 +51,18 @@
     {/if}
     <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
+        <a  href="seller.php?act=kuaibi_deposit" class="clearfix"> <span>储值卡充值</span><i></i> </a>
+        <a  href="seller.php?act=vip_deposit" class="clearfix"> <span>VIP充值</span><i></i> </a>
+   </div>
+   <div class="blank3"></div>
+    <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
         <a  href="seller.php?act=extension" class="clearfix"> <span>推广注册</span><i></i> </a>
         {if $insurance eq '0'}
+         <a  href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
 	     <a  href="seller.php?act=gas" class="clearfix"> <span>加油二维码</span><i></i> </a>
+         <a  href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
          {/if}
          <a  href="seller.php?act=info" class="clearfix"> <span>信息管理</span><i></i> </a>
-         <a  href="seller.php?act=vip_deposit" class="clearfix"> <span>VIP充值</span><i></i> </a>
 	</div>
     <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
@@ -78,7 +87,7 @@
 </header>
 <section class="wrap">
   <section class="order_box padd1 radius10">
-  <form action="seller.php" method="post" name="theForm" onsubmit="return checkConsignee(this)">
+  <form action="seller.php" method="post" name="theForm" onsubmit="return checkConsignee(this)" enctype="multipart/form-data">
     <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
       <tr>
         <td width="70">{$lang.seller_corporate}：</td>
@@ -97,6 +106,13 @@
         <td align="left" ><input name="bank_account" type="text" class="inputBg_touch" value="{$sellerInfo.bank_account}" /> </td>
       </tr>
       <tr>
+           <td width="70" align="right" bgcolor="#FFFFFF">上传招牌：</td>
+           <td align="left" bgcolor="#FFFFFF">
+               <img src="/data/images/{$sellerInfo.board}" alt="" width="300px;"><br><br>
+               <input type="file" name="board" size="45" class="inputBg">
+           </td>
+      </tr>
+      <tr>
         <td align="center" colspan="2">
           <input type="submit" name="submit"  class="c-btn3"  value="确认修改"/>
           <input type="hidden" name="act" value="act_info" />
@@ -108,6 +124,71 @@
 </section>
 <!-- {/if} -->
 <!--#卖家中心信息管理 -->
+<!--#卖家中心地图信息管理 -->
+<!--{if $action eq 'mapInfo'} -->
+<header id="header">
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+  <h1> 卖家信息管理 </h1>
+</header>
+<section class="wrap">
+  <section class="order_box padd1 radius10">
+  <form action="seller.php" method="post" name="theForm" onsubmit="return checkConsignee(this)">
+    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="ectouch_table">
+      <tr>
+        <td width="70">地址：</td>
+        <td align="left" ><input name="address" type="text" class="inputBg_touch" value="{$sellerInfo.address}" /> </td>
+      </tr>
+      <tr>
+        <td width="70">电话：</td>
+        <td align="left" ><input name="tel" type="text" class="inputBg_touch" value="{$sellerInfo.tel}" /> </td>
+      </tr>
+      <tr>
+        <td width="70">地图纬度：</td>
+        <td align="left" ><input id="latitude" name="latitude" type="text" class="inputBg_touch" value="{$sellerInfo.latitude}" /> </td>
+      </tr>
+      <tr>
+        <td width="70">地图经度：</td>
+        <td align="left" ><input id="longitude" name="longitude" type="text" class="inputBg_touch" value="{$sellerInfo.longitude}" /> </td>
+      </tr>
+      <tr>
+          <div id="qq_map" style="height:300px;border:1px solid gray"></div>
+          <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+            <script>
+                var latitude =  {$sellerInfo.latitude};
+                var longitude =  {$sellerInfo.longitude};
+                var center = new qq.maps.LatLng(latitude,longitude);
+                var map = new qq.maps.Map(document.getElementById('qq_map'),{
+                    center: center,
+                    zoom: 18
+                });
+                var marker = new qq.maps.Marker({
+                    position: center,
+                    map: map
+                });
+                qq.maps.event.addListener(map, 'click', function(e) {
+                  center = new qq.maps.LatLng(e.latLng.lat,e.latLng.lng);
+                  marker.setMap(null)
+                  marker = new qq.maps.Marker({
+                      position: center,
+                      map: map
+                  });
+                  $("#latitude").val(e.latLng.lat);
+                  $("#longitude").val(e.latLng.lng);
+                });
+            </script>
+      </tr>
+      <tr>
+        <td align="center" colspan="2">
+          <input type="submit" name="submit"  class="c-btn3"  value="确认修改"/>
+          <input type="hidden" name="act" value="act_mapInfo" />
+          <input name="address_id" type="hidden" value="{$consignee.address_id}" /></td>
+      </tr>
+    </table>
+  </form>
+  </section>
+</section>
+<!-- {/if} -->
+<!--#卖家中心地图信息管理 -->
 <!--#卖家加油二维码-->
 <!--{if $action eq 'gas'} -->
 <header id="header">
@@ -298,6 +379,36 @@
 <!-- {/if} -->
 <!-- #卖家VIP充值 end-->
 
+<!-- *卖家VIP充值 start-->
+<!-- {if $action eq 'kuaibi_deposit'} -->
+<header id="header">
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+  <h1> 储值卡充值 </h1>
+</header>
+<section class="wrap">
+    <section class="order_box padd1 radius10">
+        <form name="formInfo" action="seller.php" method="post" >
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">充值账号：</td>
+              <td width="76%" align="left" bgcolor="#FFFFFF"><input name="username" type="text" size="25"  class="inputBg" value=""/></td>
+            </tr>
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">充值金额：</td>
+              <td width="76%" align="left" bgcolor="#FFFFFF"><input name="money" type="text" size="25"  class="inputBg" value=""/></td>
+            </tr>
+           <tr>
+             <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_kuaibi_deposit" />
+               <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="充值" />
+             </td>
+           </tr>
+         </table>
+        </form>
+    </section>
+</section>
+<!-- {/if} -->
+<!-- #卖家VIP充值 end-->
+
 <!-- *卖家自提点信息 start-->
 <!-- {if $action eq 'pickup_point'} -->
 <header id="header">
@@ -385,6 +496,7 @@
               <td bgcolor="#ffffff">{$lang.order_number}</td>
               <td bgcolor="#ffffff">{$lang.order_addtime}</td>
               <td bgcolor="#ffffff">{$lang.order_money}</td>
+              <td bgcolor="#ffffff">自提点分成</td>
               <td bgcolor="#ffffff">{$lang.order_status}</td>
             </tr>
             <!--{foreach from=$orders item=item}-->
@@ -394,7 +506,8 @@
               </td>
               <td align="center" bgcolor="#ffffff">{$item.order_time}</td>
               <td align="right" bgcolor="#ffffff">{$item.total_fee}</td>
-              <td align="center" bgcolor="#ffffff">{$item.order_status}</td>
+              <td align="right" bgcolor="#ffffff">{$item.pickup_money}</td>
+              <td align="center" style="width:50px" bgcolor="#ffffff">{$item.order_status}</td>
             </tr>
             <!--{/foreach}-->
             </table>
@@ -404,7 +517,42 @@
  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
  <!--{/if}-->
 <!--#订单列表界面 end-->
-
+<!--#订单列表界面 start-->
+ <!-- {if $action eq 'spread_order'} -->
+ <header id="header">
+   <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+   <h1> 推荐人订单 </h1>
+ </header>
+ <section class="wrap">
+     <section class="order_box padd1 radius10">
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff">{$lang.order_number}</td>
+              <td bgcolor="#ffffff">{$lang.order_addtime}</td>
+              <td bgcolor="#ffffff">{$lang.order_money}</td>
+              <td bgcolor="#ffffff">推荐人分成</td>
+              <td bgcolor="#ffffff">自提状态</td>
+              <td bgcolor="#ffffff">状态</td>
+            </tr>
+            <!--{foreach from=$orders item=item}-->
+            <tr>
+              <td align="center" bgcolor="#ffffff">
+                  <a href="seller.php?act=pickup_point_order_detail&order_id={$item.order_id}" class="f6">{$item.order_sn}</a>
+              </td>
+              <td align="center" bgcolor="#ffffff">{$item.order_time}</td>
+              <td align="right" bgcolor="#ffffff">{$item.total_fee}</td>
+              <td align="right" style="width:50px" bgcolor="#ffffff">{$item.spread_money}</td>
+              <td align="right" bgcolor="#ffffff">{$item.pickup_point_title}</td>
+              <td align="center" style="width:50px" bgcolor="#ffffff">{$item.order_status}</td>
+            </tr>
+            <!--{/foreach}-->
+            </table>
+          <div class="blank5"></div>
+    </section>
+</section>
+ <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+ <!--{/if}-->
+<!--#订单列表界面 end-->
 <!-- ==========订单详情页面,包括：订单状态，商品列表，费用总计，收货人信息，支付方式，其它信息========== -->
 <!--{if $action eq pickup_point_order_detail} -->
 <header id="header">
@@ -770,7 +918,7 @@
 <!-- 推广二维码 -->
 <!-- {if $action eq 'extension'} -->
 <header id="header">
-  <div class="header_l header_return"> <a class="ico_10" href="user.php"> 返回 </a> </div>
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
   <h1> 注册推广</h1>
 </header>
 <section class="wrap">
@@ -792,6 +940,135 @@
 </section>
 <!-- {/if} -->
 <!-- 推广二维码 -->
+<!-- 卖家油价报表 -->
+<!-- {if $action eq 'oilPrice'} -->
+<header id="header">
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+  <h1> 油品设置</h1>
+</header>
+<section class="wrap">
+    <section class="order_box padd1 radius10">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+          <tbody>
+              <tr>
+                <td align="right" bgcolor="#ffffff">
+                    <a href="seller.php?act=oilPriceAdd" class="f6">新增 </a> |
+                </td>
+              </tr>
+          </tbody>
+        </table>
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+          <tr align="center">
+            <td bgcolor="#ffffff">类型</td>
+            <td bgcolor="#ffffff">规格</td>
+            <td bgcolor="#ffffff">型号</td>
+            <td bgcolor="#ffffff">价格</td>
+            <td bgcolor="#ffffff">操作</td>
+          </tr>
+          <!--{foreach from=$oilList item=item}-->
+          <tr>
+            <td align="center" bgcolor="#ffffff">{$item.type}</td>
+            <td align="center" bgcolor="#ffffff">{$item.spec}</td>
+            <td align="center" bgcolor="#ffffff">{$item.model}</td>
+            <td align="center" bgcolor="#ffffff">{$item.price}</td>
+            <td align="center" bgcolor="#ffffff">
+                <a href="seller.php?act=oilPriceEdit&amp;id={$item.id}">修改</a>
+                <a href="seller.php?act=oilPriceDelete&amp;id={$item.id}" onclick="if (!confirm('你确实要彻底删除这条油价吗？')) return false;">删除</a>
+            </td>
+          </tr>
+          <!--{/foreach}-->
+        </table>
+        <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+    </section>
+</section>
+<!-- {/if} -->
+<!-- 卖家油价报表 -->
+<!-- 卖家油价新增 -->
+<!-- {if $action eq 'oilPriceAdd'} -->
+<header id="header">
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+  <h1> 新增油品</h1>
+</header>
+<section class="wrap">
+            <form name="formSurplus" method="post" action="seller.php" onSubmit="return submitSurplus()">
+    <section class="order_box padd1 radius10">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr>
+              <td width="15%" bgcolor="#ffffff">类型:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="type"  class="inputBg" value="" size="30" />
+                  汽油、柴油
+              </td>
+            </tr>
+            <tr>
+              <td width="15%" bgcolor="#ffffff">规格:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="spec"  class="inputBg" value="国五" size="30" />
+                  国四、国五
+              </td>
+            </tr>
+            <tr>
+              <td width="15%" bgcolor="#ffffff">型号:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="model"  class="inputBg" value="" size="30" />
+                  93#、95#、98#、0#
+              </td>
+            </tr>
+            <tr>
+              <td width="15%" bgcolor="#ffffff">价格:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="price"  class="inputBg" value="" size="30" /></td>
+            </tr>
+
+          </table>
+          </table>
+
+    </section>
+      <input type="hidden" name="act" value="act_oilPriceAdd" />
+      <input type="submit" class="c-btn3" name="submit" value="提交" />
+   </form>
+</section>
+<!-- {/if} -->
+<!-- 卖家油价新增 -->
+<!-- 卖家油价编辑 -->
+<!-- {if $action eq 'oilPriceEdit'} -->
+<header id="header">
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+  <h1> 编辑</h1>
+</header>
+<section class="wrap">
+            <form name="formSurplus" method="post" action="seller.php" onSubmit="return submitSurplus()">
+    <section class="order_box padd1 radius10">
+<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+    <tr>
+      <td width="15%" bgcolor="#ffffff">类型:</td>
+      <td align="left" bgcolor="#ffffff"><input type="text" name="type"  class="inputBg" value="{$oilinfo.type}" size="30" />
+          汽油、柴油
+      </td>
+    </tr>
+    <tr>
+      <td width="15%" bgcolor="#ffffff">规格:</td>
+      <td align="left" bgcolor="#ffffff"><input type="text" name="spec"  class="inputBg" value="{$oilinfo.spec}" size="30" />
+          国四、国五
+      </td>
+    </tr>
+    <tr>
+      <td width="15%" bgcolor="#ffffff">型号:</td>
+      <td align="left" bgcolor="#ffffff"><input type="text" name="model"  class="inputBg" value="{$oilinfo.model}" size="30" />
+          93#、95#、98#、0#
+      </td>
+    </tr>
+    <tr>
+      <td width="15%" bgcolor="#ffffff">价格:</td>
+      <td align="left" bgcolor="#ffffff"><input type="text" name="price"  class="inputBg" value="{$oilinfo.price}" size="30" /></td>
+    </tr>
+
+  </table>
+  </table>
+</section>
+    <input type="hidden" name="id" value="{$oilinfo.id}" />
+    <input type="hidden" name="act" value="act_oilPriceEdit" />
+    <input type="submit" class="c-btn3" name="submit" value="提交" />
+</form>
+</section>
+<!-- {/if} -->
+<!-- 卖家油价编辑 -->
 
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 <div style="width:1px; height:1px; overflow:hidden">{foreach from=$lang.p_y item=pv}{$pv}{/foreach}</div>

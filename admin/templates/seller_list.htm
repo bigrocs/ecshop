@@ -22,8 +22,11 @@
     </th> -->
     <th><a href="#">会员名</th>
     <th><a href="#">公司名称</th>
+    <th><a href="#">推荐分成比例</th>
+    <th><a href="#">自提分成比例</th>
     <th><a href="#">可用资金</th>
     <th><a href="#">推广业绩</th>
+    <th><a href="#">自提业绩</th>
     <th>{$lang.handler}</th>
   <tr>
   {foreach from=$seller_list item=seller key=okey}
@@ -31,9 +34,13 @@
     <!-- <td valign="top" nowrap="nowrap"><input type="checkbox" name="checkboxes" value="{$seller.user_id}" />{$seller.user_id}</td> -->
     <td align="left" valign="top">{$seller.user_name}</td>
     <td align="left" valign="top">{$seller.name}</td>
+    <td align="left" valign="top">{$seller.spread_ratio}</td>
+    <td align="left" valign="top">{$seller.pickup_ratio}</td>
     <td align="left" valign="top">{$seller.user_money}</td>
     <td align="left" valign="top">{$seller.spread}</td>
+    <td align="left" valign="top">{$seller.pickup}</td>
     <td align="center" valign="top"  nowrap="nowrap">
+     <a href="seller.php?act=eidt&id={$seller.user_id}">编辑</a>
      <a href="javascript:;" onclick="listTable.remove({$seller.user_id}, '您确定要删除此卖家吗？', 'remove_seller')">删除</a>
     </td>
   </tr>

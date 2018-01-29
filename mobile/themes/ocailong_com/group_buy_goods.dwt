@@ -39,8 +39,8 @@ function changenum(diff) {
 </head>
 <body>
 <div id="page" style="right: 0px; left: 0px; display: block;">
-  <header id="header" style="z-index:1">
-    <div class="header_l"> <a class="ico_10" href="cat_all.php"> 返回 </a> </div>
+  <header id="header" style="z-index:1" class="goods_header">
+    <div class="header_l"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div>
     <h1> {$lang.groupbuy_goods_info} </h1>
   </header>
   <!--商品图 s--->
@@ -55,31 +55,31 @@ function changenum(diff) {
     </div>
     <div class="blank2"></div>
   </section>
-  <!--商品图 end---> 
+  <!--商品图 end--->
   <!--商品参数-->
   <section class="goodsInfo">
     <div class="title">
       <h1>{$gb_goods.goods_name|escape:html}</h1>
-      <!-- {if $cfg.show_goodssn && 0} --> 
+      <!-- {if $cfg.show_goodssn && 0} -->
       {$lang.goods_sn}{$gb_goods.goods_sn}<br>
-      <!-- {/if} --> 
-      <!-- {if $cfg.goods.brand_name && $show_brand && 0} --> 
+      <!-- {/if} -->
+      <!-- {if $cfg.goods.brand_name && $show_brand && 0} -->
       {$lang.goods_brand} {$gb_goods.brand_name}<br>
-      <!--{/if}--> 
-      <!-- {if $cfg.show_goodsweight && 0} --> 
+      <!--{/if}-->
+      <!-- {if $cfg.show_goodsweight && 0} -->
       {$lang.goods_weight} {$gb_goods.goods_weight}<br>
-      <!-- {/if} --> 
+      <!-- {/if} -->
     </div>
     <ul>
       <!-- {if $group_buy.deposit > 0} 保证金额-->
       <li>{$lang.gb_deposit}{$group_buy.formated_deposit}</li>
-      <!--{/if}--> 
+      <!--{/if}-->
       <!--{if $group_buy.restrict_amount > 0} 限购数量-->
       <li> {$lang.gb_restrict_amount} {$group_buy.restrict_amount} </li>
-      <!--{/if}--> 
+      <!--{/if}-->
       <!--{if $group_buy.gift_integral > 0} 送积分-->
       <li> {$lang.gb_gift_integral} {$group_buy.gift_integral} </li>
-      <!--{/if}--> 
+      <!--{/if}-->
       <!-- {if $group_buy.status eq 0} 未开始 -->
       <li> {$lang.gbs_pre_start}</li>
       <!-- {elseif $group_buy.status eq 1} 进行中 -->
@@ -109,7 +109,7 @@ function changenum(diff) {
       <!-- {/foreach} -->
     </table>
   </section>
-  <!--商品参数 E--> 
+  <!--商品参数 E-->
   <!--商品参数 B-->
   <div class="wrap">
     <section class="goodsBuy radius5">
@@ -124,16 +124,16 @@ function changenum(diff) {
             <li>{$lang.amount}：<font id="ECS_GOODS_AMOUNT" class="price">{$group_buy.formated_cur_price}</font></li>
           </ul>
           <ul class="ul2">
-            <!-- {* 开始循环所有可选属性 *} --> 
+            <!-- {* 开始循环所有可选属性 *} -->
             <!-- {foreach from=$specification item=spec key=spec_key} -->
             <li>
               <h2>{$spec.name}：</h2>
-              <div class="items"> 
+              <div class="items">
                {$spec.name}
                <!-- {if $cfg.goodsattr_style eq 1} 规格显示方式：单选按钮 -->
                 <!-- {foreach from=$spec.values item=value key=key} -->
                      <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" />
-                    <label for="spec_value_{$value.id}">{$value.label}</label> 
+                    <label for="spec_value_{$value.id}">{$value.label}</label>
                     <!-- {/foreach} -->
                     <input type="hidden" name="spec_list" value="{$key}" />
                <!-- {else} 规格显示方式：下拉列表 -->
@@ -145,21 +145,21 @@ function changenum(diff) {
                <!-- {/if} 规格显示方式 -->
               </div>
             </li>
-            <!-- {/foreach} --> 
+            <!-- {/foreach} -->
             <!-- {* 结束循环可选属性 *} -->
           </ul>
           <!-- {if $smarty.session.user_id > 0} 如果登录了，显示购买数量 -->
           <ul class="quantity">
             <h2>数量：</h2>
-            <div class="items"> <span class="ui-number radius5"> 
+            <div class="items"> <span class="ui-number radius5">
               <button type="button" class="decrease radius5" onclick="changenum(-1)">-</button>
               <input class="num" name="number" id="goods_number" autocomplete="off" value="1" min="1" max="{$goods.goods_number}" type="number" />
               <button type="button" class="increase radius5" onclick="changenum(1)">+</button>
               </span> </div>
           </ul>
-          <!-- {/if} --> 
+          <!-- {/if} -->
         </div>
-        <div class="option" > 
+        <div class="option" >
           <script type="text/javascript">
             function showDiv(){
                 document.getElementById('popDiv').style.display = 'block';
@@ -181,8 +181,8 @@ function changenum(diff) {
         </div>
       </form>
     </section>
-    
-    
+
+
 <!--团购说明 begin-->
 <section class="s-detail">
 <div id="tab1">
@@ -195,7 +195,7 @@ function changenum(diff) {
 <!---团购说明-->
   </div>
 </div>
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 <script type="text/javascript">
 //介绍 评价 咨询切换
 var tab_now = 1;
@@ -218,9 +218,9 @@ function tab(id){
 		document.getElementById('tab3').className = '';
 	}
 }
-</script> 
+</script>
 {insert_scripts files='transport.js,utils.js'}
-<!--商品参数 E--> 
+<!--商品参数 E-->
 <script type="text/javascript">
 var gmt_end_time = "{$group_buy.gmt_end_date|default:0}";
 {foreach from=$lang.goods_js item=item key=key}

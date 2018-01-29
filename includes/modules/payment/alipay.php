@@ -112,7 +112,9 @@ class alipay
         }
 
         $extend_param = 'isv^sh22';
-
+        if (empty($order['name'])) {
+            $order['name'] = null;
+        }
         $parameter = array(
             'extend_param'      => $extend_param,
             'service'           => $service,
@@ -122,8 +124,8 @@ class alipay
             'notify_url'        => return_url(basename(__FILE__, '.php')),
             'return_url'        => return_url(basename(__FILE__, '.php')),
             /* 业务参数 */
-            'subject'           => $order['order_sn'],
-            'out_trade_no'      => $order['order_sn'] . $order['log_id'],
+            'subject'           => $order['name'].' 订单号:'.$order['order_sn'],
+            'out_trade_no'      => $order['order_sn'] .$order['log_id'],
             'price'             => $order['order_amount'],
             'quantity'          => 1,
             'payment_type'      => 1,
@@ -167,9 +169,11 @@ class alipay
         }
         $payment  = get_payment($_GET['code']);
         $seller_email = rawurldecode($_GET['seller_email']);
-        $order_sn = str_replace($_GET['subject'], '', $_GET['out_trade_no']);
-        $order_sn = trim($order_sn);
 
+        $subject = str_replace('订单号:', '', strstr($_GET['subject'], '订单号:'));
+        $order_sn = str_replace($subject, '', $_GET['out_trade_no']);
+        // $order_sn = str_replace($_GET['subject'], '', $_GET['out_trade_no']);
+        $order_sn = trim($order_sn);
         /* 检查数字签名是否正确 */
         ksort($_GET);
         reset($_GET);

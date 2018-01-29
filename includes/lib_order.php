@@ -1077,7 +1077,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
         'is_shipping'   => $goods['is_shipping'],
         'jiubi'         => getFinalJiubi($goods_id, $spec),
         'is_vip_money'  => $goods['is_vip_money'],//vip_money
-        'cost_money'    => $goods['cost_money'],//成本
+        'cost_money'    => getFinalCost($goods_id, $spec),//成本
         'rec_type'      => CART_GENERAL_GOODS
     );
 

@@ -97,6 +97,8 @@ if ($_REQUEST['act'] == 'insert') {
     $userName = $_REQUEST['user_name'];
     $name = $_REQUEST['name'];//公司名字
     $insurance = $_REQUEST['insurance'];
+    $spread_ratio = $_REQUEST['spread_ratio'];
+    $pickup_ratio = $_REQUEST['pickup_ratio'];
 
     $sql = "SELECT COUNT(*) FROM " .$ecs->table('users'). " WHERE user_name = '$userName'";
     if (!$db->getOne($sql)) {
@@ -109,13 +111,47 @@ if ($_REQUEST['act'] == 'insert') {
     $sql = "SELECT user_id FROM " .$ecs->table('users'). " WHERE user_name = '$userName'";
     $userID = $db->getOne($sql);
 
-    $sql = "INSERT INTO " . $ecs->table('user_seller') . " (user_id, user_name, name, insurance, add_time)  VALUES ('" . $userID . "', '".$userName."', '".$name."', '".$insurance."', '" . time() . "')";
+    $sql = "INSERT INTO " . $ecs->table('user_seller') . " (user_id, user_name, name, spread_ratio, pickup_ratio, insurance, add_time)
+    VALUES ('" . $userID . "', '".$userName."', '".$name."', '".$spread_ratio."', '".$pickup_ratio."', '".$insurance."', '" . time() . "')";
     if ($GLOBALS['db']->query($sql)) {
         $link[] = array('href' => 'seller.php?act=list', 'text' => '返回商家列表');
         sys_msg('添加商家成功', 0, $link);
     }
 }
+if ($_REQUEST['act'] == 'eidt') {
+    /* 检查权限 */
+    admin_priv('seller_view');
+    $sql = "SELECT * FROM " .$ecs->table('user_seller'). " WHERE user_id = '$_REQUEST[id]'";
+    $sellerInfo = $db->getRow($sql);
 
+    $smarty->assign('sellerInfo', $sellerInfo);
+    $smarty->assign('ur_here', '编辑商家');
+    $smarty->assign('action_link', array('text' => '商家列表', 'href' => 'seller.php?act=list'));
+    $smarty->assign('form_action', 'update');
+
+    assign_query_info();
+    $smarty->display('seller_info.htm');
+}
+if ($_REQUEST['act'] == 'update') {
+    admin_priv('seller_view');
+    $userId = $_REQUEST['user_id'];
+    $name = $_REQUEST['name'];//公司名字
+    $insurance = $_REQUEST['insurance'];
+    $spread_ratio = $_REQUEST['spread_ratio'];
+    $pickup_ratio = $_REQUEST['pickup_ratio'];
+
+
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('user_seller').
+                        " SET name = '$name', " .
+                        "insurance = '$insurance', " .
+                        "spread_ratio = '$spread_ratio', " .
+                        "pickup_ratio = '$pickup_ratio' " .
+                        "WHERE user_id = " . $userId;
+    if ($GLOBALS['db']->query($sql)) {
+        $link[] = array('href' => 'seller.php?act=list', 'text' => '返回商家列表');
+        sys_msg('修改商家成功', 0, $link);
+    }
+}
 if ($_REQUEST['act'] == 'order') {
     /* 检查权限 */
     admin_priv('seller_view');

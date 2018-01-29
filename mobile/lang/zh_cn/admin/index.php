@@ -15,10 +15,10 @@
 
 $_LANG['shop_guide'] = '开店向导';
 $_LANG['set_navigator'] = '设置导航栏';
-$_LANG['about'] = '关于 ECSHOP';
+//$_LANG['about'] = '关于 ECSHOP';
 $_LANG['preview'] = '查看网店';
 $_LANG['menu'] = '菜单';
-$_LANG['help'] = '帮助';
+//$_LANG['help'] = '帮助';
 $_LANG['signout'] = '退出';
 $_LANG['profile'] = '个人设置';
 $_LANG['view_message'] = '管理员留言';
@@ -34,14 +34,14 @@ $_LANG['license_failed'] = '非法用户';
 $_LANG['license_oem'] = '授权商业用户';
 $_LANG['license_oemtest'] = '体验用户';
 //
-$_LANG['license_Q'] = '商业';
-$_LANG['license_G'] = '商业';
-$_LANG['license_L'] = '临时';
-$_LANG['license_S'] = '商业';
-$_LANG['license_O'] = '企业';
-$_LANG['license_T'] = '体验';
-$_LANG['license_no'] = '免费';
-$_LANG['license_test'] = '免费';
+//$_LANG['license_Q'] = '商业';
+//$_LANG['license_G'] = '商业';
+////$_LANG['license_L'] = '临时';
+//$_LANG['license_S'] = '商业';
+//$_LANG['license_O'] = '企业';
+//$_LANG['license_T'] = '体验';
+//$_LANG['license_no'] = '免费';
+//$_LANG['license_test'] = '免费';
 $_LANG['js_languages']['expand_all'] = '展开';
 $_LANG['js_languages']['collapse_all'] = '闭合';
 
@@ -78,7 +78,7 @@ $_LANG['recommed_goods'] = '精品推荐数:';
 $_LANG['hot_goods'] = '热销商品数:';
 $_LANG['warn_goods'] = '库存警告商品数:';
 $_LANG['clear_cache'] = '清除缓存';
-$_LANG['ebao_commend'] = '易宝推荐';
+//$_LANG['ebao_commend'] = '易宝推荐';
 
 $_LANG['acess_stat'] = '访问统计';
 $_LANG['acess_today'] = '今日访问:';
@@ -88,19 +88,19 @@ $_LANG['today_register'] = '今日注册:';
 $_LANG['new_feedback'] = '最新留言:';
 $_LANG['new_comments'] = '未审核评论:';
 
-$_LANG['system_info'] = '系统信息';
-$_LANG['os'] = '服务器操作系统:';
-$_LANG['web_server'] = 'Web 服务器:';
-$_LANG['php_version'] = 'PHP 版本:';
-$_LANG['mysql_version'] = 'MySQL 版本:';
-$_LANG['gd_version'] = 'GD 版本:';
-$_LANG['zlib'] = 'Zlib 支持:';
-$_LANG['ecs_version'] = 'ECShop 版本:';
-$_LANG['install_date'] = '安装日期:';
-$_LANG['ip_version'] = 'IP 库版本:';
-$_LANG['max_filesize'] = '文件上传的最大大小:';
-$_LANG['safe_mode'] = '安全模式:';
-$_LANG['safe_mode_gid'] = '安全模式GID:';
+//$_LANG['system_info'] = '系统信息';
+//$_LANG['os'] = '服务器操作系统:';
+//$_LANG['web_server'] = 'Web 服务器:';
+//$_LANG['php_version'] = 'PHP 版本:';
+//$_LANG['mysql_version'] = 'MySQL 版本:';
+//$_LANG['gd_version'] = 'GD 版本:';
+//$_LANG['zlib'] = 'Zlib 支持:';
+//$_LANG['ecs_version'] = 'ECShop 版本:';
+//$_LANG['install_date'] = '安装日期:';
+//$_LANG['ip_version'] = 'IP 库版本:';
+//$_LANG['max_filesize'] = '文件上传的最大大小:';
+//$_LANG['safe_mode'] = '安全模式:';
+//$_LANG['safe_mode_gid'] = '安全模式GID:';
 $_LANG['timezone'] = '时区设置:';
 $_LANG['no_timezone'] = '无需设置';
 $_LANG['socket'] = 'Socket 支持:';
@@ -129,7 +129,7 @@ $_LANG['caches_cleared'] = '页面缓存已经清除成功。';
 
 /*------------------------------------------------------ */
 //-- 关于我们
-/*------------------------------------------------------ */
+/*-----------------------------------------------------
 $_LANG['team_member'] = 'ECSHOP 团队成员';
 $_LANG['before_team_member'] = 'ECSHOP 贡献者';
 
@@ -141,7 +141,7 @@ $_LANG['special_thanks'] = '特别感谢';
 $_LANG['official_site'] = '官方网站';
 $_LANG['site_url'] = '网站地址:';
 $_LANG['support_center'] = '支持中心:';
-$_LANG['support_forum'] = '支持论坛:';
+$_LANG['support_forum'] = '支持论坛:';- */
 // 邮件群发
 $_LANG['mailsend_fail'] = '邮件 %s 发送失败!';
 $_LANG['mailsend_ok'] = '邮件 %s 发送成功!还有 %s 邮件未发送!';

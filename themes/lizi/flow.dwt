@@ -428,7 +428,7 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="åŠ å…
 
                   </span>
                   <script>
-                      ziTiSelectShipping({$key});
+                      ziTiSelectShipping({$shipping.shipping_id});
                   </script>
                   <input name="need_insure" id="ECS_NEEDINSURE" type="checkbox"  onclick="selectInsure(this.checked)" value="1" {if $order.need_insure}checked="true"{/if} {if $insure_disabled}disabled="true"{/if}  />
                   {$lang.need_insure} </label></td>

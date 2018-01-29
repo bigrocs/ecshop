@@ -1559,6 +1559,53 @@ function specJiuBi($spec)
     return $price;
 }
 /**
+ * [getFinalCost 取得最终储值卡可用金额]
+ * @param    [type]         $goods_id [description]
+ * @param    [type]         $attr_id  [description]
+ * @return   [type]                   [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2017-12-22
+ */
+function getFinalCost($goods_id, $attr_id)
+{
+    $sql = 'SELECT cost_money FROM ' . $GLOBALS['ecs']->table('goods') . " WHERE goods_id = $goods_id";
+    $goodsCost = floatval($GLOBALS['db']->getOne($sql));
+    $specCost =specCost($attr_id);
+    return $goodsCost+$specCost;
+}
+/**
+ * [specCost 获得指定的规格的可用储值卡金额]
+ * @param    [type]         $spec [description]
+ * @return   [type]               [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2017-12-22
+ */
+function specCost($spec)
+{
+    if (!empty($spec)) {
+        if (is_array($spec)) {
+            foreach ($spec as $key=>$val) {
+                $spec[$key]=addslashes($val);
+            }
+        } else {
+            $spec=addslashes($spec);
+        }
+
+        $where = db_create_in($spec, 'goods_attr_id');
+
+        $sql = 'SELECT SUM(attr_cost) AS attr_cost FROM ' . $GLOBALS['ecs']->table('goods_attr') . " WHERE $where";
+        $price = floatval($GLOBALS['db']->getOne($sql));
+    } else {
+        $price = 0;
+    }
+
+    return $price;
+}
+/**
 
  * 取得团购活动信息
 

@@ -129,7 +129,7 @@ spec_arr = getSelectedAttributes(frm);
 </script>
 </head>
 <body>
-<header id="header">
+<header id="header" class="goods_header">
   <div class="header_l header_return"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div>
   <h1> 商品详情 </h1>
 

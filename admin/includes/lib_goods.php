@@ -553,7 +553,7 @@ function get_attr_list($cat_id, $goods_id = 0)
     }
 
     // 查询属性值及商品的属性值
-    $sql = "SELECT a.attr_id, a.attr_name, a.attr_input_type, a.attr_type, a.attr_values, v.attr_value, v.attr_price , v.attr_jiubi ".
+    $sql = "SELECT a.attr_id, a.attr_name, a.attr_input_type, a.attr_type, a.attr_values, v.attr_value, v.attr_price , v.attr_jiubi , v.attr_cost ".
             "FROM " .$GLOBALS['ecs']->table('attribute'). " AS a ".
             "LEFT JOIN " .$GLOBALS['ecs']->table('goods_attr'). " AS v ".
             "ON v.attr_id = a.attr_id AND v.goods_id = '$goods_id' ".
@@ -637,6 +637,7 @@ function build_attr_html($cat_id, $goods_id = 0)
             $GLOBALS['_LANG']['spec_price'].' <input type="text" name="attr_price_list[]" value="' . $val['attr_price'] . '" size="5" maxlength="10" />' :
             ' <input type="hidden" name="attr_price_list[]" value="0" />';
         $html .= ' 可用储值卡 <input type="text" name="attr_jiubi_list[]" value="' . $val['attr_jiubi'] . '" size="5" maxlength="10" />';
+        $html .= ' 成本 <input type="text" name="attr_cost_list[]" value="' . $val['attr_cost'] . '" size="5" maxlength="10" />';
         $html .= '</td></tr>';
     }
 

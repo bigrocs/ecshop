@@ -14,7 +14,7 @@
 <body>
 <div id="page" style="right: 0px; left: 0px; display: block;">
   <header id="header" style="z-index:1">
-    <div class="header_l"> <a class="ico_10" href="cat_all.php"> 返回 </a> </div>
+    <div class="header_l"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div>
     <div id="search_box2" >
       <div class="search_box" >
         <form method="post" action="search.php" name="searchForm" id="searchForm_id">
@@ -37,21 +37,21 @@
       <button class="attrExtra-submit" type="submit">确定</button>
       <button class="attrExtra-cancel" type="button"  onclick="mtShowMenu()">取消</button>
     </div>
-    <div class="attrs attr-fix" style="overflow: auto;height: 100%"> 
-      <!--组合搜索 开始--> 
-      <!--{if $brands.1 || $price_grade.1 || $filter_attr_list}--> 
-      
+    <div class="attrs attr-fix" style="overflow: auto;height: 100%">
+      <!--组合搜索 开始-->
+      <!--{if $brands.1 || $price_grade.1 || $filter_attr_list}-->
+
       <!--{if $brands.1}-->
       <div class="attr brandAttr">
         <div class="attrKey">{$lang.brand}</div>
         <div class="attrValues">
           <ul class="av-collapse filter_list">
-            <!--{foreach from=$brands item=brand}--> 
+            <!--{foreach from=$brands item=brand}-->
             <!-- {if $brand.selected} -->
-            <li class="av-selected"> 
+            <li class="av-selected">
               <!-- {else} -->
-            <li> 
-              <!-- {/if} --> 
+            <li>
+              <!-- {/if} -->
               <a href="javascript:void(0);" data="{$brand.brand_id}">{$brand.brand_name}</a></li>
             <!--{/foreach}-->
             <input type="hidden" name="brand" value="{$brand_id}" />
@@ -59,19 +59,19 @@
           <div class="av-options"><a class="j_More avo-more avo-more-down" href="javascript:;">查看更多<i></i></a> </div>
         </div>
       </div>
-      <!--{/if}--> 
-      
+      <!--{/if}-->
+
       <!--{if $price_grade.1}-->
       <div class="attr brandAttr">
         <div class="attrKey">{$lang.price}</div>
         <div class="attrValues">
           <ul class="av-collapse filter_list">
-            <!--{foreach from=$price_grade item=grade}--> 
+            <!--{foreach from=$price_grade item=grade}-->
             <!-- {if $grade.selected} -->
-            <li class="av-selected"> 
+            <li class="av-selected">
               <!-- {else} -->
-            <li> 
-              <!-- {/if} --> 
+            <li>
+              <!-- {/if} -->
               <a href="javascript:void(0);" data="{$grade.start}|{$grade.end}">{$grade.price_range}</a></li>
             <!--{/foreach}-->
             <input type="hidden" name="price_min" value="{$price_min}" />
@@ -80,19 +80,19 @@
           <div class="av-options"><a class="j_More avo-more avo-more-down" href="javascript:;">查看更多<i></i></a> </div>
         </div>
       </div>
-      <!--{/if}--> 
-      
+      <!--{/if}-->
+
       <!--{foreach from=$filter_attr_list item=filter_attr}-->
       <div class="attr brandAttr">
         <div class="attrKey">{$filter_attr.filter_attr_name|escape:html}</div>
         <div class="attrValues">
           <ul class="av-collapse filter_list">
-            <!--{foreach from=$filter_attr.attr_list item=attr}--> 
+            <!--{foreach from=$filter_attr.attr_list item=attr}-->
             <!-- {if $attr.selected} -->
-            <li class="av-selected filter_attr"> 
+            <li class="av-selected filter_attr">
               <!-- {else} -->
-            <li class="filter_attr"> 
-              <!-- {/if} --> 
+            <li class="filter_attr">
+              <!-- {/if} -->
               <a href="javascript:void(0);" data="{$attr.attr_id}">{$attr.attr_value}</a></li>
             <!--{/foreach}-->
           </ul>
@@ -101,8 +101,8 @@
       </div>
       <!--{/foreach}-->
       <input type="hidden" name="filter_attr" value="{$filter_attr}"/>
-      <!-- {/if} --> 
-      <!--组合搜索 结束--> 
+      <!-- {/if} -->
+      <!--组合搜索 结束-->
     </div>
   </form>
 </div>

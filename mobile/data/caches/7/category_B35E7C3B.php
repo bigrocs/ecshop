@@ -1,9 +1,9 @@
-<?php exit;?>a:3:{s:8:"template";a:3:{i:0;s:55:"/var/www/ecshop/mobile/themes/ocailong_com/category.dwt";i:1;s:65:"/var/www/ecshop/mobile/themes/ocailong_com/library/goods_list.lbi";i:2;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1515463413;s:8:"maketime";i:1515459813;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:3:{i:0;s:68:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/category.dwt";i:1;s:78:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/goods_list.lbi";i:2;s:79:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1517138016;s:8:"maketime";i:1517134416;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
 <meta charset="utf-8" />
-<title>生鲜食品_汇丰石化测试网站 触屏版</title>
+<title>粮油食品_汇丰石化测试网站 触屏版</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -15,7 +15,7 @@
 <body>
 <div id="page" style="right: 0px; left: 0px; display: block;">
   <header id="header" style="z-index:1">
-    <div class="header_l"> <a class="ico_10" href="cat_all.php"> 返回 </a> </div>
+    <div class="header_l"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div>
     <div id="search_box2" >
       <div class="search_box" >
         <form method="post" action="search.php" name="searchForm" id="searchForm_id">
@@ -111,10 +111,6 @@
             </a>
         </div>
     </div>
-    <div class="global-nav__operate-wrap">
-        <span class="global-nav__yhd-logo"></span>
-        <span class="global-nav__operate-cart-num" id="globalId">554fcae493e564ee0dc75bdf2ebf94cacart_info_number|a:1:{s:4:"name";s:16:"cart_info_number";}554fcae493e564ee0dc75bdf2ebf94ca</span>
-    </div>
 </div>
 <div id="toTop" class="toTop">
   <img alt="" src="themes/ocailong_com/images/scropTop.png">
@@ -182,100 +178,50 @@ function get_search_box(){
       <button class="attrExtra-submit" type="submit">确定</button>
       <button class="attrExtra-cancel" type="button"  onclick="mtShowMenu()">取消</button>
     </div>
-    <div class="attrs attr-fix" style="overflow: auto;height: 100%"> 
-       
-       
+    <div class="attrs attr-fix" style="overflow: auto;height: 100%">
+      
       
             <div class="attr brandAttr">
         <div class="attrKey">品牌</div>
         <div class="attrValues">
           <ul class="av-collapse filter_list">
-             
-                        <li class="av-selected"> 
-               
-              <a href="javascript:void(0);" data="0">全部</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="2">发育宝Haipet</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="3">雷米高</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="4">百利</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="5">森美</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="6">哈根纽翠斯</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="7">比瑞吉</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="8">百利本能</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="10">维洛司</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="11">西王</a></li>
+                                    <li class="av-selected">
+                            <a href="javascript:void(0);" data="0">全部</a></li>
+                                    <li>
+                            <a href="javascript:void(0);" data="11">西王</a></li>
+                                    <li>
+                            <a href="javascript:void(0);" data="34">齐农</a></li>
                         <input type="hidden" name="brand" value="0" />
           </ul>
           <div class="av-options"><a class="j_More avo-more avo-more-down" href="javascript:;">查看更多<i></i></a> </div>
         </div>
       </div>
-       
       
             <div class="attr brandAttr">
         <div class="attrKey">价格</div>
         <div class="attrValues">
           <ul class="av-collapse filter_list">
-             
-                        <li class="av-selected"> 
-               
-              <a href="javascript:void(0);" data="0|0">全部</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="10|60">10&nbsp;-&nbsp;60</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="60|110">60&nbsp;-&nbsp;110</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="110|160">110&nbsp;-&nbsp;160</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="160|210">160&nbsp;-&nbsp;210</a></li>
-             
-                        <li> 
-               
-              <a href="javascript:void(0);" data="210|260">210&nbsp;-&nbsp;260</a></li>
+                                    <li class="av-selected">
+                            <a href="javascript:void(0);" data="0|0">全部</a></li>
+                                    <li>
+                            <a href="javascript:void(0);" data="0|30">0&nbsp;-&nbsp;30</a></li>
+                                    <li>
+                            <a href="javascript:void(0);" data="30|60">30&nbsp;-&nbsp;60</a></li>
+                                    <li>
+                            <a href="javascript:void(0);" data="60|90">60&nbsp;-&nbsp;90</a></li>
+                                    <li>
+                            <a href="javascript:void(0);" data="90|120">90&nbsp;-&nbsp;120</a></li>
+                                    <li>
+                            <a href="javascript:void(0);" data="120|150">120&nbsp;-&nbsp;150</a></li>
                         <input type="hidden" name="price_min" value="0" />
             <input type="hidden" name="price_max" value="0" />
           </ul>
           <div class="av-options"><a class="j_More avo-more avo-more-down" href="javascript:;">查看更多<i></i></a> </div>
         </div>
       </div>
-       
       
             <input type="hidden" name="filter_attr" value="0"/>
-       
-       
+            
     </div>
   </form>
 </div>

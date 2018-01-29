@@ -58,15 +58,7 @@ echo $this->_echash . $k['name'] . '|' . serialize($k) . $this->_echash;
             </a>
         </div>
     </div>
-    <div class="global-nav__operate-wrap">
-        <span class="global-nav__yhd-logo"></span>
-        <span class="global-nav__operate-cart-num" id="globalId"><?php 
-$k = array (
-  'name' => 'cart_info_number',
-);
-echo $this->_echash . $k['name'] . '|' . serialize($k) . $this->_echash;
-?></span>
-    </div>
+
 </div>
 
 

@@ -7,19 +7,34 @@
       <tr>
         <td class="label">用户名:</td>
         <td>
-          <input type='text' name='user_name' maxlength="20"  size='27' /> <font color="red">*</font>
+          <input type='text' name='user_name' maxlength="20"  size='27' value="{$sellerInfo.user_name}" {if $sellerInfo.user_name }disabled{/if}/> <font color="red">*</font>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">推荐分成比例:</td>
+        <td>
+          <input type='text' name='spread_ratio' maxlength="20"  size='27' value="{$sellerInfo.spread_ratio}"/> <font color="red">*</font>
+          <span class="notice-span" style="display:block">推荐分成=(实际收入-成本)*推荐分成比例</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">自提分成比例:</td>
+        <td>
+          <input type='text' name='pickup_ratio' maxlength="20"  size='27' value="{$sellerInfo.pickup_ratio}"/> <font color="red">*</font>
+
+          <span class="notice-span" style="display:block">自提分成=(实际收入-成本)*自提分成比例</span>
         </td>
       </tr>
       <tr>
         <td class="label">公司名称:</td>
         <td>
-          <input type='text' name='name' maxlength="20"  size='27' /> <font color="red">*</font>
+          <input type='text' name='name' maxlength="20"  size='27' value="{$sellerInfo.name}"/> <font color="red">*</font>
         </td>
       </tr>
       <tr>
         <td class="label">保险公司:</td>
         <td>
-          <input type="checkbox" name="insurance" value="1"> 打勾表示次商家为保险公司权限。</td>
+          <input type="checkbox" name="insurance" value="1" {if $sellerInfo.insurance == 1 }checked{/if}> 打勾表示次商家为保险公司权限。</td>
         </td>
       </tr>
       <tr>
@@ -30,6 +45,7 @@
         </td>
         </tr>
       </table>
+    <input type="hidden" name="user_id" value="{$sellerInfo.user_id}" />
     <input type="hidden" name="act" value="{$form_action}" />
   </form>
 </div>

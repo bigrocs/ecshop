@@ -60,7 +60,11 @@ $not_login_arr =
 
 array('login','act_login','register','act_register','act_edit_password','get_password','send_pwd_email','send_pwd_mobile','password', 'signin', 'add_tag',
 
-    'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', 'order_query', 'is_registered', 'check_email','clear_history','qpassword_name','mpassword_name', 'get_passwd_question', 'check_answer', 'oath', 'oath_login');
+    'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', '
+    order_query', 'is_registered', 'check_email','clear_history','qpassword_name','mpassword_name',
+    'get_passwd_question', 'check_answer', 'oath', 'oath_login',
+    'nav_list','ajxa_nav_list','seller_index',
+);
 
 
 
@@ -70,7 +74,11 @@ $ui_arr = array('act_pay_gas','gas','register', 'login', 'profile','dianpu', 'ac
 
 'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking', 'account_raply',
 
-'account_deposit', 'account_deposit_card', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name','mpassword_name','send_pwd_mobile', 'get_passwd_question', 'check_answer','point','user_card','fenxiao1','myorder','myorder_detail','fenxiao2','fenxiao3','fenxiao4','bindmobile');
+'account_deposit', 'account_deposit_card', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy',
+ 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name','mpassword_name',
+ 'send_pwd_mobile', 'get_passwd_question', 'check_answer','point','user_card','fenxiao1','myorder','myorder_detail','fenxiao2','fenxiao3','fenxiao4','bindmobile',
+ 'nav_list','ajxa_nav_list','seller_index',
+);
 
 /* 未登录处理 */
 
@@ -529,7 +537,9 @@ elseif ($action == 'act_register') {
         $smarty->display('user_passport.dwt');
     } else {
         include_once(ROOT_PATH . 'include/lib_passport.php');
-
+        if (empty($_POST['sellerId'])) {
+            show_message('抱歉只能通过邀请注册！');
+        }
         $username = isset($_POST['username']) ? trim($_POST['username']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
         $email    = isset($_POST['email']) ? trim($_POST['email']) : '';
@@ -942,13 +952,12 @@ elseif ($action == 'act_login') {
 
         recalculate_price();
         //加油页面自动跳转
-        if (strstr($back_act,'act=gas')) {
+        if (strstr($back_act, 'act=gas')) {
             Header("Location: $back_act");
         }
         $ucdata = isset($user->ucdata)? $user->ucdata : '';
 
         show_message($_LANG['login_success'] . $ucdata, array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act,'user.php'), 'info');
-
     } else {
         $_SESSION['login_fail'] ++ ;
 
@@ -2870,10 +2879,8 @@ elseif ($action == 'account_deposit') {
 
     $account    = get_surplus_info($surplus_id);
 
-
-
     $smarty->assign('payment', get_online_payment_list(false));
-
+    $smarty->assign('userInfo', get_user_info());
     $smarty->assign('order', $account);
 
     $smarty->display('user_transaction.dwt');
@@ -2887,6 +2894,7 @@ elseif ($action == 'account_deposit_card') {
     include_once(ROOT_PATH . 'include/lib_clips.php');
     $surplus_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     $account    = get_surplus_info($surplus_id);
+    $smarty->assign('userInfo', get_user_info());
     $smarty->assign('accountAmount', getShopConfigValue('account_amount'));
     $smarty->assign('faceValue', getShopConfigValue('face_value'));
     $smarty->assign('vipAccountAmount', getShopConfigValue('vip_account_amount'));
@@ -3183,7 +3191,7 @@ elseif ($action == 'act_account') {
 
         $order['surplus_amount'] = $amount;
 
-
+        $order['name'] = $_SESSION['user_name'].'充值';
 
         //计算支付手续费用
 
@@ -5691,13 +5699,87 @@ elseif ($action == 'act_pay_gas') {
     gasOrder($input['sellerId'], $user_id, $input['vip_money'], $input['money'], $input['accountAmount'], '加油-'.$input['userInfo']['username']);//写入加油订单
     $message = '支付成功<br>';
     if ($input['vip_money']) {
-         $message .= "使用VIP余额:".$input['vip_money']."元";
-    }else{
-        $message .= "使用余额:".$input['money']."元";
+        $message .= "使用VIP余额:".$input['vip_money']."元<br>";
+    } else {
+        $message .= "使用余额:".$input['money']."元<br>";
     }
+    $message .= '支付时间:'.date('Y-m-d H:i:s', time());
     show_message($message, '消费记录', 'user.php?act=account_detail', 'success', false);
 }
 //生成随机数 by wang
+// 自动导航定位周围加油站
+if ($action == 'nav_list') {
+    require_once "wxjs/jssdk.php";
+    include_once(ROOT_PATH .'../includes/Browser.php');
+    $Browser = new Browser();
+    if ($Browser->isWechat()) {
+        $ret = $db->getRow("SELECT  *  FROM ". $GLOBALS['ecs']->table('weixin_config'));
+        $jssdk = new JSSDK($appid=$ret['appid'], $ret['appsecret']);
+        $signPackage = $jssdk->GetSignPackage();
+        $smarty->assign('signPackage', $signPackage);
+        $smarty->display('user_transaction.dwt');
+    } else {
+        show_message('请使用微信客户端打开');
+    }
+}
+//  通过经纬度获取店铺
+if ($action == 'ajxa_nav_list') {
+    $lat = $_POST['latitude'];
+    $lon = $_POST['longitude'];
+    $sql = "SELECT user_id,name,latitude,longitude,address,tel FROM " . $GLOBALS['ecs']->table('user_seller').
+      ' WHERE latitude > '.$lat.'-1 and latitude < '.$lat.'+1 and longitude > '.$lon.'-1 and longitude < '.$lon.'+1 order by ACOS(SIN(('.$lat.' * 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(('.$lat.' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(('.$lon.'* 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6380 asc limit 50';
+    $res = $GLOBALS['db']->getAll($sql);
+    foreach ($res as $key => $value) {
+        $sellerList[$key]['user_id'] = $value['user_id'];
+        $sellerList[$key]['name'] = $value['name'];
+        $sellerList[$key]['address'] = $value['address'];
+        $sellerList[$key]['tel'] = $value['tel'];
+        $sellerList[$key]['longitude'] = $value['longitude'];
+        $sellerList[$key]['latitude'] = $value['latitude'];
+        $sellerList[$key]['distance'] = getDistance($lon, $lat, $value['longitude'], $value['latitude']);
+    }
+    $smarty->assign('sellerList', $sellerList);
+    $smarty->display('seller_list.dwt');
+}
+//商家首页
+if ($action== 'seller_index') {
+    $sellerId = $_REQUEST['sellerId'];
+    $sellerInfo = getSellerInfo($sellerId);
+    $sql = "SELECT * FROM " .$GLOBALS['ecs']->table('seller_oil'). " WHERE seller_id = '$sellerId'";
+    $oilList = $GLOBALS['db']->getAll($sql);
+    $smarty->assign('oilList', $oilList);
+    $smarty->assign('sellerInfo', $sellerInfo);
+    $smarty->display('seller_info.dwt');
+}
+/**
+ * [getdistance 求两个已知经纬度之间的距离,单位为米]
+ * @param    [type]         $lng1 [description]
+ * @param    [type]         $lat1 [description]
+ * @param    [type]         $lng2 [description]
+ * @param    [type]         $lat2 [description]
+ * @return   [type]               [距离，单位米]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2018-01-10
+ */
+function getDistance($lng1, $lat1, $lng2, $lat2)
+{
+    // 将角度转为狐度
+    $radLat1 = deg2rad($lat1); //deg2rad()函数将角度转换为弧度
+    $radLat2 = deg2rad($lat2);
+    $radLng1 = deg2rad($lng1);
+    $radLng2 = deg2rad($lng2);
+    $a = $radLat1 - $radLat2;
+    $b = $radLng1 - $radLng2;
+    $s = 2 * asin(sqrt(pow(sin($a / 2), 2) + cos($radLat1) * cos($radLat2) * pow(sin($b / 2), 2))) * 6378.137 * 1000;
+    if ($s>1000) {
+        $s = '距离'.round($s/1000, 2).'千米';
+    } else {
+        $s = '距离'.round($s, 2).'米';
+    }
+    return $s;
+}
 
 function random($length = 6, $numeric = 0)
 {

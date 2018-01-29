@@ -24,7 +24,7 @@
 <div id="page">
   <header id="header">
     <!-- <div class="header_l"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div> -->
-        <div class="header_l"> <a class="ico_10" href="/"> 返回 </a> </div>
+        <div class="header_l"> <a class="ico_10" href="./"> 返回 </a> </div>
     <h1>购物车</h1>
     <div class="header_r"></div>
   </header>
@@ -399,6 +399,9 @@ var card = document.getElementsByName('card');
 		  <?php $_from = $this->_var['shipping_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'shipping');if (count($_from)):
     foreach ($_from AS $this->_var['shipping']):
 ?>
+          <script>
+              ziTiSelectShipping(<?php echo $this->_var['shipping']['shipping_id']; ?>);
+          </script>
 		  <p>
             <input name="shipping" type="radio" class="radio" id="shipping_<?php echo $this->_var['shipping']['shipping_id']; ?>" value="<?php echo $this->_var['shipping']['shipping_id']; ?>" <?php if ($this->_var['order']['shipping_id'] == $this->_var['shipping']['shipping_id']): ?>checked="true"<?php endif; ?> supportCod="<?php echo $this->_var['shipping']['support_cod']; ?>" insure="<?php echo $this->_var['shipping']['insure']; ?>" onclick="selectShipping(this)" style="vertical-align:middle" /><label for="shipping_<?php echo $this->_var['shipping']['shipping_id']; ?>"> <?php echo $this->_var['shipping']['shipping_name']; ?> [<?php echo $this->_var['shipping']['format_shipping_fee']; ?>]</label>
            </p>
@@ -687,6 +690,15 @@ var card = document.getElementsByName('card');
               <tr>
                 <td align="left" style="padding: 5px;line-height: 24px;"><?php if ($this->_var['order']['shipping_name']): ?><?php echo $this->_var['lang']['select_shipping']; ?>: <strong><?php echo $this->_var['order']['shipping_name']; ?></strong><br><?php endif; ?><?php echo $this->_var['lang']['select_payment']; ?>: <strong><?php echo $this->_var['order']['pay_name']; ?></strong><br><?php echo $this->_var['lang']['order_amount']; ?>: <strong><?php echo $this->_var['total']['amount_formated']; ?></strong><br><?php echo $this->_var['order']['pay_desc']; ?></td>
               </tr>
+              <?php if ($this->_var['pickupPointInfo']): ?>
+              <tr>
+                <td align="left" style="padding: 5px;line-height: 24px;">
+                    自提点名称: <strong><?php echo $this->_var['pickupPointInfo']['shop_name']; ?></strong><br>
+                    自提点地址: <strong><?php echo $this->_var['pickupPointInfo']['address']; ?></strong><br>
+                    自提点电话: <strong><a href="tel:<?php echo $this->_var['pickupPointInfo']['phone']; ?>"><?php echo $this->_var['pickupPointInfo']['phone']; ?></a></strong><br>
+                </td>
+              </tr>
+              <?php endif; ?>
               <?php if ($this->_var['pay_online']): ?>
               
               <tr>

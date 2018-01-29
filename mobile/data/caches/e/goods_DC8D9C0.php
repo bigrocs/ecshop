@@ -1,10 +1,10 @@
-<?php exit;?>a:3:{s:8:"template";a:3:{i:0;s:65:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/goods.dwt";i:1;s:76:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/comments.lbi";i:2;s:79:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1515404771;s:8:"maketime";i:1515401171;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:3:{i:0;s:65:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/goods.dwt";i:1;s:76:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/comments.lbi";i:2;s:79:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1516935472;s:8:"maketime";i:1516931872;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta charset="utf-8" />
-<title>茶语仙-818冻顶老茶王_乌龙茶_茗茶_酒水饮品_汇丰石化测试网站 触屏版</title>
+<title>茶语仙-818冻顶老茶王_乌龙茶_茗茶_烟酒茶饮_汇丰石化测试网站 触屏版</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -122,7 +122,7 @@ spec_arr = getSelectedAttributes(frm);
 </script>
 </head>
 <body>
-<header id="header">
+<header id="header" class="goods_header">
   <div class="header_l header_return"> <a class="ico_10" href="javascript:history.back();"> 返回 </a> </div>
   <h1> 商品详情 </h1>
 </header>
@@ -132,7 +132,7 @@ spec_arr = getSelectedAttributes(frm);
     <div class="scroller">
       <!--<div><a href="javascript:showPic()"><img src="images/201801/thumb_img/297_thumb_G_1515196246904.jpg"  alt="茶语仙-818冻顶老茶王" /></a></div>-->
       <ul>
-                              <li><a href="javascript:showPic()"><img style="width:auto;height:20rem;" src="http://zy.jianzhanzhuanjia.net/images/201801/goods_img/297_P_1515197142663.png"/></a></li>
+                              <li><a href="javascript:showPic()"><img style="width:auto;height:20rem;" src="http://www.sdhfshxs.com/images/201801/goods_img/297_P_1515693440787.png"/></a></li>
                       </ul>
     </div>
     <div class="icons">
@@ -172,13 +172,13 @@ function showPic(){
     <div class="title">
       </div>
   <ul>
-        <li>本店售价：<b class="price">￥<span>880.00</span></b>　    <del>原价：￥<span>1056.00</span></del>
+        <li>本店售价：<b class="price">￥<span>380.00</span></b>　    <del>原价：￥<span>480.00</span></del>
     </li>
     	    <li>
-	注册用户：<b class="price" >￥<span>880.00</span></b></li>
+	注册用户：<b class="price" >￥<span>380.00</span></b></li>
   </ul>
   <ul>
-      <li>可用储值卡:<b class="price" id="ECS_SHOP_JIUBI">260.00</b></li>
+      <li>可用储值卡:<b class="price" id="ECS_SHOP_JIUBI">0.00</b></li>
   </ul>
     
   <ul>
@@ -254,7 +254,7 @@ var myString=new Array();
             <h4>商品加入购物车</h4>
             <span class="ico_08" onclick="closeDiv()"><a href="javascript:"></a></span> </div>
           <div id="main">
-            <div id="left"> <img width="115" height="115" src="http://zy.jianzhanzhuanjia.net/images/201801/source_img/297_G_1515196246146.png"> </div>
+            <div id="left"> <img width="115" height="115" src="http://www.sdhfshxs.com/images/201801/source_img/297_G_1515196246146.png"> </div>
             <div id="right">
               <p>茶语仙-818冻顶老茶王</p>
               <span> 加入数量： <b id="cartNum"></b></span> <span> 总计金额： <b id="cartPrice"></b></span>
@@ -337,7 +337,7 @@ function tab(id){
 </div>
     <div class="desc wrap">
       <div class="blank2"></div>
-	  		<p><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/0.jpg" width="735" height="496" alt="" />&nbsp;<img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/1.jpg" width="735" height="496" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/2.jpg" width="736" height="458" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/3.jpg" width="737" height="522" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/4.jpg" width="733" height="495" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/5.jpg" width="734" height="616" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/6.jpg" width="734" height="497" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/7.jpg" width="732" height="468" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/818dongdinglaochawang/8.jpg" width="731" height="527" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/wulongchatongyong/tongyong3.jpg" width="746" height="509" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/wulongchatongyong/tongyong4.jpg" width="745" height="305" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/wulongchatongyong/tongyong001.jpg" width="746" height="381" alt="" /><img src="http://zy.jianzhanzhuanjia.net/images/upload/Image/ding/wulongchatongyong/tongyong002.jpg" width="743" height="415" alt="" /></p>	      </div>
+	  		<p><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/0.jpg" width="735" height="496" alt="" />&nbsp;<img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/1.jpg" width="735" height="496" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/2.jpg" width="736" height="458" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/3.jpg" width="737" height="522" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/4.jpg" width="733" height="495" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/5.jpg" width="734" height="616" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/6.jpg" width="734" height="497" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/7.jpg" width="732" height="468" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/818dongdinglaochawang/8.jpg" width="731" height="527" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/wulongchatongyong/tongyong3.jpg" width="746" height="509" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/wulongchatongyong/tongyong4.jpg" width="745" height="305" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/wulongchatongyong/tongyong001.jpg" width="746" height="381" alt="" /><img src="http://www.sdhfshxs.com/images/upload/Image/ding/wulongchatongyong/tongyong002.jpg" width="743" height="415" alt="" /></p>	      </div>
   </div>
   <div id="tab2" class="hidden">
     <div class="wrap">
@@ -402,10 +402,6 @@ function tab(id){
                 <span class="global-nav__nav-tit">会员中心</span>
             </a>
         </div>
-    </div>
-    <div class="global-nav__operate-wrap">
-        <span class="global-nav__yhd-logo"></span>
-        <span class="global-nav__operate-cart-num" id="globalId">554fcae493e564ee0dc75bdf2ebf94cacart_info_number|a:1:{s:4:"name";s:16:"cart_info_number";}554fcae493e564ee0dc75bdf2ebf94ca</span>
     </div>
 </div>
 <div id="toTop" class="toTop">
@@ -476,7 +472,7 @@ var minute = "分钟";
 var second = "秒";
 var end = "结束";
 var goodsId = 297;
-var now_time = 1515372372;
+var now_time = 1516903072;
 onload = function(){
   changePrice();
   changeKucun();//这里是添加的
@@ -518,10 +514,10 @@ function changePriceResponse(res)
 <script>
   wx.config({
     debug: false,
-    appId: '',
-    timestamp: 1515401172,
-    nonceStr: 'XvbcHDkCoQ1WbU0J',
-    signature: 'c223193cb1816ac06274afe693cb4370e7cefd81',
+    appId: 'wx48dc842d5284028c',
+    timestamp: 1516931872,
+    nonceStr: 'xSPzl6s9WW7NsOJD',
+    signature: 'd2fcf1fbe6f2835fa021230184726d61cf38edb8',
     jsApiList: [
         'onMenuShareTimeline',
         'onMenuShareAppMessage'
@@ -532,14 +528,14 @@ function changePriceResponse(res)
     wx.onMenuShareAppMessage({
       title: '茶语仙-818冻顶老茶王',
       desc: '茶语仙-818冻顶老茶王',
-      link: 'http://zy.jianzhanzhuanjia.net/mobile/index.php?u=17',
-      imgUrl: 'http://zy.jianzhanzhuanjia.net/images/201801/source_img/297_G_1515196246146.png',
+      link: 'http://www.sdhfshxs.com/mobile/index.php?u=17',
+      imgUrl: 'http://www.sdhfshxs.com/images/201801/source_img/297_G_1515196246146.png',
       trigger: function (res) {
 		        alert('恭喜！分享可以获取提成哦！');
 		
       },
       success: function (res) {
-		        window.location.href="http://zy.jianzhanzhuanjia.net/mobile/re_url.php?user_id=17&type=1";
+		        window.location.href="http://www.sdhfshxs.com/mobile/re_url.php?user_id=17&type=1";
 		      },
       cancel: function (res) {
         alert('很遗憾，您已取消分享');
@@ -551,13 +547,13 @@ function changePriceResponse(res)
 	//分享到朋友圈模板之家
     wx.onMenuShareTimeline({
       title: '茶语仙-818冻顶老茶王',
-      link: 'http://zy.jianzhanzhuanjia.net/mobile/index.php?u=17',
-      imgUrl: 'http://zy.jianzhanzhuanjia.net/images/201801/source_img/297_G_1515196246146.png',
+      link: 'http://www.sdhfshxs.com/mobile/index.php?u=17',
+      imgUrl: 'http://www.sdhfshxs.com/images/201801/source_img/297_G_1515196246146.png',
       trigger: function (res) {
         			alert('恭喜！分享可以获取提成哦！');
 		      },
       success: function (res) {
-       	        window.location.href="http://zy.jianzhanzhuanjia.net/mobile/re_url.php?user_id=17&type=2";
+       	        window.location.href="http://www.sdhfshxs.com/mobile/re_url.php?user_id=17&type=2";
 		      },
       cancel: function (res) {
          alert('很遗憾，您已取消分享');

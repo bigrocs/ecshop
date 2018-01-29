@@ -221,6 +221,7 @@ $data = array (
   'seller_cash' => '0.2',
   'seller_deposit_min' => '1000',
   'seller_deposit_percent' => '1.15',
+  'seller_kuaibi_deposit' => '1',
   'best_number' => 3,
   'new_number' => 3,
   'hot_number' => 3,

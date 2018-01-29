@@ -102,7 +102,7 @@
           <ul>
             <!--{foreach from=$categories item=cat name=foo}-->
             <li {if $smarty.foreach.foo.first}class="first"{/if}>
-              <h3 style="background:url(data/cat_ico/{$cat.cat_ico}) 20px center no-repeat;"><a href="{$cat.url}">{$cat.name|escape:html}</a></h3>
+              <h3 style="background:url(data/cat_ico/{$cat.cat_ico}) 20px center no-repeat;background-size: 28px 28px;"><a href="{$cat.url}">{$cat.name|escape:html}</a></h3>
             </li>
             <!--{/foreach}-->
           </ul>

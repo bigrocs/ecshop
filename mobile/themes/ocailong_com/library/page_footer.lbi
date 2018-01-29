@@ -54,10 +54,7 @@
             </a>
         </div>
     </div>
-    <div class="global-nav__operate-wrap">
-        <span class="global-nav__yhd-logo"></span>
-        <span class="global-nav__operate-cart-num" id="globalId">{insert name='cart_info_number'}</span>
-    </div>
+
 </div>
 <!--全局导航-End-->
 

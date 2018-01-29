@@ -58,7 +58,7 @@
      <?php if (isSeller ( $this->_var['user_id'] )): ?>
          <a  href="seller.php" class="clearfix"> <span>卖家中心</span><i></i> </a>
      <?php endif; ?>
-	 <!-- <a  href="distribute.php" class="clearfix"> <span>分销中心</span><i></i> </a> -->
+	 <a  href="user.php?act=nav_list" class="clearfix"> <span>一键导航</span><i></i> </a>
 	</div>
 	  <div class="blank3"></div>
 
