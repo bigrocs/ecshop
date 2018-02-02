@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1517554126;s:8:"maketime";i:1517550526;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1517561556;s:8:"maketime";i:1517557956;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -855,9 +855,9 @@ $(function() {
   wx.config({
     debug: false,
     appId: 'wx48dc842d5284028c',
-    timestamp: 1517550526,
-    nonceStr: 'OhfY16mqRQjLGHHt',
-    signature: 'ebef674a735723271677e8f4769135deca3a6311',
+    timestamp: 1517557956,
+    nonceStr: 'iBxKyHN4D60dQABQ',
+    signature: '675a4c982e836b6813bdc443c721666fdad56b36',
     jsApiList: [
         'onMenuShareTimeline',
         'onMenuShareAppMessage'

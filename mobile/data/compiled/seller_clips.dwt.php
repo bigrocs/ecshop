@@ -39,7 +39,7 @@
 </dl>
 <div class="blank3"></div>
 <section class="wrap">
-    <?php if ($this->_var['insurance'] == '0'): ?>
+    <?php if ($this->_var['insurance'] == '0' && $this->_var['isOilMember'] == '0'): ?>
 	<div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
 	 <a  href="seller.php?act=order_list" class="clearfix"> <span>加油订单列表</span><i></i> </a>
      <a  href="seller.php?act=spread_order" class="clearfix"> <span>推荐订单列表</span><i></i> </a>
@@ -50,28 +50,37 @@
      <a  href="seller.php?act=pickup_point_order" class="clearfix"> <span>自提订单列表</span><i></i> </a>
 	</div>
     <?php endif; ?>
+    <?php if ($this->_var['isOilMember'] == '0'): ?>
     <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
         <a  href="seller.php?act=kuaibi_deposit" class="clearfix"> <span>储值卡充值</span><i></i> </a>
         <a  href="seller.php?act=vip_deposit" class="clearfix"> <span>VIP充值</span><i></i> </a>
    </div>
+   <?php endif; ?>
    <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
         <a  href="seller.php?act=extension" class="clearfix"> <span>推广注册</span><i></i> </a>
         <?php if ($this->_var['insurance'] == '0'): ?>
-         <a  href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
-	     <a  href="seller.php?act=gas" class="clearfix"> <span>加油二维码</span><i></i> </a>
-         <a  href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
+        <a  href="seller.php?act=gas" class="clearfix"> <span>加油二维码</span><i></i> </a>
+        <?php endif; ?>
+        <?php if ($this->_var['isOilMember'] == '0'): ?>
+            <?php if ($this->_var['insurance'] == '0'): ?>
+                <a  href="seller.php?act=oilMemberList" class="clearfix"> <span>加油员</span><i></i> </a>
+                 <a  href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
+                 <a  href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
+             <?php endif; ?>
+             <a  href="seller.php?act=info" class="clearfix"> <span>信息管理</span><i></i> </a>
          <?php endif; ?>
-         <a  href="seller.php?act=info" class="clearfix"> <span>信息管理</span><i></i> </a>
 	</div>
     <div class="blank3"></div>
-    <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
-         <a  href="seller.php?act=seller_deposit" class="clearfix"> <span>商家充值</span><i></i> </a>
-         <a  href="seller.php?act=cash" class="clearfix"> <span>商家提现</span><i></i> </a>
-         <a  href="seller.php?act=account_log" class="clearfix"> <span>资金记录</span><i></i> </a>
-         <a  href="seller.php?act=seller_account" class="clearfix"> <span>提现充值记录</span><i></i> </a>
-    </div>
+     <?php if ($this->_var['isOilMember'] == '0'): ?>
+        <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
+             <a  href="seller.php?act=seller_deposit" class="clearfix"> <span>商家充值</span><i></i> </a>
+             <a  href="seller.php?act=cash" class="clearfix"> <span>商家提现</span><i></i> </a>
+             <a  href="seller.php?act=account_log" class="clearfix"> <span>资金记录</span><i></i> </a>
+             <a  href="seller.php?act=seller_account" class="clearfix"> <span>提现充值记录</span><i></i> </a>
+        </div>
+     <?php endif; ?>
     <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
         <a href="user.php?act=logout" class="clearfix"> <span>退出登录</span><i></i> </a>
@@ -255,6 +264,7 @@
             <td bgcolor="#ffffff">买家</td>
             <td bgcolor="#ffffff">到账金额</td>
             <td bgcolor="#ffffff">余额支付</td>
+            <td bgcolor="#ffffff">操作员</td>
             <td bgcolor="#ffffff">VIP支付</td>
           </tr>
           <?php $_from = $this->_var['orderGas']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item');if (count($_from)):
@@ -265,6 +275,7 @@
               <td align="center" bgcolor="#ffffff"><?php echo $this->_var['item']['user_name']; ?></td>
               <td bgcolor="#ffffff"><?php echo $this->_var['item']['show_arrival_money']; ?></td>
               <td bgcolor="#ffffff"><?php echo $this->_var['item']['show_money']; ?></td>
+               <td bgcolor="#ffffff" ><?php echo $this->_var['item']['childrenName']; ?></td>
               <td bgcolor="#ffffff" ><?php echo $this->_var['item']['show_vip_money']; ?></td>
           </tr>
           <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
@@ -543,24 +554,20 @@
  <section class="wrap">
      <section class="order_box padd1 radius10">
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-            <tr align="center">
-              <td bgcolor="#ffffff"><?php echo $this->_var['lang']['order_number']; ?></td>
-              <td bgcolor="#ffffff"><?php echo $this->_var['lang']['order_addtime']; ?></td>
-              <td bgcolor="#ffffff"><?php echo $this->_var['lang']['order_money']; ?></td>
-              <td bgcolor="#ffffff">推荐人分成</td>
-              <td bgcolor="#ffffff">自提状态</td>
-              <td bgcolor="#ffffff">状态</td>
-            </tr>
             <?php $_from = $this->_var['orders']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item');if (count($_from)):
     foreach ($_from AS $this->_var['item']):
 ?>
             <tr>
               <td align="center" bgcolor="#ffffff">
-                  <a href="seller.php?act=pickup_point_order_detail&order_id=<?php echo $this->_var['item']['order_id']; ?>" class="f6"><?php echo $this->_var['item']['order_sn']; ?></a>
+                 订单: <a href="seller.php?act=pickup_point_order_detail&order_id=<?php echo $this->_var['item']['order_id']; ?>" class="f6"><?php echo $this->_var['item']['order_sn']; ?></a>
               </td>
-              <td align="center" bgcolor="#ffffff"><?php echo $this->_var['item']['order_time']; ?></td>
-              <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['total_fee']; ?></td>
-              <td align="right" style="width:50px" bgcolor="#ffffff"><?php echo $this->_var['item']['spread_money']; ?></td>
+              <td align="center" bgcolor="#ffffff">日期: <?php echo $this->_var['item']['order_time']; ?></td>
+              <td align="right" bgcolor="#ffffff" colspan="2">金额:<?php echo $this->_var['item']['total_fee']; ?></td>
+
+            </tr>
+            <tr style="border-bottom: solid 1px #ccc;">
+              <td align="right" bgcolor="#ffffff">分成: <?php echo $this->_var['item']['spread_money']; ?></td>
+              <td align="right" bgcolor="#ffffff">推荐人: <?php echo $this->_var['item']['spread_user_name']; ?></td>
               <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['pickup_point_title']; ?></td>
               <td align="center" style="width:50px" bgcolor="#ffffff"><?php echo $this->_var['item']['order_status']; ?></td>
             </tr>
@@ -1097,6 +1104,76 @@
     <input type="hidden" name="act" value="act_oilPriceEdit" />
     <input type="submit" class="c-btn3" name="submit" value="提交" />
 </form>
+</section>
+<?php endif; ?>
+
+
+
+ <?php if ($this->_var['action'] == 'oilMemberList'): ?>
+ <header id="header">
+   <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+   <h1> 加油员列表</h1>
+ </header>
+ <section class="wrap">
+     <section class="order_box padd1 radius10">
+         <div class="blank"></div>
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff">ID</td>
+              <td bgcolor="#ffffff">成员账号</td>
+              <td bgcolor="#ffffff">推荐分成统计</td>
+              <!-- <td bgcolor="#ffffff">自提点分成统计</td> -->
+              <td bgcolor="#ffffff">加油统计</td>
+              <td bgcolor="#ffffff">操作</td>
+            </tr>
+            <?php $_from = $this->_var['oilMemberList']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item');if (count($_from)):
+    foreach ($_from AS $this->_var['item']):
+?>
+            <tr>
+              <td align="center" bgcolor="#ffffff">
+                  <?php echo $this->_var['item']['user_id']; ?>
+              </td>
+              <td align="center" bgcolor="#ffffff"><?php echo $this->_var['item']['user_name']; ?></td>
+              <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['spread']; ?></td>
+              <!-- <td align="right" bgcolor="#ffffff"><?php echo $this->_var['item']['pickup']; ?></td> -->
+              <td align="center" bgcolor="#ffffff"><?php echo $this->_var['item']['user_money']; ?></td>
+              <td bgcolor="#ffffff">
+                  <a href="seller.php?act=oilMemberDelete&user_id=<?php echo $this->_var['item']['user_id']; ?>">删除</a>
+              </td>
+            </tr>
+            <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
+            </table>
+          <div class="blank5"></div>
+
+    </section>
+    <a class="c-btn3" href="seller.php?act=oilMemberAdd">新增加油员</a>
+</section>
+ <?php endif; ?>
+
+
+
+<?php if ($this->_var['action'] == 'oilMemberAdd'): ?>
+<header id="header">
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+  <h1> 新增加油员</h1>
+</header>
+<section class="wrap">
+    <section class="order_box padd1 radius10">
+        <form name="formSurplus" method="post" action="seller.php" onSubmit="return submitSurplus()">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr>
+              <td width="15%" bgcolor="#ffffff">用户名:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="user_name"  class="inputBg" value="<?php echo $this->_var['oilinfo']['type']; ?>" size="30" />
+              </td>
+            </tr>
+            <td bgcolor="#ffffff" colspan="3"  align="center" >
+              <input type="hidden" name="act" value="act_oilMemberAdd" />
+              <input type="submit" style="margin-top:15px;" class="c-btn3" name="submit" value="提交" />
+            </td>
+          </table>
+          </table>
+        </form>
+    </section>
 </section>
 <?php endif; ?>
 
