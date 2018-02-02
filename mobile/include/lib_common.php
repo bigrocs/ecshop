@@ -2290,7 +2290,7 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
                 return false;
             } else {
 
-        /*O菜龙工作室-www.ocailong.com修改*/
+        /*bigrcos 修改*/
 
                 $userid=$_SESSION['user_id'];
 
@@ -2298,21 +2298,15 @@ function build_uri($app, $params, $append = '', $page = 0, $keywords = '', $size
 
                 $level_register_up = (float)$affiliate['config']['level_register_up'];
 
-                $rank_points =  $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users')."where user_id=".$userid);
-
-
-
-                if ($rank_points>$level_register_up||$rank_points==$level_register_up) {
-                    if (!empty($userid)) {
+                if (!empty($userid)) {
+                    $rank_points =  $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users')."where user_id=".$userid);
+                    if ($rank_points>$level_register_up||$rank_points==$level_register_up) {
                         $uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid."&u=".$userid;
-                    } else {
-                        $uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid;
                     }
                 } else {
                     $uri = $rewrite ? 'goods-' . $gid : 'goods.php?id=' . $gid;
                 }
-
-                /*O菜龙工作室-www.ocailong.com修改*/
+                /*bigrcos 修改*/
             }
 
 
