@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:65:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/index.dwt";i:1;s:79:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:82:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:77:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:79:"D:/wwwroot/zhongyan3/wwwroot/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1517198145;s:8:"maketime";i:1517194545;}<!DOCTYPE html>
+<?php exit;?>a:3:{s:8:"template";a:5:{i:0;s:52:"/var/www/ecshop/mobile/themes/ocailong_com/index.dwt";i:1;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/ad_position.lbi";i:2;s:69:"/var/www/ecshop/mobile/themes/ocailong_com/library/recommend_best.lbi";i:3;s:64:"/var/www/ecshop/mobile/themes/ocailong_com/library/cat_goods.lbi";i:4;s:66:"/var/www/ecshop/mobile/themes/ocailong_com/library/page_footer.lbi";}s:7:"expires";i:1517561500;s:8:"maketime";i:1517557900;}<!DOCTYPE html>
 <html>
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -188,14 +188,14 @@ TouchSlide({
             <li class="flex_in"> <a href="cat_all.php" title="全部分类"> <div class="CarouselImg"><img src="data/item_pic/1443584338752549142.png" /></div> </a>
         <p> 全部分类 </p>
       </li>
-                  <li class="flex_in"> <a href="user.php?act=nav_list" title="导航"> <div class="CarouselImg"><img src="data/item_pic/1443586488909704319.png" /></div> </a>
-        <p> 导航 </p>
-      </li>
                   <li class="flex_in"> <a href="group_buy.php" title="团购"> <div class="CarouselImg"><img src="data/item_pic/1443585779204202237.png" /></div> </a>
         <p> 团购 </p>
       </li>
                   <li class="flex_in"> <a href="exchange.php" title="积分商城"> <div class="CarouselImg"><img src="data/item_pic/1443586061863736586.png" /></div> </a>
         <p> 积分商城 </p>
+      </li>
+                  <li class="flex_in"> <a href="flow.php" title="购物车"> <div class="CarouselImg"><img src="data/item_pic/1443584408064043342.png" /></div> </a>
+        <p> 购物车 </p>
       </li>
                 </ul>
   </div>
@@ -247,31 +247,31 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=202&u=19">
-                <img src="http://www.sdhfshxs.com/images/201711/thumb_img/202_thumb_G_1511572087353.jpg" alt="怀庄53-神秘茅台" />
+            <a href="goods.php?id=298&u=82">
+                <img src="http://ecshop.test/images/201801/thumb_img/298_thumb_G_1515197604688.jpg" alt="三億茶-阿里山玉露" />
             </a>
             <div style="text-align:center">
              
-            <span class="price_s"> ￥<span>158.00</span> </span> 
-                        <br>怀庄53-神秘茅台            </div>
+            <span class="price_s"> ￥<span>660.00</span> </span> 
+                        <br>三億茶-阿里山玉露            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=446&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/446_thumb_G_1516065463996.jpg" alt="齐农-小麦粉 水饺粉 " />
+            <a href="goods.php?id=297&u=82">
+                <img src="http://ecshop.test/images/201801/thumb_img/297_thumb_G_1515196246904.jpg" alt="茶语仙-818冻顶老茶王" />
             </a>
             <div style="text-align:center">
              
-            <span class="price_s"> ￥<span>25.00</span> </span> 
-                        <br>齐农-小麦粉 水饺粉            </div>
+            <span class="price_s"> ￥<span>880.00</span> </span> 
+                        <br>茶语仙-818冻顶老茶王            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=523&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/523_thumb_G_1516748909701.jpg" alt="汾酒 30年青花 53° 单瓶 清香型" />
+            <a href="goods.php?id=187&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/187_thumb_G_1511571187942.jpg" alt="西王橄榄玉米胚芽油" />
             </a>
             <div style="text-align:center">
              
-            <span class="price_s"> ￥<span>658.00</span> </span> 
-                        <br>汾酒 30年青花 53°...            </div>
+            <span class="price_s"> ￥<span>79.90</span> </span> 
+                        <br>西王橄榄玉米胚芽油            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
 </section>
@@ -279,69 +279,69 @@ TouchSlide({
 <section class="item_show_box1 box1 region">
     <h3>
       <a target="_top" href="category.php?id=2">
-        <span class="titico"></span>粮油食品<span class="titmore"><i class="ico_16"></i></span>
+        <span class="titico"></span>生鲜食品<span class="titmore"><i class="ico_16"></i></span>
       </a>
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=524&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/524_thumb_G_1516300468159.jpg" alt="巧媳妇原汁酱油1.9L" />
+            <a href="goods.php?id=195&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/195_thumb_G_1511571690703.jpg" alt="西王花生油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>17.00</span> </span>
-                        <del style="color:#878D99">￥<span>19.50</span></del>
+                        <span class="price_s"> ￥<span>139.00</span> </span>
+                        <del style="color:#878D99">￥<span>139.00</span></del>
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>巧媳妇原汁酱油1.9L            </div>
+            <br>西王花生油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=452&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/452_thumb_G_1516123702427.jpg" alt="西王鲜胚玉米胚芽油1.8L" />
+            <a href="goods.php?id=188&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/188_thumb_G_1511571245946.jpg" alt="西王鲜胚玉米胚芽油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>38.60</span> </span>
-                        <del style="color:#878D99">￥<span>46.32</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 3.00 </span>
-            <br>西王鲜胚玉米胚芽油1.8...            </div>
+                        <span class="price_s"> ￥<span>21.90</span> </span>
+                        <del style="color:#878D99">￥<span>21.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王鲜胚玉米胚芽油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=446&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/446_thumb_G_1516065463996.jpg" alt="齐农-小麦粉 水饺粉 " />
+            <a href="goods.php?id=187&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/187_thumb_G_1511571187942.jpg" alt="西王橄榄玉米胚芽油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>25.00</span> </span>
-                        <del style="color:#878D99">￥<span>55.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 2.50 </span>
-            <br>齐农-小麦粉 水饺粉            </div>
+                        <span class="price_s"> ￥<span>79.90</span> </span>
+                        <del style="color:#878D99">￥<span>79.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王橄榄玉米胚芽油            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=459&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/459_thumb_G_1516128634694.jpg" alt="西王鲜胚玉米胚芽油5L" />
+            <a href="goods.php?id=182&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/182_thumb_G_1511570888835.jpg" alt="西王葵花籽油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>112.80</span> </span>
-                        <del style="color:#878D99">￥<span>118.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 6.00 </span>
-            <br>西王鲜胚玉米胚芽油5L            </div>
-        </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=435&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/435_thumb_G_1516057348440.jpg" alt="齐农-小麦粉 颗粒粉 10KG" />
-            </a>
-            <div style="text-align:center">
-                        <span class="price_s"> ￥<span>55.00</span> </span>
-                        <del style="color:#878D99">￥<span>60.50</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 5.50 </span>
-            <br>齐农-小麦粉 颗粒粉 1...            </div>
-        </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=526&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/526_thumb_G_1516302329017.jpg" alt="巧媳妇葱姜料酒" />
-            </a>
-            <div style="text-align:center">
-                        <span class="price_s"> ￥<span>5.80</span> </span>
-                        <del style="color:#878D99">￥<span>6.20</span></del>
+                        <span class="price_s"> ￥<span>19.90</span> </span>
+                        <del style="color:#878D99">￥<span>19.90</span></del>
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>巧媳妇葱姜料酒            </div>
+            <br>西王葵花籽油            </div>
+        </div>
+                         <div class="goodsItem flex_in">
+            <a href="goods.php?id=178&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/178_thumb_G_1511570646292.jpg" alt="西王玉米胚芽油4L+葵花籽油1L" />
+            </a>
+            <div style="text-align:center">
+                        <span class="price_s"> ￥<span>69.90</span> </span>
+                        <del style="color:#878D99">￥<span>69.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王玉米胚芽油4L+葵花...            </div>
+        </div>
+                         <div class="goodsItem flex_in">
+            <a href="goods.php?id=177&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/177_thumb_G_1511570297432.jpg" alt="西王玉米胚芽油4L+鲜胚玉米胚芽油900ML" />
+            </a>
+            <div style="text-align:center">
+                        <span class="price_s"> ￥<span>69.90</span> </span>
+                        <del style="color:#878D99">￥<span>69.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王玉米胚芽油4L+鲜胚...            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
     <div class="item_tags clearfix">
@@ -361,69 +361,69 @@ TouchSlide({
 <section class="item_show_box1 box1 region">
     <h3>
       <a target="_top" href="category.php?id=1">
-        <span class="titico"></span>烟酒茶饮<span class="titmore"><i class="ico_16"></i></span>
+        <span class="titico"></span>酒水饮品<span class="titmore"><i class="ico_16"></i></span>
       </a>
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=202&u=19">
-                <img src="http://www.sdhfshxs.com/images/201711/thumb_img/202_thumb_G_1511572087353.jpg" alt="怀庄53-神秘茅台" />
+            <a href="goods.php?id=298&u=82">
+                <img src="http://ecshop.test/images/201801/thumb_img/298_thumb_G_1515197604688.jpg" alt="三億茶-阿里山玉露" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>158.00</span> </span>
+                        <span class="price_s"> ￥<span>660.00</span> </span>
+                        <del style="color:#878D99">￥<span>792.00</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 260.00 </span>
+            <br>三億茶-阿里山玉露            </div>
+        </div>
+                         <div class="goodsItem flex_in">
+            <a href="goods.php?id=297&u=82">
+                <img src="http://ecshop.test/images/201801/thumb_img/297_thumb_G_1515196246904.jpg" alt="茶语仙-818冻顶老茶王" />
+            </a>
+            <div style="text-align:center">
+                        <span class="price_s"> ￥<span>880.00</span> </span>
+                        <del style="color:#878D99">￥<span>1056.00</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 260.00 </span>
+            <br>茶语仙-818冻顶老茶王            </div>
+        </div>
+                         <div class="goodsItem flex_in">
+            <a href="goods.php?id=202&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/202_thumb_G_1511572087353.jpg" alt="怀庄53-神秘茅台" />
+            </a>
+            <div style="text-align:center">
+                        <span class="price_s"> ￥<span>98.00</span> </span>
                         <del style="color:#878D99">￥<span>398.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 89.00 </span>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 20.00 </span>
             <br>怀庄53-神秘茅台            </div>
         </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=721&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/721_thumb_G_1516905728529.jpg" alt="茶语仙-软枝乌龙 150g X 2" />
-            </a>
-            <div style="text-align:center">
-                        <span class="price_s"> ￥<span>160.00</span> </span>
-                        <del style="color:#878D99">￥<span>420.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 10.00 </span>
-            <br>茶语仙-软枝乌龙 150...            </div>
-        </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=523&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/523_thumb_G_1516748909701.jpg" alt="汾酒 30年青花 53° 单瓶 清香型" />
-            </a>
-            <div style="text-align:center">
-                        <span class="price_s"> ￥<span>658.00</span> </span>
-                        <del style="color:#878D99">￥<span>748.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>汾酒 30年青花 53°...            </div>
-        </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=711&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/711_thumb_G_1516842807852.jpg" alt="五粮液 52°五粮液 500ml 浓香型 " />
+            <a href="goods.php?id=201&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/201_thumb_G_1511572024910.jpg" alt="怀庄53-喜酱" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>1099.00</span> </span>
-                        <del style="color:#878D99">￥<span>1099.00</span></del>
+                        <span class="price_s"> ￥<span>268.00</span> </span>
+                        <del style="color:#878D99">￥<span>268.00</span></del>
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>五粮液 52°五粮液 5...            </div>
+            <br>怀庄53-喜酱            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=698&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/698_thumb_G_1516837561587.jpg" alt="茅台-汉酱 51° 500ml 酱香型" />
+            <a href="goods.php?id=200&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/200_thumb_G_1511571984596.jpg" alt="怀庄53-六合文化" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>298.00</span> </span>
-                        <del style="color:#878D99">￥<span>359.00</span></del>
+                        <span class="price_s"> ￥<span>598.00</span> </span>
+                        <del style="color:#878D99">￥<span>598.00</span></del>
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>茅台-汉酱 51° 50...            </div>
+            <br>怀庄53-六合文化            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=483&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/483_thumb_G_1516147985114.jpg" alt="三億茶-大禹岭茶150g/罐" />
+            <a href="goods.php?id=199&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/199_thumb_G_1511571931323.jpg" alt="怀庄53-和贵福" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>500.00</span> </span>
-                        <del style="color:#878D99">￥<span>580.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 60.00 </span>
-            <br>三億茶-大禹岭茶150g...            </div>
+                        <span class="price_s"> ￥<span>380.00</span> </span>
+                        <del style="color:#878D99">￥<span>380.00</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>怀庄53-和贵福            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
     <div class="item_tags clearfix">
@@ -431,10 +431,10 @@ TouchSlide({
             茗茶        </A>
                 <A href="category.php?id=144">
             美酒        </A>
+                <A href="category.php?id=145">
+            咖啡        </A>
                 <A href="category.php?id=146">
             饮料        </A>
-                <A href="category.php?id=191">
-            香烟        </A>
                     </div>
 </section>
 <div class="blank2"></div>
@@ -446,64 +446,64 @@ TouchSlide({
     </h3>
     <div class="flex flex-f-row">
                 <div class="goodsItem flex_in">
-            <a href="goods.php?id=524&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/524_thumb_G_1516300468159.jpg" alt="巧媳妇原汁酱油1.9L" />
+            <a href="goods.php?id=195&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/195_thumb_G_1511571690703.jpg" alt="西王花生油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>17.00</span> </span>
-                        <del style="color:#878D99">￥<span>19.50</span></del>
+                        <span class="price_s"> ￥<span>139.00</span> </span>
+                        <del style="color:#878D99">￥<span>139.00</span></del>
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>巧媳妇原汁酱油1.9L            </div>
+            <br>西王花生油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=452&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/452_thumb_G_1516123702427.jpg" alt="西王鲜胚玉米胚芽油1.8L" />
+            <a href="goods.php?id=188&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/188_thumb_G_1511571245946.jpg" alt="西王鲜胚玉米胚芽油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>38.60</span> </span>
-                        <del style="color:#878D99">￥<span>46.32</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 3.00 </span>
-            <br>西王鲜胚玉米胚芽油1.8...            </div>
+                        <span class="price_s"> ￥<span>21.90</span> </span>
+                        <del style="color:#878D99">￥<span>21.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王鲜胚玉米胚芽油            </div>
         </div>
                          <div class="goodsItem flex_in">
-            <a href="goods.php?id=446&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/446_thumb_G_1516065463996.jpg" alt="齐农-小麦粉 水饺粉 " />
+            <a href="goods.php?id=187&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/187_thumb_G_1511571187942.jpg" alt="西王橄榄玉米胚芽油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>25.00</span> </span>
-                        <del style="color:#878D99">￥<span>55.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 2.50 </span>
-            <br>齐农-小麦粉 水饺粉            </div>
+                        <span class="price_s"> ￥<span>79.90</span> </span>
+                        <del style="color:#878D99">￥<span>79.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王橄榄玉米胚芽油            </div>
         </div>
          </div><div class="flex flex-f-row">                <div class="goodsItem flex_in">
-            <a href="goods.php?id=459&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/459_thumb_G_1516128634694.jpg" alt="西王鲜胚玉米胚芽油5L" />
+            <a href="goods.php?id=182&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/182_thumb_G_1511570888835.jpg" alt="西王葵花籽油" />
             </a>
             <div style="text-align:center">
-                        <span class="price_s"> ￥<span>112.80</span> </span>
-                        <del style="color:#878D99">￥<span>118.00</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 6.00 </span>
-            <br>西王鲜胚玉米胚芽油5L            </div>
-        </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=435&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/435_thumb_G_1516057348440.jpg" alt="齐农-小麦粉 颗粒粉 10KG" />
-            </a>
-            <div style="text-align:center">
-                        <span class="price_s"> ￥<span>55.00</span> </span>
-                        <del style="color:#878D99">￥<span>60.50</span></del>
-            <br> 可用储值卡:<span style="color:#EB9E05"> 5.50 </span>
-            <br>齐农-小麦粉 颗粒粉 1...            </div>
-        </div>
-                         <div class="goodsItem flex_in">
-            <a href="goods.php?id=526&u=19">
-                <img src="http://www.sdhfshxs.com/images/201801/thumb_img/526_thumb_G_1516302329017.jpg" alt="巧媳妇葱姜料酒" />
-            </a>
-            <div style="text-align:center">
-                        <span class="price_s"> ￥<span>5.80</span> </span>
-                        <del style="color:#878D99">￥<span>6.20</span></del>
+                        <span class="price_s"> ￥<span>19.90</span> </span>
+                        <del style="color:#878D99">￥<span>19.90</span></del>
             <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
-            <br>巧媳妇葱姜料酒            </div>
+            <br>西王葵花籽油            </div>
+        </div>
+                         <div class="goodsItem flex_in">
+            <a href="goods.php?id=178&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/178_thumb_G_1511570646292.jpg" alt="西王玉米胚芽油4L+葵花籽油1L" />
+            </a>
+            <div style="text-align:center">
+                        <span class="price_s"> ￥<span>69.90</span> </span>
+                        <del style="color:#878D99">￥<span>69.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王玉米胚芽油4L+葵花...            </div>
+        </div>
+                         <div class="goodsItem flex_in">
+            <a href="goods.php?id=177&u=82">
+                <img src="http://ecshop.test/images/201711/thumb_img/177_thumb_G_1511570297432.jpg" alt="西王玉米胚芽油4L+鲜胚玉米胚芽油900ML" />
+            </a>
+            <div style="text-align:center">
+                        <span class="price_s"> ￥<span>69.90</span> </span>
+                        <del style="color:#878D99">￥<span>69.90</span></del>
+            <br> 可用储值卡:<span style="color:#EB9E05"> 0.00 </span>
+            <br>西王玉米胚芽油4L+鲜胚...            </div>
         </div>
          </div><div class="flex flex-f-row">            </div>
     <div class="item_tags clearfix">
@@ -626,10 +626,9 @@ function get_search_box(){
 		document.getElementById('keywordfoot').focus();
  	}
 }
-</script>
-<nav id="menu" style="display:None">
+</script><nav id="menu" style="display:None">
   <ul>
-        <li> <a href="category.php?id=2"> 粮油食品 </a>
+        <li> <a href="category.php?id=2"> 生鲜食品 </a>
       <ul>
                 <li> <a href="category.php?id=5"> 粮油调味 </a>
           <ul>
@@ -667,7 +666,7 @@ function get_search_box(){
         </li>
               </ul>
     </li>
-        <li> <a href="category.php?id=1"> 烟酒茶饮 </a>
+        <li> <a href="category.php?id=1"> 酒水饮品 </a>
       <ul>
                 <li> <a href="category.php?id=7"> 茗茶 </a>
           <ul>
@@ -687,15 +686,18 @@ function get_search_box(){
                         <li> <a href="category.php?id=163"> 保健酒 </a> </li>
                       </ul>
         </li>
+                <li> <a href="category.php?id=145"> 咖啡 </a>
+          <ul>
+                        <li> <a href="category.php?id=164"> 速溶咖啡 </a> </li>
+                        <li> <a href="category.php?id=165"> 咖啡粉 </a> </li>
+                        <li> <a href="category.php?id=166"> 咖啡豆 </a> </li>
+                      </ul>
+        </li>
                 <li> <a href="category.php?id=146"> 饮料 </a>
           <ul>
                         <li> <a href="category.php?id=167"> 矿泉水 </a> </li>
                         <li> <a href="category.php?id=168"> 碳酸饮料 </a> </li>
                         <li> <a href="category.php?id=169"> 果汁 </a> </li>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=191"> 香烟 </a>
-          <ul>
                       </ul>
         </li>
               </ul>
@@ -712,6 +714,7 @@ function get_search_box(){
         </li>
                 <li> <a href="category.php?id=140"> 面部护理 </a>
           <ul>
+                        <li> <a href="category.php?id=151"> 香皂 </a> </li>
                         <li> <a href="category.php?id=152"> 洁面乳 </a> </li>
                         <li> <a href="category.php?id=153"> 面膜 </a> </li>
                       </ul>
@@ -735,7 +738,6 @@ function get_search_box(){
         </li>
                 <li> <a href="category.php?id=171"> 沐浴清洁 </a>
           <ul>
-                        <li> <a href="category.php?id=151"> 香皂 </a> </li>
                         <li> <a href="category.php?id=179"> 沐浴露 </a> </li>
                         <li> <a href="category.php?id=180"> 洗手液 </a> </li>
                       </ul>
@@ -744,62 +746,12 @@ function get_search_box(){
           <ul>
                         <li> <a href="category.php?id=183"> 洗洁精 </a> </li>
                         <li> <a href="category.php?id=184"> 洁厕灵 </a> </li>
-                        <li> <a href="category.php?id=189"> 机用清洁剂 </a> </li>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=199"> 儿童护理 </a>
-          <ul>
-                        <li> <a href="category.php?id=201"> 青蛙王子 </a> </li>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=202"> 韩束专区 </a>
-          <ul>
-                        <li> <a href="category.php?id=203"> 弹润系列 </a> </li>
-                        <li> <a href="category.php?id=205"> 面部清洁 </a> </li>
-                        <li> <a href="category.php?id=206"> 凝乳 </a> </li>
-                        <li> <a href="category.php?id=207"> 补水系列 </a> </li>
-                        <li> <a href="category.php?id=209"> 韩束细肤 </a> </li>
-                        <li> <a href="category.php?id=210"> 洁面乳 </a> </li>
-                        <li> <a href="category.php?id=211"> 韩束套装 </a> </li>
-                        <li> <a href="category.php?id=218"> 红景天系列 </a> </li>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=204"> 美妆日用 </a>
-          <ul>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=213"> 相宜本草 </a>
-          <ul>
-                        <li> <a href="category.php?id=214"> 百合高保湿系列 </a> </li>
-                        <li> <a href="category.php?id=215"> 芯净自然系列 </a> </li>
-                        <li> <a href="category.php?id=216"> 红景系列 </a> </li>
-                        <li> <a href="category.php?id=217"> 相宜本草四倍系列 </a> </li>
                       </ul>
         </li>
               </ul>
     </li>
         <li> <a href="category.php?id=133"> 家居家纺 </a>
       <ul>
-                <li> <a href="category.php?id=192"> 四件套 </a>
-          <ul>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=193"> 六件套 </a>
-          <ul>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=194"> 十件套 </a>
-          <ul>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=195"> 被子 </a>
-          <ul>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=196"> 毯子 </a>
-          <ul>
-                      </ul>
-        </li>
               </ul>
     </li>
         <li> <a href="category.php?id=134"> 箱包钟表 </a>
@@ -814,16 +766,8 @@ function get_search_box(){
         </li>
               </ul>
     </li>
-        <li> <a href="category.php?id=135"> 数码电器 </a>
+        <li> <a href="category.php?id=135"> 家用电器 </a>
       <ul>
-                <li> <a href="category.php?id=197"> 抽油烟机 </a>
-          <ul>
-                      </ul>
-        </li>
-                <li> <a href="category.php?id=198"> 燃气灶 </a>
-          <ul>
-                      </ul>
-        </li>
               </ul>
     </li>
         <li> <a href="category.php?id=172"> 户外运动 </a>
@@ -910,9 +854,9 @@ $(function() {
   wx.config({
     debug: false,
     appId: 'wx48dc842d5284028c',
-    timestamp: 1517194545,
-    nonceStr: 'syRZs1WdmLFJPCux',
-    signature: 'df19703df9c9a736e7cb6f9704f068ba1cc77bf0',
+    timestamp: 1517557900,
+    nonceStr: 'isry7nw0JFzcPM9P',
+    signature: 'f8346e98b4d837ba81773491ebc7293bc5efd8f5',
     jsApiList: [
         'onMenuShareTimeline',
         'onMenuShareAppMessage'
@@ -923,14 +867,14 @@ $(function() {
     wx.onMenuShareAppMessage({
       title: '汇丰石化测试网站',
       desc: '汇丰石化测试网站',
-      link: 'http://www.sdhfshxs.com/mobile/index.php?u=19',
+      link: 'http://ecshop.test/mobile/index.php?u=82',
       imgUrl: '',
       trigger: function (res) {
 		        alert('恭喜！分享可以获取提成哦！');
 		
       },
       success: function (res) {
-		        window.location.href="http://www.sdhfshxs.com/mobile/re_url.php?user_id=19&type=1";
+		        window.location.href="http://ecshop.test/mobile/re_url.php?user_id=82&type=1";
 		      },
       cancel: function (res) {
         alert('很遗憾，您已取消分享');
@@ -942,13 +886,13 @@ $(function() {
 	//分享到朋友圈模板之家
     wx.onMenuShareTimeline({
       title: '汇丰石化测试网站',
-      link: 'http://www.sdhfshxs.com/mobile/index.php?u=19',
+      link: 'http://ecshop.test/mobile/index.php?u=82',
       imgUrl: '',
       trigger: function (res) {
         			alert('恭喜！分享可以获取提成哦！');
 		      },
       success: function (res) {
-       	        window.location.href="http://www.sdhfshxs.com/mobile/re_url.php?user_id=19&type=2";
+       	        window.location.href="http://ecshop.test/mobile/re_url.php?user_id=82&type=2";
 		      },
       cancel: function (res) {
          alert('很遗憾，您已取消分享');

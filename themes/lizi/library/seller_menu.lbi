@@ -6,7 +6,7 @@
     </h3>
     <ul class="slide_item">
 
-        {if $insurance eq '0'}
+        {if $insurance eq '0' && $isOilMember eq '0'}
         <li class="item">
             <div class="root_node"><i class="iconfont"></i>订单中心</div>
             <ul>
@@ -32,6 +32,7 @@
             </ul>
         </li>
         {/if}
+        {if $isOilMember eq '0'}
         <li class="item">
             <div class="root_node"><i class="iconfont"></i>充值管理</div>
             <ul>
@@ -43,6 +44,7 @@
                 </li>
             </ul>
         </li>
+        {/if}
         <li class="item">
             <div class="root_node"><i class="iconfont"></i>管理中心</div>
             <ul>
@@ -50,21 +52,29 @@
                     <a class="{if $action eq 'extension'}on{/if}" href="seller.php?act=extension">推广注册</a>
                 </li>
                 {if $insurance eq '0'}
+                <li>
+                    <a class="{if $action eq 'gas'}on{/if}" href="seller.php?act=gas">{$lang.seller_gas}</a>
+                </li>
+                {/if}
+                {if $isOilMember eq '0'}
+                    {if $insurance eq '0'}
+                        <li>
+                            <a class="{if $action eq 'oilMemberList'}on{/if}" href="seller.php?act=oilMemberList" class="clearfix"> <span>加油员</span><i></i> </a>
+                        </li>
+                        <li>
+                            <a class="{if $action eq 'oilPrice'}on{/if}" href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
+                        </li>
+                        <li>
+                            <a class="{if $action eq 'mapInfo'}on{/if}" href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
+                        </li>
+                    {/if}
                     <li>
-                        <a class="{if $action eq 'oilPrice'}on{/if}" href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
-                    </li>
-                    <li>
-                        <a class="{if $action eq 'gas'}on{/if}" href="seller.php?act=gas">{$lang.seller_gas}</a>
-                    </li>
-                    <li>
-                        <a class="{if $action eq 'mapInfo'}on{/if}" href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
+                        <a class="{if $action eq 'info'}on{/if}" href="seller.php?act=info">{$lang.seller_info}</a>
                     </li>
                 {/if}
-                <li>
-                    <a class="{if $action eq 'info'}on{/if}" href="seller.php?act=info">{$lang.seller_info}</a>
-                </li>
             </ul>
         </li>
+        {if $isOilMember eq '0'}
         <li class="item">
             <div class="root_node"><i class="iconfont"></i>资金管理</div>
             <ul>
@@ -82,6 +92,7 @@
                 </li>
             </ul>
         </li>
+        {/if}
     </ul>
 
 </div>

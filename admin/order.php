@@ -754,7 +754,7 @@ elseif ($_REQUEST['act'] == 'delivery_ship') {
     update_order($order_id, $arr);
     // 确认收货后 计算卖家分成 推荐分成 自提分成
     $profit = actualMoney($order)-$order['cost_money'];
-    updateSellerSpread($order['order_id'], $profit, $order['spread_id']);//推荐分成
+    updateSellerSpread($order['order_id'], $profit, $order['spread_id'], $order['children_spread_id']);//推荐分成
     updateSellerPickup($order['order_id'], $profit, $order['pickup_point']);//自提分成
 
 

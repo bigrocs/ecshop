@@ -35,11 +35,16 @@ function getSellerInfo($userId)
  * @Email    bigrocs@qq.com
  * @DateTime 2017-12-20
  */
-function setSellerInfo($userId, $key, $value)
-{
-    $sql = 'UPDATE ' . $GLOBALS['ecs']->table('user_seller') . " SET `$key`='$value'  WHERE `user_id`='" . $userId . "'";
-    return $GLOBALS['db']->query($sql);
-}
+ function setSellerInfo($userId, $key, $value, $extra = false)
+ {
+     $sql = 'UPDATE ' . $GLOBALS['ecs']->table('user_seller') . " SET `$key`='$value'  WHERE `user_id`='" . $userId . "'";
+     if ($extra) {
+         $sql = 'UPDATE ' . $GLOBALS['ecs']->table('user_seller') . " SET `$key`=$key+('$value')  WHERE `user_id`='" . $userId . "'";
+     } else {
+         $sql = 'UPDATE ' . $GLOBALS['ecs']->table('user_seller') . " SET `$key`='$value'  WHERE `user_id`='" . $userId . "'";
+     }
+     return $GLOBALS['db']->query($sql);
+ }
 /**
  * [isSeller 是否是卖家]
  * @param  [type]  $userId [description]
@@ -69,7 +74,7 @@ function logSellerAccountChange($sellerId, $userId = 0, $money = 0, $changeDesc 
         'seller_id'     => $sellerId,
         'user_id'       => $userId,
         'money'         => $money,
-        'frozen_money'  => $frozen_money,
+        'frozen_money'  => $frozenMoney,
         'change_time'   => gmtime(),
         'change_desc'   => $changeDesc,
         'change_type'   => $changeType
@@ -97,7 +102,7 @@ function logSellerAccountChange($sellerId, $userId = 0, $money = 0, $changeDesc 
  * @Email    bigrocs@qq.com
  * @DateTime 2017-12-12
  */
-function gasOrder($sellerId, $userId = 0, $vipMoney = 0, $money = 0, $arrivalMoney = 0, $name = '')
+function gasOrder($sellerId, $userId = 0, $vipMoney = 0, $money = 0, $arrivalMoney = 0, $name = '', $children = 0)
 {
     $gasOrder = array(
         'order_id'      => date('YmdHis') . mt_rand(1000, 9999),
@@ -107,6 +112,7 @@ function gasOrder($sellerId, $userId = 0, $vipMoney = 0, $money = 0, $arrivalMon
         'money'         => $money,
         'arrival_money' => $arrivalMoney,
         'name'          => $name,
+        'children'     => $children,
         'time'   => gmtime(),
     );
     $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('order_gas'), $gasOrder, 'INSERT');
@@ -489,7 +495,7 @@ function setPickupPoint($userId, $post)
  {
      /* 取得订单列表 */
      $arr    = array();
-     $sql = "SELECT order_id, order_sn, order_status, shipping_status, pay_status, add_time, is_pickup, pickup_money," .
+     $sql = "SELECT order_id, order_sn, order_status, shipping_status, pay_status, add_time, is_pickup, pickup_money, spread_id, children_spread_id," .
             "(goods_amount + shipping_fee + insure_fee + pay_fee + pack_fee + card_fee + tax - discount) AS total_fee ".
             " FROM " .$GLOBALS['ecs']->table('order_info') .
             " WHERE pickup_point = '$pickupPoint' ORDER BY add_time DESC";
@@ -526,7 +532,7 @@ function setPickupPoint($userId, $post)
      /* 取得订单列表 */
      $arr    = array();
 
-     $sql = "SELECT order_id, order_sn, order_status, shipping_status, pay_status, add_time, is_pickup, spread_money, pickup_point," .
+     $sql = "SELECT order_id, order_sn, order_status, shipping_status, pay_status, add_time, is_pickup, spread_money, pickup_point, spread_id, children_spread_id," .
             "(goods_amount + shipping_fee + insure_fee + pay_fee + pack_fee + card_fee + tax - discount) AS total_fee ".
             " FROM " .$GLOBALS['ecs']->table('order_info') .
             " WHERE spread_id = '$spread_id' ORDER BY add_time DESC";
@@ -541,12 +547,17 @@ function setPickupPoint($userId, $post)
          } else {
              $pickup_point_title = '<b style="color:#F56C6C">非本站点取货</b>';
          }
-
+         if ($row['children_spread_id']>0) {
+             $sellerInfo = getSellerInfo($row['children_spread_id']);
+         } else {
+             $sellerInfo = getSellerInfo($row['spread_id']);
+         }
          $arr[] = array('order_id'       => $row['order_id'],
                         'order_sn'       => $row['order_sn'],
                         'order_time'     => local_date('Y-m-d', $row['add_time']),
                         'order_status'   => $row['order_status'],
                         'pickup_point_title'   => $pickup_point_title,
+                        'spread_user_name' => $sellerInfo['user_name'],
                         'spread_money'   => price_format($row['spread_money'], false),
                         'total_fee'      => price_format($row['total_fee'], false)
                     );
@@ -563,7 +574,7 @@ function setPickupPoint($userId, $post)
  *
  * @return   arr        $order          订单所有信息的数组
  */
-function getOrderDetail($order_id, $pickupPoint = 0)
+function getOrderDetail($order_id, $pickupPoint = 0, $spreadId = 0)
 {
     include_once(ROOT_PATH . 'includes/lib_order.php');
 
@@ -576,7 +587,7 @@ function getOrderDetail($order_id, $pickupPoint = 0)
     $order = order_info($order_id);
 
     //检查订单是否属于该自提点
-    if ($pickupPoint > 0 && $pickupPoint != $order['pickup_point']) {
+    if ($pickupPoint>0 && $pickupPoint != $order['pickup_point'] && $spreadId>0 && $spreadId != $order['spread_id']) {
         $GLOBALS['err']->add('你没有权限查看此订单');
         return false;
     }
@@ -652,4 +663,61 @@ function getOrderDetail($order_id, $pickupPoint = 0)
     }
 
     return $order;
+}
+/**
+ * [updateSellerSpread 更新商家推荐分成分成]
+ * @param    [type]         $orderId  [description]
+ * @param    [type]         $profit   [description]
+ * @param    [type]         $spreadId [description]
+ * @return   [type]                   [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2018-01-18
+ */
+function updateSellerSpread($orderId, $profit, $userId, $children_spread_id = 0)
+{
+    $sellerInfo = getSellerInfo($userId);
+    $spread = $profit*$sellerInfo['spread_ratio'];//分成金额
+    setSellerInfo($userId, 'spread', $spread, true);//增加分成
+    if ($children_spread_id>0) {
+        setSellerInfo($children_spread_id, 'spread', $spread, true);//增加加油员分成
+    }
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('order_info') .
+            " SET spread_money = '$spread'" .
+            " WHERE order_id = '$orderId' LIMIT 1";
+    $GLOBALS['db']->query($sql);
+}
+/**
+ * [updateSellerPickup 更新商家自提点分成分成]
+ * @param    [type]         $orderId [description]
+ * @param    [type]         $profit  [description]
+ * @param    [type]         $pickupId  [description]
+ * @return   [type]                  [description]
+ * @Author   bigrocs
+ * @QQ       532388887
+ * @Email    bigrocs@qq.com
+ * @DateTime 2018-01-18
+ */
+function updateSellerPickup($orderId, $profit, $pickupId)
+{
+    $sellerInfo = getPickupSellerInfo($pickupId);
+    ;
+    $pickup = $profit*$sellerInfo['pickup_ratio'];//分成金额
+    setSellerInfo($sellerInfo['user_id'], 'pickup', $pickup+$sellerInfo['pickup']);//增加分成
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('order_info') .
+            " SET pickup_money = '$pickup'" .
+            " WHERE order_id = '$orderId' LIMIT 1";
+    $GLOBALS['db']->query($sql);
+}
+/**
+ * [getSellerInfo 获取卖家账户信息]
+ * @param  [type] $userId [description]
+ * @return [type]         [description]
+ */
+function getPickupSellerInfo($pickupId)
+{
+    $sql = "SELECT * FROM " .$GLOBALS['ecs']->table('user_seller'). " WHERE pickup_point = '$pickupId'";
+    $row = $GLOBALS['db']->getRow($sql);
+    return $row;
 }

@@ -374,3 +374,22 @@ function getRegionName($region_id)
     $sql = "SELECT region_name FROM " .$GLOBALS['ecs']->table('region'). " WHERE region_id='$region_id'";
     return $GLOBALS['db']->getOne($sql);
 }
+
+if (!function_exists('dd')) {
+    function dd($args)
+    {
+        if (!is_array($args)) {
+            echo($args);
+            exit;
+        } else {
+            print_R($args);
+            exit;
+        }
+    }
+}
+if (!function_exists('d')) {
+    function d($args)
+    {
+        echo(json_encode($args));
+    }
+}

@@ -2877,12 +2877,23 @@ elseif ($action == 'act_pay_gas') {
     include_once(ROOT_PATH .'includes/lib_seller.php');
     $input = payGasCheckInput($user_id);
     $_SESSION['VerifyingId'] = 0;//清空 防止刷新
-
     log_account_change($user_id, (-1) * $input['money'], 0, 0, 0, '加油-'.$input['sellerInfo']['name'], 66, 0, (-1) * $input['vip_money']); //用户账号资金改变
-    logSellerAccountChange($input['sellerId'], $user_id, $input['accountAmount'], '加油收入-'.$input['userInfo']['username'], 1);//卖家账户余额变化
-    gasOrder($input['sellerId'], $user_id, $input['vip_money'], $input['money'], $input['accountAmount'], '加油-'.$input['userInfo']['username']);//写入加油订单
-    // show_message('支付成功', '', $_REQUEST['callblock'], 'success', false);
-    show_message('支付成功', '消费记录', 'user.php?act=account_detail', 'success', false);
+    if ($input['sellerInfo']['is_oil_member']) {
+        logSellerAccountChange($input['sellerId'], $user_id, $input['accountAmount'], '加油收入-'.$input['userInfo']['username'], 1);//加油员账户余额变化
+        logSellerAccountChange($input['sellerInfo']['parent'], $user_id, $input['accountAmount'], '加油收入-'.$input['userInfo']['username'], 1);//卖家账户余额变化
+        gasOrder($input['sellerInfo']['parent'], $user_id, $input['vip_money'], $input['money'], $input['accountAmount'], '加油-'.$input['userInfo']['username'], $input['sellerId']);//写入加油订单
+    } else {
+        logSellerAccountChange($input['sellerId'], $user_id, $input['accountAmount'], '加油收入-'.$input['userInfo']['username'], 1);//卖家账户余额变化
+        gasOrder($input['sellerId'], $user_id, $input['vip_money'], $input['money'], $input['accountAmount'], '加油-'.$input['userInfo']['username']);//写入加油订单
+    }
+    $message = '支付成功<br>';
+    if ($input['vip_money']) {
+        $message .= "使用VIP余额:".$input['vip_money']."元<br>";
+    } else {
+        $message .= "使用余额:".$input['money']."元<br>";
+    }
+    $message .= '支付时间:'.date('Y-m-d H:i:s', time());
+    show_message($message, '消费记录', 'user.php?act=account_detail', 'success', false);
 }
 /**
  * [getArrivalInfo 获取到账信息]

@@ -17,7 +17,7 @@ define('IN_ECS', true);
 
 require(dirname(__FILE__) . '/includes/init.php');
 require(ROOT_PATH . 'includes/lib_order.php');
-
+require(ROOT_PATH . 'includes/lib_seller.php');
 /* 载入语言文件 */
 require_once(ROOT_PATH . 'languages/' .$_CFG['lang']. '/user.php');
 require_once(ROOT_PATH . 'languages/' .$_CFG['lang']. '/shopping_flow.php');
@@ -1859,7 +1859,13 @@ elseif ($_REQUEST['step'] == 'done') {
     /* 插入订单表 */
     $error_no = 0;
     do {
-        $order['spread_id']   = $user_info['seller_id']; //获取商家业务员编号 spread_id
+        $sellerInfo = getSellerInfo($user_info['seller_id']);
+        if ($sellerInfo['is_oil_member']) {
+            $order['spread_id']   = $sellerInfo['parent']; //获取商家业务员编号 spread_id
+            $order['children_spread_id']   = $sellerInfo['user_id']; //获取加油员业务员编号 children_spread_id
+        } else {
+            $order['spread_id']   = $user_info['seller_id']; //获取商家业务员编号 spread_id
+        }
         $order['order_sn'] = get_order_sn(); //获取新订单号
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('order_info'), $order, 'INSERT');
 

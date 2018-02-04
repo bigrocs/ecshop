@@ -38,7 +38,7 @@
 </dl>
 <div class="blank3"></div>
 <section class="wrap">
-    {if $insurance eq '0'}
+    {if $insurance eq '0' && $isOilMember eq '0'}
 	<div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
 	 <a  href="seller.php?act=order_list" class="clearfix"> <span>加油订单列表</span><i></i> </a>
      <a  href="seller.php?act=spread_order" class="clearfix"> <span>推荐订单列表</span><i></i> </a>
@@ -49,28 +49,37 @@
      <a  href="seller.php?act=pickup_point_order" class="clearfix"> <span>自提订单列表</span><i></i> </a>
 	</div>
     {/if}
+    {if $isOilMember eq '0'}
     <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
         <a  href="seller.php?act=kuaibi_deposit" class="clearfix"> <span>储值卡充值</span><i></i> </a>
         <a  href="seller.php?act=vip_deposit" class="clearfix"> <span>VIP充值</span><i></i> </a>
    </div>
+   {/if}
    <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
         <a  href="seller.php?act=extension" class="clearfix"> <span>推广注册</span><i></i> </a>
         {if $insurance eq '0'}
-         <a  href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
-	     <a  href="seller.php?act=gas" class="clearfix"> <span>加油二维码</span><i></i> </a>
-         <a  href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
+        <a  href="seller.php?act=gas" class="clearfix"> <span>加油二维码</span><i></i> </a>
+        {/if}
+        {if $isOilMember eq '0'}
+            {if $insurance eq '0'}
+                <a  href="seller.php?act=oilMemberList" class="clearfix"> <span>加油员</span><i></i> </a>
+                 <a  href="seller.php?act=oilPrice" class="clearfix"> <span>油品设置</span><i></i> </a>
+                 <a  href="seller.php?act=mapInfo" class="clearfix"> <span>地图信息</span><i></i> </a>
+             {/if}
+             <a  href="seller.php?act=info" class="clearfix"> <span>信息管理</span><i></i> </a>
          {/if}
-         <a  href="seller.php?act=info" class="clearfix"> <span>信息管理</span><i></i> </a>
 	</div>
     <div class="blank3"></div>
-    <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
-         <a  href="seller.php?act=seller_deposit" class="clearfix"> <span>商家充值</span><i></i> </a>
-         <a  href="seller.php?act=cash" class="clearfix"> <span>商家提现</span><i></i> </a>
-         <a  href="seller.php?act=account_log" class="clearfix"> <span>资金记录</span><i></i> </a>
-         <a  href="seller.php?act=seller_account" class="clearfix"> <span>提现充值记录</span><i></i> </a>
-    </div>
+     {if $isOilMember eq '0'}
+        <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
+             <a  href="seller.php?act=seller_deposit" class="clearfix"> <span>商家充值</span><i></i> </a>
+             <a  href="seller.php?act=cash" class="clearfix"> <span>商家提现</span><i></i> </a>
+             <a  href="seller.php?act=account_log" class="clearfix"> <span>资金记录</span><i></i> </a>
+             <a  href="seller.php?act=seller_account" class="clearfix"> <span>提现充值记录</span><i></i> </a>
+        </div>
+     {/if}
     <div class="blank3"></div>
     <div class="list_box padd1 radius10" style="padding-top:0;padding-bottom:0;">
         <a href="user.php?act=logout" class="clearfix"> <span>退出登录</span><i></i> </a>
@@ -252,6 +261,7 @@
             <td bgcolor="#ffffff">买家</td>
             <td bgcolor="#ffffff">到账金额</td>
             <td bgcolor="#ffffff">余额支付</td>
+            <td bgcolor="#ffffff">操作员</td>
             <td bgcolor="#ffffff">VIP支付</td>
           </tr>
           <!--{foreach from=$orderGas item=item}-->
@@ -260,6 +270,7 @@
               <td align="center" bgcolor="#ffffff">{$item.user_name}</td>
               <td bgcolor="#ffffff">{$item.show_arrival_money}</td>
               <td bgcolor="#ffffff">{$item.show_money}</td>
+               <td bgcolor="#ffffff" >{$item.childrenName}</td>
               <td bgcolor="#ffffff" >{$item.show_vip_money}</td>
           </tr>
           <!--{/foreach}-->
@@ -483,7 +494,7 @@
 <!-- {/if} -->
 <!-- #卖家自提点信息 end-->
 
-<!--#订单列表界面 start-->
+<!--#自提点订单列表 start-->
  <!-- {if $action eq 'pickup_point_order'} -->
  <header id="header">
    <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
@@ -516,8 +527,8 @@
 </section>
  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
  <!--{/if}-->
-<!--#订单列表界面 end-->
-<!--#订单列表界面 start-->
+<!--#自提点订单列表 end-->
+<!--#推荐人订单列表界面 start-->
  <!-- {if $action eq 'spread_order'} -->
  <header id="header">
    <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
@@ -526,22 +537,18 @@
  <section class="wrap">
      <section class="order_box padd1 radius10">
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-            <tr align="center">
-              <td bgcolor="#ffffff">{$lang.order_number}</td>
-              <td bgcolor="#ffffff">{$lang.order_addtime}</td>
-              <td bgcolor="#ffffff">{$lang.order_money}</td>
-              <td bgcolor="#ffffff">推荐人分成</td>
-              <td bgcolor="#ffffff">自提状态</td>
-              <td bgcolor="#ffffff">状态</td>
-            </tr>
             <!--{foreach from=$orders item=item}-->
             <tr>
               <td align="center" bgcolor="#ffffff">
-                  <a href="seller.php?act=pickup_point_order_detail&order_id={$item.order_id}" class="f6">{$item.order_sn}</a>
+                 订单: <a href="seller.php?act=pickup_point_order_detail&order_id={$item.order_id}" class="f6">{$item.order_sn}</a>
               </td>
-              <td align="center" bgcolor="#ffffff">{$item.order_time}</td>
-              <td align="right" bgcolor="#ffffff">{$item.total_fee}</td>
-              <td align="right" style="width:50px" bgcolor="#ffffff">{$item.spread_money}</td>
+              <td align="center" bgcolor="#ffffff">日期: {$item.order_time}</td>
+              <td align="right" bgcolor="#ffffff" colspan="2">金额:{$item.total_fee}</td>
+
+            </tr>
+            <tr style="border-bottom: solid 1px #ccc;">
+              <td align="right" bgcolor="#ffffff">分成: {$item.spread_money}</td>
+              <td align="right" bgcolor="#ffffff">推荐人: {$item.spread_user_name}</td>
               <td align="right" bgcolor="#ffffff">{$item.pickup_point_title}</td>
               <td align="center" style="width:50px" bgcolor="#ffffff">{$item.order_status}</td>
             </tr>
@@ -552,7 +559,7 @@
 </section>
  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
  <!--{/if}-->
-<!--#订单列表界面 end-->
+<!--#推荐人订单列表界面 end-->
 <!-- ==========订单详情页面,包括：订单状态，商品列表，费用总计，收货人信息，支付方式，其它信息========== -->
 <!--{if $action eq pickup_point_order_detail} -->
 <header id="header">
@@ -1069,6 +1076,74 @@
 </section>
 <!-- {/if} -->
 <!-- 卖家油价编辑 -->
+
+<!--#加油员列表 start-->
+ <!-- {if $action eq 'oilMemberList'} -->
+ <header id="header">
+   <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+   <h1> 加油员列表</h1>
+ </header>
+ <section class="wrap">
+     <section class="order_box padd1 radius10">
+         <div class="blank"></div>
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+              <td bgcolor="#ffffff">ID</td>
+              <td bgcolor="#ffffff">成员账号</td>
+              <td bgcolor="#ffffff">推荐分成统计</td>
+              <!-- <td bgcolor="#ffffff">自提点分成统计</td> -->
+              <td bgcolor="#ffffff">加油统计</td>
+              <td bgcolor="#ffffff">操作</td>
+            </tr>
+            <!--{foreach from=$oilMemberList item=item}-->
+            <tr>
+              <td align="center" bgcolor="#ffffff">
+                  {$item.user_id}
+              </td>
+              <td align="center" bgcolor="#ffffff">{$item.user_name}</td>
+              <td align="right" bgcolor="#ffffff">{$item.spread}</td>
+              <!-- <td align="right" bgcolor="#ffffff">{$item.pickup}</td> -->
+              <td align="center" bgcolor="#ffffff">{$item.user_money}</td>
+              <td bgcolor="#ffffff">
+                  <a href="seller.php?act=oilMemberDelete&user_id={$item.user_id}">删除</a>
+              </td>
+            </tr>
+            <!--{/foreach}-->
+            </table>
+          <div class="blank5"></div>
+
+    </section>
+    <a class="c-btn3" href="seller.php?act=oilMemberAdd">新增加油员</a>
+</section>
+ <!--{/if}-->
+<!--#加油员列表 end-->
+
+<!-- 新增加油员-->
+<!-- {if $action eq 'oilMemberAdd'} -->
+<header id="header">
+  <div class="header_l header_return"> <a class="ico_10" href="javascript:history.go(-1)"> 返回 </a> </div>
+  <h1> 新增加油员</h1>
+</header>
+<section class="wrap">
+    <section class="order_box padd1 radius10">
+        <form name="formSurplus" method="post" action="seller.php" onSubmit="return submitSurplus()">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr>
+              <td width="15%" bgcolor="#ffffff">用户名:</td>
+              <td align="left" bgcolor="#ffffff"><input type="text" name="user_name"  class="inputBg" value="{$oilinfo.type}" size="30" />
+              </td>
+            </tr>
+            <td bgcolor="#ffffff" colspan="3"  align="center" >
+              <input type="hidden" name="act" value="act_oilMemberAdd" />
+              <input type="submit" style="margin-top:15px;" class="c-btn3" name="submit" value="提交" />
+            </td>
+          </table>
+          </table>
+        </form>
+    </section>
+</section>
+<!-- {/if} -->
+<!-- 新增加油员 -->
 
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 <div style="width:1px; height:1px; overflow:hidden">{foreach from=$lang.p_y item=pv}{$pv}{/foreach}</div>

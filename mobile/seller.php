@@ -17,6 +17,7 @@ $user_id = $_SESSION['user_id'];
 $action  = isset($_REQUEST['act']) ? trim($_REQUEST['act']) : 'default';
 $sellerInfo = getSellerInfo($user_id);
 $smarty->assign('insurance', $sellerInfo['insurance']);//是否是保险公司
+$smarty->assign('isOilMember', $sellerInfo['is_oil_member']);//是否是加油员账号
 $affiliate = unserialize($GLOBALS['_CFG']['affiliate']);
 $smarty->assign('affiliate', $affiliate);
 
@@ -62,7 +63,19 @@ $ui_arr = array(
     'mapInfo',
     'oilPrice',
     'oilPriceAdd',
-    'oilPriceEdit'
+    'oilPriceEdit',
+
+    'oilMemberAdd',
+    'act_oilMemberAdd',
+    'oilMemberList',
+    'addOilMember',
+    'oilMemberDelete',
+);
+//加油员权限
+$oilMember = array(
+    'default',
+    'extension',
+    'gas',
 );
 /* 未登录处理 */
 if (empty($_SESSION['user_id'])) {
@@ -89,7 +102,15 @@ if (empty($_SESSION['user_id'])) {
         }
     }
 }
-
+// 验证权限
+if (!empty($_SESSION['user_id'])) {
+    //加油员权限
+    if ($sellerInfo['is_oil_member']==1) {
+        if (!in_array($action, $oilMember)) {
+            show_message('您是加油员权限，没有更高权限。');
+        }
+    }
+}
 /* 如果是显示页面，对页面进行相应赋值 */
 if (in_array($action, $ui_arr)) {
     assign_template();
@@ -246,7 +267,7 @@ elseif ($action == 'order_list') {
 
     //获取余额记录
     $orderGas = array();
-    $sql = "SELECT us.user_name,o.order_id,o.seller_id,o.user_id,o.vip_money,o.time,o.money,o.arrival_money,o.name FROM " . $ecs->table('order_gas') ." AS o,".
+    $sql = "SELECT us.user_name,o.order_id,o.seller_id,o.user_id,o.vip_money,o.time,o.money,o.arrival_money,o.name,o.children FROM " . $ecs->table('order_gas') ." AS o,".
             $ecs->table('users') . ' AS us '.
            " WHERE o.user_id = us.user_id AND o.seller_id = '$user_id'" .
            " ORDER BY id DESC";
@@ -257,6 +278,13 @@ elseif ($action == 'order_list') {
         $row['show_money'] = price_format(abs($row['money']), false);
         $row['show_vip_money'] = price_format(abs($row['vip_money']), false);
         $row['short_change_desc'] = sub_str($row['name'], 60);
+        if ($row['children']>0) {
+            $sellerInfo = getSellerInfo($row['children']);
+            $row['childrenName'] = $sellerInfo['user_name'];
+        } else {
+            $sellerInfo = getSellerInfo($row['seller_id']);
+            $row['childrenName'] = $sellerInfo['user_name'];
+        }
         $row['amount'] = $row[$account_type];
         $orderGas[] = $row;
     }
@@ -452,7 +480,7 @@ if ($action == 'pickup_point_order_detail') {
     $order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : 0;
     $sellerInfo = getSellerInfo($user_id);
     /* 订单详情 */
-    $order = getOrderDetail($order_id, $sellerInfo['pickup_point']);
+    $order = getOrderDetail($order_id, $sellerInfo['pickup_point'], $sellerInfo['user_id']);
 
     if ($order === false) {
         $err->show($_LANG['back_home_lnk'], './');
@@ -736,6 +764,53 @@ if ($action == 'act_oilPriceEdit') {
     `price`='$price'  WHERE `id`='" . $_POST['id'] . "'";
     $db->query($sql);
     show_message('修改成功', '油品列表', 'seller.php?act=oilPrice');
+}
+
+
+// 新增加油员
+if ($action == 'oilMemberAdd') {
+    $smarty->display('seller_clips.dwt');
+}
+// 新增加油站act
+if ($action == 'act_oilMemberAdd') {
+    $userName = $_REQUEST['user_name'];
+
+    $sql = "SELECT COUNT(*) FROM " .$ecs->table('users'). " WHERE user_name = '$userName'";
+    if (!$db->getOne($sql)) {
+        show_message($userName.'用户未注册', '加油员列表', 'seller.php?act=oilMemberList');
+    }
+    $sql = "SELECT COUNT(*) FROM " .$ecs->table('user_seller'). " WHERE user_name = '$userName'";
+    if ($db->getOne($sql)) {
+        show_message($userName.'已经是商家,或者是加油员,请勿重复添加', '加油员列表', 'seller.php?act=oilMemberList');
+    }
+    $sql = "SELECT user_id FROM " .$ecs->table('users'). " WHERE user_name = '$userName'";
+    $userID = $db->getOne($sql);
+    $name = $sellerInfo['name'];
+    $parentId = $sellerInfo['user_id'];
+
+    $sql = "INSERT INTO " . $ecs->table('user_seller') . " (user_id, user_name, name, is_oil_member, parent, add_time)
+    VALUES ('" . $userID . "', '".$userName."', '".$name."', '1', '".$parentId."', '" . time() . "')";
+    if ($GLOBALS['db']->query($sql)) {
+        show_message('添加加油员成功', '油品列表', 'seller.php?act=oilMemberList');
+    } else {
+        show_message('修改成功', '油品列表', 'seller.php?act=oilMemberList');
+    }
+}
+
+// 加油员列表
+if ($action == 'oilMemberList') {
+    $sql = 'SELECT * FROM ' .$GLOBALS['ecs']->table('user_seller').
+           " WHERE is_oil_member = '1' AND parent = '$user_id'";
+    $oilMemberList = $db->getAll($sql);
+    $smarty->assign('oilMemberList', $oilMemberList);
+    $smarty->display('seller_clips.dwt');
+}
+// 删除加油员
+if ($action == 'oilMemberDelete') {
+    $sql = 'DELETE FROM ' .$GLOBALS['ecs']->table('user_seller').
+           " WHERE user_id = '$_REQUEST[user_id]' AND is_oil_member = '1' AND parent = '$user_id'";
+    $GLOBALS['db']->query($sql);
+    show_message('删除成功', '加油员列表', 'seller.php?act=oilMemberList');
 }
 /*修改油品报价*/
 /**
